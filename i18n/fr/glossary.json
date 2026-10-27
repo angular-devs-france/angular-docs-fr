@@ -945,5 +945,40 @@
   {
     "term": "breakpoint",
     "translation": "point d'arrêt"
+  },
+  {
+    "term": "drag and drop",
+    "translation": "glisser-déposer",
+    "note": "drag handle → poignée de glissement; drop list → liste de dépôt"
+  },
+  {
+    "term": "screen reader",
+    "translation": "lecteur d'écran"
+  },
+  {
+    "term": "keyboard navigation",
+    "translation": "navigation au clavier"
+  },
+  {
+    "term": "sanitization",
+    "translation": "assainissement",
+    "note": "sanitize → assainir"
+  },
+  {
+    "term": "translation file",
+    "translation": "fichier de traduction"
+  },
+  {
+    "term": "icu expression",
+    "translation": "expression ICU"
+  },
+  {
+    "term": "directive composition api",
+    "translation": "API de composition de directives"
+  },
+  {
+    "term": "lazy rendering",
+    "translation": "rendu lazy",
+    "note": "« différé » stays reserved for @defer"
   }
 ]
