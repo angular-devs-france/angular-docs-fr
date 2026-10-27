@@ -40,7 +40,7 @@ export class ParentView {
 
 Angular ne recherche qu'en remontant la hiérarchie, jamais en descendant. Les composants parents ne peuvent pas accéder aux services fournis dans les composants enfants.
 
-**Solution :** fournissez le service à un niveau plus élevé (application ou composant parent).
+**Solution :** fournissez le service à un niveau plus élevé (application ou composant parent).
 
 ```ts {prefer}
 import {Service} from '@angular/core';
@@ -87,7 +87,7 @@ Les routes en lazy loading créent des injectors enfants qui ne sont disponibles
 
 NOTE: Par défaut, les injectors de route et leurs services persistent même après avoir quitté la route. Ils ne sont pas détruits avant la fermeture de l'application. Pour le nettoyage automatique des injectors de route inutilisés, consultez [personnaliser le comportement des routes](guide/routing/customizing-route-behavior#automatic-cleanup-of-unused-route-injectors).
 
-**Solution :** utilisez `@Service` pour les services qui doivent être partagés au-delà des frontières du lazy loading.
+**Solution :** utilisez `@Service` pour les services qui doivent être partagés au-delà des frontières du lazy loading.
 
 ```ts {prefer, header: 'Provide at root for shared services'}
 import {Service} from '@angular/core';
@@ -133,7 +133,7 @@ export class UserSettings {
 
 Chaque composant obtient sa propre instance de `UserClient`. Les modifications faites dans l'un n'affectent pas l'autre.
 
-**Solution :** utilisez `@Service` pour les singletons.
+**Solution :** utilisez `@Service` pour les singletons.
 
 ```ts {prefer, header: 'Root-level singleton'}
 import {Service} from '@angular/core';
@@ -206,7 +206,7 @@ export class UserProfile {
 }
 ```
 
-**Solution :** capturez les dépendances et dérivez les valeurs dans les initialiseurs de champs.
+**Solution :** capturez les dépendances et dérivez les valeurs dans les initialiseurs de champs.
 
 ```angular-ts {prefer, header: 'Derive values in field initializers'}
 import {Component, inject} from '@angular/core';
@@ -283,9 +283,9 @@ La différence entre `providers` et `viewProviders` a un impact dans les scénar
 
 #### Comprendre la différence {#understanding-the-difference}
 
-**providers :** disponibles pour le template du composant ET pour tout contenu projeté dans le composant (ng-content).
+**providers :** disponibles pour le template du composant ET pour tout contenu projeté dans le composant (ng-content).
 
-**viewProviders :** disponibles uniquement pour le template du composant, PAS pour le contenu projeté.
+**viewProviders :** disponibles uniquement pour le template du composant, PAS pour le contenu projeté.
 
 ```angular-ts {header: 'parent-view.ts'}
 import {Component, inject} from '@angular/core';
@@ -370,7 +370,7 @@ Utilisez `viewProviders` lorsque :
 - Vous voulez masquer des détails d'implémentation au contenu projeté
 - Vous fournissez des services internes qui ne doivent pas fuiter à l'extérieur
 
-**Recommandation par défaut :** utilisez `providers`, sauf si vous avez une raison précise de restreindre l'accès avec `viewProviders`.
+**Recommandation par défaut :** utilisez `providers`, sauf si vous avez une raison précise de restreindre l'accès avec `viewProviders`.
 
 ### Problèmes avec InjectionToken {#injectiontoken-issues}
 
@@ -421,7 +421,7 @@ export class FeatureView {
 
 Même si les deux jetons ont la description `'app config'`, ce sont des objets différents. Angular compare les jetons par référence, et non par description.
 
-**Solution :** importez la même instance de jeton.
+**Solution :** importez la même instance de jeton.
 
 ```angular-ts {prefer, header: 'feature-view.ts'}
 import {inject, Component} from '@angular/core';
@@ -458,7 +458,7 @@ export class UserProfile {
 }
 ```
 
-**Solution :** utilisez `InjectionToken` pour les types interface.
+**Solution :** utilisez `InjectionToken` pour les types interface.
 
 ```angular-ts {prefer, header: 'Use InjectionToken for interfaces'}
 import {InjectionToken, inject, Component} from '@angular/core';
@@ -532,9 +532,9 @@ Angular DevTools inclut un inspecteur de l'arbre des injectors qui visualise l'e
 
 Lorsque vous déboguez des problèmes de DI, utilisez les DevTools pour répondre à ces questions :
 
-- **Le service est-il fourni ?** Sélectionnez le composant dont l'injection échoue et vérifiez si le service apparaît dans la section Injector.
-- **À quel niveau ?** Remontez l'arbre des composants pour trouver où le service est réellement fourni (au niveau du composant, de la route ou de l'application).
-- **Plusieurs instances ?** Si un service singleton apparaît dans plusieurs injectors de composants, il est probablement fourni dans les tableaux `providers` de composants au lieu d'utiliser `@Service` ou `providedIn: 'root'`.
+- **Le service est-il fourni ?** Sélectionnez le composant dont l'injection échoue et vérifiez si le service apparaît dans la section Injector.
+- **À quel niveau ?** Remontez l'arbre des composants pour trouver où le service est réellement fourni (au niveau du composant, de la route ou de l'application).
+- **Plusieurs instances ?** Si un service singleton apparaît dans plusieurs injectors de composants, il est probablement fourni dans les tableaux `providers` de composants au lieu d'utiliser `@Service` ou `providedIn: 'root'`.
 
 Si un service n'apparaît dans aucun injector, vérifiez qu'il a le décorateur `@Service` ou qu'il figure dans un tableau `providers`.
 
@@ -564,7 +564,7 @@ export class UserClient {
 
 Lorsque le service est créé, vous voyez le message de log et une trace de pile montrant où l'injection a eu lieu.
 
-**Ce qu'il faut vérifier :**
+**Ce qu'il faut vérifier :**
 
 - Combien de fois le constructeur est-il appelé ? (une seule fois pour un singleton)
 - À quel endroit du code est-il injecté ? (consultez la trace de pile)
@@ -674,7 +674,7 @@ Cette section fournit des informations détaillées sur les codes d'erreur de DI
 
 ### NullInjectorError : No provider for [Service] {#nullinjectorerror-no-provider-for-service}
 
-**Code d'erreur :** [NG0201](errors/NG0201)
+**Code d'erreur :** [NG0201](errors/NG0201)
 
 Cette erreur se produit lorsqu'Angular ne trouve aucun provider pour un jeton dans la hiérarchie des injectors. Le message d'erreur inclut un chemin de dépendances qui montre où l'injection a été tentée.
 
@@ -813,7 +813,7 @@ L'injection optionnelle renvoie `null` si aucun provider n'est trouvé, ce qui v
 
 ### NG0203 : inject() must be called from an injection context {#ng0203-inject-must-be-called-from-an-injection-context}
 
-**Code d'erreur :** NG0203
+**Code d'erreur :** NG0203
 
 Cette erreur se produit lorsque vous appelez `inject()` en dehors d'un contexte d'injection valide. Angular exige que `inject()` soit appelé de façon synchrone pendant la construction de la classe ou l'exécution d'une fabrique.
 
@@ -923,13 +923,13 @@ Consultez la section « Utilisation incorrecte de inject() » pour des exemp
 
 #### Solutions et contournements {#solutions-and-workarounds}
 
-**Solution 1 :** capturez les dépendances dans les initialiseurs de champs (le cas le plus courant)
+**Solution 1 :** capturez les dépendances dans les initialiseurs de champs (le cas le plus courant)
 
 ```ts
 private userService = inject(UserClient) // Capture at class level
 ```
 
-**Solution 2 :** utilisez `runInInjectionContext()` pour les callbacks
+**Solution 2 :** utilisez `runInInjectionContext()` pour les callbacks
 
 ```ts
 private injector = inject(Injector)
@@ -941,7 +941,7 @@ someCallback() {
 }
 ```
 
-**Solution 3 :** passez les dépendances en paramètres au lieu de les injecter
+**Solution 3 :** passez les dépendances en paramètres au lieu de les injecter
 
 ```ts
 // Instead of injecting inside a callback
@@ -959,7 +959,7 @@ setTimeout(() => {
 
 ### NG0200 : Circular dependency detected {#ng0200-circular-dependency-detected}
 
-**Code d'erreur :** NG0200
+**Code d'erreur :** NG0200
 
 Cette erreur se produit lorsque deux services ou plus dépendent les uns des autres, ce qui crée une dépendance circulaire qu'Angular ne peut pas résoudre.
 

@@ -216,9 +216,9 @@ Lorsque vous utilisez le mode [`RenderMode.Prerender`](api/ssr/RenderMode#Preren
 
 Les stratégies de repli disponibles sont :
 
-- **Server :** se replie sur le rendu côté serveur. C'est le comportement **par défaut** si aucune propriété `fallback` n'est indiquée.
-- **Client :** se replie sur le rendu côté client.
-- **None :** aucun repli. Angular ne gère pas les requêtes vers des chemins qui ne sont pas prérendus.
+- **Server :** se replie sur le rendu côté serveur. C'est le comportement **par défaut** si aucune propriété `fallback` n'est indiquée.
+- **Client :** se replie sur le rendu côté client.
+- **None :** aucun repli. Angular ne gère pas les requêtes vers des chemins qui ne sont pas prérendus.
 
 ```ts {header: "app.routes.server.ts"}
 import {RenderMode, PrerenderFallback, ServerRoute} from '@angular/ssr';
