@@ -68,10 +68,7 @@
   },
   {
     "term": "library",
-    "translation": "bibliothèque",
-    "forbidden": [
-      "librairie"
-    ]
+    "keep": true
   },
   {
     "term": "form",
@@ -79,7 +76,7 @@
   },
   {
     "term": "reactive forms",
-    "translation": "formulaires réactifs"
+    "keep": true
   },
   {
     "term": "signal forms",
@@ -88,16 +85,15 @@
   },
   {
     "term": "binding",
-    "translation": "liaison",
-    "note": "property binding: liaison de propriété"
+    "keep": true
   },
   {
     "term": "event listener",
-    "translation": "écouteur d'événements"
+    "keep": true
   },
   {
     "term": "lifecycle hook",
-    "translation": "hook de cycle de vie"
+    "keep": true
   },
   {
     "term": "deferrable views",
@@ -105,7 +101,7 @@
   },
   {
     "term": "control flow",
-    "translation": "flux de contrôle"
+    "keep": true
   },
   {
     "term": "route",
@@ -114,16 +110,16 @@
   },
   {
     "term": "router",
-    "translation": "routeur"
+    "keep": true
   },
   {
     "term": "guard",
-    "translation": "garde",
-    "note": "feminine in this context: une garde de route"
+    "keep": true,
+    "note": "feminine in this context: une gard de route"
   },
   {
     "term": "resolver",
-    "translation": "résolveur"
+    "keep": true
   },
   {
     "term": "input",
@@ -160,12 +156,12 @@
   },
   {
     "term": "model",
-    "translation": "modèle",
+    "keep": true,
     "note": "the API (model(), ngModel) stays in English; « modèle » for the concept (data model) only"
   },
   {
     "term": "resource",
-    "translation": "ressource",
+    "keep": true,
     "note": "the API (resource(), httpResource(), Resource) stays in English; « ressource » in prose"
   },
   {
@@ -175,8 +171,7 @@
   },
   {
     "term": "attribute",
-    "translation": "attribut",
-    "note": "attribute directive: directive d'attribut"
+    "keep": true
   },
   {
     "term": "package",
@@ -205,18 +200,15 @@
   },
   {
     "term": "host",
-    "translation": "hôte",
-    "note": "host element: élément hôte; the `host` metadata property and :host selector stay"
+    "keep": true
   },
   {
     "term": "injector",
-    "translation": "injecteur",
-    "note": "masculine; Injector / EnvironmentInjector classes stay"
+    "keep": true
   },
   {
     "term": "effect",
-    "translation": "effet",
-    "note": "the API (effect()) stays in English; « un effet » for the concept in prose"
+    "keep": true
   },
   {
     "term": "validator",
@@ -240,17 +232,15 @@
   },
   {
     "term": "query",
-    "translation": "requête",
-    "note": "view/content queries (viewChild, contentChildren): requête de vue, requête de contenu; URL query parameters: paramètres de requête"
+    "keep": true
   },
   {
     "term": "selector",
-    "translation": "sélecteur"
+    "keep": true
   },
   {
     "term": "workspace",
-    "translation": "espace de travail",
-    "note": "Angular CLI workspace (angular.json); masculine"
+    "keep": true
   },
   {
     "term": "migration",
@@ -259,7 +249,7 @@
   },
   {
     "term": "routing",
-    "translation": "routage"
+    "keep": true
   },
   {
     "term": "decorator",
@@ -320,24 +310,19 @@
   },
   {
     "term": "promise",
-    "translation": "promesse",
-    "note": "feminine; the Promise type stays in code"
+    "keep": true
   },
   {
     "term": "host element",
-    "translation": "élément hôte"
+    "keep": true
   },
   {
     "term": "template-driven forms",
-    "translation": "formulaires pilotés par le template",
-    "forbidden": [
-      "formulaires basés sur le template",
-      "formulaires dirigés par le template"
-    ]
+    "keep": true
   },
   {
     "term": "interpolation",
-    "translation": "interpolation"
+    "keep": true
   },
   {
     "term": "form group",
@@ -346,11 +331,7 @@
   },
   {
     "term": "bootstrap",
-    "translation": "amorçage",
-    "note": "noun: amorçage; verb: amorcer (amorcer l'application). bootstrapApplication stays. Never « bootstrapper »",
-    "forbidden": [
-      "bootstrapper"
-    ]
+    "keep": true
   },
   {
     "term": "accessibility",
@@ -364,20 +345,15 @@
   },
   {
     "term": "property binding",
-    "translation": "liaison de propriété"
+    "keep": true
   },
   {
     "term": "two-way binding",
-    "translation": "liaison bidirectionnelle",
-    "forbidden": [
-      "liaison dans les deux sens",
-      "liaison à double sens"
-    ]
+    "keep": true
   },
   {
     "term": "host binding",
-    "translation": "liaison d'hôte",
-    "note": "@HostBinding / host metadata stay"
+    "keep": true
   },
   {
     "term": "unit test",
@@ -389,7 +365,7 @@
   },
   {
     "term": "event binding",
-    "translation": "liaison d'événement"
+    "keep": true
   },
   {
     "term": "subscription",
@@ -434,13 +410,11 @@
   },
   {
     "term": "linked signal",
-    "translation": "signal lié",
-    "note": "linkedSignal() stays; un signal lié"
+    "keep": true
   },
   {
     "term": "slot",
-    "translation": "emplacement",
-    "note": "ng-content slots: emplacements de projection; « slot » acceptable in parentheses"
+    "keep": true
   },
   {
     "term": "localization",
@@ -497,12 +471,11 @@
   },
   {
     "term": "child query",
-    "translation": "requête d'enfant",
-    "note": "plural: requêtes d'enfants"
+    "keep": true
   },
   {
     "term": "query locator",
-    "translation": "localisateur de requête"
+    "keep": true
   },
   {
     "term": "injection context",
@@ -515,15 +488,15 @@
   },
   {
     "term": "view container",
-    "translation": "conteneur de vues"
+    "keep": true
   },
   {
     "term": "host view",
-    "translation": "vue hôte"
+    "keep": true
   },
   {
     "term": "host directive",
-    "translation": "directive d'hôte"
+    "keep": true
   },
   {
     "term": "structural directive",
@@ -539,7 +512,7 @@
   },
   {
     "term": "custom element",
-    "translation": "élément personnalisé"
+    "keep": true
   },
   {
     "term": "css custom properties",
@@ -547,7 +520,7 @@
   },
   {
     "term": "namespace",
-    "translation": "espace de noms"
+    "keep": true
   },
   {
     "term": "style encapsulation",
@@ -589,8 +562,7 @@
   },
   {
     "term": "error boundary",
-    "translation": "périmètre d'erreur",
-    "note": "add (error boundary) on first mention"
+    "keep": true
   },
   {
     "term": "embedded view",
@@ -635,7 +607,7 @@
   },
   {
     "term": "nullish coalescing",
-    "translation": "coalescence des nuls"
+    "keep": true
   },
   {
     "term": "arrow function",
@@ -648,7 +620,7 @@
   },
   {
     "term": "event handler",
-    "translation": "gestionnaire d'événements"
+    "keep": true
   },
   {
     "term": "pure pipe",
