@@ -833,5 +833,25 @@
   {
     "term": "type narrowing",
     "translation": "affinage de type"
+  },
+  {
+    "term": "pristine",
+    "translation": "intact",
+    "note": "add (pristine) on first mention; pristine() stays"
+  },
+  {
+    "term": "value accessor",
+    "keep": true,
+    "note": "le value accessor (ControlValueAccessor)"
+  },
+  {
+    "term": "typed forms",
+    "translation": "formulaires typés",
+    "note": "untyped forms → formulaires non typés"
+  },
+  {
+    "term": "sync validator",
+    "translation": "validateur synchrone",
+    "note": "async validator → validateur asynchrone"
   }
 ]
