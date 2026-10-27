@@ -777,5 +777,61 @@
     "term": "mock",
     "keep": true,
     "note": "un mock, mocker; fake/stub kept too"
+  },
+  {
+    "term": "field",
+    "translation": "champ",
+    "note": "form field; « champ de classe » for a class field"
+  },
+  {
+    "term": "field tree",
+    "translation": "arbre de champs",
+    "note": "FieldTree stays"
+  },
+  {
+    "term": "schema",
+    "translation": "schéma",
+    "note": "schema function → fonction de schéma"
+  },
+  {
+    "term": "schema path",
+    "keep": true,
+    "note": "le schema path"
+  },
+  {
+    "term": "form model",
+    "translation": "model de formulaire",
+    "note": "generic domain model stays « modèle de domaine »"
+  },
+  {
+    "term": "submission",
+    "translation": "soumission",
+    "note": "submit → soumettre"
+  },
+  {
+    "term": "custom control",
+    "translation": "contrôle personnalisé"
+  },
+  {
+    "term": "cross-field validation",
+    "translation": "validation inter-champs"
+  },
+  {
+    "term": "touched",
+    "translation": "touché",
+    "note": "API state touched() stays"
+  },
+  {
+    "term": "dirty",
+    "translation": "modifié",
+    "note": "add (dirty) in headings; dirty() stays"
+  },
+  {
+    "term": "discriminated union",
+    "translation": "union discriminée"
+  },
+  {
+    "term": "type narrowing",
+    "translation": "affinage de type"
   }
 ]
