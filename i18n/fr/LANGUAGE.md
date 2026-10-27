@@ -35,7 +35,7 @@ Ces règles s'appliquent à toute page sous `i18n/fr/src/`. Le glossaire (`gloss
 ## Ce qui reste en anglais
 
 - Les noms d'API, de fichiers, de commandes et d'options : `@Component`, `ng generate`, `--standalone`.
-- Les termes marqués `keep` dans le glossaire : *signal*, *template*, *pipe*, *standalone*, *zoneless*, *hydration* est traduit (hydratation) mais *SSR* reste.
+- Les termes marqués `keep` dans le glossaire : *signal*, *template*, *pipe*, *standalone*, *zoneless*, *computed*, *provider*, *schematic*, *package*, *locale*, *observable*, les noms de produits (Angular DevTools, Angular Language Service, Zone.js) et les termes de la plateforme web (*service worker*, *Shadow DOM*). Les acronymes restent (SSR, SSG, i18n, l10n, a11y, e2e) même quand le terme développé est traduit : *hydration* → hydratation, *server-side rendering* → rendu côté serveur (SSR).
 - Le code, y compris ses commentaires (règle v1), les exemples de sortie, les URL, les ancres.
 
 ## Pièges
@@ -44,9 +44,12 @@ Ces règles s'appliquent à toute page sous `i18n/fr/src/`. Le glossaire (`gloss
 - *Template* reste template (masculin : le template). Jamais « gabarit » ni « modèle ».
 - *Dependency injection* → injection de dépendances (pluriel). *Change detection* → détection de changements.
 - *Library* → bibliothèque, jamais « librairie ».
-- *Form* → formulaire ; *reactive forms* → formulaires réactifs ; *signal forms* → formulaires à base de signals.
+- *Form* → formulaire ; *reactive forms* → formulaires réactifs ; *template-driven forms* → formulaires pilotés par le template ; *Signal Forms* reste tel quel (nom de la fonctionnalité : les Signal Forms) ; l'expression générique *forms with signals* → formulaires à base de signals.
+- *Lazy loading* reste en anglais (le lazy loading) ; « chargement différé » est réservé à `@defer` et aux *deferrable views* → vues différables.
+- *Essentials* (la section) → Fondamentaux ; *Playground* reste tel quel.
+- Les noms d'API gardent leur nom anglais même quand le concept est traduit : « un effet » se crée avec `effect()`, « une ressource » avec `resource()`, « le modèle » avec `model()`.
 - *You* dans une instruction → « vous » ; *your application* → « votre application ».
-- Ne traduisez pas les faux amis à l'identique : *actually* → en réalité ; *eventually* → au final ; *consistent* → cohérent.
+- Ne traduisez pas les faux amis à l'identique : *actually* → en réalité ; *eventually* → finalement, à terme ; *consistent* → cohérent.
 
 ## Chaînes d'interface
 

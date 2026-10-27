@@ -12,7 +12,7 @@
 </div>
 
 <docs-nav-card title="Envie de voir du code ?" iconImgSrc="adev/src/assets/icons/star.svg">
-  <docs-nav-link title="Essentiels" iconName="docs" href="essentials" iconImgSrc="adev/src/assets/icons/docs.svg">
+  <docs-nav-link title="Fondamentaux" iconName="docs" href="essentials" iconImgSrc="adev/src/assets/icons/docs.svg">
     Un aperçu de ce qu'est le développement avec Angular
   </docs-nav-link>
   <docs-nav-link title="Tutoriels" iconName="code"  href="tutorials" iconImgSrc="adev/src/assets/icons/tutorials.svg">
@@ -34,7 +34,7 @@
     Partagez facilement du code entre les composants de toute votre application.
   </docs-card>
   <docs-card title="Routage Angular" href="guide/routing" link="Explorer le routage Angular" iconImgSrc="adev/src/assets/icons/routing.svg">
-    Une boîte à outils de navigation complète, avec notamment les gardes de route, la résolution de données, le chargement différé et bien plus.
+    Une boîte à outils de navigation complète, avec notamment les gardes de route, la résolution de données, le lazy loading et bien plus.
   </docs-card>
   <docs-card title="Les formulaires avec Angular" href="guide/forms" link="Explorer les formulaires" iconImgSrc="adev/src/assets/icons/forms.svg">
     Un système standardisé pour la saisie et la validation des formulaires.

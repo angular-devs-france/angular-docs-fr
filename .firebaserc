@@ -1,12 +1,12 @@
 {
   "projects": {
-    "default": "rosetta-example"
+    "default": "angular-docs-fr"
   },
   "targets": {
-    "rosetta-example": {
+    "angular-docs-fr": {
       "hosting": {
-        "docs-example": [
-          "rosetta-example"
+        "angular-docs-fr": [
+          "angular-docs-fr"
         ]
       }
     }

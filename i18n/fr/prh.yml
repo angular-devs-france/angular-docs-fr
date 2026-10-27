@@ -1,0 +1,51 @@
+# Generated from glossary.json by `pnpm glossary <lang>`. Edit glossary.json, not this file.
+version: 1
+rules:
+  - expected: signal
+    patterns:
+      - /(?<![\p{L}\p{N}])signaux(?![\p{L}\p{N}])/i
+    prh: "API name; masculine in French: un signal, des signals"
+  - expected: template
+    patterns:
+      - /(?<![\p{L}\p{N}])gabarit(?![\p{L}\p{N}])/i
+    prh: "masculine: le template"
+  - expected: injection de dépendances
+    patterns:
+      - /(?<![\p{L}\p{N}])injection de dépendance(?![\p{L}\p{N}])/i
+  - expected: détection de changements
+    patterns:
+      - /(?<![\p{L}\p{N}])détection des changements(?![\p{L}\p{N}])/i
+      - /(?<![\p{L}\p{N}])détection de changement(?![\p{L}\p{N}])/i
+  - expected: bibliothèque
+    patterns:
+      - /(?<![\p{L}\p{N}])librairie(?![\p{L}\p{N}])/i
+  - expected: jeton d’injection
+    patterns:
+      - /(?<![\p{L}\p{N}])token d’injection(?![\p{L}\p{N}])/i
+      - /(?<![\p{L}\p{N}])token d'injection(?![\p{L}\p{N}])/i
+    prh: InjectionToken class stays
+  - expected: formulaires pilotés par le template
+    patterns:
+      - /(?<![\p{L}\p{N}])formulaires basés sur le template(?![\p{L}\p{N}])/i
+      - /(?<![\p{L}\p{N}])formulaires dirigés par le template(?![\p{L}\p{N}])/i
+  - expected: amorçage
+    patterns:
+      - /(?<![\p{L}\p{N}])bootstrapper(?![\p{L}\p{N}])/i
+    prh: "noun: amorçage; verb: amorcer (amorcer l’application).
+      bootstrapApplication stays. Never « bootstrapper »"
+  - expected: liaison bidirectionnelle
+    patterns:
+      - /(?<![\p{L}\p{N}])liaison à double sens(?![\p{L}\p{N}])/i
+      - /(?<![\p{L}\p{N}])liaison dans les deux sens(?![\p{L}\p{N}])/i
+  - expected: lazy loading
+    patterns:
+      - /(?<![\p{L}\p{N}])chargement paresseux(?![\p{L}\p{N}])/i
+      - /(?<![\p{L}\p{N}])chargement à la demande(?![\p{L}\p{N}])/i
+    prh: "masculine: le lazy loading. « chargement différé » is reserved for @defer
+      / deferrable views"
+  - expected: prérendu
+    patterns:
+      - /(?<![\p{L}\p{N}])pré-rendu(?![\p{L}\p{N}])/i
+      - /(?<![\p{L}\p{N}])pré-rendering(?![\p{L}\p{N}])/i
+    prh: "noun: le prérendu; verb: prérendre; in parentheses with the English on
+      first mention (prérendu, SSG)"

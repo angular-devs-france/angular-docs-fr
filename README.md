@@ -124,7 +124,7 @@ build/<lang>/               git worktree of origin + overlay (ignored, never com
 <!-- languages:start -->
 | Language | Site | Maintainers |
 | --- | --- | --- |
-| _none yet: run `pnpm create-language <lang>`_ | | |
+| Français (`fr`) | https://docs.angulardevs.fr |  |
 <!-- languages:end -->
 
 ## Working with an AI assistant
