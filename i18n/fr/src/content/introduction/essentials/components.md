@@ -11,7 +11,7 @@ Chaque composant comporte quelques parties principales :
 
 1. Un [décorateur](https://www.typescriptlang.org/docs/handbook/decorators.html) `@Component` qui contient la configuration utilisée par Angular.
 2. Un template HTML qui contrôle ce qui est rendu dans le DOM.
-3. Un [sélecteur CSS](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors) qui définit comment le composant est utilisé dans le HTML.
+3. Un [selector CSS](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors) qui définit comment le composant est utilisé dans le HTML.
 4. Une classe TypeScript avec des comportements, comme la gestion des saisies de l'utilisateur ou l'envoi de requêtes à un serveur.
 
 Voici un exemple simplifié d'un composant `UserProfile`.
@@ -94,7 +94,7 @@ Pour importer et utiliser un composant, vous devez :
 
 1. Dans le fichier TypeScript de votre composant, ajouter une instruction `import` pour le composant que vous voulez utiliser.
 2. Dans votre décorateur `@Component`, ajouter une entrée au tableau `imports` pour le composant que vous voulez utiliser.
-3. Dans le template de votre composant, ajouter un élément qui correspond au sélecteur du composant que vous voulez utiliser.
+3. Dans le template de votre composant, ajouter un élément qui correspond au selector du composant que vous voulez utiliser.
 
 Voici un exemple d'un composant `UserProfile` qui importe un composant `ProfilePhoto` :
 

@@ -1,7 +1,7 @@
 <!-- source: 9754515c033c0c41451e1e5cebc337481f95da6c -->
-# Effets
+# Effects
 
-Les signals sont utiles parce qu'ils notifient les consommateurs intéressés quand ils changent. Un **effet** est une opération qui s'exécute chaque fois que la valeur d'un ou plusieurs signals change. Vous pouvez créer un effet avec la fonction `effect` :
+Les signals sont utiles parce qu'ils notifient les consommateurs intéressés quand ils changent. Un **effect** est une opération qui s'exécute chaque fois que la valeur d'un ou plusieurs signals change. Vous pouvez créer un effect avec la fonction `effect` :
 
 ```ts
 import {effect} from '@angular/core';
@@ -11,23 +11,23 @@ effect(() => {
 });
 ```
 
-Les effets s'exécutent toujours **au moins une fois.** Quand un effet s'exécute, il suit toutes les lectures de valeurs de signals. Chaque fois que l'une de ces valeurs de signals change, l'effet s'exécute à nouveau. Comme les signals computed, les effets suivent leurs dépendances de manière dynamique et ne suivent que les signals lus lors de l'exécution la plus récente.
+Les effects s'exécutent toujours **au moins une fois.** Quand un effect s'exécute, il suit toutes les lectures de valeurs de signals. Chaque fois que l'une de ces valeurs de signals change, l'effect s'exécute à nouveau. Comme les signals computed, les effects suivent leurs dépendances de manière dynamique et ne suivent que les signals lus lors de l'exécution la plus récente.
 
-Les effets s'exécutent toujours de manière **asynchrone**, pendant le processus de détection de changements.
+Les effects s'exécutent toujours de manière **asynchrone**, pendant le processus de détection de changements.
 
-## Cas d'usage des effets {#use-cases-for-effects}
+## Cas d'usage des effects {#use-cases-for-effects}
 
-Les effets devraient être la dernière API à laquelle vous avez recours. Préférez toujours `computed()` pour les valeurs dérivées et `linkedSignal()` pour les valeurs qui peuvent être à la fois dérivées et définies manuellement. Si vous vous retrouvez à copier des données d'un signal à un autre avec un effet, c'est le signe que vous devriez remonter votre source de vérité et utiliser `computed()` ou `linkedSignal()` à la place. Les effets sont surtout adaptés pour synchroniser l'état des signals avec des API impératives qui n'utilisent pas les signals.
+Les effects devraient être la dernière API à laquelle vous avez recours. Préférez toujours `computed()` pour les valeurs dérivées et `linkedSignal()` pour les valeurs qui peuvent être à la fois dérivées et définies manuellement. Si vous vous retrouvez à copier des données d'un signal à un autre avec un effect, c'est le signe que vous devriez remonter votre source de vérité et utiliser `computed()` ou `linkedSignal()` à la place. Les effects sont surtout adaptés pour synchroniser l'état des signals avec des API impératives qui n'utilisent pas les signals.
 
-TIP: Il n'existe aucune situation où un effet est bon, seulement des situations où il est approprié.
+TIP: Il n'existe aucune situation où un effect est bon, seulement des situations où il est approprié.
 
 - Journaliser des valeurs de signals, que ce soit pour l'analytique ou comme outil de débogage.
 - Garder des données synchronisées avec différents types de stockage : `window.localStorage`, session storage, cookies, etc.
 - Ajouter un comportement DOM personnalisé qui ne peut pas être exprimé avec la syntaxe de template.
-- Effectuer un rendu personnalisé dans un élément `<canvas>`, une bibliothèque de graphiques ou une autre bibliothèque d'interface tierce.
+- Effectuer un rendu personnalisé dans un élément `<canvas>`, une library de graphiques ou une autre library d'interface tierce.
 
-<docs-callout critical title="Quand ne pas utiliser les effets">
-Évitez d'utiliser les effets pour propager des changements d'état. Cela peut entraîner des erreurs `ExpressionChangedAfterItHasBeenChecked`, des mises à jour circulaires infinies ou des cycles de détection de changements inutiles.
+<docs-callout critical title="Quand ne pas utiliser les effects">
+Évitez d'utiliser les effects pour propager des changements d'état. Cela peut entraîner des erreurs `ExpressionChangedAfterItHasBeenChecked`, des mises à jour circulaires infinies ou des cycles de détection de changements inutiles.
 
 Utilisez plutôt des signals `computed` pour modéliser un état qui dépend d'un autre état.
 </docs-callout>
@@ -50,7 +50,7 @@ export class EffectiveCounter {
 }
 ```
 
-Pour créer un effet en dehors du constructeur, vous pouvez passer un `Injector` à `effect` via ses options :
+Pour créer un effect en dehors du constructeur, vous pouvez passer un `Injector` à `effect` via ses options :
 
 ```ts
 @Component(/* ... */)
@@ -69,11 +69,11 @@ export class EffectiveCounter {
 }
 ```
 
-## Exécution des effets {#execution-of-effects}
+## Exécution des effects {#execution-of-effects}
 
-Angular définit implicitement deux comportements pour ses effets selon le contexte dans lequel ils ont été créés.
+Angular définit implicitement deux comportements pour ses effects selon le contexte dans lequel ils ont été créés.
 
-Un « View Effect » est un `effect` créé dans le contexte de l'instanciation d'un composant. Cela inclut les effets créés par des services liés aux injecteurs de composants.<br>
+Un « View Effect » est un `effect` créé dans le contexte de l'instanciation d'un composant. Cela inclut les effects créés par des services liés aux injectors de composants.<br>
 Un « Root Effect » est créé dans le contexte de l'instanciation d'un service fourni à la racine.
 
 L'exécution de ces deux types d'`effect` est liée au processus de détection de changements.
@@ -81,23 +81,23 @@ L'exécution de ces deux types d'`effect` est liée au processus de détection d
 - Les « View effects » sont exécutés _avant_ que leur composant correspondant soit vérifié par le processus de détection de changements.
 - Les « Root effects » sont exécutés avant que tous les composants soient vérifiés par le processus de détection de changements.
 
-Dans les deux cas, si au moins une des dépendances de l'effet a changé pendant son exécution, l'effet se réexécute avant de poursuivre le processus de détection de changements.
+Dans les deux cas, si au moins une des dépendances de l'effect a changé pendant son exécution, l'effect se réexécute avant de poursuivre le processus de détection de changements.
 
-## Détruire les effets {#destroying-effects}
+## Détruire les effects {#destroying-effects}
 
-Quand un composant ou une directive est détruit, Angular nettoie automatiquement tous les effets associés.
+Quand un composant ou une directive est détruit, Angular nettoie automatiquement tous les effects associés.
 
 Un `effect` peut être créé dans deux contextes différents, qui déterminent le moment où il est détruit :
 
 - Un « View effect » est détruit quand le composant est détruit.
 - Un « Root effect » est détruit quand l'application est détruite.
 
-Les effets renvoient un `EffectRef`. Vous pouvez utiliser la méthode `destroy` de cette référence pour supprimer manuellement un effet. Vous pouvez combiner cela avec l'option `manualCleanup` lors de la création d'un effet pour désactiver le nettoyage automatique. Veillez à bien détruire ces effets quand ils ne sont plus nécessaires.
+Les effects renvoient un `EffectRef`. Vous pouvez utiliser la méthode `destroy` de cette référence pour supprimer manuellement un effect. Vous pouvez combiner cela avec l'option `manualCleanup` lors de la création d'un effect pour désactiver le nettoyage automatique. Veillez à bien détruire ces effects quand ils ne sont plus nécessaires.
 
-## Fonctions de nettoyage des effets {#effect-cleanup-functions}
+## Fonctions de nettoyage des effects {#effect-cleanup-functions}
 
-Quand un composant ou une directive est détruit, Angular nettoie automatiquement tous les effets associés.
-Les effets peuvent lancer des opérations de longue durée, que vous devriez annuler si l'effet est détruit ou s'exécute à nouveau avant la fin de la première opération. Quand vous créez un effet, votre fonction peut éventuellement accepter une fonction `onCleanup` comme premier paramètre. Cette fonction `onCleanup` vous permet d'enregistrer un callback invoqué avant le début de la prochaine exécution de l'effet, ou quand l'effet est détruit.
+Quand un composant ou une directive est détruit, Angular nettoie automatiquement tous les effects associés.
+Les effects peuvent lancer des opérations de longue durée, que vous devriez annuler si l'effect est détruit ou s'exécute à nouveau avant la fin de la première opération. Quand vous créez un effect, votre fonction peut éventuellement accepter une fonction `onCleanup` comme premier paramètre. Cette fonction `onCleanup` vous permet d'enregistrer un callback invoqué avant le début de la prochaine exécution de l'effect, ou quand l'effect est détruit.
 
 ```ts
 effect((onCleanup) => {
@@ -115,7 +115,7 @@ effect((onCleanup) => {
 
 ## Effets de bord sur les éléments du DOM {#side-effects-on-dom-elements}
 
-La fonction `effect` est un outil polyvalent pour exécuter du code en réaction aux changements de signals. Cependant, elle s'exécute _avant_ qu'Angular mette à jour le DOM. Dans certaines situations, vous pouvez avoir besoin d'inspecter ou de modifier manuellement le DOM, ou d'intégrer une bibliothèque tierce qui nécessite un accès direct au DOM.
+La fonction `effect` est un outil polyvalent pour exécuter du code en réaction aux changements de signals. Cependant, elle s'exécute _avant_ qu'Angular mette à jour le DOM. Dans certaines situations, vous pouvez avoir besoin d'inspecter ou de modifier manuellement le DOM, ou d'intégrer une library tierce qui nécessite un accès direct au DOM.
 
 Pour ces situations, vous pouvez utiliser `afterRenderEffect`. Elle fonctionne comme `effect`, mais s'exécute après qu'Angular a terminé le rendu et appliqué ses changements au DOM.
 
@@ -142,7 +142,7 @@ export class MyFancyChart {
 }
 ```
 
-Dans cet exemple, `afterRenderEffect` est utilisée pour mettre à jour un graphique créé par une bibliothèque tierce.
+Dans cet exemple, `afterRenderEffect` est utilisée pour mettre à jour un graphique créé par une library tierce.
 
 TIP: Vous n'avez souvent pas besoin de `afterRenderEffect` pour détecter les changements du DOM. Des API comme `ResizeObserver`, `MutationObserver` et `IntersectionObserver` sont préférables à `effect` ou `afterRenderEffect` lorsque c'est possible.
 
@@ -188,7 +188,7 @@ CRITICAL: Si vous ne spécifiez pas la phase, `afterRenderEffect` exécute les c
 
 Le callback de la phase `earlyRead` ne reçoit que la fonction de nettoyage. Chaque phase suivante reçoit, sous forme de Signal, la valeur de retour du callback de la phase précédente. Vous pouvez vous en servir pour coordonner le travail entre les phases.
 
-Les effets s'exécutent dans l'ordre de phases suivant :
+Les effects s'exécutent dans l'ordre de phases suivant :
 
 1. `earlyRead`
 2. `write`
@@ -199,7 +199,7 @@ Si l'une des phases modifie la valeur d'un signal suivi par `afterRenderEffect`,
 
 #### Nettoyage {#cleanup}
 
-Chaque phase fournit une fonction de nettoyage (callback) en argument. Les callbacks de nettoyage sont exécutés quand l'`afterRenderEffect` est détruit ou avant la réexécution des effets de phase.
+Chaque phase fournit une fonction de nettoyage (callback) en argument. Les callbacks de nettoyage sont exécutés quand l'`afterRenderEffect` est détruit ou avant la réexécution des effects de phase.
 
 ### Mises en garde concernant le rendu côté serveur {#server-side-rendering-caveats}
 

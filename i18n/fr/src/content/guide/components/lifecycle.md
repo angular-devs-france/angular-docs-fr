@@ -7,15 +7,15 @@ Le **cycle de vie** d'un composant est la séquence d'étapes qui se déroulent 
 et sa destruction. Chaque étape représente une partie différente du processus par lequel Angular effectue le rendu
 des composants et vérifie au fil du temps s'ils doivent être mis à jour.
 
-Dans vos composants, vous pouvez implémenter des **hooks de cycle de vie** pour exécuter du code pendant ces étapes.
-Les hooks de cycle de vie liés à une instance de composant précise sont implémentés comme des méthodes de votre
-classe de composant. Les hooks de cycle de vie liés à l'application Angular dans son ensemble sont implémentés
+Dans vos composants, vous pouvez implémenter des **lifecycle hooks** pour exécuter du code pendant ces étapes.
+Les lifecycle hooks liés à une instance de composant précise sont implémentés comme des méthodes de votre
+classe de composant. Les lifecycle hooks liés à l'application Angular dans son ensemble sont implémentés
 comme des fonctions qui acceptent un callback.
 
 Le cycle de vie d'un composant est étroitement lié à la manière dont Angular vérifie au fil du temps les changements de vos composants.
 Pour comprendre ce cycle de vie, il vous suffit de savoir qu'Angular parcourt
-l'arbre de votre application de haut en bas, en vérifiant les changements des liaisons de template. Les hooks
-de cycle de vie décrits ci-dessous s'exécutent pendant ce parcours. Ce parcours visite chaque
+l'arbre de votre application de haut en bas, en vérifiant les changements des bindings de template. Les lifecycle
+hooks décrits ci-dessous s'exécutent pendant ce parcours. Ce parcours visite chaque
 composant exactement une fois : évitez donc toujours d'apporter d'autres changements d'état au milieu du
 processus.
 
@@ -169,7 +169,7 @@ En vérifiant `destroyRef.destroyed`, vous pouvez empêcher l'exécution de code
 
 La méthode `ngDoCheck` s'exécute avant chaque vérification par Angular des changements du template d'un composant.
 
-Vous pouvez utiliser ce hook de cycle de vie pour vérifier manuellement des changements d'état en dehors de la
+Vous pouvez utiliser ce lifecycle hook pour vérifier manuellement des changements d'état en dehors de la
 détection de changements normale d'Angular, en mettant à jour manuellement l'état du composant.
 
 Cette méthode s'exécute très fréquemment et peut avoir un impact important sur les performances de votre page. Évitez
@@ -182,9 +182,9 @@ Pendant l'initialisation, le premier `ngDoCheck` s'exécute après `ngOnInit`.
 La méthode `ngAfterContentInit` s'exécute une fois, après l'initialisation de tous les enfants imbriqués dans le composant (son
 _contenu_).
 
-Vous pouvez utiliser ce hook de cycle de vie pour lire les résultats des
-[requêtes de contenu](guide/components/queries#content-queries). Vous pouvez accéder à l'état initialisé
-de ces requêtes, mais toute tentative de modifier un état dans cette méthode provoque une
+Vous pouvez utiliser ce lifecycle hook pour lire les résultats des
+[content queries](guide/components/queries#content-queries). Vous pouvez accéder à l'état initialisé
+de ces queries, mais toute tentative de modifier un état dans cette méthode provoque une
 [ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100)
 
 ### ngAfterContentChecked {#ngaftercontentchecked}
@@ -196,7 +196,7 @@ Cette méthode s'exécute très fréquemment et peut avoir un impact important s
 de définir ce hook autant que possible, et ne l'utilisez que si vous n'avez pas d'autre solution.
 
 Vous pouvez accéder ici à l'état mis à jour
-des [requêtes de contenu](guide/components/queries#content-queries), mais toute tentative de
+des [content queries](guide/components/queries#content-queries), mais toute tentative de
 modifier un état dans cette méthode provoque
 une [ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100).
 
@@ -205,9 +205,9 @@ une [ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100).
 La méthode `ngAfterViewInit` s'exécute une fois, après l'initialisation de tous les enfants du template du composant (sa
 _vue_).
 
-Vous pouvez utiliser ce hook de cycle de vie pour lire les résultats des
-[requêtes de vue](guide/components/queries#view-queries). Vous pouvez accéder à l'état initialisé de
-ces requêtes, mais toute tentative de modifier un état dans cette méthode provoque une
+Vous pouvez utiliser ce lifecycle hook pour lire les résultats des
+[view queries](guide/components/queries#view-queries). Vous pouvez accéder à l'état initialisé de
+ces queries, mais toute tentative de modifier un état dans cette méthode provoque une
 [ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100)
 
 ### ngAfterViewChecked {#ngafterviewchecked}
@@ -218,7 +218,7 @@ _vue_) ont été vérifiés pour détecter des changements.
 Cette méthode s'exécute très fréquemment et peut avoir un impact important sur les performances de votre page. Évitez
 de définir ce hook autant que possible, et ne l'utilisez que si vous n'avez pas d'autre solution.
 
-Vous pouvez accéder à l'état mis à jour des [requêtes de vue](guide/components/queries#view-queries)
+Vous pouvez accéder à l'état mis à jour des [view queries](guide/components/queries#view-queries)
 ici, mais toute tentative de
 modifier un état dans cette méthode provoque
 une [ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100).
@@ -228,7 +228,7 @@ une [ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100).
 Les fonctions `afterEveryRender` et `afterNextRender` vous permettent d'enregistrer un **callback de rendu** à
 invoquer après qu'Angular a terminé le rendu de _tous les composants_ de la page dans le DOM.
 
-Ces fonctions diffèrent des autres hooks de cycle de vie décrits dans ce guide. Au lieu d'une
+Ces fonctions diffèrent des autres lifecycle hooks décrits dans ce guide. Au lieu d'une
 méthode de classe, ce sont des fonctions standalone qui acceptent un callback. L'exécution des callbacks
 de rendu n'est liée à aucune instance de composant précise : il s'agit d'un hook à l'échelle de l'application.
 
@@ -313,7 +313,7 @@ export class UserProfile implements OnInit {
 
 ## Ordre d'exécution {#execution-order}
 
-Les diagrammes suivants montrent l'ordre d'exécution des hooks de cycle de vie d'Angular.
+Les diagrammes suivants montrent l'ordre d'exécution des lifecycle hooks d'Angular.
 
 ### Pendant l'initialisation {#during-initialization}
 
@@ -348,6 +348,6 @@ CHANGE--Rendu-->afterEveryRender
 ### Ordre avec les directives {#ordering-with-directives}
 
 Lorsque vous placez une ou plusieurs directives sur le même élément qu'un composant, que ce soit dans un template ou avec
-la propriété `hostDirectives`, le framework ne garantit aucun ordre d'exécution d'un hook de cycle de vie donné
+la propriété `hostDirectives`, le framework ne garantit aucun ordre d'exécution d'un lifecycle hook donné
 entre le composant et les directives d'un même élément. Ne vous fiez jamais à un ordre
 observé, car il peut changer dans les versions ultérieures d'Angular.

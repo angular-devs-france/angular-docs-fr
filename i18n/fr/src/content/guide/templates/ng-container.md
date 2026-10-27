@@ -23,7 +23,7 @@
 
 Vous pouvez appliquer des directives à `<ng-container>` pour ajouter des comportements ou de la configuration à une partie de votre template.
 
-Angular ignore toutes les liaisons d'attribut et tous les écouteurs d'événements appliqués à `<ng-container>`, y compris ceux appliqués via une directive.
+Angular ignore tous les attribute bindings et tous les event listeners appliqués à `<ng-container>`, y compris ceux appliqués via une directive.
 
 ## Utiliser `<ng-container>` pour afficher du contenu dynamique {#using-ng-container-to-display-dynamic-contents}
 

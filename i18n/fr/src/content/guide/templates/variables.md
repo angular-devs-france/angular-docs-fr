@@ -11,7 +11,7 @@ La syntaxe `@let` d'Angular vous permet de définir une variable locale et de la
 
 ### Utiliser `@let` {#using-let}
 
-Utilisez `@let` pour déclarer une variable dont la valeur repose sur le résultat d'une expression de template. Angular maintient automatiquement la valeur de la variable à jour avec l'expression donnée, de manière similaire aux [liaisons](/guide/templates/binding).
+Utilisez `@let` pour déclarer une variable dont la valeur repose sur le résultat d'une expression de template. Angular maintient automatiquement la valeur de la variable à jour avec l'expression donnée, de manière similaire aux [bindings](/guide/templates/binding).
 
 ```angular-html
 @let name = user.name;
@@ -61,7 +61,7 @@ Une différence essentielle entre `@let` et le `let` de JavaScript est que `@let
 
 ### Portée des variables {#variable-scope}
 
-Les déclarations `@let` ont pour portée la vue courante et ses descendants. Angular crée une nouvelle vue aux frontières des composants et partout où un template peut contenir du contenu dynamique, comme les blocs de flux de contrôle, les blocs `@defer` ou les directives structurelles.
+Les déclarations `@let` ont pour portée la vue courante et ses descendants. Angular crée une nouvelle vue aux frontières des composants et partout où un template peut contenir du contenu dynamique, comme les blocs de control flow, les blocs `@defer` ou les directives structurelles.
 
 Comme les déclarations `@let` ne sont pas remontées (hoisting), elles ne sont **pas** accessibles depuis les vues parentes ni depuis les éléments frères :
 
@@ -110,7 +110,7 @@ Les variables de référence de template vous permettent de déclarer une variab
 
 Une variable de référence de template peut faire référence à :
 
-- un élément du DOM dans un template (y compris les [éléments personnalisés](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements))
+- un élément du DOM dans un template (y compris les [custom elements](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements))
 - un composant ou une directive Angular
 - un [TemplateRef](/api/core/TemplateRef) issu d'un [ng-template](/api/core/ng-template)
 
@@ -175,9 +175,9 @@ Lorsque vous déclarez une variable de template sur un élément, vous pouvez as
 
 Vous ne pouvez pas faire référence à une directive qui ne définit pas de nom `exportAs`.
 
-### Utiliser les variables de référence de template avec les requêtes {#using-template-reference-variables-with-queries}
+### Utiliser les variables de référence de template avec les queries {#using-template-reference-variables-with-queries}
 
-En plus d'utiliser les variables de template pour lire des valeurs depuis une autre partie du même template, vous pouvez aussi utiliser ce style de déclaration de variable pour « marquer » un élément pour les [requêtes de composant et de directive](/guide/components/queries).
+En plus d'utiliser les variables de template pour lire des valeurs depuis une autre partie du même template, vous pouvez aussi utiliser ce style de déclaration de variable pour « marquer » un élément pour les [queries de composant et de directive](/guide/components/queries).
 
 Lorsque vous voulez interroger un élément précis d'un template, vous pouvez déclarer une variable de template sur cet élément, puis interroger l'élément à partir du nom de la variable.
 
@@ -196,13 +196,13 @@ export class AppComponent {
 }
 ```
 
-Consultez [Référencer des enfants avec des requêtes](/guide/components/queries) pour plus d'informations sur les requêtes.
+Consultez [Référencer des enfants avec des queries](/guide/components/queries) pour plus d'informations sur les queries.
 
 ### Portée des variables de template {#template-variable-scope}
 
 Tout comme les variables dans du code JavaScript ou TypeScript, les variables de template ont pour portée le template qui les déclare.
 
-De même, les [blocs de flux de contrôle](guide/templates/control-flow) comme `@if` et `@for`, les [directives structurelles](guide/directives/structural-directives) et les déclarations `<ng-template>` créent une nouvelle portée de template imbriquée, tout comme les instructions de flux de contrôle de JavaScript telles que `if` et `for` créent de nouvelles portées lexicales. Vous ne pouvez pas accéder aux variables de template d'un de ces templates imbriqués depuis l'extérieur de ses limites.
+De même, les [blocs de control flow](guide/templates/control-flow) comme `@if` et `@for`, les [directives structurelles](guide/directives/structural-directives) et les déclarations `<ng-template>` créent une nouvelle portée de template imbriquée, tout comme les instructions de flux de contrôle de JavaScript telles que `if` et `for` créent de nouvelles portées lexicales. Vous ne pouvez pas accéder aux variables de template d'un de ces templates imbriqués depuis l'extérieur de ses limites.
 
 HELPFUL: Ne définissez une variable qu'une seule fois dans le template afin que sa valeur à l'exécution reste prévisible.
 

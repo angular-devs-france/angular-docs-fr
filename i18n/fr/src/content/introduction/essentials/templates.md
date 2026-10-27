@@ -3,13 +3,13 @@
 Utilisez la syntaxe de template d'Angular pour créer des interfaces utilisateur dynamiques.
 </docs-decorative-header>
 
-Les templates de composant ne sont pas du simple HTML statique : ils peuvent utiliser les données de la classe de votre composant et mettre en place des gestionnaires pour les interactions de l'utilisateur.
+Les templates de composant ne sont pas du simple HTML statique : ils peuvent utiliser les données de la classe de votre composant et mettre en place des event handlers pour les interactions de l'utilisateur.
 
 ## Afficher du texte dynamique {#showing-dynamic-text}
 
-Dans Angular, une _liaison_ (binding) crée une connexion dynamique entre le template d'un composant et ses données. Cette connexion garantit que les modifications des données du composant mettent automatiquement à jour le template rendu.
+Dans Angular, un _binding_ crée une connexion dynamique entre le template d'un composant et ses données. Cette connexion garantit que les modifications des données du composant mettent automatiquement à jour le template rendu.
 
-Vous pouvez créer une liaison pour afficher du texte dynamique dans un template avec des doubles accolades :
+Vous pouvez créer un binding pour afficher du texte dynamique dans un template avec des doubles accolades :
 
 ```angular-ts
 @Component({
@@ -27,7 +27,7 @@ Quand Angular rend le composant, vous voyez :
 <h1>Profile for pro_programmer_123</h1>
 ```
 
-Angular maintient automatiquement la liaison à jour quand la valeur du signal change. En reprenant
+Angular maintient automatiquement le binding à jour quand la valeur du signal change. En reprenant
 l'exemple ci-dessus, si nous mettons à jour la valeur du signal `userName` :
 
 ```typescript
@@ -66,7 +66,7 @@ Angular met automatiquement à jour les propriétés et les attributs du DOM qua
 
 ## Gérer les interactions de l'utilisateur {#handling-user-interaction}
 
-Angular vous permet d'ajouter des écouteurs d'événements à un élément de votre template avec des parenthèses :
+Angular vous permet d'ajouter des event listeners à un élément de votre template avec des parenthèses :
 
 ```angular-ts
 @Component({
@@ -83,7 +83,7 @@ export class UserProfile {
 }
 ```
 
-Si vous devez passer l'objet [événement](https://developer.mozilla.org/docs/Web/API/Event) à votre écouteur, vous pouvez utiliser la variable intégrée `$event` d'Angular dans l'appel de fonction :
+Si vous devez passer l'objet [événement](https://developer.mozilla.org/docs/Web/API/Event) à votre event listener, vous pouvez utiliser la variable intégrée `$event` d'Angular dans l'appel de fonction :
 
 ```angular-ts
 @Component({
@@ -100,7 +100,7 @@ export class UserProfile {
 }
 ```
 
-## Flux de contrôle avec `@if` et `@for` {#control-flow-with-if-and-for}
+## Control flow avec `@if` et `@for` {#control-flow-with-if-and-for}
 
 Vous pouvez masquer et afficher des parties d'un template selon une condition avec le bloc `@if` d'Angular :
 

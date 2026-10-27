@@ -68,7 +68,8 @@
   },
   {
     "term": "library",
-    "keep": true
+    "keep": true,
+    "note": "feminine: la library"
   },
   {
     "term": "form",
@@ -76,7 +77,8 @@
   },
   {
     "term": "reactive forms",
-    "keep": true
+    "keep": true,
+    "note": "masculine: les reactive forms"
   },
   {
     "term": "signal forms",
@@ -85,15 +87,18 @@
   },
   {
     "term": "binding",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le binding"
   },
   {
     "term": "event listener",
-    "keep": true
+    "keep": true,
+    "note": "masculine: l'event listener"
   },
   {
     "term": "lifecycle hook",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le lifecycle hook"
   },
   {
     "term": "deferrable views",
@@ -101,7 +106,8 @@
   },
   {
     "term": "control flow",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le control flow"
   },
   {
     "term": "route",
@@ -110,16 +116,18 @@
   },
   {
     "term": "router",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le router"
   },
   {
     "term": "guard",
     "keep": true,
-    "note": "feminine in this context: une gard de route"
+    "note": "feminine: la guard"
   },
   {
     "term": "resolver",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le resolver"
   },
   {
     "term": "input",
@@ -157,12 +165,12 @@
   {
     "term": "model",
     "keep": true,
-    "note": "the API (model(), ngModel) stays in English; « modèle » for the concept (data model) only"
+    "note": "masculine: le model; model() stays. Generic « modèle » (data model in general) stays French"
   },
   {
     "term": "resource",
     "keep": true,
-    "note": "the API (resource(), httpResource(), Resource) stays in English; « ressource » in prose"
+    "note": "feminine: une resource, les resources; resource()/httpResource() stay"
   },
   {
     "term": "schematic",
@@ -171,7 +179,8 @@
   },
   {
     "term": "attribute",
-    "keep": true
+    "keep": true,
+    "note": "masculine: l'attribute (Angular concept: attribute binding, attribute directive, attribute selector); a generic HTML attribute stays « attribut »"
   },
   {
     "term": "package",
@@ -200,15 +209,18 @@
   },
   {
     "term": "host",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le host"
   },
   {
     "term": "injector",
-    "keep": true
+    "keep": true,
+    "note": "masculine: l'injector"
   },
   {
     "term": "effect",
-    "keep": true
+    "keep": true,
+    "note": "masculine: un effect; effect() stays; « en effet » is unrelated"
   },
   {
     "term": "validator",
@@ -232,15 +244,18 @@
   },
   {
     "term": "query",
-    "keep": true
+    "keep": true,
+    "note": "feminine: la query, les queries (view query, content query); « requête HTTP » stays French"
   },
   {
     "term": "selector",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le selector"
   },
   {
     "term": "workspace",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le workspace"
   },
   {
     "term": "migration",
@@ -249,7 +264,8 @@
   },
   {
     "term": "routing",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le routing"
   },
   {
     "term": "decorator",
@@ -310,19 +326,23 @@
   },
   {
     "term": "promise",
-    "keep": true
+    "keep": true,
+    "note": "feminine: la promise"
   },
   {
     "term": "host element",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le host element"
   },
   {
     "term": "template-driven forms",
-    "keep": true
+    "keep": true,
+    "note": "masculine: les template-driven forms"
   },
   {
     "term": "interpolation",
-    "keep": true
+    "keep": true,
+    "note": "feminine: l'interpolation"
   },
   {
     "term": "form group",
@@ -331,7 +351,8 @@
   },
   {
     "term": "bootstrap",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le bootstrap"
   },
   {
     "term": "accessibility",
@@ -345,15 +366,18 @@
   },
   {
     "term": "property binding",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le property binding"
   },
   {
     "term": "two-way binding",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le two-way binding"
   },
   {
     "term": "host binding",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le host binding"
   },
   {
     "term": "unit test",
@@ -365,7 +389,8 @@
   },
   {
     "term": "event binding",
-    "keep": true
+    "keep": true,
+    "note": "masculine: l'event binding"
   },
   {
     "term": "subscription",
@@ -410,11 +435,13 @@
   },
   {
     "term": "linked signal",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le linked signal"
   },
   {
     "term": "slot",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le slot"
   },
   {
     "term": "localization",
@@ -471,11 +498,13 @@
   },
   {
     "term": "child query",
-    "keep": true
+    "keep": true,
+    "note": "feminine: la child query"
   },
   {
     "term": "query locator",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le query locator"
   },
   {
     "term": "injection context",
@@ -488,15 +517,18 @@
   },
   {
     "term": "view container",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le view container"
   },
   {
     "term": "host view",
-    "keep": true
+    "keep": true,
+    "note": "feminine: la host view"
   },
   {
     "term": "host directive",
-    "keep": true
+    "keep": true,
+    "note": "feminine: la host directive"
   },
   {
     "term": "structural directive",
@@ -512,7 +544,8 @@
   },
   {
     "term": "custom element",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le custom element"
   },
   {
     "term": "css custom properties",
@@ -520,7 +553,8 @@
   },
   {
     "term": "namespace",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le namespace"
   },
   {
     "term": "style encapsulation",
@@ -562,7 +596,8 @@
   },
   {
     "term": "error boundary",
-    "keep": true
+    "keep": true,
+    "note": "feminine: l'error boundary"
   },
   {
     "term": "embedded view",
@@ -607,7 +642,8 @@
   },
   {
     "term": "nullish coalescing",
-    "keep": true
+    "keep": true,
+    "note": "masculine: le nullish coalescing"
   },
   {
     "term": "arrow function",
@@ -620,7 +656,8 @@
   },
   {
     "term": "event handler",
-    "keep": true
+    "keep": true,
+    "note": "masculine: l'event handler"
   },
   {
     "term": "pure pipe",

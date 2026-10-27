@@ -23,7 +23,7 @@ export class CustomListbox extends ListboxBase {
 
 Quand un composant étend un autre composant ou une directive, il hérite d'une partie des métadonnées définies dans
 le décorateur de la classe de base ainsi que des membres décorés de la classe de base. Cela comprend
-les liaisons d'hôte, les inputs, les outputs et les méthodes de cycle de vie.
+les host bindings, les inputs, les outputs et les méthodes de cycle de vie.
 
 ```angular-ts
 @Component({
@@ -56,10 +56,10 @@ export class CustomListbox extends ListboxBase {
 ```
 
 Dans l'exemple ci-dessus, `CustomListbox` hérite de toutes les informations associées à `ListboxBase`,
-en remplaçant le sélecteur et le template par ses propres valeurs. `CustomListbox` possède deux inputs (`value`
-et `disabled`) et deux écouteurs d'événements (`keydown` et `click`).
+en remplaçant le selector et le template par ses propres valeurs. `CustomListbox` possède deux inputs (`value`
+et `disabled`) et deux event listeners (`keydown` et `click`).
 
-Les classes enfants obtiennent au final l'_union_ des inputs, des outputs et des liaisons d'hôte de tous leurs ancêtres
+Les classes enfants obtiennent au final l'_union_ des inputs, des outputs et des host bindings de tous leurs ancêtres
 et des leurs.
 
 ### Transmettre les dépendances injectées {#forwarding-injected-dependencies}

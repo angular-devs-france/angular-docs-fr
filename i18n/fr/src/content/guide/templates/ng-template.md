@@ -17,9 +17,9 @@ Vous pouvez créer un fragment de template dans n'importe quel template de compo
 
 Lors de l'affichage du code ci-dessus, le contenu de l'élément `<ng-template>` n'est pas affiché sur la page. À la place, vous pouvez obtenir une référence au fragment de template et écrire du code pour l'afficher dynamiquement.
 
-### Contexte de liaison des fragments {#binding-context-for-fragments}
+### Contexte de binding des fragments {#binding-context-for-fragments}
 
-Les fragments de template peuvent contenir des liaisons avec des expressions dynamiques :
+Les fragments de template peuvent contenir des bindings avec des expressions dynamiques :
 
 ```angular-ts
 @Component({
@@ -38,7 +38,7 @@ Les expressions et les instructions d'un fragment de template sont évaluées pa
 Vous pouvez obtenir une référence à un fragment de template de trois manières :
 
 - En déclarant une [variable de référence de template](/guide/templates/variables#template-reference-variables) sur l'élément `<ng-template>`
-- En interrogeant le fragment avec [une requête de composant ou de directive](/guide/components/queries)
+- En interrogeant le fragment avec [une query de composant ou de directive](/guide/components/queries)
 - En injectant le fragment dans une directive appliquée directement à un élément `<ng-template>`.
 
 Dans les trois cas, le fragment est représenté par un objet [TemplateRef](/api/core/TemplateRef).
@@ -57,11 +57,11 @@ Vous pouvez ajouter une variable de référence de template à un élément `<ng
 
 Vous pouvez ensuite référencer ce fragment n'importe où ailleurs dans le template via la variable `myFragment`.
 
-### Référencer un fragment de template avec des requêtes {#referencing-a-template-fragment-with-queries}
+### Référencer un fragment de template avec des queries {#referencing-a-template-fragment-with-queries}
 
-Vous pouvez obtenir une référence à un fragment de template avec n'importe quelle [API de requête de composant ou de directive](/guide/components/queries).
+Vous pouvez obtenir une référence à un fragment de template avec n'importe quelle [API de query de composant ou de directive](/guide/components/queries).
 
-Vous pouvez interroger directement l'objet `TemplateRef` avec une requête `viewChild`.
+Vous pouvez interroger directement l'objet `TemplateRef` avec une query `viewChild`.
 
 ```angular-ts
 @Component({
@@ -162,7 +162,7 @@ Cet exemple produit le DOM suivant :
 
 ### Utiliser `ViewContainerRef` {#using-viewcontainerref}
 
-Un **conteneur de vues** (view container) est un nœud de l'arbre de composants d'Angular qui peut contenir du contenu. Tout composant ou toute directive peut injecter `ViewContainerRef` pour obtenir une référence au conteneur de vues correspondant à l'emplacement de ce composant ou de cette directive dans le DOM.
+Un **view container** est un nœud de l'arbre de composants d'Angular qui peut contenir du contenu. Tout composant ou toute directive peut injecter `ViewContainerRef` pour obtenir une référence au view container correspondant à l'emplacement de ce composant ou de cette directive dans le DOM.
 
 Vous pouvez utiliser la méthode `createEmbeddedView` de `ViewContainerRef` pour afficher dynamiquement un fragment de template. Lorsque vous affichez un fragment avec un `ViewContainerRef`, Angular l'ajoute au DOM comme frère suivant du composant ou de la directive qui a injecté le `ViewContainerRef`.
 
@@ -213,7 +213,7 @@ Dans l'exemple ci-dessus, un clic sur le bouton « Show » produit le résul
 
 ## Passer des paramètres lors de l'affichage d'un fragment de template {#passing-parameters-when-rendering-a-template-fragment}
 
-Lorsque vous déclarez un fragment de template avec `<ng-template>`, vous pouvez en plus déclarer les paramètres acceptés par le fragment. Lorsque vous affichez un fragment, vous pouvez éventuellement passer un objet `context` correspondant à ces paramètres. Vous pouvez utiliser les données de cet objet de contexte dans les expressions de liaison et les instructions, en plus des données du composant dans lequel le fragment est déclaré.
+Lorsque vous déclarez un fragment de template avec `<ng-template>`, vous pouvez en plus déclarer les paramètres acceptés par le fragment. Lorsque vous affichez un fragment, vous pouvez éventuellement passer un objet `context` correspondant à ces paramètres. Vous pouvez utiliser les données de cet objet de contexte dans les expressions de binding et les instructions, en plus des données du composant dans lequel le fragment est déclaré.
 
 Chaque paramètre s'écrit sous la forme d'un attribut préfixé par `let-`, dont la valeur correspond à un nom de propriété de l'objet de contexte :
 
@@ -243,9 +243,9 @@ Vous pouvez passer un objet de contexte comme second argument de `createEmbedded
 this.viewContainer.createEmbeddedView(this.myFragment, {topping: 'onion'});
 ```
 
-## Fournir des injecteurs aux fragments de template {#providing-injectors-to-template-fragments}
+## Fournir des injectors aux fragments de template {#providing-injectors-to-template-fragments}
 
-Lorsque vous affichez un fragment de template, son contexte d'injecteur provient de **l'emplacement de la déclaration du template**, et non de l'endroit où il est affiché. Vous pouvez modifier ce comportement en fournissant un injecteur personnalisé.
+Lorsque vous affichez un fragment de template, son contexte d'injector provient de **l'emplacement de la déclaration du template**, et non de l'endroit où il est affiché. Vous pouvez modifier ce comportement en fournissant un injector personnalisé.
 
 ### Utiliser `NgTemplateOutlet` {#using-ngtemplateoutlet-with-injectors}
 
@@ -281,9 +281,9 @@ export class Root {
 }
 ```
 
-#### Hériter de l'injecteur de l'outlet {#inheriting-the-outlets-injector}
+#### Hériter de l'injector de l'outlet {#inheriting-the-outlets-injector}
 
-Vous pouvez définir `ngTemplateOutletInjector` sur la chaîne `'outlet'` pour que la vue intégrée hérite de l'injecteur de l'emplacement de l'outlet dans le DOM, plutôt que de l'endroit où le template a été déclaré.
+Vous pouvez définir `ngTemplateOutletInjector` sur la chaîne `'outlet'` pour que la vue intégrée hérite de l'injector de l'emplacement de l'outlet dans le DOM, plutôt que de l'endroit où le template a été déclaré.
 
 ```angular-html
 <ng-template #node let-items>
@@ -299,13 +299,13 @@ Vous pouvez définir `ngTemplateOutletInjector` sur la chaîne `'outlet'` pour q
 <ng-container *ngTemplateOutlet="node; context: {$implicit: topLevelItems}" />
 ```
 
-Chaque affichage récursif du template `node` hérite de l'injecteur de l'`<item-component>` englobant, ce qui permet à chaque niveau imbriqué d'accéder aux providers rattachés à son composant parent.
+Chaque affichage récursif du template `node` hérite de l'injector de l'`<item-component>` englobant, ce qui permet à chaque niveau imbriqué d'accéder aux providers rattachés à son composant parent.
 
 NOTE: C'est utile pour construire des structures récursives, ou dans toute situation où le template affiché a besoin d'accéder aux providers de l'arbre de composants à l'emplacement de l'outlet.
 
 ### Utiliser `ViewContainerRef` {#using-viewcontainerref-with-injectors}
 
-Vous pouvez passer un injecteur personnalisé dans l'objet d'options de `createEmbeddedView` :
+Vous pouvez passer un injector personnalisé dans l'objet d'options de `createEmbeddedView` :
 
 ```ts
 this.viewContainer.createEmbeddedView(this.myFragment, context, {
@@ -320,7 +320,7 @@ Une **directive structurelle** est une directive qui :
 - Injecte `TemplateRef`
 - Injecte `ViewContainerRef` et affiche de manière programmatique le `TemplateRef` injecté
 
-Angular prend en charge une syntaxe simplifiée spéciale pour les directives structurelles. Si vous appliquez la directive à un élément en préfixant le sélecteur de la directive par un astérisque (`*`), Angular interprète l'élément entier et tout son contenu comme un fragment de template :
+Angular prend en charge une syntaxe simplifiée spéciale pour les directives structurelles. Si vous appliquez la directive à un élément en préfixant le selector de la directive par un astérisque (`*`), Angular interprète l'élément entier et tout son contenu comme un fragment de template :
 
 ```angular-html
 <section *myDirective>
@@ -344,7 +344,7 @@ Pour plus de détails, consultez [Directives structurelles](/guide/directives/st
 
 ## Ressources supplémentaires {#additional-resources}
 
-Pour des exemples d'utilisation de `ng-template` dans d'autres bibliothèques, consultez :
+Pour des exemples d'utilisation de `ng-template` dans d'autres libraries, consultez :
 
 - [Les onglets d'Angular Material](https://material.angular.dev/components/tabs/overview) - rien n'est affiché dans le DOM tant que l'onglet n'est pas activé
 - [Le tableau d'Angular Material](https://material.angular.dev/components/table/overview) - permet aux développeurs de définir différentes manières d'afficher les données

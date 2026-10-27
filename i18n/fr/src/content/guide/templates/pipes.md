@@ -56,7 +56,7 @@ Angular inclut un ensemble de pipes intégrés dans le package `@angular/common`
 | [`DatePipe`](api/common/DatePipe)             | Formate une valeur `Date` selon les règles de la locale. |
 | [`DecimalPipe`](api/common/DecimalPipe)       | Transforme un nombre en chaîne avec un séparateur décimal, formatée selon les règles de la locale. |
 | [`I18nPluralPipe`](api/common/I18nPluralPipe) | Associe une valeur à une chaîne qui met la valeur au pluriel selon les règles de la locale. |
-| [`I18nSelectPipe`](api/common/I18nSelectPipe) | Associe une clé à un sélecteur personnalisé qui renvoie la valeur souhaitée. |
+| [`I18nSelectPipe`](api/common/I18nSelectPipe) | Associe une clé à un sélecteur personnalisé qui renvoie la valeur souhaitée.  |
 | [`JsonPipe`](api/common/JsonPipe)             | Transforme un objet en représentation sous forme de chaîne via `JSON.stringify`, destinée au débogage. |
 | [`KeyValuePipe`](api/common/KeyValuePipe)     | Transforme un Object ou une Map en tableau de paires clé-valeur. |
 | [`LowerCasePipe`](api/common/LowerCasePipe)   | Transforme le texte entièrement en minuscules. |

@@ -126,9 +126,9 @@ export class DynamicCard {
 
 NOTE: L'hydratation ne prend pas en charge la projection de nœuds du DOM créés avec les API natives du DOM. Cela provoque une [erreur NG0503](/errors/NG0503). Utilisez les API d'Angular pour créer le contenu projeté ou ajoutez `ngSkipHydration` au composant.
 
-### Fournir des injecteurs {#providing-injectors}
+### Fournir des injectors {#providing-injectors}
 
-Vous pouvez fournir un injecteur personnalisé au composant créé dynamiquement avec `ngComponentOutletInjector`. C'est utile pour fournir des services ou une configuration propres au composant.
+Vous pouvez fournir un injector personnalisé au composant créé dynamiquement avec `ngComponentOutletInjector`. C'est utile pour fournir des services ou une configuration propres au composant.
 
 ```angular-ts
 export const THEME_DATA = new InjectionToken<string>('THEME_DATA', {
@@ -193,8 +193,8 @@ capacités de la directive.
 
 ## Utiliser ViewContainerRef {#using-viewcontainerref}
 
-Un **conteneur de vues** est un nœud de l'arbre des composants d'Angular qui peut contenir du contenu. Tout composant
-ou toute directive peut injecter `ViewContainerRef` pour obtenir une référence au conteneur de vues correspondant à
+Un **view container** est un nœud de l'arbre des composants d'Angular qui peut contenir du contenu. Tout composant
+ou toute directive peut injecter `ViewContainerRef` pour obtenir une référence au view container correspondant à
 l'emplacement de ce composant ou de cette directive dans le DOM.
 
 Vous pouvez utiliser la méthode `createComponent`de `ViewContainerRef` pour créer et rendre dynamiquement un
@@ -283,17 +283,17 @@ export class AdminSettings {
 
 L'exemple ci-dessus charge et affiche `AdvancedSettings` lors d'un clic sur un bouton.
 
-## Lier des inputs et des outputs et définir des directives d'hôte à la création {#binding-inputs-outputs-and-setting-host-directives-at-creation}
+## Lier des inputs et des outputs et définir des host directives à la création {#binding-inputs-outputs-and-setting-host-directives-at-creation}
 
-Lors de la création dynamique de composants, définir manuellement les inputs et s'abonner aux outputs peut être source d'erreurs. Vous devez souvent écrire du code supplémentaire rien que pour mettre en place les liaisons une fois le composant instancié.
+Lors de la création dynamique de composants, définir manuellement les inputs et s'abonner aux outputs peut être source d'erreurs. Vous devez souvent écrire du code supplémentaire rien que pour mettre en place les bindings une fois le composant instancié.
 
-Pour simplifier cela, `createComponent` et `ViewContainerRef.createComponent` acceptent tous deux un tableau `bindings` avec des helpers comme `inputBinding()`, `outputBinding()` et `twoWayBinding()` pour configurer les inputs et les outputs dès le départ. Vous pouvez aussi spécifier un tableau `directives` pour appliquer des directives d'hôte. Cela permet de créer des composants par programmation avec des liaisons semblables à celles d'un template, en un seul appel déclaratif.
+Pour simplifier cela, `createComponent` et `ViewContainerRef.createComponent` acceptent tous deux un tableau `bindings` avec des helpers comme `inputBinding()`, `outputBinding()` et `twoWayBinding()` pour configurer les inputs et les outputs dès le départ. Vous pouvez aussi spécifier un tableau `directives` pour appliquer des host directives. Cela permet de créer des composants par programmation avec des bindings semblables à ceux d'un template, en un seul appel déclaratif.
 
-### Vue hôte avec `ViewContainerRef.createComponent` {#host-view-using-viewcontainerrefcreatecomponent}
+### Host view avec `ViewContainerRef.createComponent` {#host-view-using-viewcontainerrefcreatecomponent}
 
-`ViewContainerRef.createComponent` crée un composant et insère automatiquement sa vue hôte et son élément hôte dans la hiérarchie de vues du conteneur, à l'emplacement du conteneur. Utilisez-le quand le composant dynamique doit faire partie de la structure logique et visuelle du conteneur (par exemple, pour ajouter des éléments de liste ou une UI en ligne).
+`ViewContainerRef.createComponent` crée un composant et insère automatiquement sa host view et son host element dans la hiérarchie de vues du conteneur, à l'emplacement du conteneur. Utilisez-le quand le composant dynamique doit faire partie de la structure logique et visuelle du conteneur (par exemple, pour ajouter des éléments de liste ou une UI en ligne).
 
-À l'inverse, l'API standalone `createComponent` n'attache le nouveau composant à aucune vue ni à aucun emplacement du DOM existant : elle renvoie un `ComponentRef` et vous laisse contrôler explicitement où placer l'élément hôte du composant.
+À l'inverse, l'API standalone `createComponent` n'attache le nouveau composant à aucune vue ni à aucun emplacement du DOM existant : elle renvoie un `ComponentRef` et vous laisse contrôler explicitement où placer le host element du composant.
 
 ```angular-ts
 import {Component, input, model, output} from '@angular/core';
@@ -355,11 +355,11 @@ export class Host {
 }
 ```
 
-Dans l'exemple ci-dessus, le composant dynamique **AppWarning** est créé avec son input `canClose` lié à un signal réactif, une liaison bidirectionnelle sur son état `isExpanded` et un écouteur d'output pour `close`. `FocusTrap` et `ThemeDirective` sont attachées à l'élément hôte via `directives`.
+Dans l'exemple ci-dessus, le composant dynamique **AppWarning** est créé avec son input `canClose` lié à un signal réactif, un two-way binding sur son état `isExpanded` et un écouteur d'output pour `close`. `FocusTrap` et `ThemeDirective` sont attachées au host element via `directives`.
 
 ### Popup attachée à `document.body` avec `createComponent` + `hostElement` {#popup-attached-to-documentbody-with-createcomponent--hostelement}
 
-Utilisez cette approche pour un rendu en dehors de la hiérarchie de vues actuelle (par exemple, des overlays). Le `hostElement` fourni devient l'hôte du composant dans le DOM, si bien qu'Angular ne crée pas de nouvel élément correspondant au sélecteur. Vous pouvez configurer directement les **liaisons**.
+Utilisez cette approche pour un rendu en dehors de la hiérarchie de vues actuelle (par exemple, des overlays). Le `hostElement` fourni devient le host du composant dans le DOM, si bien qu'Angular ne crée pas de nouvel élément correspondant au selector. Vous pouvez configurer directement les **bindings**.
 
 ```ts
 import {

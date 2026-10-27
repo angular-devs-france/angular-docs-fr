@@ -32,7 +32,7 @@ TIP: `<ng-content>` fonctionne de manière similaire
 à [l'élément natif `<slot>`](https://developer.mozilla.org/docs/Web/HTML/Element/slot),
 mais avec certaines fonctionnalités propres à Angular.
 
-Quand vous utilisez un composant avec `<ng-content>`, tous les enfants de l'élément hôte du composant sont
+Quand vous utilisez un composant avec `<ng-content>`, tous les enfants du host element du composant sont
 rendus, ou **projetés**, à l'emplacement de ce `<ng-content>` :
 
 ```angular-ts
@@ -83,7 +83,7 @@ consultez [Fragments de template](api/core/ng-template).
 ## Plusieurs placeholders de contenu {#multiple-content-placeholders}
 
 Angular permet de projeter plusieurs éléments différents dans différents placeholders `<ng-content>`
-en fonction d'un sélecteur CSS. En reprenant l'exemple de carte ci-dessus, vous pouvez créer deux placeholders pour
+en fonction d'un selector CSS. En reprenant l'exemple de carte ci-dessus, vous pouvez créer deux placeholders pour
 le titre et le corps de la carte grâce à l'attribut `select` :
 
 ```angular-ts
@@ -141,8 +141,8 @@ export class App {}
 </custom-card>
 ```
 
-Le placeholder `<ng-content>` prend en charge les mêmes sélecteurs CSS
-que les [sélecteurs de composant](guide/components/selectors).
+Le placeholder `<ng-content>` prend en charge les mêmes selectors CSS
+que les [selectors de composant](guide/components/selectors).
 
 Si vous incluez un ou plusieurs placeholders `<ng-content>` avec un attribut `select` et
 un placeholder `<ng-content>` sans attribut `select`, ce dernier capture tous les éléments qui
@@ -216,7 +216,7 @@ Angular peut afficher un _contenu de repli_ pour le placeholder `<ng-content>` d
 
 ## Définir un alias de contenu pour la projection {#aliasing-content-for-projection}
 
-Angular prend en charge un attribut spécial, `ngProjectAs`, qui vous permet de définir un sélecteur CSS sur
+Angular prend en charge un attribut spécial, `ngProjectAs`, qui vous permet de définir un selector CSS sur
 n'importe quel élément. Chaque fois qu'un élément portant `ngProjectAs` est comparé à un placeholder
 `<ng-content>`, Angular utilise la valeur de `ngProjectAs` au lieu de l'identité de l'élément :
 
@@ -267,12 +267,12 @@ Même si le contenu projeté est _rendu_ à l'intérieur du composant qui le re�
 </onpush-wrapper>
 ```
 
-**Injection de dépendances :** le contenu projeté obtient ses dépendances depuis l'injecteur du parent, et non depuis les `viewProviders` du composant qui le reçoit. Consultez [Providers et viewProviders](guide/di/hierarchical-dependency-injection) pour plus de détails.
+**Injection de dépendances :** le contenu projeté obtient ses dépendances depuis l'injector du parent, et non depuis les `viewProviders` du composant qui le reçoit. Consultez [Providers et viewProviders](guide/di/hierarchical-dependency-injection) pour plus de détails.
 
-### Certains composants de bibliothèque ne prennent pas en charge les enfants projetés {#some-library-components-dont-support-projected-children}
+### Certains composants de library ne prennent pas en charge les enfants projetés {#some-library-components-dont-support-projected-children}
 
 Certains composants (menus, onglets, listes) utilisent `ContentChildren` pour trouver leurs enfants et mettre en place des comportements comme la navigation au clavier, la gestion du focus ou les attributs ARIA. Ils sont écrits en partant du principe qu'ils possèdent directement leurs enfants, si bien que projeter du contenu externe à l'intérieur a tendance à provoquer des dysfonctionnements subtils.
 
-Par exemple, envelopper des éléments `<mat-menu-item>` dans une couche supplémentaire et les projeter dans `<mat-menu>` peut casser silencieusement la navigation au clavier et la prise en charge des lecteurs d'écran. La requête trouve toujours les éléments, mais la configuration interne qui les rend interactifs peut ne pas fonctionner correctement quand les éléments proviennent d'un contexte de vue différent.
+Par exemple, envelopper des éléments `<mat-menu-item>` dans une couche supplémentaire et les projeter dans `<mat-menu>` peut casser silencieusement la navigation au clavier et la prise en charge des lecteurs d'écran. La query trouve toujours les éléments, mais la configuration interne qui les rend interactifs peut ne pas fonctionner correctement quand les éléments proviennent d'un contexte de vue différent.
 
-Si un composant de bibliothèque gère le comportement de ses enfants, consultez sa documentation avant de recourir à la projection de contenu : elle n'est peut-être pas prise en charge.
+Si un composant de library gère le comportement de ses enfants, consultez sa documentation avant de recourir à la projection de contenu : elle n'est peut-être pas prise en charge.

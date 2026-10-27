@@ -1,7 +1,7 @@
 <!-- source: 08d576cd3e3c3a73478fdfbb00cfe18168555975 -->
 # Lier du texte, des propriétés et des attributs dynamiques
 
-Dans Angular, une **liaison** (binding) crée une connexion dynamique entre le template d'un composant et ses données. Cette connexion garantit que les modifications des données du composant mettent automatiquement à jour le template rendu.
+Dans Angular, un **binding** crée une connexion dynamique entre le template d'un composant et ses données. Cette connexion garantit que les modifications des données du composant mettent automatiquement à jour le template rendu.
 
 ## Afficher du texte dynamique avec l'interpolation de texte {#render-dynamic-text-with-text-interpolation}
 
@@ -26,7 +26,7 @@ Dans cet exemple, quand l'extrait est rendu dans la page, Angular remplace `{{ t
 <p>Your color preference is dark.</p>
 ```
 
-Les liaisons qui changent au fil du temps doivent lire leurs valeurs depuis des [signals](/guide/signals). Angular suit les signals lus dans le template et met à jour la page rendue quand les valeurs de ces signals changent.
+Les bindings qui changent au fil du temps doivent lire leurs valeurs depuis des [signals](/guide/signals). Angular suit les signals lus dans le template et met à jour la page rendue quand les valeurs de ces signals changent.
 
 ```angular-ts
 @Component({
@@ -65,7 +65,7 @@ Vous pouvez vous lier aux propriétés de l'instance DOM d'un élément HTML, d'
 
 ### Propriétés des éléments natifs {#native-element-properties}
 
-Chaque élément HTML possède une représentation DOM correspondante. Par exemple, chaque élément HTML `<button>` correspond à une instance de `HTMLButtonElement` dans le DOM. Dans Angular, vous utilisez les liaisons de propriété pour affecter des valeurs directement à la représentation DOM de l'élément.
+Chaque élément HTML possède une représentation DOM correspondante. Par exemple, chaque élément HTML `<button>` correspond à une instance de `HTMLButtonElement` dans le DOM. Dans Angular, vous utilisez les property bindings pour affecter des valeurs directement à la représentation DOM de l'élément.
 
 ```angular-html
 <!-- Bind the `disabled` property on the button element's DOM object -->
@@ -76,7 +76,7 @@ Dans cet exemple, chaque fois que `isFormValid` change, Angular définit automat
 
 ### Propriétés de composants et de directives {#component-and-directive-properties}
 
-Quand un élément est un composant Angular, vous pouvez utiliser les liaisons de propriété pour définir les propriétés d'input du composant avec la même syntaxe à crochets.
+Quand un élément est un composant Angular, vous pouvez utiliser les property bindings pour définir les propriétés d'input du composant avec la même syntaxe à crochets.
 
 ```angular-html
 <!-- Bind the `value` property on the `MyListbox` component instance. -->
@@ -104,24 +104,24 @@ Quand vous devez définir des attributs HTML qui n'ont pas de propriété DOM co
 
 Dans cet exemple, chaque fois que `listRole` change, Angular définit automatiquement l'attribut `role` de l'élément `<ul>` en appelant `setAttribute`.
 
-Si la valeur d'une liaison d'attribut est `null`, Angular supprime l'attribut en appelant `removeAttribute`.
+Si la valeur d'un attribute binding est `null`, Angular supprime l'attribut en appelant `removeAttribute`.
 
 ### Interpolation de texte dans les propriétés et les attributs {#text-interpolation-in-properties-and-attributes}
 
-Vous pouvez aussi utiliser la syntaxe d'interpolation de texte dans les propriétés et les attributs, en utilisant la syntaxe à doubles accolades au lieu de placer des crochets autour du nom de la propriété ou de l'attribut. Avec cette syntaxe, Angular traite l'affectation comme une liaison de propriété.
+Vous pouvez aussi utiliser la syntaxe d'interpolation de texte dans les propriétés et les attributs, en utilisant la syntaxe à doubles accolades au lieu de placer des crochets autour du nom de la propriété ou de l'attribut. Avec cette syntaxe, Angular traite l'affectation comme un property binding.
 
 ```angular-html
 <!-- Binds a value to the `alt` property of the image element's DOM object. -->
 <img src="profile-photo.jpg" alt="Profile photo of {{ firstName() }}" />
 ```
 
-## Liaisons de classes CSS et de propriétés de style {#css-class-and-style-property-bindings}
+## Bindings de classes CSS et de propriétés de style {#css-class-and-style-property-bindings}
 
 Angular offre des fonctionnalités supplémentaires pour lier des classes CSS et des propriétés de style CSS aux éléments.
 
 ### Classes CSS {#css-classes}
 
-Vous pouvez créer une liaison de classe CSS pour ajouter ou retirer une classe CSS d'un élément selon que la valeur liée est [truthy ou falsy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy).
+Vous pouvez créer un class binding CSS pour ajouter ou retirer une classe CSS d'un élément selon que la valeur liée est [truthy ou falsy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy).
 
 <!-- prettier-ignore -->
 ```angular-html
@@ -167,7 +167,7 @@ L'exemple ci-dessus produit le DOM suivant :
 
 Angular ignore toute valeur de chaîne qui n'est pas un nom de classe CSS valide.
 
-Quand vous utilisez à la fois des classes CSS statiques, une liaison directe à `class` et des liaisons à des classes spécifiques, Angular combine intelligemment toutes les classes dans le résultat rendu.
+Quand vous utilisez à la fois des classes CSS statiques, un binding direct à `class` et des bindings à des classes spécifiques, Angular combine intelligemment toutes les classes dans le résultat rendu.
 
 ```angular-ts
 @Component({
@@ -191,9 +191,9 @@ Angular ne garantit aucun ordre particulier des classes CSS sur les éléments r
 
 Quand vous liez `class` à un tableau ou à un objet, Angular compare la valeur précédente à la valeur actuelle avec l'opérateur d'égalité stricte (`===`). Vous devez créer une nouvelle instance d'objet ou de tableau quand vous modifiez ces valeurs pour qu'Angular applique les mises à jour.
 
-Si un élément possède plusieurs liaisons pour la même classe CSS, Angular résout les conflits en suivant son ordre de priorité des styles.
+Si un élément possède plusieurs bindings pour la même classe CSS, Angular résout les conflits en suivant son ordre de priorité des styles.
 
-NOTE: Les liaisons de classe ne prennent pas en charge plusieurs noms de classe séparés par des espaces dans une même clé. Elles ne prennent pas non plus en charge les mutations d'objets, car la référence de la liaison reste la même. Si vous avez besoin de l'un ou de l'autre, utilisez la directive [ngClass](/api/common/NgClass).
+NOTE: Les class bindings ne prennent pas en charge plusieurs noms de classe séparés par des espaces dans une même clé. Ils ne prennent pas non plus en charge les mutations d'objets, car la référence du binding reste la même. Si vous avez besoin de l'un ou de l'autre, utilisez la directive [ngClass](/api/common/NgClass).
 
 ### Propriétés de style CSS {#css-style-properties}
 
@@ -213,7 +213,7 @@ Vous pouvez en outre préciser l'unité des propriétés CSS qui en acceptent un
 <section [style.height.px]="sectionHeightInPixels()">
 ```
 
-Vous pouvez aussi définir plusieurs valeurs de style dans une seule liaison. Angular accepte les types de valeur suivants :
+Vous pouvez aussi définir plusieurs valeurs de style dans un seul binding. Angular accepte les types de valeur suivants :
 
 | Description de la valeur de `style` | Type TypeScript |
 | ------------------------------------------------------------------------------------------------------------------------- | --------------------- |
@@ -247,7 +247,7 @@ L'exemple ci-dessus produit le DOM suivant.
 
 Quand vous liez `style` à un objet, Angular compare la valeur précédente à la valeur actuelle avec l'opérateur d'égalité stricte (`===`). Vous devez créer une nouvelle instance d'objet quand vous modifiez ces valeurs pour qu'Angular applique les mises à jour.
 
-Si un élément possède plusieurs liaisons pour la même propriété de style, Angular résout les conflits en suivant son ordre de priorité des styles.
+Si un élément possède plusieurs bindings pour la même propriété de style, Angular résout les conflits en suivant son ordre de priorité des styles.
 
 ## Attributs ARIA {#aria-attributes}
 
@@ -261,4 +261,4 @@ Angular permet de lier des valeurs de chaîne aux attributs ARIA.
 
 Angular écrit la valeur de chaîne dans l'attribut `aria-label` de l'élément et le supprime quand la valeur liée est `null`.
 
-Certaines fonctionnalités ARIA exposent des propriétés DOM ou des inputs de directive qui acceptent des valeurs structurées (comme des références d'éléments). Utilisez les liaisons de propriété standard dans ces cas-là. Consultez le [guide d'accessibilité](/best-practices/a11y#aria-attributes-and-properties) pour des exemples et des conseils supplémentaires.
+Certaines fonctionnalités ARIA exposent des propriétés DOM ou des inputs de directive qui acceptent des valeurs structurées (comme des références d'éléments). Utilisez les property bindings standard dans ces cas-là. Consultez le [guide d'accessibilité](/best-practices/a11y#aria-attributes-and-properties) pour des exemples et des conseils supplémentaires.
