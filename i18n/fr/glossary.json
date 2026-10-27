@@ -903,5 +903,47 @@
   {
     "term": "layout shift",
     "translation": "décalage de mise en page"
+  },
+  {
+    "term": "fixture",
+    "keep": true,
+    "note": "la fixture (ComponentFixture)"
+  },
+  {
+    "term": "spy",
+    "keep": true,
+    "note": "un spy, des spies"
+  },
+  {
+    "term": "test runner",
+    "keep": true,
+    "note": "le test runner"
+  },
+  {
+    "term": "test double",
+    "translation": "doublure de test"
+  },
+  {
+    "term": "code coverage",
+    "translation": "couverture de code",
+    "note": "coverage report → rapport de couverture"
+  },
+  {
+    "term": "component harness",
+    "translation": "harnais de composant",
+    "note": "HarnessLoader → loader de harnais"
+  },
+  {
+    "term": "watch mode",
+    "translation": "mode watch"
+  },
+  {
+    "term": "headless",
+    "keep": true,
+    "note": "le mode headless"
+  },
+  {
+    "term": "breakpoint",
+    "translation": "point d'arrêt"
   }
 ]
