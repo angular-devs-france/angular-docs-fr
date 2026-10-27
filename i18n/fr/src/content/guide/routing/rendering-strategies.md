@@ -71,7 +71,7 @@ Angular prend en charge trois stratégies de rendu principales :
 | **Temps de build**      | Plus long - toutes les pages sont générées à l'avance        |
 | **Mises à jour du contenu** | Nécessitent un nouveau build et un redéploiement               |
 
-📖 **Mise en œuvre :** consultez [Personnaliser le prérendu au moment du build](guide/ssr#customizing-build-time-prerendering-ssg) dans le guide SSR.
+📖 **Mise en œuvre :** consultez [Personnaliser le prérendu au moment du build](guide/ssr#customizing-build-time-prerendering-ssg) dans le guide SSR.
 
 ## Rendu côté serveur (SSR) {#server-side-rendering-ssr}
 
@@ -103,7 +103,7 @@ Une fois que le client a affiché la page, Angular [hydrate](/guide/hydration#wh
 | **Personnalisation** | Accès complet au contexte utilisateur                         |
 | **Coûts serveur**    | Plus élevés - rendu lors de la requête initiale de chaque route |
 
-📖 **Mise en œuvre :** consultez [Routing côté serveur](guide/ssr#server-routing) et [Écrire des composants compatibles avec le serveur](guide/ssr#authoring-server-compatible-components) dans le guide SSR.
+📖 **Mise en œuvre :** consultez [Routing côté serveur](guide/ssr#server-routing) et [Écrire des composants compatibles avec le serveur](guide/ssr#authoring-server-compatible-components) dans le guide SSR.
 
 ## Choisir la bonne stratégie {#choosing-the-right-strategy}
 
@@ -120,13 +120,13 @@ Une fois que le client a affiché la page, Angular [hydrate](/guide/hydration#wh
 
 Avec le SSR ou le SSG, Angular « hydrate » le HTML rendu par le serveur pour le rendre interactif.
 
-**Stratégies disponibles :**
+**Stratégies disponibles :**
 
 - **Hydratation complète** - Toute l'application devient interactive d'un coup (par défaut)
 - **Hydratation incrémentale** - Des parties deviennent interactives au besoin (meilleures performances)
 - **Event replay** - Capture les clics avant la fin de l'hydratation
 
-📖 **En savoir plus :**
+📖 **En savoir plus :**
 
 - [Guide de l'hydratation](guide/hydration) - Configuration complète de l'hydratation
 - [Hydratation incrémentale](guide/incremental-hydration) - Hydratation avancée avec les blocs `@defer`

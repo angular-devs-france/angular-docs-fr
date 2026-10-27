@@ -87,7 +87,7 @@ Vous pouvez maintenant supprimer `karma.conf.js` et `src/test.ts` de votre proje
 
 Si vous devez exécuter les tests dans un vrai navigateur, vous devez installer un provider de navigateur et configurer votre `angular.json`.
 
-**Installer un provider de navigateur :**
+**Installer un provider de navigateur :**
 
 Choisissez l'un des providers de navigateur suivants selon vos besoins :
 
@@ -110,7 +110,7 @@ Choisissez l'un des providers de navigateur suivants selon vos besoins :
   </docs-code>
 </docs-code-multifile>
 
-**Mettre à jour `angular.json` pour le mode navigateur :**
+**Mettre à jour `angular.json` pour le mode navigateur :**
 
 Ajoutez l'option `browsers` aux options de votre cible `test`. Le nom du navigateur dépend du provider installé (par ex. `chromium` pour Playwright, `chrome` pour WebdriverIO).
 
@@ -203,7 +203,7 @@ IMPORTANT: Si une configuration personnalisée donne accès à des options avanc
 
 Vous pouvez fournir un fichier de configuration Vitest personnalisé pour remplacer les réglages par défaut. Pour la liste complète des options disponibles, consultez la [documentation officielle de Vitest](https://vitest.dev/config/).
 
-**1. Chemin direct :**
+**1. Chemin direct :**
 Indiquez un chemin direct vers un fichier de configuration Vitest dans votre `angular.json` :
 
 ```json
@@ -221,7 +221,7 @@ Indiquez un chemin direct vers un fichier de configuration Vitest dans votre `an
 }
 ```
 
-**2. Recherche automatique d'une configuration de base :**
+**2. Recherche automatique d'une configuration de base :**
 Si vous définissez `runnerConfig` à `true`, le builder recherche automatiquement un fichier partagé `vitest-base.config.*` à la racine de votre projet et de votre workspace.
 
 ## Patch Vitest de `zone.js` {#zonejs-vitest-patch}

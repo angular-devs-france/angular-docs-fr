@@ -471,14 +471,14 @@ Comme le formulaire racine est un champ, il possède les mêmes signals (comme `
 
 ### Quand utiliser le niveau formulaire ou le niveau champ {#when-to-use-form-level-vs-field-level}
 
-**Utilisez l'état au niveau du formulaire pour :**
+**Utilisez l'état au niveau du formulaire pour :**
 
 - L'état activé/désactivé du bouton de soumission
 - L'état du bouton « Enregistrer »
 - Les vérifications de validité globale du formulaire
 - Les avertissements de modifications non enregistrées
 
-**Utilisez l'état au niveau du champ pour :**
+**Utilisez l'état au niveau du champ pour :**
 
 - Les messages d'erreur propres à chaque champ
 - Les styles spécifiques à un champ

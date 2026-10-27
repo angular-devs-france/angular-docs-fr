@@ -38,9 +38,9 @@ export class BasicDataStore {
 
 Par défaut, les services sont fournis au niveau racine. Quand un service est fourni globalement, Angular garantit trois avantages principaux :
 
-- **Instance singleton :** une seule instance partagée est créée pour toute l'application.
-- **Disponibilité globale :** le service est automatiquement accessible partout, sans enregistrement manuel de provider.
-- **Tree-shaking :** le service est exclu du bundle de production final si votre code ne l'utilise jamais explicitement.
+- **Instance singleton :** une seule instance partagée est créée pour toute l'application.
+- **Disponibilité globale :** le service est automatiquement accessible partout, sans enregistrement manuel de provider.
+- **Tree-shaking :** le service est exclu du bundle de production final si votre code ne l'utilise jamais explicitement.
 
 ### Utiliser le décorateur `@Service` ou `@Injectable` {#using-the-service-vs-injectable-decorator}
 

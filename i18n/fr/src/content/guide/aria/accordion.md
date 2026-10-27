@@ -20,14 +20,14 @@ Un accordion organise du contenu associé en sections dépliables et repliables,
 
 Les accordions conviennent bien pour organiser du contenu en groupes logiques lorsque les utilisateurs ont généralement besoin de consulter une section à la fois.
 
-**Utilisez des accordions pour :**
+**Utilisez des accordions pour :**
 
 - Afficher des FAQ avec plusieurs questions et réponses
 - Organiser de longs formulaires en sections faciles à gérer
 - Réduire le défilement sur les pages riches en contenu
 - Révéler progressivement des informations associées
 
-**Évitez les accordions pour :**
+**Évitez les accordions pour :**
 
 - Créer des menus de navigation (utilisez plutôt le composant [Menu](guide/aria/menu))
 - Créer des interfaces à onglets (utilisez plutôt le composant [Tabs](guide/aria/tabs))

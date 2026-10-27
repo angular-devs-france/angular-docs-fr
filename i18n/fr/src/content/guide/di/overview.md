@@ -37,12 +37,12 @@ Un _service_ Angular est une classe TypeScript décorée avec `@Service`, ce qui
 
 Les types de services les plus courants sont :
 
-- **Les clients de données :** ils masquent les détails des requêtes envoyées à un serveur pour récupérer et modifier des données
-- **La gestion d'état :** ils définissent un état partagé entre plusieurs composants ou pages
-- **L'authentification et l'autorisation :** ils gèrent l'authentification des utilisateurs, le stockage des jetons et le contrôle d'accès
-- **La journalisation et la gestion des erreurs :** ils établissent une API commune pour journaliser ou communiquer les états d'erreur à l'utilisateur
-- **La gestion et la diffusion d'événements :** ils gèrent les événements ou les notifications qui ne sont pas associés à un composant spécifique, ou diffusent des événements et des notifications aux composants, selon le [pattern observateur](https://en.wikipedia.org/wiki/Observer_pattern)
-- **Les fonctions utilitaires :** ils proposent des fonctions utilitaires réutilisables, comme le formatage de données, la validation ou des calculs
+- **Les clients de données :** ils masquent les détails des requêtes envoyées à un serveur pour récupérer et modifier des données
+- **La gestion d'état :** ils définissent un état partagé entre plusieurs composants ou pages
+- **L'authentification et l'autorisation :** ils gèrent l'authentification des utilisateurs, le stockage des jetons et le contrôle d'accès
+- **La journalisation et la gestion des erreurs :** ils établissent une API commune pour journaliser ou communiquer les états d'erreur à l'utilisateur
+- **La gestion et la diffusion d'événements :** ils gèrent les événements ou les notifications qui ne sont pas associés à un composant spécifique, ou diffusent des événements et des notifications aux composants, selon le [pattern observateur](https://en.wikipedia.org/wiki/Observer_pattern)
+- **Les fonctions utilitaires :** ils proposent des fonctions utilitaires réutilisables, comme le formatage de données, la validation ou des calculs
 
 L'exemple suivant déclare un service nommé `AnalyticsLogger` :
 

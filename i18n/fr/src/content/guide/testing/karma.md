@@ -19,7 +19,7 @@ ng new my-karma-app --test-runner=karma
 
 Pour ajouter Karma et Jasmine à un projet existant, suivez ces étapes :
 
-1.  **Installez les packages nécessaires :**
+1.  **Installez les packages nécessaires :**
 
     <docs-code-multifile>
       <docs-code header="npm" language="shell">
@@ -60,7 +60,7 @@ Pour ajouter Karma et Jasmine à un projet existant, suivez ces étapes :
     }
     ```
 
-3.  **Mettez à jour `tsconfig.spec.json` pour les types Jasmine :**
+3.  **Mettez à jour `tsconfig.spec.json` pour les types Jasmine :**
 
     Pour que TypeScript reconnaisse les fonctions de test globales comme `describe` et `it`, ajoutez `"jasmine"` au tableau `types` de votre `tsconfig.spec.json` :
 

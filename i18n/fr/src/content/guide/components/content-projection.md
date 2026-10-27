@@ -257,7 +257,7 @@ n'importe quel élément. Chaque fois qu'un élément portant `ngProjectAs` est 
 
 Même si le contenu projeté est _rendu_ à l'intérieur du composant qui le reçoit, il appartient toujours au composant qui l'a déclaré. Angular le suit comme une partie de la vue du parent, ce qui a quelques effets de bord qu'il est bon de connaître.
 
-**Détection de changements :** le contenu projeté est vérifié quand le _parent_ exécute la détection de changements. Si le composant qui le reçoit utilise `OnPush`, Angular peut ignorer la vérification du template de ce composant, mais il n'ignorera pas le contenu projeté, car celui-ci appartient au parent.
+**Détection de changements :** le contenu projeté est vérifié quand le _parent_ exécute la détection de changements. Si le composant qui le reçoit utilise `OnPush`, Angular peut ignorer la vérification du template de ce composant, mais il n'ignorera pas le contenu projeté, car celui-ci appartient au parent.
 
 ```angular-html
 <!-- Parent template (default change detection) -->
@@ -267,7 +267,7 @@ Même si le contenu projeté est _rendu_ à l'intérieur du composant qui le re�
 </onpush-wrapper>
 ```
 
-**Injection de dépendances :** le contenu projeté obtient ses dépendances depuis l'injector du parent, et non depuis les `viewProviders` du composant qui le reçoit. Consultez [Providers et viewProviders](guide/di/hierarchical-dependency-injection) pour plus de détails.
+**Injection de dépendances :** le contenu projeté obtient ses dépendances depuis l'injector du parent, et non depuis les `viewProviders` du composant qui le reçoit. Consultez [Providers et viewProviders](guide/di/hierarchical-dependency-injection) pour plus de détails.
 
 ### Certains composants de library ne prennent pas en charge les enfants projetés {#some-library-components-dont-support-projected-children}
 

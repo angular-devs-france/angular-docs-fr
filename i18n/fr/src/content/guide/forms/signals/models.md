@@ -308,14 +308,14 @@ La directive `[formField]` crée une synchronisation bidirectionnelle automatiqu
 
 Les changements circulent dans les deux sens :
 
-**Saisie utilisateur → Model :**
+**Saisie utilisateur → Model :**
 
 1. L'utilisateur saisit du texte dans un élément de saisie
 2. La directive `[formField]` détecte le changement
 3. L'état du champ est mis à jour
 4. Le signal du model est mis à jour
 
-**Mise à jour par programmation → Interface :**
+**Mise à jour par programmation → Interface :**
 
 1. Le code met à jour le model avec `set()` ou `update()`
 2. Le signal du model notifie ses abonnés
@@ -383,13 +383,13 @@ const userModel = signal({
 });
 ```
 
-**Utilisez des structures plates quand :**
+**Utilisez des structures plates quand :**
 
 - Les champs n'ont pas de regroupement conceptuel évident
 - Vous voulez un accès plus simple aux champs (`userForm.city` plutôt que `userForm.address.city`)
 - Les règles de validation couvrent plusieurs groupes potentiels
 
-**Utilisez des structures imbriquées quand :**
+**Utilisez des structures imbriquées quand :**
 
 - Les champs forment un groupe conceptuel évident (comme une adresse)
 - Les données regroupées correspondent à la structure de votre API
