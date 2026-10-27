@@ -853,5 +853,55 @@
     "term": "sync validator",
     "translation": "validateur synchrone",
     "note": "async validator → validateur asynchrone"
+  },
+  {
+    "term": "hydration mismatch",
+    "translation": "incohérence d'hydratation"
+  },
+  {
+    "term": "header",
+    "translation": "en-tête",
+    "note": "HTTP header"
+  },
+  {
+    "term": "status code",
+    "translation": "code de statut"
+  },
+  {
+    "term": "server routes",
+    "translation": "routes serveur",
+    "note": "server routing → routing côté serveur"
+  },
+  {
+    "term": "render mode",
+    "translation": "mode de rendu"
+  },
+  {
+    "term": "event replay",
+    "keep": true,
+    "note": "l'event replay (feature: Event Replay)"
+  },
+  {
+    "term": "transfer cache",
+    "keep": true,
+    "note": "le transfer cache (HTTP transfer cache)"
+  },
+  {
+    "term": "cross-site request forgery",
+    "translation": "falsification de requête intersites",
+    "note": "XSRF/CSRF acronym kept; SSRF → falsification de requête côté serveur"
+  },
+  {
+    "term": "app shell",
+    "keep": true,
+    "note": "l'app shell"
+  },
+  {
+    "term": "above the fold",
+    "translation": "au-dessus de la ligne de flottaison"
+  },
+  {
+    "term": "layout shift",
+    "translation": "décalage de mise en page"
   }
 ]
