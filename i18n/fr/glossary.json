@@ -235,7 +235,7 @@
   {
     "term": "environment",
     "translation": "environnement",
-    "note": "environment injector: injecteur d'environnement; environment files stay (environment.ts)"
+    "note": "environment injector: injector d'environnement; environment files stay (environment.ts)"
   },
   {
     "term": "locale",
@@ -681,5 +681,37 @@
     "term": "returns",
     "translation": "renvoie",
     "note": "prefer renvoyer over retourner"
+  },
+  {
+    "term": "element injector",
+    "keep": true,
+    "note": "l'element injector"
+  },
+  {
+    "term": "environment injector",
+    "translation": "injector d'environnement",
+    "note": "EnvironmentInjector stays"
+  },
+  {
+    "term": "root injector",
+    "translation": "injector racine"
+  },
+  {
+    "term": "platform injector",
+    "translation": "injector de plateforme"
+  },
+  {
+    "term": "resolution modifier",
+    "translation": "modificateur de résolution"
+  },
+  {
+    "term": "tree-shaking",
+    "keep": true,
+    "note": "le tree-shaking; tree-shakable → compatible avec le tree-shaking"
+  },
+  {
+    "term": "location strategy",
+    "keep": true,
+    "note": "la location strategy (LocationStrategy); never « stratégie de location »"
   }
 ]
