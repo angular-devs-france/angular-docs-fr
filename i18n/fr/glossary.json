@@ -53,8 +53,8 @@
     "term": "change detection",
     "translation": "détection de changements",
     "forbidden": [
-      "détection des changements",
-      "détection de changement"
+      "détection de changement",
+      "détection des changements"
     ]
   },
   {
@@ -176,7 +176,7 @@
   {
     "term": "attribute",
     "translation": "attribut",
-    "note": "attribute directive: directive d’attribut"
+    "note": "attribute directive: directive d'attribut"
   },
   {
     "term": "package",
@@ -231,7 +231,7 @@
   {
     "term": "environment",
     "translation": "environnement",
-    "note": "environment injector: injecteur d’environnement; environment files stay (environment.ts)"
+    "note": "environment injector: injecteur d'environnement; environment files stay (environment.ts)"
   },
   {
     "term": "locale",
@@ -268,7 +268,7 @@
   {
     "term": "performance",
     "translation": "performances",
-    "note": "plural in French for the general notion (les performances de l’application); singular for one measurement"
+    "note": "plural in French for the general notion (les performances de l'application); singular for one measurement"
   },
   {
     "term": "observable",
@@ -312,10 +312,9 @@
   },
   {
     "term": "injection token",
-    "translation": "jeton d’injection",
+    "translation": "jeton d'injection",
     "note": "InjectionToken class stays",
     "forbidden": [
-      "token d’injection",
       "token d'injection"
     ]
   },
@@ -348,7 +347,7 @@
   {
     "term": "bootstrap",
     "translation": "amorçage",
-    "note": "noun: amorçage; verb: amorcer (amorcer l’application). bootstrapApplication stays. Never « bootstrapper »",
+    "note": "noun: amorçage; verb: amorcer (amorcer l'application). bootstrapApplication stays. Never « bootstrapper »",
     "forbidden": [
       "bootstrapper"
     ]
@@ -371,13 +370,13 @@
     "term": "two-way binding",
     "translation": "liaison bidirectionnelle",
     "forbidden": [
-      "liaison à double sens",
-      "liaison dans les deux sens"
+      "liaison dans les deux sens",
+      "liaison à double sens"
     ]
   },
   {
     "term": "host binding",
-    "translation": "liaison d’hôte",
+    "translation": "liaison d'hôte",
     "note": "@HostBinding / host metadata stay"
   },
   {
@@ -390,12 +389,12 @@
   },
   {
     "term": "event binding",
-    "translation": "liaison d’événement"
+    "translation": "liaison d'événement"
   },
   {
     "term": "subscription",
     "translation": "abonnement",
-    "note": "subscribe: s’abonner ; unsubscribe: se désabonner"
+    "note": "subscribe: s'abonner ; unsubscribe: se désabonner"
   },
   {
     "term": "stylesheet",
@@ -420,8 +419,8 @@
     "translation": "prérendu",
     "note": "noun: le prérendu; verb: prérendre; in parentheses with the English on first mention (prérendu, SSG)",
     "forbidden": [
-      "pré-rendu",
-      "pré-rendering"
+      "pré-rendering",
+      "pré-rendu"
     ]
   },
   {
@@ -481,5 +480,101 @@
     "term": "playground",
     "keep": true,
     "note": "name of the /playground page; masculine: le Playground. « bac à sable » only translates \"sandbox\""
+  },
+  {
+    "term": "model input",
+    "translation": "input model",
+    "note": "plural: inputs model; the model() API stays"
+  },
+  {
+    "term": "required input",
+    "translation": "input obligatoire"
+  },
+  {
+    "term": "input transform",
+    "translation": "transformation d'input",
+    "note": "transform function: fonction de transformation"
+  },
+  {
+    "term": "child query",
+    "translation": "requête d'enfant",
+    "note": "plural: requêtes d'enfants"
+  },
+  {
+    "term": "query locator",
+    "translation": "localisateur de requête"
+  },
+  {
+    "term": "injection context",
+    "translation": "contexte d'injection"
+  },
+  {
+    "term": "render callback",
+    "translation": "callback de rendu",
+    "note": "callback stays, masculine: un callback"
+  },
+  {
+    "term": "view container",
+    "translation": "conteneur de vues"
+  },
+  {
+    "term": "host view",
+    "translation": "vue hôte"
+  },
+  {
+    "term": "host directive",
+    "translation": "directive d'hôte"
+  },
+  {
+    "term": "structural directive",
+    "translation": "directive structurelle"
+  },
+  {
+    "term": "template reference variable",
+    "translation": "variable de référence de template"
+  },
+  {
+    "term": "fallback content",
+    "translation": "contenu de repli"
+  },
+  {
+    "term": "custom element",
+    "translation": "élément personnalisé"
+  },
+  {
+    "term": "css custom properties",
+    "translation": "propriétés personnalisées CSS"
+  },
+  {
+    "term": "namespace",
+    "translation": "espace de noms"
+  },
+  {
+    "term": "style encapsulation",
+    "translation": "encapsulation des styles",
+    "note": "emulated encapsulation: encapsulation émulée"
+  },
+  {
+    "term": "renderer",
+    "keep": true,
+    "note": "le renderer"
+  },
+  {
+    "term": "developer preview",
+    "keep": true,
+    "note": "en developer preview"
+  },
+  {
+    "term": "side effect",
+    "translation": "effet de bord"
+  },
+  {
+    "term": "compile time",
+    "translation": "à la compilation",
+    "note": "run time: à l'exécution; build time: au moment du build"
+  },
+  {
+    "term": "backwards compatibility",
+    "translation": "rétrocompatibilité"
   }
 ]

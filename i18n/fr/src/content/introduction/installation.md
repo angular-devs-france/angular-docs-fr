@@ -112,4 +112,4 @@ Pour commencer à développer dans votre IDE assisté par IA préféré, [consul
 
 ## Prochaines étapes {#next-steps}
 
-Maintenant que vous avez créé votre projet Angular, vous pouvez en apprendre davantage sur Angular avec notre [guide des fondamentaux](/essentials) ou choisir un sujet dans nos guides approfondis !
+Maintenant que vous avez créé votre projet Angular, vous pouvez en apprendre davantage sur Angular avec notre [guide des Fondamentaux](/essentials) ou choisir un sujet dans nos guides approfondis !
