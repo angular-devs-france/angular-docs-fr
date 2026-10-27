@@ -1,0 +1,48 @@
+{
+  "name": "angular-docs-rosetta",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Translate and publish angular.dev in your language: pinned upstream submodule, overlay build, snapshot-based sync, agent skills.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=26"
+  },
+  "packageManager": "pnpm@10.17.1",
+  "scripts": {
+    "rosetta": "node tools/cli.mjs",
+    "bootstrap": "node tools/cli.mjs bootstrap",
+    "update-origin": "node tools/cli.mjs update-origin",
+    "status": "node tools/cli.mjs status",
+    "check": "node tools/cli.mjs check",
+    "build": "node tools/cli.mjs build",
+    "start": "node tools/cli.mjs start",
+    "create-language": "node tools/cli.mjs create-language",
+    "dictionaries": "node tools/cli.mjs dictionaries",
+    "glossary": "node tools/cli.mjs glossary",
+    "report": "node tools/cli.mjs report",
+    "languages": "node tools/cli.mjs languages",
+    "firebase-config": "node tools/cli.mjs firebase-config",
+    "search-index": "node tools/cli.mjs search-index",
+    "test": "node --test tools/test/*.test.mjs"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.8.1",
+    "ajv": "^8.20.0",
+    "angular-html-parser": "^10.13.0",
+    "bcp-47": "^2.1.2",
+    "chokidar": "^4.0.3",
+    "citty": "^0.2.2",
+    "diff": "^9.0.0",
+    "execa": "^10.2.1",
+    "marked": "^18.1.2",
+    "picocolors": "^1.1.1",
+    "textlint": "^15.8.0",
+    "textlint-rule-prh": "^6.1.1",
+    "tinyglobby": "^0.2.14",
+    "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "jiti": "^2.7.0"
+  }
+}

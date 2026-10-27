@@ -1,0 +1,8 @@
+# Code owners. `pnpm create-language` appends a line per language.
+# Tooling, skills and workflows are reviewed by the repository maintainers.
+/tools/             @openng-org/angular-docs-rosetta-maintainers
+/.agents/           @openng-org/angular-docs-rosetta-maintainers
+/.github/           @openng-org/angular-docs-rosetta-maintainers
+/docs/              @openng-org/angular-docs-rosetta-maintainers
+# languages:start
+# languages:end

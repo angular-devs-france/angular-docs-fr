@@ -1,0 +1,13 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Translated Markdown mirrors upstream line for line; never let an editor rewrap or trim it.
+[i18n/**/*.md]
+trim_trailing_whitespace = false

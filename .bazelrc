@@ -1,0 +1,10 @@
+# Copied into build/<lang>/.bazelrc.user by the tooling (Bazel only reads it from its own workspace root).
+# Add personal overrides in /.bazelrc.user at the repo root (ignored by git); they are appended.
+
+# Show which rc options apply, and full failure output.
+build --announce_rc
+build --verbose_failures=true
+common --color=yes
+
+# Prerendering calls Algolia from inside the sandbox.
+build --sandbox_default_allow_network

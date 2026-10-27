@@ -1,0 +1,22 @@
+# Every text file is LF in the working tree on every platform: the source markers hash the
+# English snapshots as git stores them, and a CRLF checkout would change every hash and show
+# every page as outdated. (The tooling also normalizes CRLF before hashing, as a second guard.)
+* text=auto eol=lf
+
+# Patches are applied byte for byte.
+*.patch -text
+
+# Binary assets
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.pdf binary
+*.zip binary

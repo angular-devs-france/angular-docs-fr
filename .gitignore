@@ -1,0 +1,17 @@
+# Build directories are git worktrees of the origin submodule plus node_modules; never commit them.
+/build/
+
+# Root tooling dependencies
+/node_modules/
+
+# Local overrides
+/.bazelrc.user
+/.env
+/.firebase/
+*.log
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json

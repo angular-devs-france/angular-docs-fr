@@ -1,0 +1,135 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  languages:
+    name: Configured languages
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.langs.outputs.matrix }}
+      count: ${{ steps.langs.outputs.count }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+      - uses: pnpm/action-setup@d9184bf108216479bc5a137cc391f4d7b14c870b # v6.1.0
+      - run: pnpm install --frozen-lockfile
+      - id: langs
+        run: |
+          # The template itself only has i18n/_example; instances have real languages.
+          INCLUDE=""
+          if [ "${{ github.repository }}" = "openng-org/angular-docs-rosetta" ]; then INCLUDE="--include-example"; fi
+          echo "matrix=$(node tools/cli.mjs languages --matrix $INCLUDE)" >> "$GITHUB_OUTPUT"
+          echo "count=$(node tools/cli.mjs languages --json $INCLUDE | node -e 'process.stdin.on("data",d=>console.log(JSON.parse(d).length))')" >> "$GITHUB_OUTPUT"
+
+  tooling:
+    name: Tooling tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+      - uses: pnpm/action-setup@d9184bf108216479bc5a137cc391f4d7b14c870b # v6.1.0
+      - run: pnpm install --frozen-lockfile
+      - run: for f in tools/*.mjs tools/lib/*.mjs tools/commands/*.mjs tools/test/*.mjs; do node --check "$f"; done
+      - run: pnpm test
+
+  check:
+    name: Check ${{ matrix.lang }}
+    needs: languages
+    if: needs.languages.outputs.count != '0'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.languages.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+      - uses: pnpm/action-setup@d9184bf108216479bc5a137cc391f4d7b14c870b # v6.1.0
+      - run: pnpm install --frozen-lockfile
+      - name: Fetch the pinned upstream (shallow)
+        run: pnpm bootstrap
+      - name: Patches still apply
+        run: |
+          for p in tools/adev-patches/*.patch; do
+            [ -e "$p" ] || continue
+            git -C origin apply --check "../$p" || { echo "::error::patch $p no longer applies"; exit 1; }
+          done
+      - name: Generated files are current (textlint rules, Firebase config)
+        run: |
+          pnpm glossary ${{ matrix.lang }} --check
+          pnpm firebase-config --check $INCLUDE
+        env:
+          INCLUDE: ${{ github.repository == 'openng-org/angular-docs-rosetta' && '--include-example' || '' }}
+      - name: Translation checks
+        # Errors fail the job; warnings (typography, glossary keep terms) are annotations for the
+        # reviewer. `pnpm check <lang> --strict` locally turns them into errors.
+        run: pnpm check ${{ matrix.lang }}
+      - name: Status summary
+        run: pnpm status ${{ matrix.lang }} --md >> "$GITHUB_STEP_SUMMARY"
+
+  build:
+    # Full Bazel build only when the build inputs changed or when asked for with the `build` label.
+    name: Build ${{ matrix.lang }}
+    needs: [languages, check]
+    if: >-
+      needs.languages.outputs.count != '0' &&
+      (github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'build'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.languages.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+      - uses: pnpm/action-setup@d9184bf108216479bc5a137cc391f4d7b14c870b # v6.1.0
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm bootstrap
+      - uses: bazel-contrib/setup-bazel@8cb04a772ab4c1eb984e9c1b493a182e96c5e425 # 0.19.0
+        with:
+          bazelisk-cache: true
+          disk-cache: build-${{ matrix.lang }}
+          repository-cache: true
+          bazelrc: |
+            build --local_resources=memory=4096
+            build --local_resources=cpu=2
+            build --jobs=1
+            build --discard_analysis_cache
+            build --nokeep_state_after_build
+            build --sandbox_default_allow_network
+      - name: Build
+        run: pnpm build ${{ matrix.lang }}
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: site-${{ matrix.lang }}
+          path: build/${{ matrix.lang }}/dist/bin/adev/dist/browser
+          retention-days: 7

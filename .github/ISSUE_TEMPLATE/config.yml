@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Upstream documentation bug (English content)
+    url: https://github.com/angular/angular/issues/new/choose
+    about: Errors in the English text belong to angular/angular; translations follow once fixed upstream.

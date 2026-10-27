@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "rosetta-example"
+  },
+  "targets": {
+    "rosetta-example": {
+      "hosting": {
+        "docs-example": [
+          "rosetta-example"
+        ]
+      }
+    }
+  }
+}
