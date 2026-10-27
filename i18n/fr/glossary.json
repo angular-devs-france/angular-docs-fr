@@ -713,5 +713,69 @@
     "term": "location strategy",
     "keep": true,
     "note": "la location strategy (LocationStrategy); never « stratégie de location »"
+  },
+  {
+    "term": "snapshot",
+    "keep": true,
+    "note": "le snapshot (ActivatedRouteSnapshot, ResourceSnapshot)"
+  },
+  {
+    "term": "query parameters",
+    "keep": true,
+    "note": "les query parameters (URL ?a=b); queryParams stays"
+  },
+  {
+    "term": "query string",
+    "keep": true,
+    "note": "la query string"
+  },
+  {
+    "term": "router outlet",
+    "keep": true,
+    "note": "le router outlet, l'outlet; named outlets → outlets nommés"
+  },
+  {
+    "term": "route matcher",
+    "keep": true,
+    "note": "masculine: le route matcher (custom route matcher → route matcher personnalisé); UrlMatcher stays; « matcher » alone OK"
+  },
+  {
+    "term": "preloading",
+    "translation": "préchargement",
+    "note": "PreloadingStrategy stays; préchargement de routes"
+  },
+  {
+    "term": "eager loading",
+    "translation": "chargement immédiat",
+    "note": "eagerly loaded → chargé immédiatement"
+  },
+  {
+    "term": "nested routes",
+    "translation": "routes imbriquées",
+    "note": "child route → route enfant"
+  },
+  {
+    "term": "route resolver data",
+    "translation": "données résolues"
+  },
+  {
+    "term": "skeleton",
+    "keep": true,
+    "note": "masculine: un skeleton, des skeletons (loading UI)"
+  },
+  {
+    "term": "view transitions",
+    "keep": true,
+    "note": "la view transition; API name: l'API View Transitions"
+  },
+  {
+    "term": "deep linking",
+    "translation": "lien profond",
+    "note": "add (deep linking) on first mention"
+  },
+  {
+    "term": "mock",
+    "keep": true,
+    "note": "un mock, mocker; fake/stub kept too"
   }
 ]
