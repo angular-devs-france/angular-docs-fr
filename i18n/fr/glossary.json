@@ -147,7 +147,7 @@
   {
     "term": "bundle",
     "translation": "bundle",
-    "note": "masculine: un bundle; 'paquet' is acceptable in prose"
+    "note": "masculine: un bundle; 'paquet' is acceptable in prose; a build chunk stays « un chunk »"
   },
   {
     "term": "animation",
@@ -576,5 +576,101 @@
   {
     "term": "backwards compatibility",
     "translation": "rétrocompatibilité"
+  },
+  {
+    "term": "trigger",
+    "translation": "déclencheur",
+    "note": "@defer triggers: les déclencheurs; the `on …` syntax stays"
+  },
+  {
+    "term": "prefetch",
+    "translation": "préchargement",
+    "note": "verb: précharger"
+  },
+  {
+    "term": "error boundary",
+    "translation": "périmètre d'erreur",
+    "note": "add (error boundary) on first mention"
+  },
+  {
+    "term": "embedded view",
+    "translation": "vue intégrée"
+  },
+  {
+    "term": "template fragment",
+    "translation": "fragment de template"
+  },
+  {
+    "term": "writable signal",
+    "translation": "signal modifiable",
+    "note": "WritableSignal stays"
+  },
+  {
+    "term": "loader",
+    "keep": true,
+    "note": "le loader; the `loader` option and ResourceLoader stay"
+  },
+  {
+    "term": "truthy",
+    "keep": true,
+    "note": "truthy / falsy"
+  },
+  {
+    "term": "debounce",
+    "keep": true,
+    "note": "debounce; « valeur debouncée »"
+  },
+  {
+    "term": "viewport",
+    "keep": true,
+    "note": "le viewport"
+  },
+  {
+    "term": "incremental hydration",
+    "translation": "hydratation incrémentale"
+  },
+  {
+    "term": "optional chaining",
+    "translation": "chaînage optionnel"
+  },
+  {
+    "term": "nullish coalescing",
+    "translation": "coalescence des nuls"
+  },
+  {
+    "term": "arrow function",
+    "translation": "fonction fléchée"
+  },
+  {
+    "term": "destructuring",
+    "translation": "déstructuration",
+    "note": "spread: décomposition"
+  },
+  {
+    "term": "event handler",
+    "translation": "gestionnaire d'événements"
+  },
+  {
+    "term": "pure pipe",
+    "translation": "pipe pur",
+    "note": "impure pipe: pipe impur"
+  },
+  {
+    "term": "upstream",
+    "translation": "en amont",
+    "note": "downstream: en aval"
+  },
+  {
+    "term": "reactive context",
+    "translation": "contexte réactif"
+  },
+  {
+    "term": "cleanup function",
+    "translation": "fonction de nettoyage"
+  },
+  {
+    "term": "returns",
+    "translation": "renvoie",
+    "note": "prefer renvoyer over retourner"
   }
 ]
