@@ -2,7 +2,7 @@
 
 Translate and publish [angular.dev](https://angular.dev) in your language, and keep the translation current as upstream moves.
 
-This is a **GitHub template repository**. Click **Use this template**, run one command, and you have a repo that builds a localized copy of the Angular docs site, tracks what changed upstream file by file, and ships with agent skills so humans and AI assistants translate and maintain it the same way.
+This is a **GitHub template repository**. Click the template, run one command, and you have a repo that builds a localized copy of the Angular docs site, tracks what changed upstream file by file, and ships with agent skills so humans and AI assistants translate and maintain it the same way.
 
 **Start with [docs/guide.md](docs/guide.md)**: set up, deploy and maintain, end to end.
 
