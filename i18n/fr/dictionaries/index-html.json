@@ -16,17 +16,17 @@
   },
   {
     "find": "href=\"https://angular.dev\"",
-    "replace": "href=\"https://example.invalid\"",
+    "replace": "href=\"https://docs.angulardevs.fr\"",
     "note": "canonical"
   },
   {
     "find": "content=\"https://angular.dev/\"",
-    "replace": "content=\"https://example.invalid/\"",
+    "replace": "content=\"https://docs.angulardevs.fr/\"",
     "note": "og:url, twitter:url"
   },
   {
     "find": "content=\"https://angular.dev/assets/images/ng-image.jpg\"",
-    "replace": "content=\"https://example.invalid/assets/images/ng-image.jpg\"",
+    "replace": "content=\"https://docs.angulardevs.fr/assets/images/ng-image.jpg\"",
     "note": "social image"
   }
 ]

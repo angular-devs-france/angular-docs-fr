@@ -1,0 +1,485 @@
+[
+  {
+    "term": "signal",
+    "keep": true,
+    "forbidden": [
+      "signaux"
+    ],
+    "note": "API name; masculine in French: un signal, des signals"
+  },
+  {
+    "term": "template",
+    "keep": true,
+    "forbidden": [
+      "gabarit"
+    ],
+    "note": "masculine: le template"
+  },
+  {
+    "term": "pipe",
+    "keep": true,
+    "note": "masculine: un pipe"
+  },
+  {
+    "term": "standalone",
+    "keep": true
+  },
+  {
+    "term": "zoneless",
+    "keep": true
+  },
+  {
+    "term": "component",
+    "translation": "composant",
+    "note": "masculine"
+  },
+  {
+    "term": "directive",
+    "translation": "directive",
+    "note": "feminine"
+  },
+  {
+    "term": "service",
+    "translation": "service"
+  },
+  {
+    "term": "dependency injection",
+    "translation": "injection de dépendances",
+    "forbidden": [
+      "injection de dépendance"
+    ]
+  },
+  {
+    "term": "change detection",
+    "translation": "détection de changements",
+    "forbidden": [
+      "détection des changements",
+      "détection de changement"
+    ]
+  },
+  {
+    "term": "hydration",
+    "translation": "hydratation"
+  },
+  {
+    "term": "server-side rendering",
+    "translation": "rendu côté serveur (SSR)",
+    "note": "keep the SSR acronym"
+  },
+  {
+    "term": "library",
+    "translation": "bibliothèque",
+    "forbidden": [
+      "librairie"
+    ]
+  },
+  {
+    "term": "form",
+    "translation": "formulaire"
+  },
+  {
+    "term": "reactive forms",
+    "translation": "formulaires réactifs"
+  },
+  {
+    "term": "signal forms",
+    "keep": true,
+    "note": "feature name: les Signal Forms (capitalized). The generic phrase \"forms with signals\" → formulaires à base de signals"
+  },
+  {
+    "term": "binding",
+    "translation": "liaison",
+    "note": "property binding: liaison de propriété"
+  },
+  {
+    "term": "event listener",
+    "translation": "écouteur d'événements"
+  },
+  {
+    "term": "lifecycle hook",
+    "translation": "hook de cycle de vie"
+  },
+  {
+    "term": "deferrable views",
+    "translation": "vues différables"
+  },
+  {
+    "term": "control flow",
+    "translation": "flux de contrôle"
+  },
+  {
+    "term": "route",
+    "translation": "route",
+    "note": "feminine: une route"
+  },
+  {
+    "term": "router",
+    "translation": "routeur"
+  },
+  {
+    "term": "guard",
+    "translation": "garde",
+    "note": "feminine in this context: une garde de route"
+  },
+  {
+    "term": "resolver",
+    "translation": "résolveur"
+  },
+  {
+    "term": "input",
+    "translation": "input",
+    "note": "the API (input(), @Input) stays in English; 'entrée' for user input in prose, so not a keep term"
+  },
+  {
+    "term": "output",
+    "translation": "output",
+    "note": "the API (output(), @Output) stays in English; 'sortie' in prose when not the API"
+  },
+  {
+    "term": "build",
+    "translation": "build",
+    "note": "masculine: le build; 'compiler' or 'construire' as a verb in prose"
+  },
+  {
+    "term": "deploy",
+    "translation": "déployer"
+  },
+  {
+    "term": "bundle",
+    "translation": "bundle",
+    "note": "masculine: un bundle; 'paquet' is acceptable in prose"
+  },
+  {
+    "term": "animation",
+    "translation": "animation",
+    "note": "feminine: une animation"
+  },
+  {
+    "term": "validation",
+    "translation": "validation"
+  },
+  {
+    "term": "model",
+    "translation": "modèle",
+    "note": "the API (model(), ngModel) stays in English; « modèle » for the concept (data model) only"
+  },
+  {
+    "term": "resource",
+    "translation": "ressource",
+    "note": "the API (resource(), httpResource(), Resource) stays in English; « ressource » in prose"
+  },
+  {
+    "term": "schematic",
+    "keep": true,
+    "note": "Angular CLI term; masculine: un schematic, des schematics"
+  },
+  {
+    "term": "attribute",
+    "translation": "attribut",
+    "note": "attribute directive: directive d’attribut"
+  },
+  {
+    "term": "package",
+    "keep": true,
+    "note": "masculine: un package npm; « paquet » is acceptable in prose when not referring to npm"
+  },
+  {
+    "term": "provider",
+    "keep": true,
+    "note": "masculine: un provider; never « fournisseur »"
+  },
+  {
+    "term": "view",
+    "translation": "vue",
+    "note": "feminine: une vue; view child/view query: voir query"
+  },
+  {
+    "term": "service worker",
+    "keep": true,
+    "note": "web platform term; masculine: un service worker"
+  },
+  {
+    "term": "module",
+    "translation": "module",
+    "note": "masculine; NgModule stays"
+  },
+  {
+    "term": "host",
+    "translation": "hôte",
+    "note": "host element: élément hôte; the `host` metadata property and :host selector stay"
+  },
+  {
+    "term": "injector",
+    "translation": "injecteur",
+    "note": "masculine; Injector / EnvironmentInjector classes stay"
+  },
+  {
+    "term": "effect",
+    "translation": "effet",
+    "note": "the API (effect()) stays in English; « un effet » for the concept in prose"
+  },
+  {
+    "term": "validator",
+    "translation": "validateur",
+    "note": "Validators class stays"
+  },
+  {
+    "term": "metadata",
+    "translation": "métadonnées",
+    "note": "always plural in French: les métadonnées du composant"
+  },
+  {
+    "term": "environment",
+    "translation": "environnement",
+    "note": "environment injector: injecteur d’environnement; environment files stay (environment.ts)"
+  },
+  {
+    "term": "locale",
+    "keep": true,
+    "note": "feminine: une locale, la locale fr-FR"
+  },
+  {
+    "term": "query",
+    "translation": "requête",
+    "note": "view/content queries (viewChild, contentChildren): requête de vue, requête de contenu; URL query parameters: paramètres de requête"
+  },
+  {
+    "term": "selector",
+    "translation": "sélecteur"
+  },
+  {
+    "term": "workspace",
+    "translation": "espace de travail",
+    "note": "Angular CLI workspace (angular.json); masculine"
+  },
+  {
+    "term": "migration",
+    "translation": "migration",
+    "note": "feminine; ng update migrations: les migrations automatiques"
+  },
+  {
+    "term": "routing",
+    "translation": "routage"
+  },
+  {
+    "term": "decorator",
+    "translation": "décorateur"
+  },
+  {
+    "term": "performance",
+    "translation": "performances",
+    "note": "plural in French for the general notion (les performances de l’application); singular for one measurement"
+  },
+  {
+    "term": "observable",
+    "keep": true,
+    "note": "RxJS type; masculine: un observable, des observables"
+  },
+  {
+    "term": "devtools",
+    "keep": true,
+    "note": "product name: Angular DevTools, with capitals"
+  },
+  {
+    "term": "placeholder",
+    "keep": true,
+    "note": "the @placeholder block stays; masculine: un placeholder. For an input placeholder in prose, « texte indicatif » is acceptable"
+  },
+  {
+    "term": "computed",
+    "keep": true,
+    "note": "API name: un signal computed, un computed"
+  },
+  {
+    "term": "form control",
+    "translation": "contrôle de formulaire",
+    "note": "FormControl class stays"
+  },
+  {
+    "term": "interceptor",
+    "translation": "intercepteur",
+    "note": "HttpInterceptorFn stays"
+  },
+  {
+    "term": "zone",
+    "translation": "zone",
+    "note": "feminine: une zone; Zone.js and NgZone stay"
+  },
+  {
+    "term": "caching",
+    "translation": "mise en cache",
+    "note": "cache (noun) stays: le cache"
+  },
+  {
+    "term": "injection token",
+    "translation": "jeton d’injection",
+    "note": "InjectionToken class stays",
+    "forbidden": [
+      "token d’injection",
+      "token d'injection"
+    ]
+  },
+  {
+    "term": "promise",
+    "translation": "promesse",
+    "note": "feminine; the Promise type stays in code"
+  },
+  {
+    "term": "host element",
+    "translation": "élément hôte"
+  },
+  {
+    "term": "template-driven forms",
+    "translation": "formulaires pilotés par le template",
+    "forbidden": [
+      "formulaires basés sur le template",
+      "formulaires dirigés par le template"
+    ]
+  },
+  {
+    "term": "interpolation",
+    "translation": "interpolation"
+  },
+  {
+    "term": "form group",
+    "translation": "groupe de formulaire",
+    "note": "FormGroup class stays"
+  },
+  {
+    "term": "bootstrap",
+    "translation": "amorçage",
+    "note": "noun: amorçage; verb: amorcer (amorcer l’application). bootstrapApplication stays. Never « bootstrapper »",
+    "forbidden": [
+      "bootstrapper"
+    ]
+  },
+  {
+    "term": "accessibility",
+    "translation": "accessibilité",
+    "note": "a11y acronym stays"
+  },
+  {
+    "term": "language service",
+    "keep": true,
+    "note": "product name: Angular Language Service (extension) ; « service de langage » only when describing the generic concept"
+  },
+  {
+    "term": "property binding",
+    "translation": "liaison de propriété"
+  },
+  {
+    "term": "two-way binding",
+    "translation": "liaison bidirectionnelle",
+    "forbidden": [
+      "liaison à double sens",
+      "liaison dans les deux sens"
+    ]
+  },
+  {
+    "term": "host binding",
+    "translation": "liaison d’hôte",
+    "note": "@HostBinding / host metadata stay"
+  },
+  {
+    "term": "unit test",
+    "translation": "test unitaire"
+  },
+  {
+    "term": "deployment",
+    "translation": "déploiement"
+  },
+  {
+    "term": "event binding",
+    "translation": "liaison d’événement"
+  },
+  {
+    "term": "subscription",
+    "translation": "abonnement",
+    "note": "subscribe: s’abonner ; unsubscribe: se désabonner"
+  },
+  {
+    "term": "stylesheet",
+    "translation": "feuille de style"
+  },
+  {
+    "term": "lazy loading",
+    "note": "masculine: le lazy loading. « chargement différé » is reserved for @defer / deferrable views",
+    "forbidden": [
+      "chargement paresseux",
+      "chargement à la demande"
+    ],
+    "keep": true
+  },
+  {
+    "term": "end-to-end",
+    "translation": "de bout en bout",
+    "note": "end-to-end tests: tests de bout en bout (e2e); the e2e acronym stays"
+  },
+  {
+    "term": "prerendering",
+    "translation": "prérendu",
+    "note": "noun: le prérendu; verb: prérendre; in parentheses with the English on first mention (prérendu, SSG)",
+    "forbidden": [
+      "pré-rendu",
+      "pré-rendering"
+    ]
+  },
+  {
+    "term": "content projection",
+    "translation": "projection de contenu"
+  },
+  {
+    "term": "internationalization",
+    "translation": "internationalisation",
+    "note": "i18n acronym stays"
+  },
+  {
+    "term": "linked signal",
+    "translation": "signal lié",
+    "note": "linkedSignal() stays; un signal lié"
+  },
+  {
+    "term": "slot",
+    "translation": "emplacement",
+    "note": "ng-content slots: emplacements de projection; « slot » acceptable in parentheses"
+  },
+  {
+    "term": "localization",
+    "translation": "localisation",
+    "note": "l10n acronym stays; $localize stays"
+  },
+  {
+    "term": "view encapsulation",
+    "translation": "encapsulation des vues",
+    "note": "ViewEncapsulation enum stays"
+  },
+  {
+    "term": "dev server",
+    "translation": "serveur de développement"
+  },
+  {
+    "term": "test harness",
+    "translation": "harnais de test",
+    "note": "component harness: harnais de composant (CDK)"
+  },
+  {
+    "term": "shadow dom",
+    "keep": true,
+    "note": "web platform term: le Shadow DOM, with capitals"
+  },
+  {
+    "term": "image optimization",
+    "translation": "optimisation des images",
+    "note": "NgOptimizedImage stays"
+  },
+  {
+    "term": "essentials",
+    "translation": "Fondamentaux",
+    "note": "name of the docs section (/essentials): le guide des Fondamentaux"
+  },
+  {
+    "term": "playground",
+    "keep": true,
+    "note": "name of the /playground page; masculine: le Playground. « bac à sable » only translates \"sandbox\""
+  }
+]

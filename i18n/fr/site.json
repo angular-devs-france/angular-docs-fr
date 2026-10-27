@@ -1,19 +1,19 @@
 {
   "$schema": "../../tools/site.schema.json",
   "lang": "fr",
-  "name": "Français (exemple)",
-  "englishName": "French (template example)",
+  "name": "Français",
+  "englishName": "French",
   "direction": "ltr",
-  "domain": "example.invalid",
+  "domain": "docs.angulardevs.fr",
   "upstreamSite": "https://angular.dev",
   "repo": {
-    "owner": "openng-org",
-    "name": "angular-docs-rosetta",
+    "owner": "angular-devs-france",
+    "name": "angular-docs-fr",
     "branch": "main"
   },
   "firebase": {
-    "projectId": "rosetta-example",
-    "target": "docs-example"
+    "projectId": "angular-docs-fr",
+    "target": "angular-docs-fr"
   },
   "search": {
     "provider": "none"
@@ -25,12 +25,12 @@
     "chat": "",
     "maintainers": []
   },
-  "notice": "Traduction communautaire de angular.dev, non affiliée à Google.",
+  "notice": "Traduction communautaire d’angular.dev, non affiliée à Google.",
   "strings": {
     "readInEnglish": "Lire cette page en anglais",
     "otherLanguages": "Autres langues",
     "outdatedBanner": "Cette traduction est en retard sur la page anglaise ; certains passages peuvent être obsolètes.",
-    "untranslatedBanner": "Cette page n'est pas encore traduite ; elle est affichée en anglais.",
+    "untranslatedBanner": "Cette page n’a pas encore été traduite ; elle est affichée en anglais.",
     "reportIssue": "Signaler un problème de traduction"
   }
 }
