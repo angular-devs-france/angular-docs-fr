@@ -1,15 +1,15 @@
 <!-- source: f31051425bf275e567591b8258d1b6f02896f197 -->
 <docs-decorative-header title="Les formulaires avec les signals" imgSrc="adev/src/assets/images/signals.svg"> </docs-decorative-header>
 
-Les Signal Forms gèrent l'état des formulaires à l'aide des signals Angular, pour synchroniser automatiquement votre modèle de données et l'interface grâce aux Angular Signals.
+Les Signal Forms gèrent l'état des formulaires à l'aide des signals Angular, pour synchroniser automatiquement votre model de données et l'interface grâce aux Angular Signals.
 
 Ce guide vous présente les concepts essentiels pour créer des formulaires avec les Signal Forms. Voici comment cela fonctionne :
 
 ## Créer votre premier formulaire {#creating-your-first-form}
 
-### 1. Créer un modèle de formulaire avec `signal()` {#1-create-a-form-model-with-signal}
+### 1. Créer un model de formulaire avec `signal()` {#1-create-a-form-model-with-signal}
 
-Chaque formulaire commence par la création d'un signal qui contient le modèle de données du formulaire :
+Chaque formulaire commence par la création d'un signal qui contient le model de données du formulaire :
 
 ```ts
 interface LoginData {
@@ -23,9 +23,9 @@ const loginModel = signal<LoginData>({
 });
 ```
 
-### 2. Passer le modèle de formulaire à `form()` pour créer un `FieldTree` {#2-pass-the-form-model-to-form-to-create-a-fieldtree}
+### 2. Passer le model de formulaire à `form()` pour créer un `FieldTree` {#2-pass-the-form-model-to-form-to-create-a-fieldtree}
 
-Ensuite, vous passez votre modèle de formulaire à la fonction `form()` pour créer un **arbre de champs** (field tree) : une structure d'objets qui reproduit la forme de votre modèle et vous permet d'accéder aux champs avec la notation pointée.
+Ensuite, vous passez votre model de formulaire à la fonction `form()` pour créer un **arbre de champs** (field tree) : une structure d'objets qui reproduit la forme de votre model et vous permet d'accéder aux champs avec la notation pointée.
 
 L'objet racine du formulaire comme ses propriétés imbriquées sont des nœuds `FieldTree` :
 
@@ -38,7 +38,7 @@ loginForm.email; // is also a FieldTree
 
 ### 3. Lier les champs HTML avec la directive `[formField]` {#3-bind-html-inputs-with-formfield-directive}
 
-Ensuite, vous liez vos champs HTML au formulaire avec la directive `[formField]`, qui crée une liaison bidirectionnelle entre eux :
+Ensuite, vous liez vos champs HTML au formulaire avec la directive `[formField]`, qui crée un two-way binding entre eux :
 
 ```html
 <input type="email" [formField]="loginForm.email" />
@@ -73,14 +73,14 @@ const currentEmail = loginForm.email().value();
 
 ### 5. Mettre à jour les valeurs avec `set()` {#5-update-values-with-set}
 
-Vous pouvez mettre à jour les valeurs par programmation avec la méthode `value.set()` sur n'importe quel nœud. Cela met à jour à la fois le `FieldTree` et le signal du modèle sous-jacent :
+Vous pouvez mettre à jour les valeurs par programmation avec la méthode `value.set()` sur n'importe quel nœud. Cela met à jour à la fois le `FieldTree` et le signal du model sous-jacent :
 
 ```ts
 // Update the value programmatically
 loginForm.email().value.set('alice@wonderland.com');
 ```
 
-Ainsi, la valeur du champ et le signal du modèle sont tous deux mis à jour automatiquement :
+Ainsi, la valeur du champ et le signal du model sont tous deux mis à jour automatiquement :
 
 ```ts
 // The model signal is also updated
@@ -269,7 +269,7 @@ Chaque nœud de l'arbre, y compris l'objet racine du formulaire, fournit les mê
 Pour en savoir plus sur les Signal Forms et leur fonctionnement, consultez les guides approfondis :
 
 - [Vue d'ensemble](guide/forms/signals/overview) - Introduction aux Signal Forms et aux cas où les utiliser
-- [Modèles de formulaire](guide/forms/signals/models) - Créer et gérer les données de formulaire avec les signals
+- [Models de formulaire](guide/forms/signals/models) - Créer et gérer les données de formulaire avec les signals
 - [Gestion de l'état des champs](guide/forms/signals/field-state-management) - Travailler avec l'état de validation, le suivi des interactions et la visibilité des champs
 - [Validation](guide/forms/signals/validation) - Validateurs intégrés, règles de validation personnalisées et validation asynchrone
 

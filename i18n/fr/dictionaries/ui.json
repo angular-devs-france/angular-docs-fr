@@ -143,9 +143,9 @@
     "Preview progress": "Progression de l'aperçu"
   },
   "src/app/features/home/components/control-flow/control-flow-example.html": {
-    "Control Flow": "Flux de contrôle",
-    "Angular's new control flow syntax makes templates easier to write and understand.": "La nouvelle syntaxe de flux de contrôle d'Angular rend les templates plus faciles à écrire et à comprendre.",
-    "Learn more about Control Flow": "En savoir plus sur le flux de contrôle"
+    "Control Flow": "Control flow",
+    "Angular's new control flow syntax makes templates easier to write and understand.": "La nouvelle syntaxe de control flow d'Angular rend les templates plus faciles à écrire et à comprendre.",
+    "Learn more about Control Flow": "En savoir plus sur le control flow"
   },
   "src/app/features/home/components/deferrable-views-example/deferrable-views-example.html": {
     "Deferrable Views": "Vues différables",
@@ -200,7 +200,7 @@
     "Features that actually": "Des fonctionnalités qui vous aident",
     "help you solve problems": "vraiment à résoudre vos problèmes",
     "Signals": "Signals",
-    "Control Flow": "Flux de contrôle",
+    "Control Flow": "Control flow",
     "Deferrable Views": "Vues différables",
     "Hydration": "Hydratation",
     "Enabling you to build": "Pour construire",
@@ -212,7 +212,7 @@
     "Reactive": "Réactif",
     "and fast state updates with fine-grained reactivity based on Angular Signals": "avec des mises à jour d'état rapides grâce à la réactivité fine des Angular Signals",
     "Fully featured": "Une plateforme complète",
-    "platform where everything works together with Angular's first-party modules for forms, routing, and more": "où tout fonctionne ensemble grâce aux modules officiels d'Angular pour les formulaires, le routage et plus encore",
+    "platform where everything works together with Angular's first-party modules for forms, routing, and more": "où tout fonctionne ensemble grâce aux modules officiels d'Angular pour les formulaires, le routing et plus encore",
     "Where performance matters": "Quand la performance compte",
     "Trusted by millions to build fast, reliable applications that scale with the size of your team": "Des millions de développeurs lui font confiance pour construire des applications rapides et fiables, qui grandissent avec leur équipe",
     "Get started": "Commencer",

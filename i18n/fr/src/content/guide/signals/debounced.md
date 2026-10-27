@@ -32,17 +32,17 @@ export class Search {
 }
 ```
 
-`debounced` prend le signal source et une durée d'attente en millisecondes. La `value()` de la ressource renvoyée contient toujours la dernière valeur stabilisée, et `status()` vous indique si une nouvelle valeur est encore en attente.
+`debounced` prend le signal source et une durée d'attente en millisecondes. La `value()` de la resource renvoyée contient toujours la dernière valeur stabilisée, et `status()` vous indique si une nouvelle valeur est encore en attente.
 
 ## Statut pendant le debounce {#status-during-debounce}
 
-Pendant le décompte du minuteur de debounce, `status()` vaut `'loading'` et `value()` renvoie la valeur résolue précédemment. Quand le minuteur expire, la ressource passe à l'état `'resolved'`. Si le signal source lève une erreur, la ressource passe immédiatement à l'état `'error'` ; aucun minuteur ne s'exécute.
+Pendant le décompte du minuteur de debounce, `status()` vaut `'loading'` et `value()` renvoie la valeur résolue précédemment. Quand le minuteur expire, la resource passe à l'état `'resolved'`. Si le signal source lève une erreur, la resource passe immédiatement à l'état `'error'` ; aucun minuteur ne s'exécute.
 
-Consultez [Statut d'une ressource](/guide/signals/resource#resource-status) pour la liste complète des statuts et le comportement de `value()` pour chacun d'eux.
+Consultez [Statut d'une resource](/guide/signals/resource#resource-status) pour la liste complète des statuts et le comportement de `value()` pour chacun d'eux.
 
 ## Fonction d'attente personnalisée {#custom-wait-function}
 
-Au lieu d'une durée en millisecondes, vous pouvez passer une fonction qui renvoie une `Promise<void>`. La ressource se résout quand la promesse se résout. Si le signal source change avant que la promesse soit réglée, Angular abandonne la promesse précédente et en démarre une nouvelle.
+Au lieu d'une durée en millisecondes, vous pouvez passer une fonction qui renvoie une `Promise<void>`. La resource se résout quand la promise se résout. Si le signal source change avant que la promise soit réglée, Angular abandonne la promise précédente et en démarre une nouvelle.
 
 ```ts
 debouncedQuery = debounced(query, (value, lastSnapshot) => {
@@ -70,7 +70,7 @@ debouncedFilter = debounced(filter, 200, {
 
 ## Contexte d'injection {#injection-context}
 
-`debounced` doit être appelé dans un [contexte d'injection](guide/di/dependency-injection-context). Angular détruit automatiquement la ressource « debouncée » et annule tout minuteur en attente quand l'injecteur est détruit.
+`debounced` doit être appelé dans un [contexte d'injection](guide/di/dependency-injection-context). Angular détruit automatiquement la resource « debouncée » et annule tout minuteur en attente quand l'injector est détruit.
 
 Pour utiliser `debounced` en dehors d'un contexte d'injection, passez un `Injector` explicite via les options :
 

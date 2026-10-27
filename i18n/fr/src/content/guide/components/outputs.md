@@ -49,7 +49,7 @@ this.thumbDropped.emit({
 });
 ```
 
-Quand vous définissez un écouteur d'événements dans un template, vous pouvez accéder aux données de l'événement via la variable `$event` :
+Quand vous définissez un event listener dans un template, vous pouvez accéder aux données de l'événement via la variable `$event` :
 
 ```angular-html
 <custom-slider (valueChanged)="logValue($event)" />
@@ -117,7 +117,7 @@ eventSubscription.unsubscribe();
 
 Évitez de choisir des noms d'outputs qui entrent en collision avec les événements des éléments du DOM comme HTMLElement. Les collisions de noms créent une confusion : on ne sait plus si la propriété liée appartient au composant ou à l'élément du DOM.
 
-N'ajoutez pas de préfixes aux outputs des composants comme vous le feriez pour les sélecteurs de composants. Comme un élément donné ne peut héberger qu'un seul composant, on peut considérer que toutes les propriétés personnalisées appartiennent au composant.
+N'ajoutez pas de préfixes aux outputs des composants comme vous le feriez pour les selectors de composants. Comme un élément donné ne peut héberger qu'un seul composant, on peut considérer que toutes les propriétés personnalisées appartiennent au composant.
 
 Utilisez toujours des noms d'outputs en [camelCase](https://en.wikipedia.org/wiki/Camel_case). Évitez de préfixer les noms d'outputs par « on ».
 

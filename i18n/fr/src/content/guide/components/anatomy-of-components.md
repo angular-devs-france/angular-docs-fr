@@ -8,7 +8,7 @@ Chaque composant doit avoir :
 
 - Une classe TypeScript avec des _comportements_, comme la gestion des saisies de l'utilisateur et la récupération de données depuis un serveur
 - Un template HTML qui contrôle ce qui est rendu dans le DOM
-- Un [sélecteur CSS](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors) qui définit comment le composant est utilisé dans le HTML
+- Un [selector CSS](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors) qui définit comment le composant est utilisé dans le HTML
 
 Vous fournissez à Angular les informations propres à un composant en ajoutant un [décorateur](https://www.typescriptlang.org/docs/handbook/decorators.html) `@Component` au-dessus de la classe TypeScript :
 
@@ -20,7 +20,7 @@ Vous fournissez à Angular les informations propres à un composant en ajoutant 
 export class ProfilePhoto {}
 ```
 
-Pour tous les détails sur l'écriture des templates Angular, notamment la liaison de données, la gestion des événements et le flux de contrôle, consultez le [guide des templates](guide/templates).
+Pour tous les détails sur l'écriture des templates Angular, notamment le data binding, la gestion des événements et le control flow, consultez le [guide des templates](guide/templates).
 
 L'objet passé au décorateur `@Component` s'appelle les **métadonnées** du composant. Elles comprennent le `selector`, le `template` et d'autres propriétés décrites tout au long de ce guide.
 
@@ -82,7 +82,7 @@ IMPORTANT: Dans les versions d'Angular antérieures à 19.0.0, l'option `standal
 
 ### Afficher des composants dans un template {#showing-components-in-a-template}
 
-Chaque composant définit un [sélecteur CSS](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors) :
+Chaque composant définit un [selector CSS](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors) :
 
 ```angular-ts {highlight: [2]}
 @Component({
@@ -92,7 +92,7 @@ Chaque composant définit un [sélecteur CSS](https://developer.mozilla.org/docs
 export class ProfilePhoto { }
 ```
 
-Consultez [Sélecteurs de composant](guide/components/selectors) pour les détails sur les types de sélecteurs pris en charge par Angular et des conseils pour choisir un sélecteur.
+Consultez [Selectors de composant](guide/components/selectors) pour les détails sur les types de selectors pris en charge par Angular et des conseils pour choisir un selector.
 
 Vous affichez un composant en créant un élément HTML correspondant dans le template d'_autres_ composants :
 
@@ -109,7 +109,7 @@ export class ProfilePhoto {}
 export class UserProfile {}
 ```
 
-Angular crée une instance du composant pour chaque élément HTML correspondant qu'il rencontre. L'élément du DOM qui correspond au sélecteur d'un composant est appelé l'**élément hôte** de ce composant. Le contenu du template d'un composant est rendu à l'intérieur de son élément hôte.
+Angular crée une instance du composant pour chaque élément HTML correspondant qu'il rencontre. L'élément du DOM qui correspond au selector d'un composant est appelé le **host element** de ce composant. Le contenu du template d'un composant est rendu à l'intérieur de son host element.
 
 Le DOM rendu par un composant, qui correspond au template de ce composant, est appelé la
 **vue** de ce composant.
@@ -127,4 +127,4 @@ flowchart TD
     E[UserBio]
 ```
 
-Cette structure en arbre est importante pour comprendre plusieurs autres concepts d'Angular, notamment l'[injection de dépendances](guide/di) et les [requêtes d'enfants](guide/components/queries).
+Cette structure en arbre est importante pour comprendre plusieurs autres concepts d'Angular, notamment l'[injection de dépendances](guide/di) et les [child queries](guide/components/queries).

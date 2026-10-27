@@ -6,7 +6,7 @@
 
 <div style="margin: 2em">
   Maintenu par une équipe dédiée chez Google, Angular fournit un large ensemble d'outils, d'API et de
-  bibliothèques pour simplifier et fluidifier votre flux de développement. Angular vous donne
+  libraries pour simplifier et fluidifier votre flux de développement. Angular vous donne
   une plateforme solide sur laquelle créer des applications rapides et fiables, qui grandissent avec la taille de
   votre équipe comme avec celle de votre base de code. Angular.dev est le site officiel de la documentation d'Angular.
 </div>
@@ -33,8 +33,8 @@
   <docs-card title="Injection de dépendances" href="essentials/dependency-injection" link="Explorer l'injection de dépendances" iconImgSrc="adev/src/assets/icons/di.svg">
     Partagez facilement du code entre les composants de toute votre application.
   </docs-card>
-  <docs-card title="Routage Angular" href="guide/routing" link="Explorer le routage Angular" iconImgSrc="adev/src/assets/icons/routing.svg">
-    Une boîte à outils de navigation complète, avec notamment les gardes de route, la résolution de données, le lazy loading et bien plus.
+  <docs-card title="Routing Angular" href="guide/routing" link="Explorer le routing Angular" iconImgSrc="adev/src/assets/icons/routing.svg">
+    Une boîte à outils de navigation complète, avec notamment les guards de route, la résolution de données, le lazy loading et bien plus.
   </docs-card>
   <docs-card title="Les formulaires avec Angular" href="guide/forms" link="Explorer les formulaires" iconImgSrc="adev/src/assets/icons/forms.svg">
     Un système standardisé pour la saisie et la validation des formulaires.

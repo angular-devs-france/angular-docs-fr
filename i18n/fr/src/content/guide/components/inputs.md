@@ -182,7 +182,7 @@ Les **inputs model** sont un type particulier d'input qui permet à un composant
 
 Quand vous créez un composant, vous pouvez définir un input model de la même manière qu'un input standard.
 
-Les deux types d'input permettent de lier une valeur à la propriété. Cependant, **les inputs model permettent à l'auteur du composant d'écrire des valeurs dans la propriété**. Si la propriété est liée par une liaison bidirectionnelle, la nouvelle valeur se propage à cette liaison.
+Les deux types d'input permettent de lier une valeur à la propriété. Cependant, **les inputs model permettent à l'auteur du composant d'écrire des valeurs dans la propriété**. Si la propriété est liée par un two-way binding, la nouvelle valeur se propage à ce binding.
 
 ```ts
 @Component(/* ... */)
@@ -209,13 +209,13 @@ export class MediaControls {
 }
 ```
 
-Dans l'exemple ci-dessus, `CustomSlider` peut écrire des valeurs dans son input model `value`, qui propage ensuite ces valeurs vers le signal `volume` de `MediaControls`. Cette liaison garde les valeurs de `value` et `volume` synchronisées. Notez que la liaison transmet l'instance du signal `volume`, et non la _valeur_ du signal.
+Dans l'exemple ci-dessus, `CustomSlider` peut écrire des valeurs dans son input model `value`, qui propage ensuite ces valeurs vers le signal `volume` de `MediaControls`. Ce binding garde les valeurs de `value` et `volume` synchronisées. Notez que le binding transmet l'instance du signal `volume`, et non la _valeur_ du signal.
 
 Pour le reste, les inputs model fonctionnent comme les inputs standard. Vous pouvez lire la valeur en appelant la fonction du signal, y compris dans des [contextes réactifs](guide/signals#reactive-contexts) comme `computed` et `effect`.
 
-Consultez [Liaison bidirectionnelle](guide/templates/two-way-binding) pour plus de détails sur la liaison bidirectionnelle dans les templates.
+Consultez [Two-way binding](guide/templates/two-way-binding) pour plus de détails sur le two-way binding dans les templates.
 
-### Liaison bidirectionnelle avec des propriétés simples {#two-way-binding-with-plain-properties}
+### Two-way binding avec des propriétés simples {#two-way-binding-with-plain-properties}
 
 Vous pouvez lier une propriété JavaScript simple à un input model.
 
@@ -231,7 +231,7 @@ export class MediaControls {
 }
 ```
 
-Dans l'exemple ci-dessus, `CustomSlider` peut écrire des valeurs dans son input model `value`, qui propage ensuite ces valeurs vers la propriété `volume` de `MediaControls`. Cette liaison garde les valeurs de `value` et `volume` synchronisées.
+Dans l'exemple ci-dessus, `CustomSlider` peut écrire des valeurs dans son input model `value`, qui propage ensuite ces valeurs vers la propriété `volume` de `MediaControls`. Ce binding garde les valeurs de `value` et `volume` synchronisées.
 
 ### Événements `change` implicites {#implicit-change-events}
 
@@ -258,13 +258,13 @@ Les inputs model ne prennent pas en charge les transformations d'input.
 
 ### Quand utiliser les inputs model {#when-to-use-model-inputs}
 
-Utilisez les inputs model quand vous voulez qu'un composant prenne en charge la liaison bidirectionnelle. C'est généralement approprié quand un composant sert à modifier une valeur en fonction des interactions de l'utilisateur. Le plus souvent, les contrôles de formulaire personnalisés, comme un sélecteur de date ou une combobox, devraient utiliser des inputs model pour leur valeur principale.
+Utilisez les inputs model quand vous voulez qu'un composant prenne en charge le two-way binding. C'est généralement approprié quand un composant sert à modifier une valeur en fonction des interactions de l'utilisateur. Le plus souvent, les contrôles de formulaire personnalisés, comme un sélecteur de date ou une combobox, devraient utiliser des inputs model pour leur valeur principale.
 
 ## Choisir les noms des inputs {#choosing-input-names}
 
 Évitez de choisir des noms d'inputs qui entrent en collision avec les propriétés des éléments du DOM comme HTMLElement. Les collisions de noms créent une confusion : on ne sait plus si la propriété liée appartient au composant ou à l'élément du DOM.
 
-N'ajoutez pas de préfixes aux inputs des composants comme vous le feriez pour les sélecteurs de composants. Comme un élément donné ne peut héberger qu'un seul composant, on peut considérer que toutes les propriétés personnalisées appartiennent au composant.
+N'ajoutez pas de préfixes aux inputs des composants comme vous le feriez pour les selectors de composants. Comme un élément donné ne peut héberger qu'un seul composant, on peut considérer que toutes les propriétés personnalisées appartiennent au composant.
 
 ## Déclarer des inputs avec le décorateur `@Input` {#declaring-inputs-with-the-input-decorator}
 
@@ -279,7 +279,7 @@ export class CustomSlider {
 }
 ```
 
-La liaison à un input est identique pour les inputs basés sur les signals et pour ceux basés sur un décorateur :
+Le binding à un input est identique pour les inputs basés sur les signals et pour ceux basés sur un décorateur :
 
 ```angular-html
 <custom-slider [value]="50" />

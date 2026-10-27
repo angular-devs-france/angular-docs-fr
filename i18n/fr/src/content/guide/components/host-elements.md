@@ -1,11 +1,11 @@
 <!-- source: 0493a09e3fa04b4a25d88c340105bd842dc192be -->
-# Éléments hôtes des composants
+# Host elements des composants
 
 TIP: Ce guide suppose que vous avez déjà lu le [guide des Fondamentaux](essentials). Commencez par celui-ci si vous découvrez Angular.
 
-Angular crée une instance d'un composant pour chaque élément HTML qui correspond au sélecteur
-du composant. L'élément du DOM qui correspond au sélecteur d'un composant est l'**élément hôte** de ce composant.
-Le contenu du template d'un composant est rendu à l'intérieur de son élément hôte.
+Angular crée une instance d'un composant pour chaque élément HTML qui correspond au selector
+du composant. L'élément du DOM qui correspond au selector d'un composant est le **host element** de ce composant.
+Le contenu du template d'un composant est rendu à l'intérieur de son host element.
 
 ```angular-ts
 // Component source
@@ -32,12 +32,12 @@ export class ProfilePhoto {}
 <button>Upload a new profile photo</button>
 ```
 
-Dans l'exemple ci-dessus, `<profile-photo>` est l'élément hôte du composant `ProfilePhoto`.
+Dans l'exemple ci-dessus, `<profile-photo>` est le host element du composant `ProfilePhoto`.
 
-## Lier des valeurs à l'élément hôte {#binding-to-the-host-element}
+## Lier des valeurs au host element {#binding-to-the-host-element}
 
-Un composant peut lier des propriétés, des attributs, des styles et des événements à son élément hôte. Cela se comporte
-exactement comme les liaisons sur les éléments à l'intérieur du template du composant, mais se définit avec
+Un composant peut lier des propriétés, des attributs, des styles et des événements à son host element. Cela se comporte
+exactement comme les bindings sur les éléments à l'intérieur du template du composant, mais se définit avec
 la propriété `host` du décorateur `@Component` :
 
 ```angular-ts
@@ -72,10 +72,10 @@ plutôt le modificateur `code`, par exemple `'(keydown.code.Enter)'`. Consultez
 
 ## Les décorateurs `@HostBinding` et `@HostListener` {#the-hostbinding-and-hostlistener-decorators}
 
-Vous pouvez aussi lier des valeurs à l'élément hôte en appliquant les décorateurs `@HostBinding` et `@HostListener`
+Vous pouvez aussi lier des valeurs au host element en appliquant les décorateurs `@HostBinding` et `@HostListener`
 aux membres de la classe.
 
-`@HostBinding` vous permet de lier des propriétés et des attributs de l'hôte à des propriétés et à des getters :
+`@HostBinding` vous permet de lier des propriétés et des attributs du host à des propriétés et à des getters :
 
 ```ts
 @Component({/* ... */})
@@ -92,7 +92,7 @@ export class CustomSlider {
 }
 ```
 
-`@HostListener` vous permet de lier des écouteurs d'événements à l'élément hôte. Le décorateur accepte un nom
+`@HostListener` vous permet de lier des event listeners au host element. Le décorateur accepte un nom
 d'événement et un tableau facultatif d'arguments :
 
 ```ts
@@ -109,10 +109,10 @@ export class CustomSlider {
 décorateurs existent uniquement pour la rétrocompatibilité.
 </docs-callout>
 
-## Conflits de liaisons {#binding-collisions}
+## Conflits de bindings {#binding-collisions}
 
-Quand vous utilisez un composant dans un template, vous pouvez ajouter des liaisons à l'élément de cette instance du composant.
-Le composant peut _aussi_ définir des liaisons d'hôte pour les mêmes propriétés ou attributs.
+Quand vous utilisez un composant dans un template, vous pouvez ajouter des bindings à l'élément de cette instance du composant.
+Le composant peut _aussi_ définir des host bindings pour les mêmes propriétés ou attributs.
 
 ```angular-ts
 @Component({
@@ -131,14 +131,14 @@ export class ProfilePhoto { /* ... */ }
 
 Dans ce genre de cas, les règles suivantes déterminent quelle valeur l'emporte :
 
-- Si les deux valeurs sont statiques, la liaison de l'instance l'emporte.
+- Si les deux valeurs sont statiques, le binding de l'instance l'emporte.
 - Si une valeur est statique et l'autre dynamique, la valeur dynamique l'emporte.
-- Si les deux valeurs sont dynamiques, la liaison d'hôte du composant l'emporte.
+- Si les deux valeurs sont dynamiques, le host binding du composant l'emporte.
 
 ## Styliser avec les propriétés personnalisées CSS {#styling-with-css-custom-properties}
 
 Les développeurs s'appuient souvent sur les [propriétés personnalisées CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties) pour permettre une configuration flexible des styles de leurs composants.
-Vous pouvez définir ces propriétés personnalisées sur un élément hôte avec une [liaison de style](guide/templates/binding#css-style-properties).
+Vous pouvez définir ces propriétés personnalisées sur un host element avec un [style binding](guide/templates/binding#css-style-properties).
 
 ```angular-ts
 @Component({
@@ -156,7 +156,7 @@ Dans cet exemple, la propriété personnalisée CSS `--my-background` est liée 
 
 ### Définir des propriétés personnalisées sur les composants enfants {#setting-custom-properties-on-children-components}
 
-Il est également possible de définir des propriétés personnalisées CSS sur l'élément hôte des composants enfants avec une [liaison de style](guide/templates/binding#css-style-properties).
+Il est également possible de définir des propriétés personnalisées CSS sur le host element des composants enfants avec un [style binding](guide/templates/binding#css-style-properties).
 
 ```angular-ts
 @Component({
@@ -168,9 +168,9 @@ export class MyComponent {
 }
 ```
 
-## Injecter les attributs de l'élément hôte {#injecting-host-element-attributes}
+## Injecter les attributs du host element {#injecting-host-element-attributes}
 
-Les composants et les directives peuvent lire les attributs statiques de leur élément hôte en utilisant `HostAttributeToken` avec la fonction [`inject`](api/core/inject).
+Les composants et les directives peuvent lire les attributs statiques de leur host element en utilisant `HostAttributeToken` avec la fonction [`inject`](api/core/inject).
 
 ```ts
 import { Component, HostAttributeToken, inject } from '@angular/core';

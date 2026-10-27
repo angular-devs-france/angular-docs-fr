@@ -1,9 +1,9 @@
 <!-- source: ae644cc0916da5775462786f0edeba8acdd7dc52 -->
-# Réactivité asynchrone avec les ressources
+# Réactivité asynchrone avec les resources
 
 Toutes les API de signals sont synchrones : `signal`, `computed`, `input`, etc. Pourtant, les applications doivent souvent gérer des données disponibles de manière asynchrone. Une `Resource` vous permet d'intégrer des données asynchrones dans le code de votre application basé sur les signals, tout en vous permettant d'accéder à ces données de manière synchrone.
 
-Vous pouvez utiliser une `Resource` pour effectuer n'importe quel type d'opération asynchrone, mais le cas d'usage le plus courant d'une `Resource` est la récupération de données depuis un serveur. L'exemple suivant crée une ressource pour récupérer des données utilisateur.
+Vous pouvez utiliser une `Resource` pour effectuer n'importe quel type d'opération asynchrone, mais le cas d'usage le plus courant d'une `Resource` est la récupération de données depuis un serveur. L'exemple suivant crée une resource pour récupérer des données utilisateur.
 
 Le moyen le plus simple de créer une `Resource` est la fonction `resource`.
 
@@ -38,27 +38,27 @@ const firstName = computed(() => {
 
 La fonction `resource` accepte un objet `ResourceOptions` avec deux propriétés principales : `params` et `loader`.
 
-La propriété `params` définit un calcul réactif qui produit une valeur de paramètre. Chaque fois que les signals lus dans ce calcul changent, la ressource produit une nouvelle valeur de paramètre, comme le fait `computed`.
+La propriété `params` définit un calcul réactif qui produit une valeur de paramètre. Chaque fois que les signals lus dans ce calcul changent, la resource produit une nouvelle valeur de paramètre, comme le fait `computed`.
 
-La propriété `loader` définit un `ResourceLoader` : une fonction asynchrone qui récupère un état. La ressource appelle le loader chaque fois que le calcul `params` produit une nouvelle valeur, en lui passant cette valeur. Consultez la section [Loaders de ressources](#resource-loaders) ci-dessous pour plus de détails.
+La propriété `loader` définit un `ResourceLoader` : une fonction asynchrone qui récupère un état. La resource appelle le loader chaque fois que le calcul `params` produit une nouvelle valeur, en lui passant cette valeur. Consultez la section [Loaders de resources](#resource-loaders) ci-dessous pour plus de détails.
 
 `Resource` possède un signal `value` qui contient les résultats du loader.
 
-## Loaders de ressources {#resource-loaders}
+## Loaders de resources {#resource-loaders}
 
-Quand vous créez une ressource, vous spécifiez un `ResourceLoader`. Ce loader est une fonction asynchrone qui accepte un unique paramètre (un objet `ResourceLoaderParams`) et renvoie une valeur.
+Quand vous créez une resource, vous spécifiez un `ResourceLoader`. Ce loader est une fonction asynchrone qui accepte un unique paramètre (un objet `ResourceLoaderParams`) et renvoie une valeur.
 
 L'objet `ResourceLoaderParams` contient trois propriétés : `params`, `previous` et `abortSignal`.
 
 | Propriété     | Description                                                                                                                                      |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `params`      | La valeur du calcul `params` de la ressource.                                                                                                    |
+| `params`      | La valeur du calcul `params` de la resource.                                                                                                    |
 | `previous`    | Un objet avec une propriété `status`, contenant le `ResourceStatus` précédent.                                                                   |
 | `abortSignal` | Un [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal). Consultez [Annuler des requêtes](#aborting-requests) ci-dessous pour plus de détails. |
 
-Si le calcul `params` renvoie `undefined`, la fonction loader ne s'exécute pas et le statut de la ressource devient `'idle'`.
+Si le calcul `params` renvoie `undefined`, la fonction loader ne s'exécute pas et le statut de la resource devient `'idle'`.
 
-### Ressources en streaming {#streaming-resources}
+### Resources en streaming {#streaming-resources}
 
 Certaines sources de données asynchrones produisent plusieurs valeurs au fil du temps au lieu de renvoyer un résultat unique. C'est le cas par exemple des WebSockets, des Server-Sent Events (SSE) et des écouteurs `onSnapshot` de Firestore.
 
@@ -81,7 +81,7 @@ userUpdates.set({value: 'Bob'});
 
 ### Annuler des requêtes {#aborting-requests}
 
-Une ressource annule une opération de chargement en cours si le calcul `params` change pendant que la ressource charge.
+Une resource annule une opération de chargement en cours si le calcul `params` change pendant que la resource charge.
 
 Vous pouvez utiliser l'`abortSignal` de `ResourceLoaderParams` pour réagir aux requêtes annulées. Par exemple, la fonction native `fetch` accepte un `AbortSignal` :
 
@@ -102,7 +102,7 @@ Consultez [`AbortSignal` sur MDN](https://developer.mozilla.org/en-US/docs/Web/A
 
 ### Rechargement {#reloading}
 
-Vous pouvez déclencher programmatiquement le `loader` d'une ressource en appelant la méthode `reload`.
+Vous pouvez déclencher programmatiquement le `loader` d'une resource en appelant la méthode `reload`.
 
 ```typescript
 const userId: Signal<string> = getUserId();
@@ -117,36 +117,36 @@ const userResource = resource({
 userResource.reload();
 ```
 
-## Statut d'une ressource {#resource-status}
+## Statut d'une resource {#resource-status}
 
-L'objet ressource possède plusieurs propriétés signal permettant de lire le statut du loader asynchrone.
+L'objet resource possède plusieurs propriétés signal permettant de lire le statut du loader asynchrone.
 
 | Propriété   | Description                                                                                                                                                                                  |
 | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `value`     | La valeur la plus récente de la ressource, ou la valeur par défaut (`undefined` sauf si `defaultValue` est défini) si aucune valeur n'a été reçue. Lire `value()` lève une erreur quand le statut est `'error'`. |
-| `hasValue`  | Indique si la ressource a une valeur.                                                                                                                                                        |
-| `error`     | La dernière erreur rencontrée lors de l'exécution du loader de la ressource, ou `undefined` si aucune erreur ne s'est produite.                                                              |
-| `isLoading` | Indique si le loader de la ressource est en cours d'exécution.                                                                                                                               |
-| `status`    | Le `ResourceStatus` précis de la ressource, comme décrit ci-dessous.                                                                                                                         |
+| `value`     | La valeur la plus récente de la resource, ou la valeur par défaut (`undefined` sauf si `defaultValue` est défini) si aucune valeur n'a été reçue. Lire `value()` lève une erreur quand le statut est `'error'`. |
+| `hasValue`  | Indique si la resource a une valeur.                                                                                                                                                        |
+| `error`     | La dernière erreur rencontrée lors de l'exécution du loader de la resource, ou `undefined` si aucune erreur ne s'est produite.                                                              |
+| `isLoading` | Indique si le loader de la resource est en cours d'exécution.                                                                                                                               |
+| `status`    | Le `ResourceStatus` précis de la resource, comme décrit ci-dessous.                                                                                                                         |
 
-Le signal `status` fournit un `ResourceStatus` précis qui décrit l'état de la ressource à l'aide d'une constante de type chaîne.
+Le signal `status` fournit un `ResourceStatus` précis qui décrit l'état de la resource à l'aide d'une constante de type chaîne.
 
 | Statut        | `value()`         | Description                                                                  |
 | ------------- | :---------------- | ---------------------------------------------------------------------------- |
-| `'idle'`      | `undefined`       | La ressource n'a pas de requête valide et le loader ne s'est pas exécuté.    |
+| `'idle'`      | `undefined`       | La resource n'a pas de requête valide et le loader ne s'est pas exécuté.    |
 | `'error'`     | Lève une erreur   | Le loader a rencontré une erreur.                                            |
 | `'loading'`   | `undefined`       | Le loader s'exécute suite au changement de la valeur `params`.               |
-| `'reloading'` | Valeur précédente | Le loader s'exécute suite à l'appel de la méthode `reload` de la ressource.  |
+| `'reloading'` | Valeur précédente | Le loader s'exécute suite à l'appel de la méthode `reload` de la resource.  |
 | `'resolved'`  | Valeur résolue    | Le loader a terminé.                                                         |
-| `'local'`     | Valeur définie localement | La valeur de la ressource a été définie localement via `.set()` ou `.update()` |
+| `'local'`     | Valeur définie localement | La valeur de la resource a été définie localement via `.set()` ou `.update()` |
 
 Vous pouvez utiliser ces informations de statut pour afficher conditionnellement des éléments d'interface utilisateur, comme des indicateurs de chargement et des messages d'erreur.
 
 ## Mettre en cache les données de `resource` avec le SSR {#caching-resource-data-with-ssr}
 
-Quand une application est rendue sur le serveur, un loader de ressource s'exécute une fois pour produire le HTML initial. Pendant l'hydratation, le navigateur exécute normalement à nouveau le même loader.
+Quand une application est rendue sur le serveur, un loader de resource s'exécute une fois pour produire le HTML initial. Pendant l'hydratation, le navigateur exécute normalement à nouveau le même loader.
 
-Pour réutiliser le résultat du serveur, fournissez un `id` pour la ressource. Angular stocke la valeur résolue dans `TransferState` sur le serveur et l'utilise côté client pour initialiser la ressource dans un état `'resolved'`.
+Pour réutiliser le résultat du serveur, fournissez un `id` pour la resource. Angular stocke la valeur résolue dans `TransferState` sur le serveur et l'utilise côté client pour initialiser la resource dans un état `'resolved'`.
 
 ```ts
 const userId: Signal<string> = getUserId();
@@ -158,13 +158,13 @@ const userResource = resource({
 });
 ```
 
-La valeur de `id` doit être unique dans votre application et identique sur le serveur et le client, afin qu'Angular puisse faire correspondre l'entrée en cache à la ressource qui l'a demandée.
+La valeur de `id` doit être unique dans votre application et identique sur le serveur et le client, afin qu'Angular puisse faire correspondre l'entrée en cache à la resource qui l'a demandée.
 
-IMPORTANT: Comme la valeur en cache est sérialisée dans le HTML de la page, évitez de définir `id` sur les ressources qui chargent des données propres à l'utilisateur ayant déclenché le rendu côté serveur, en particulier si le HTML rendu peut être mis en cache ou partagé entre utilisateurs.
+IMPORTANT: Comme la valeur en cache est sérialisée dans le HTML de la page, évitez de définir `id` sur les resources qui chargent des données propres à l'utilisateur ayant déclenché le rendu côté serveur, en particulier si le HTML rendu peut être mis en cache ou partagé entre utilisateurs.
 
-## Chaîner des ressources {#chaining-resources}
+## Chaîner des resources {#chaining-resources}
 
-Parfois, une ressource dépend du résultat d'une autre. Vous pouvez exprimer cette dépendance avec la fonction `chain` disponible dans l'objet de contexte de `params`.
+Parfois, une resource dépend du résultat d'une autre. Vous pouvez exprimer cette dépendance avec la fonction `chain` disponible dans l'objet de contexte de `params`.
 
 ```typescript
 import {resource} from '@angular/core';
@@ -189,11 +189,11 @@ Ici, `companyResource` dépend du `companyId` de l'utilisateur, qui n'est connu 
 
 Quand `chain` propage un statut de `userResource` (`idle`, `loading`, `reloading` ou `error`), la fonction params ne continue pas. Quand `userResource` est `resolved` ou `local`, `chain` renvoie sa valeur, qui peut elle-même être `undefined`. L'exemple gère ce cas avec `chain(userResource)?.companyId`, de sorte qu'une valeur `undefined` donne des params `undefined` et que `companyResource` devient `idle`.
 
-NOTE: Passez directement la valeur chaînée comme valeur de params, au lieu de l'envelopper dans un objet. Une valeur de params comme `{companyId: undefined}` reste une valeur définie : le loader s'exécuterait donc avec un `companyId` `undefined` au lieu que la ressource devienne `idle`.
+NOTE: Passez directement la valeur chaînée comme valeur de params, au lieu de l'envelopper dans un objet. Une valeur de params comme `{companyId: undefined}` reste une valeur définie : le loader s'exécuterait donc avec un `companyId` `undefined` au lieu que la resource devienne `idle`.
 
-### Chaîner ou lire directement les valeurs d'une ressource {#chaining-vs-reading-resource-values-directly}
+### Chaîner ou lire directement les valeurs d'une resource {#chaining-vs-reading-resource-values-directly}
 
-Vous pourriez être tenté de lire directement la valeur d'une ressource dans `params` :
+Vous pourriez être tenté de lire directement la valeur d'une resource dans `params` :
 
 ```typescript {avoid, header: 'reads value() directly without status propagation'}
 const companyResource = resource({
@@ -205,17 +205,17 @@ const companyResource = resource({
 });
 ```
 
-Même si cela fonctionne, renvoyer `undefined` depuis `params` fait passer la ressource à l'état `idle` au lieu de refléter l'état réel de la ressource en amont. Il est préférable d'utiliser `chain`, car cette fonction reflète correctement les états `loading` et `error`.
+Même si cela fonctionne, renvoyer `undefined` depuis `params` fait passer la resource à l'état `idle` au lieu de refléter l'état réel de la resource en amont. Il est préférable d'utiliser `chain`, car cette fonction reflète correctement les états `loading` et `error`.
 
-N'utilisez `chain` que lorsque la ressource en aval effectue son propre travail asynchrone qui dépend de la valeur en amont. Si vous avez seulement besoin de dériver une valeur de manière synchrone à partir d'une ressource, utilisez plutôt `computed`.
+N'utilisez `chain` que lorsque la resource en aval effectue son propre travail asynchrone qui dépend de la valeur en amont. Si vous avez seulement besoin de dériver une valeur de manière synchrone à partir d'une resource, utilisez plutôt `computed`.
 
 ## Récupération de données réactive avec `httpResource` {#reactive-data-fetching-with-httpresource}
 
 [`httpResource`](/guide/http/http-resource) est une enveloppe autour de `HttpClient` qui vous fournit le statut de la requête et la réponse sous forme de signals. Elle effectue les requêtes HTTP via la pile HTTP d'Angular, intercepteurs compris.
 
-## Composition de ressources avec des snapshots {#resource-composition-with-snapshots}
+## Composition de resources avec des snapshots {#resource-composition-with-snapshots}
 
-Un `ResourceSnapshot` est une représentation structurée de l'état actuel d'une ressource. Chaque ressource possède une propriété `snapshot` qui fournit un signal de son état actuel.
+Un `ResourceSnapshot` est une représentation structurée de l'état actuel d'une resource. Chaque resource possède une propriété `snapshot` qui fournit un signal de son état actuel.
 
 ```ts
 const userId: Signal<string> = getUserId();
@@ -230,11 +230,11 @@ const userSnapshot = userResource.snapshot;
 
 Chaque snapshot contient un `status` et soit une `value`, soit une `error`.
 
-### Composer des ressources avec des snapshots {#composing-resources-with-snapshots}
+### Composer des resources avec des snapshots {#composing-resources-with-snapshots}
 
 IMPORTANT: `resourceFromSnapshots` est [expérimental](reference/releases#experimental). Vous pouvez l'essayer dès maintenant, mais il pourrait changer avant d'être stable.
 
-Vous pouvez créer de nouvelles ressources à partir de snapshots avec `resourceFromSnapshots`. Cela permet la composition avec des API de signals comme `computed` et `linkedSignal` pour transformer le comportement d'une ressource.
+Vous pouvez créer de nouvelles resources à partir de snapshots avec `resourceFromSnapshots`. Cela permet la composition avec des API de signals comme `computed` et `linkedSignal` pour transformer le comportement d'une resource.
 
 ```ts
 import {

@@ -1,15 +1,15 @@
 <!-- source: 62a6523d5e41e13999f85e50c8b160115f301cb7 -->
-# Liaison bidirectionnelle
+# Two-way binding
 
-La **liaison bidirectionnelle** est un raccourci pour lier simultanément une valeur à un élément, tout en donnant à cet élément la possibilité de propager les modifications en retour via cette liaison.
+Le **two-way binding** est un raccourci pour lier simultanément une valeur à un élément, tout en donnant à cet élément la possibilité de propager les modifications en retour via ce binding.
 
 ## Syntaxe {#syntax}
 
-La syntaxe de la liaison bidirectionnelle est une combinaison de crochets et de parenthèses, `[()]`. Elle combine la syntaxe de la liaison de propriété, `[]`, et celle de la liaison d'événement, `()`. La communauté Angular appelle familièrement cette syntaxe « banana-in-a-box ».
+La syntaxe du two-way binding est une combinaison de crochets et de parenthèses, `[()]`. Elle combine la syntaxe du property binding, `[]`, et celle de l'event binding, `()`. La communauté Angular appelle familièrement cette syntaxe « banana-in-a-box ».
 
-## Liaison bidirectionnelle avec les contrôles de formulaire {#two-way-binding-with-form-controls}
+## Two-way binding avec les contrôles de formulaire {#two-way-binding-with-form-controls}
 
-Les développeurs utilisent couramment la liaison bidirectionnelle pour garder les données d'un composant synchronisées avec un contrôle de formulaire pendant que l'utilisateur interagit avec ce contrôle. Par exemple, quand un utilisateur remplit un champ de saisie de texte, l'état du composant doit être mis à jour.
+Les développeurs utilisent couramment le two-way binding pour garder les données d'un composant synchronisées avec un contrôle de formulaire pendant que l'utilisateur interagit avec ce contrôle. Par exemple, quand un utilisateur remplit un champ de saisie de texte, l'état du composant doit être mis à jour.
 
 L'exemple suivant met à jour dynamiquement l'attribut `firstName` sur la page :
 
@@ -31,19 +31,19 @@ export class App {
 }
 ```
 
-Pour utiliser la liaison bidirectionnelle avec des contrôles de formulaire natifs, vous devez :
+Pour utiliser le two-way binding avec des contrôles de formulaire natifs, vous devez :
 
 1. Importer le `FormsModule` depuis `@angular/forms`
-1. Utiliser la directive `ngModel` avec la syntaxe de liaison bidirectionnelle (par exemple, `[(ngModel)]`)
+1. Utiliser la directive `ngModel` avec la syntaxe de two-way binding (par exemple, `[(ngModel)]`)
 1. Lui assigner l'état que vous voulez qu'elle mette à jour (par exemple, `firstName`)
 
 Une fois cette configuration en place, Angular s'assure que toute modification dans le champ de saisie de texte se reflète correctement dans l'état du composant !
 
 Pour en savoir plus sur [`NgModel`](/api/forms/NgModel), consultez la documentation officielle.
 
-## Liaison bidirectionnelle entre composants {#two-way-binding-between-components}
+## Two-way binding entre composants {#two-way-binding-between-components}
 
-Mettre en place une liaison bidirectionnelle entre un composant parent et un composant enfant demande plus de configuration que pour les éléments de formulaire.
+Mettre en place un two-way binding entre un composant parent et un composant enfant demande plus de configuration que pour les éléments de formulaire.
 
 Voici un exemple où `App` est responsable de définir l'état initial du compteur, tandis que la logique de mise à jour et de rendu de l'interface du compteur se trouve principalement dans son enfant `Counter`.
 
@@ -86,9 +86,9 @@ export class Counter {
 }
 ```
 
-### Activer la liaison bidirectionnelle entre composants {#enabling-two-way-binding-between-components}
+### Activer le two-way binding entre composants {#enabling-two-way-binding-between-components}
 
-Si l'on réduit l'exemple ci-dessus à l'essentiel, chaque liaison bidirectionnelle entre composants nécessite ce qui suit :
+Si l'on réduit l'exemple ci-dessus à l'essentiel, chaque two-way binding entre composants nécessite ce qui suit :
 
 Le composant enfant doit contenir une propriété `model`.
 
@@ -111,7 +111,7 @@ export class Counter {
 
 Le composant parent doit :
 
-1. Entourer le nom de la propriété `model` avec la syntaxe de liaison bidirectionnelle.
+1. Entourer le nom de la propriété `model` avec la syntaxe de two-way binding.
 1. Assigner une propriété ou un signal à la propriété `model`.
 
 Voici un exemple simplifié :

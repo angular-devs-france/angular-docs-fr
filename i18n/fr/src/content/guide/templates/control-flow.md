@@ -1,7 +1,7 @@
 <!-- source: 5425e5b1963f6a84448f5b39f1cb4861539cbf80 -->
-# Flux de contrôle
+# Control flow
 
-Les templates Angular prennent en charge des blocs de flux de contrôle qui vous permettent d'afficher, de masquer et de répéter des éléments de manière conditionnelle.
+Les templates Angular prennent en charge des blocs de control flow qui vous permettent d'afficher, de masquer et de répéter des éléments de manière conditionnelle.
 
 ## Afficher du contenu de manière conditionnelle avec `@if`, `@else if` et `@else` {#conditionally-display-content-with-if-else-if-and-else}
 
@@ -69,7 +69,7 @@ Si aucune autre option n'est disponible, vous pouvez utiliser l'élément lui-m�
 }
 ```
 
-NOTE: Contrairement à `*ngFor`, le bloc `@for` privilégie la réutilisation des vues. Si une propriété suivie change mais que la référence de l'objet reste la même, Angular met à jour les liaisons de la vue (y compris les inputs des composants) au lieu de détruire et de recréer l'élément entier.
+NOTE: Contrairement à `*ngFor`, le bloc `@for` privilégie la réutilisation des vues. Si une propriété suivie change mais que la référence de l'objet reste la même, Angular met à jour les bindings de la vue (y compris les inputs des composants) au lieu de détruire et de recréer l'élément entier.
 
 ### Variables contextuelles dans les blocs `@for` {#contextual-variables-in-for-blocks}
 

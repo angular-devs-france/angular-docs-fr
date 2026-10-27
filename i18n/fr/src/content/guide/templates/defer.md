@@ -22,7 +22,7 @@ Les composants, les directives, les pipes et les styles CSS des composants peuve
 Pour que les dépendances d'un bloc `@defer` soient différées, elles doivent remplir deux conditions :
 
 1. **Elles doivent être standalone.** Les dépendances non standalone ne peuvent pas être différées et sont toujours chargées immédiatement, même si elles se trouvent dans des blocs `@defer`.
-1. **Elles ne peuvent pas être référencées en dehors des blocs `@defer` dans le même fichier.** Si elles sont référencées en dehors du bloc `@defer` ou dans des requêtes ViewChild, les dépendances seront chargées immédiatement.
+1. **Elles ne peuvent pas être référencées en dehors des blocs `@defer` dans le même fichier.** Si elles sont référencées en dehors du bloc `@defer` ou dans des queries ViewChild, les dépendances seront chargées immédiatement.
 
 Les dépendances _transitives_ des composants, directives et pipes utilisés dans le bloc `@defer` n'ont pas besoin d'être strictement standalone : les dépendances transitives peuvent toujours être déclarées dans un `NgModule` et participer au chargement différé.
 

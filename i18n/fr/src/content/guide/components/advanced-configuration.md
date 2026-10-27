@@ -16,8 +16,8 @@ les timers, et plus encore.
 **`ChangeDetectionStrategy.OnPush`** est la stratégie par défaut (depuis la v22). Ce mode réduit la quantité de vérifications qu'Angular
 doit effectuer. Dans ce mode, le framework vérifie si le DOM d'un composant doit être mis à jour uniquement quand :
 
-- Un input du composant change à la suite d'une liaison dans un template, ou
-- Un écouteur d'événements de ce composant s'exécute
+- Un input du composant change à la suite d'un binding dans un template, ou
+- Un event listener de ce composant s'exécute
 - Le composant est explicitement marqué pour vérification, via `ChangeDetectorRef.markForCheck` ou quelque chose qui l'encapsule, comme `AsyncPipe`.
 
 De plus, quand un composant OnPush est vérifié, Angular vérifie _aussi_ tous ses composants
@@ -29,7 +29,7 @@ Par défaut, Angular supprime et réduit les espaces superflus dans les template
 des retours à la ligne et de l'indentation. Vous pouvez modifier ce réglage en définissant explicitement `preserveWhitespaces` à
 `true` dans les métadonnées d'un composant.
 
-## Schémas d'éléments personnalisés {#custom-element-schemas}
+## Schémas de custom elements {#custom-element-schemas}
 
 Par défaut, Angular lève une erreur quand il rencontre un élément HTML inconnu. Vous pouvez
 désactiver ce comportement pour un composant en incluant `CUSTOM_ELEMENTS_SCHEMA` dans la propriété `schemas`

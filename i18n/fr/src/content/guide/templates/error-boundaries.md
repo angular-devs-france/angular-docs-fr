@@ -1,15 +1,15 @@
 <!-- source: 3a3bac481c7c34b131b840087cfe5e908b80fe74 -->
-# Périmètres d'erreur avec `@boundary`
+# Error boundaries avec `@boundary`
 
 IMPORTANT: `@boundary` est en [developer preview](reference/releases#developer-preview).
 
-Les templates Angular prennent en charge les périmètres d'erreur (error boundaries) pour gérer proprement les erreurs d'exécution qui surviennent pendant l'affichage et la détection de changements.
+Les templates Angular prennent en charge les error boundaries pour gérer proprement les erreurs d'exécution qui surviennent pendant l'affichage et la détection de changements.
 
-Les périmètres d'erreur empêchent la défaillance d'un seul composant de faire planter toute l'application et permettent d'afficher une interface de repli à l'utilisateur.
+Les error boundaries empêchent la défaillance d'un seul composant de faire planter toute l'application et permettent d'afficher une interface de repli à l'utilisateur.
 
 ## Intercepter les erreurs avec `@boundary` et `@error` {#catching-errors-with-boundary-and-error}
 
-Le bloc `@boundary` englobe une section de votre template. Si un composant ou une directive à l'intérieur de ce périmètre lève une erreur pendant l'initialisation ou la détection de changements, le framework intercepte l'erreur et affiche le bloc `@error` à la place.
+Le bloc `@boundary` englobe une section de votre template. Si un composant ou une directive à l'intérieur de cette error boundary lève une erreur pendant l'initialisation ou la détection de changements, le framework intercepte l'erreur et affiche le bloc `@error` à la place.
 
 ```angular-html
 @boundary {
@@ -31,9 +31,9 @@ Vous pouvez accéder à l'erreur interceptée via la variable implicite `$error`
 }
 ```
 
-## Réinitialiser le périmètre {#resetting-the-boundary}
+## Réinitialiser l'error boundary {#resetting-the-boundary}
 
-Vous pouvez tenter d'afficher à nouveau le contenu du `@boundary` en appelant la fonction implicite `$reset` dans le bloc `@error`. Lorsqu'elle est appelée, elle réinitialise l'état du périmètre et tente d'afficher à nouveau le contenu d'origine.
+Vous pouvez tenter d'afficher à nouveau le contenu du `@boundary` en appelant la fonction implicite `$reset` dans le bloc `@error`. Lorsqu'elle est appelée, elle réinitialise l'état de l'error boundary et tente d'afficher à nouveau le contenu d'origine.
 
 ```angular-html
 @boundary {
@@ -63,7 +63,7 @@ Ordonnez vos blocs `@error` du plus spécifique au moins spécifique, car Angula
 
 ## Intégration avec le gestionnaire d'erreurs global {#global-error-handler-integration}
 
-Lorsqu'un périmètre intercepte une erreur, Angular peut tout de même notifier l'`ErrorHandler` global. Vous pouvez implémenter le hook optionnel `onViewError` dans votre `ErrorHandler` personnalisé pour journaliser ces erreurs interceptées dans votre service de suivi des erreurs.
+Lorsqu'une error boundary intercepte une erreur, Angular peut tout de même notifier l'`ErrorHandler` global. Vous pouvez implémenter le hook optionnel `onViewError` dans votre `ErrorHandler` personnalisé pour journaliser ces erreurs interceptées dans votre service de suivi des erreurs.
 
 ```ts
 @Injectable()

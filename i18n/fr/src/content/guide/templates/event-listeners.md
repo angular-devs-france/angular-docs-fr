@@ -1,11 +1,11 @@
 <!-- source: 4871cf446a746fc1d5ede66b7bd5f48e0b005015 -->
-# Ajouter des écouteurs d'événements
+# Ajouter des event listeners
 
-Angular permet de définir des écouteurs d'événements sur un élément de votre template en indiquant le nom de l'événement entre parenthèses, accompagné d'une instruction qui s'exécute chaque fois que l'événement se produit.
+Angular permet de définir des event listeners sur un élément de votre template en indiquant le nom de l'événement entre parenthèses, accompagné d'une instruction qui s'exécute chaque fois que l'événement se produit.
 
 ## Écouter les événements natifs {#listening-to-native-events}
 
-Pour ajouter des écouteurs d'événements à un élément HTML, entourez l'événement de parenthèses, `()`, ce qui vous permet de spécifier une instruction d'écoute.
+Pour ajouter des event listeners à un élément HTML, entourez l'événement de parenthèses, `()`, ce qui vous permet de spécifier une instruction d'écoute.
 
 ```angular-ts
 @Component({
@@ -23,11 +23,11 @@ export class App{
 
 Dans cet exemple, Angular appelle `updateField` chaque fois que l'élément `<input>` émet un événement `keyup`.
 
-Vous pouvez ajouter des écouteurs pour n'importe quel événement natif, comme `click`, `keydown`, `mouseover`, etc. Pour en savoir plus, consultez [la liste de tous les événements disponibles sur les éléments sur MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element#events).
+Vous pouvez ajouter des event listeners pour n'importe quel événement natif, comme `click`, `keydown`, `mouseover`, etc. Pour en savoir plus, consultez [la liste de tous les événements disponibles sur les éléments sur MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element#events).
 
 ## Accéder à l'argument de l'événement {#accessing-the-event-argument}
 
-Dans chaque écouteur d'événements de template, Angular fournit une variable nommée `$event` qui contient une référence à l'objet de l'événement.
+Dans chaque event listener de template, Angular fournit une variable nommée `$event` qui contient une référence à l'objet de l'événement.
 
 ```angular-ts
 @Component({
@@ -88,7 +88,7 @@ Vous pouvez également ajouter des modificateurs de touches supplémentaires :
 
 Angular prend en charge les modificateurs `alt`, `control`, `meta` et `shift`.
 
-Vous pouvez spécifier la touche (key) ou le code que vous souhaitez lier aux événements clavier. Les champs key et code font partie nativement de l'objet d'événement clavier du navigateur. Par défaut, la liaison d'événement suppose que vous souhaitez utiliser les [valeurs Key des événements clavier](https://developer.mozilla.org/docs/Web/API/UI_Events/Keyboard_event_key_values).
+Vous pouvez spécifier la touche (key) ou le code que vous souhaitez lier aux événements clavier. Les champs key et code font partie nativement de l'objet d'événement clavier du navigateur. Par défaut, l'event binding suppose que vous souhaitez utiliser les [valeurs Key des événements clavier](https://developer.mozilla.org/docs/Web/API/UI_Events/Keyboard_event_key_values).
 
 Angular vous permet aussi de spécifier les [valeurs Code des événements clavier](https://developer.mozilla.org/docs/Web/API/UI_Events/Keyboard_event_code_values) grâce au suffixe intégré `code`.
 
@@ -117,7 +117,7 @@ export class MyView {}
 
 ## Empêcher le comportement par défaut d'un événement {#preventing-event-default-behavior}
 
-Si votre gestionnaire d'événement doit remplacer le comportement natif du navigateur, vous pouvez utiliser la [méthode `preventDefault`](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault) de l'objet de l'événement :
+Si votre event handler doit remplacer le comportement natif du navigateur, vous pouvez utiliser la [méthode `preventDefault`](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault) de l'objet de l'événement :
 
 ```angular-ts
 @Component({
@@ -134,7 +134,7 @@ export class App{
 }
 ```
 
-Si l'instruction du gestionnaire d'événement s'évalue à `false`, Angular appelle automatiquement `preventDefault()`, comme pour les [attributs natifs de gestionnaires d'événements](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes#event_handler_attributes). _Privilégiez toujours un appel explicite à `preventDefault`_, car cette approche rend l'intention du code évidente.
+Si l'instruction de l'event handler s'évalue à `false`, Angular appelle automatiquement `preventDefault()`, comme pour les [attributs natifs d'event handler](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes#event_handler_attributes). _Privilégiez toujours un appel explicite à `preventDefault`_, car cette approche rend l'intention du code évidente.
 
 ## Étendre la gestion des événements {#extend-event-handling}
 

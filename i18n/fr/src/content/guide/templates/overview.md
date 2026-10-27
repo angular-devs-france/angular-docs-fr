@@ -12,7 +12,7 @@ Les templates se trouvent généralement soit dans la propriété `template` d'u
 
 ## Comment fonctionnent les templates ? {#how-do-templates-work}
 
-Les templates reposent sur la syntaxe [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML), avec des fonctionnalités supplémentaires comme des fonctions de template intégrées, la liaison de données, l'écoute d'événements, des variables, et plus encore.
+Les templates reposent sur la syntaxe [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML), avec des fonctionnalités supplémentaires comme des fonctions de template intégrées, le data binding, l'écoute d'événements, des variables, et plus encore.
 
 Angular compile les templates en JavaScript afin de se construire une représentation interne de votre application. L'un des avantages de cette approche réside dans les optimisations de rendu intégrées qu'Angular applique automatiquement à votre application.
 
@@ -22,8 +22,8 @@ Voici quelques différences entre les templates et la syntaxe HTML standard :
 
 - Les commentaires présents dans le code source du template ne sont pas inclus dans le rendu final
 - Les éléments de composants et de directives peuvent être auto-fermants (par exemple, `<UserProfile />`)
-- Les attributs comportant certains caractères (comme `[]`, `()`, etc.) ont une signification particulière pour Angular. Consultez la [documentation sur les liaisons](guide/templates/binding) et la [documentation sur l'ajout d'écouteurs d'événements](guide/templates/event-listeners) pour plus d'informations.
-- Le caractère `@` a une signification particulière pour Angular et sert à ajouter un comportement dynamique aux templates, comme le [flux de contrôle](guide/templates/control-flow). Vous pouvez inclure un caractère `@` littéral en l'échappant sous forme d'entité HTML (`&commat;` ou `&#64;`).
+- Les attributs comportant certains caractères (comme `[]`, `()`, etc.) ont une signification particulière pour Angular. Consultez la [documentation sur les bindings](guide/templates/binding) et la [documentation sur l'ajout d'event listeners](guide/templates/event-listeners) pour plus d'informations.
+- Le caractère `@` a une signification particulière pour Angular et sert à ajouter un comportement dynamique aux templates, comme le [control flow](guide/templates/control-flow). Vous pouvez inclure un caractère `@` littéral en l'échappant sous forme d'entité HTML (`&commat;` ou `&#64;`).
 - Angular ignore et réduit les caractères d'espacement inutiles. Consultez [les espaces dans les templates](guide/templates/whitespace) pour plus de détails.
 - Angular peut ajouter des nœuds de commentaire à une page comme placeholders pour du contenu dynamique, mais les développeurs peuvent les ignorer.
 
@@ -36,9 +36,9 @@ Les sujets suivants pourraient également vous intéresser :
 | Sujets                                                                      | Détails                                                                                 |
 | :-------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
 | [Lier du texte, des propriétés et des attributs dynamiques](guide/templates/binding) | Liez des données dynamiques à du texte, des propriétés et des attributs.     |
-| [Ajouter des écouteurs d'événements](guide/templates/event-listeners)       | Réagissez aux événements dans vos templates.                                            |
-| [Liaison bidirectionnelle](guide/templates/two-way-binding)                 | Lie une valeur et propage ses changements simultanément.                                |
-| [Flux de contrôle](guide/templates/control-flow)                            | Affichez, masquez et répétez des éléments de manière conditionnelle.                    |
+| [Ajouter des event listeners](guide/templates/event-listeners)              | Réagissez aux événements dans vos templates.                                            |
+| [Two-way binding](guide/templates/two-way-binding)                          | Lie une valeur et propage ses changements simultanément.                                |
+| [Control flow](guide/templates/control-flow)                                | Affichez, masquez et répétez des éléments de manière conditionnelle.                    |
 | [Pipes](guide/templates/pipes)                                              | Transformez des données de manière déclarative.                                         |
 | [Insérer du contenu enfant avec ng-content](guide/templates/ng-content)     | Contrôlez la manière dont les composants rendent le contenu.                            |
 | [Créer des fragments de template avec ng-template](guide/templates/ng-template) | Déclarez un fragment de template.                                                   |

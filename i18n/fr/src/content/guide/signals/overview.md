@@ -133,7 +133,7 @@ Angular entre automatiquement dans un contexte réactif lors des opérations sui
 - L'évaluation d'un signal `computed`.
 - L'évaluation d'un `linkedSignal`.
 - L'évaluation de la fonction params d'une `resource`.
-- Le rendu du template d'un composant (y compris les liaisons dans la [propriété host](guide/components/host-elements#binding-to-the-host-element)).
+- Le rendu du template d'un composant (y compris les bindings dans la [propriété host](guide/components/host-elements#binding-to-the-host-element)).
 
 Pendant ces opérations, Angular crée une connexion _active_. Si un signal suivi change, Angular réexécutera _à terme_ le consommateur.
 
@@ -162,7 +162,7 @@ effect(() => {
 });
 ```
 
-Cet exemple journalise un message quand `currentUser` _ou_ `counter` change. Cependant, si l'effet ne doit s'exécuter que lorsque `currentUser` change, alors la lecture de `counter` n'est qu'accessoire et les changements de `counter` ne devraient pas journaliser de nouveau message.
+Cet exemple journalise un message quand `currentUser` _ou_ `counter` change. Cependant, si l'effect ne doit s'exécuter que lorsque `currentUser` change, alors la lecture de `counter` n'est qu'accessoire et les changements de `counter` ne devraient pas journaliser de nouveau message.
 
 Vous pouvez empêcher le suivi de la lecture d'un signal en appelant son getter avec `untracked` :
 
@@ -172,7 +172,7 @@ effect(() => {
 });
 ```
 
-`untracked` est aussi utile quand un effet doit invoquer du code externe qui ne doit pas être traité comme une dépendance :
+`untracked` est aussi utile quand un effect doit invoquer du code externe qui ne doit pas être traité comme une dépendance :
 
 ```ts
 effect(() => {
@@ -219,7 +219,7 @@ effect(async () => {
 Alors que `computed` gère les dérivations simples en lecture seule, vous pourriez avoir besoin d'un état modifiable qui dépend d'autres signals.
 Pour plus d'informations, consultez le guide [État dépendant avec linkedSignal](/guide/signals/linked-signal).
 
-Toutes les API de signals sont synchrones : `signal`, `computed`, `input`, etc. Cependant, les applications doivent souvent gérer des données disponibles de manière asynchrone. Une `Resource` vous permet d'intégrer des données asynchrones dans le code de votre application basé sur les signals tout en vous permettant d'accéder à ses données de manière synchrone. Pour plus d'informations, consultez le guide [Réactivité asynchrone avec les ressources](/guide/signals/resource).
+Toutes les API de signals sont synchrones : `signal`, `computed`, `input`, etc. Cependant, les applications doivent souvent gérer des données disponibles de manière asynchrone. Une `Resource` vous permet d'intégrer des données asynchrones dans le code de votre application basé sur les signals tout en vous permettant d'accéder à ses données de manière synchrone. Pour plus d'informations, consultez le guide [Réactivité asynchrone avec les resources](/guide/signals/resource).
 
 ## Exécuter des effets de bord sur des API non réactives {#executing-side-effects-on-non-reactive-apis}
 
@@ -280,5 +280,5 @@ Consultez [Interopérabilité RxJS avec les signals Angular](ecosystem/rxjs-inte
 
 ## Déboguer les signals {#debugging-signals}
 
-Angular DevTools peut visualiser le graphe de signals d'un composant ou d'une directive, en montrant comment ses signals, computeds, effets et autres nœuds réactifs dépendent les uns des autres.
+Angular DevTools peut visualiser le graphe de signals d'un composant ou d'une directive, en montrant comment ses signals, computeds, effects et autres nœuds réactifs dépendent les uns des autres.
 Consultez [Déboguer le graphe de signals](tools/devtools/signals) pour apprendre à ouvrir, lire et inspecter le graphe.

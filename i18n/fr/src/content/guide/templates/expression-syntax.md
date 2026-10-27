@@ -61,7 +61,7 @@ Angular prend en charge les opérateurs suivants du JavaScript standard.
 | ET (logique)                  | `&&`                                           |
 | OU (logique)                  | `\|\|`                                         |
 | NON (logique)                 | `!`                                            |
-| Coalescence des nuls          | `possiblyNullValue ?? 'default'`               |
+| Nullish coalescing            | `possiblyNullValue ?? 'default'`               |
 | Opérateurs de comparaison     | `<`, `<=`, `>`, `>=`, `==`, `===`, `!==`, `!=` |
 | Négation unaire               | `-x`                                           |
 | Plus unaire                   | `+y`                                           |
@@ -79,13 +79,13 @@ Angular prend en charge les opérateurs suivants du JavaScript standard.
 | Affectation après exponentiation | `a **= b`                                      |
 | Affectation après ET logique  | `a &&= b`                                      |
 | Affectation après OU logique  | `a \|\|= b`                                    |
-| Affectation de coalescence des nuls | `a ??= b`                                      |
+| Affectation de nullish coalescing   | `a ??= b`                                      |
 | Décomposition dans les littéraux d'objet | `{...obj, foo: 'bar'}`                         |
 | Décomposition dans les littéraux de tableau | `[...arr, 1, 2, 3]`                            |
 | Décomposition dans les appels de fonction | `fn(...args)`                                  |
 | Fonction fléchée              | `items.filter((i) => i.active)`                |
 
-NOTE: Les opérateurs d'affectation et d'incrémentation/décrémentation ne sont valides que dans les [instructions des écouteurs d'événements](#event-listener-statements). Les utiliser dans une liaison ou une interpolation provoque une erreur de compilation, sauf s'ils se trouvent dans une fonction fléchée.
+NOTE: Les opérateurs d'affectation et d'incrémentation/décrémentation ne sont valides que dans les [instructions d'event listener](#event-listener-statements). Les utiliser dans un binding ou une interpolation provoque une erreur de compilation, sauf s'ils se trouvent dans une fonction fléchée.
 
 Les fonctions fléchées doivent avoir une expression comme corps. Les pipes ne peuvent pas être utilisés dans une fonction fléchée, mais vous pouvez passer une fonction fléchée en argument à un pipe.
 
@@ -139,9 +139,9 @@ De manière générale, les déclarations ne sont pas prises en charge dans les 
 | Fonctions fléchées avec un corps en bloc | `() => { }`                                 |
 | Classes                           | `class Rectangle { }`                       |
 
-## Instructions des écouteurs d'événements {#event-listener-statements}
+## Instructions d'event listener {#event-listener-statements}
 
-Les gestionnaires d'événements sont des **instructions** et non des expressions. Bien qu'ils prennent en charge toute la syntaxe des expressions Angular, il existe deux différences clés :
+Les event handlers sont des **instructions** et non des expressions. Bien qu'ils prennent en charge toute la syntaxe des expressions Angular, il existe deux différences clés :
 
 1. Les instructions **prennent en charge** les opérateurs d'affectation (mais pas les affectations par déstructuration)
 1. Les instructions **ne prennent pas en charge** les pipes

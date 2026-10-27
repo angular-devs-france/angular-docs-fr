@@ -28,7 +28,7 @@ Ces règles s'appliquent à toute page sous `i18n/fr/src/`. Le glossaire (`gloss
 
 - Espace fine insécable (U+202F) avant `:` `;` `?` `!`. Le vérificateur signale une espace ordinaire ou une absence d'espace.
 - Guillemets français « » avec espaces insécables à l'intérieur. Les guillemets droits restent dans le code, les sorties de commande et les citations en anglais.
-- Titres en casse de phrase : « Composants et modèles », pas « Composants Et Modèles ».
+- Titres en casse de phrase : « Composants et templates », pas « Composants Et Templates ».
 - Noms de produits et d'API tels quels : Angular, Angular CLI, TypeScript, `signal`, `computed`, `inject`.
 - Nombres : espace insécable pour les milliers, virgule décimale (1 234,56). Dates en toutes lettres dans la prose (27 octobre 2026).
 
@@ -43,11 +43,12 @@ Ces règles s'appliquent à toute page sous `i18n/fr/src/`. Le glossaire (`gloss
 - *Component* → composant (masculin). *Directive* → directive (féminin). *Signal* reste signal, masculin : un signal, des signals (pas « signaux », qui désigne le concept général).
 - *Template* reste template (masculin : le template). Jamais « gabarit » ni « modèle ».
 - *Dependency injection* → injection de dépendances (pluriel). *Change detection* → détection de changements.
-- *Library* → bibliothèque, jamais « librairie ».
-- *Form* → formulaire ; *reactive forms* → formulaires réactifs ; *template-driven forms* → formulaires pilotés par le template ; *Signal Forms* reste tel quel (nom de la fonctionnalité : les Signal Forms) ; l'expression générique *forms with signals* → formulaires à base de signals.
+- Beaucoup de concepts Angular restent en anglais (`keep` dans le glossaire) : *binding*, *selector*, *host*, *injector*, *query*, *effect*, *resource*, *model*, *library*, *router*, *guard*… Le genre suit le mot français équivalent : le binding, le selector, le host, l'injector, le model, l'effect ; la query, la library, la resource, la promise, la guard, l'error boundary.
+- Seul le concept Angular ou d'API web passe en anglais : « une requête HTTP », « en effet », un attribut HTML générique restent en français.
+- *Form* → formulaire ; *reactive forms* et *template-driven forms* restent en anglais (les reactive forms) ; *Signal Forms* reste tel quel (nom de la fonctionnalité : les Signal Forms) ; l'expression générique *forms with signals* → formulaires à base de signals.
 - *Lazy loading* reste en anglais (le lazy loading) ; « chargement différé » est réservé à `@defer` et aux *deferrable views* → vues différables.
 - *Essentials* (la section) → Fondamentaux ; *Playground* reste tel quel.
-- Les noms d'API gardent leur nom anglais même quand le concept est traduit : « un effet » se crée avec `effect()`, « une ressource » avec `resource()`, « le modèle » avec `model()`.
+- Les noms d'API restent en anglais, et le concept aussi quand le glossaire le marque `keep` : « un effect » se crée avec `effect()`, « une resource » avec `resource()`.
 - *You* dans une instruction → « vous » ; *your application* → « votre application ».
 - Ne traduisez pas les faux amis à l'identique : *actually* → en réalité ; *eventually* → finalement, à terme ; *consistent* → cohérent.
 
