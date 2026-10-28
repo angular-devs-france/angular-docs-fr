@@ -318,6 +318,7 @@ describe('postProcess', () => {
     assert.ok((await read(copied)).includes('https://github.com/org/docs-fr/edit/main/i18n/fr/src/content/ai/agent-skills.md'));
     assert.ok((await read(target)).includes(blob), 'the Bazel output behind the symlink is not edited');
     assert.equal((await stat(target)).mode & 0o777, 0o444, 'and keeps its mode');
+    await chmod(path.join(elsewhere, 'content/ai'), 0o755); // let the suite's cleanup remove it as a normal user
   });
   test('fails when there is no build output', async () => {
     await removeDir(path.join(dir, 'dist'));
