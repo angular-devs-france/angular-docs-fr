@@ -2,7 +2,7 @@
  * Steps shared by `pnpm build` and `pnpm start`: worktree, patches, overlay, dictionaries,
  * status report, pnpm in the build directory, post-processing of the output.
  */
-import {appendFile, chmod, copyFile as fsCopyFile, cp, lstat, readFile, readdir, realpath, stat, unlink} from 'node:fs/promises';
+import {appendFile, readFile} from 'node:fs/promises';
 import path from 'node:path';
 import {applyIndexHtmlPairs, applyNavLabels, applyPipelinePairs, applyTemplateStrings} from './adev.mjs';
 import {git, run} from './exec.mjs';
@@ -253,51 +253,12 @@ export async function checkNodeVersion(dir) {
 
 export const OUTPUT_REL = path.join('dist', 'bin', 'adev', 'dist', 'browser');
 
-/**
- * Bazel writes its outputs read-only (files 0444, directories 0555), and parts of the output tree
- * (assets/content, for example) are symlinks into other read-only Bazel outputs. Post-processing
- * edits the tree in place, so: replace every symlink with a real copy of its target (Bazel's own
- * outputs stay untouched), then give the owner write access to every file and directory.
- * Dangling symlinks are left as they are.
- */
-export async function makeWritable(dir) {
-  let count = 0;
-  const walk = async (p) => {
-    let st = await lstat(p);
-    if (st.isSymbolicLink()) {
-      let target;
-      try {
-        target = await realpath(p);
-      } catch {
-        return;
-      }
-      const tst = await stat(target);
-      await unlink(p);
-      if (tst.isDirectory()) await cp(target, p, {recursive: true, dereference: true});
-      else await fsCopyFile(target, p);
-      count++;
-      st = await lstat(p);
-    }
-    const mode = st.mode & 0o7777;
-    const want = st.isDirectory() ? mode | 0o700 : mode | 0o200;
-    if (want !== mode) {
-      await chmod(p, want);
-      count++;
-    }
-    if (st.isDirectory()) for (const name of await readdir(p)) await walk(path.join(p, name));
-  };
-  await walk(dir);
-  return count;
-}
-
 /** Rewrite edit links, add canonical + hreflang per page, write sitemap.xml and robots.txt. */
 export async function postProcess(lang, dir) {
   const site = await loadSite(lang);
   const out = path.join(dir, OUTPUT_REL);
   if (!(await exists(out))) throw new Error(`build output not found at ${out}`);
   log.step('post-process output');
-  const unlocked = await makeWritable(out);
-  if (unlocked) log.info(`made ${unlocked} read-only Bazel output entr${unlocked === 1 ? 'y' : 'ies'} writable`);
 
   const editFrom = ['https://github.com/angular/angular/edit/main/adev/src/content/', 'https://github.com/angular/angular/blob/main/adev/src/content/'];
   const editTo = `${site.repoUrl}/edit/${site.repo.branch}/i18n/${lang}/src/content/`;
