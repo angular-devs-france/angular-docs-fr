@@ -50,7 +50,7 @@ export async function makeUpstream({dir, git = true} = {}) {
 
 /**
  * A repository for the tooling to work on: site schema, marker files, languages.json, a copy of
- * the template's example language (configuration only, no pages), optionally origin/ (the fixture
+ * the template's example language (configuration only, no pages, from tools/test/fixtures/example), optionally origin/ (the fixture
  * upstream as a git repository) and a git history of its own.
  */
 export async function makeRepo({example = true, git = false, origin = false} = {}) {
@@ -66,7 +66,9 @@ export async function makeRepo({example = true, git = false, origin = false} = {
   await mkdir(path.join(root, '.github', 'workflows'), {recursive: true});
   await writeFile(path.join(root, '.github', 'workflows', 'template-canary.yml'), 'name: canary\n');
   if (example) {
-    const from = path.join(packageRoot, 'i18n', '_example');
+    // A frozen copy of the template's example language: i18n/_example is deleted by
+    // `pnpm create-language` in real repositories, and the tests must not depend on it.
+    const from = path.join(fixturesDir, 'example');
     const to = path.join(root, 'i18n', '_example');
     await mkdir(path.join(to, 'src'), {recursive: true});
     for (const f of ['site.json', 'LANGUAGE.md', 'glossary.json', 'README.md']) await cp(path.join(from, f), path.join(to, f));
