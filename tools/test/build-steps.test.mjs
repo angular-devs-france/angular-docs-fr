@@ -4,7 +4,7 @@
  * upstream as origin/ (a real git repository), so ROSETTA_ORIGIN stays unset like in a real build.
  */
 import assert from 'node:assert/strict';
-import {chmod, stat} from 'node:fs/promises';
+import {chmod, lstat, mkdir, stat, symlink} from 'node:fs/promises';
 import path from 'node:path';
 import {after, before, describe, test} from 'node:test';
 import {execa} from 'execa';
@@ -294,6 +294,30 @@ describe('postProcess', () => {
     // Root ignores permission bits, so also assert the modes themselves (CI runs as a normal user).
     assert.equal((await stat(page)).mode & 0o200, 0o200, 'file made writable');
     assert.equal((await stat(path.join(out, 'ai/agent-skills'))).mode & 0o700, 0o700, 'directory made writable');
+  });
+  test('replaces symlinks into other Bazel outputs with writable copies, leaving the targets untouched', async () => {
+    const out = path.join(dir, OUTPUT_REL);
+    const elsewhere = path.join(dir, 'bazel-out-elsewhere');
+    const target = path.join(elsewhere, 'content/ai/agent-skills.md.html');
+    const blob = 'https://github.com/angular/angular/blob/main/adev/src/content/ai/agent-skills.md';
+    await write(target, `<p><a href="${blob}">edit</a></p>`);
+    await write(path.join(elsewhere, 'single.js'), `const e = "${blob}";`);
+    await write(path.join(out, 'index.html'), '<html><head></head><body>home</body></html>');
+    await mkdir(path.join(out, 'assets'), {recursive: true});
+    await symlink(path.join(elsewhere, 'content'), path.join(out, 'assets/content'));
+    await symlink(path.join(elsewhere, 'single.js'), path.join(out, 'single.js'));
+    await symlink(path.join(elsewhere, 'missing'), path.join(out, 'dangling'));
+    await chmod(target, 0o444);
+    await chmod(path.join(elsewhere, 'content/ai'), 0o555);
+    await postProcess(lang, dir);
+    const copied = path.join(out, 'assets/content/ai/agent-skills.md.html');
+    assert.ok(!(await lstat(path.join(out, 'assets/content'))).isSymbolicLink(), 'directory symlink replaced by a copy');
+    assert.ok(!(await lstat(path.join(out, 'single.js'))).isSymbolicLink(), 'file symlink replaced by a copy');
+    assert.ok((await lstat(path.join(out, 'dangling'))).isSymbolicLink(), 'dangling symlink left alone');
+    assert.equal((await stat(copied)).mode & 0o200, 0o200, 'copied file writable');
+    assert.ok((await read(copied)).includes('https://github.com/org/docs-fr/edit/main/i18n/fr/src/content/ai/agent-skills.md'));
+    assert.ok((await read(target)).includes(blob), 'the Bazel output behind the symlink is not edited');
+    assert.equal((await stat(target)).mode & 0o777, 0o444, 'and keeps its mode');
   });
   test('fails when there is no build output', async () => {
     await removeDir(path.join(dir, 'dist'));

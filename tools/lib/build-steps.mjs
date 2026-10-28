@@ -2,7 +2,7 @@
  * Steps shared by `pnpm build` and `pnpm start`: worktree, patches, overlay, dictionaries,
  * status report, pnpm in the build directory, post-processing of the output.
  */
-import {appendFile, chmod, lstat, readFile, readdir} from 'node:fs/promises';
+import {appendFile, chmod, copyFile as fsCopyFile, cp, lstat, readFile, readdir, realpath, stat, unlink} from 'node:fs/promises';
 import path from 'node:path';
 import {applyIndexHtmlPairs, applyNavLabels, applyPipelinePairs, applyTemplateStrings} from './adev.mjs';
 import {git, run} from './exec.mjs';
@@ -254,14 +254,30 @@ export async function checkNodeVersion(dir) {
 export const OUTPUT_REL = path.join('dist', 'bin', 'adev', 'dist', 'browser');
 
 /**
- * Bazel writes its outputs read-only (files 0444, directories 0555). Post-processing edits them in
- * place, so give the owner write access first. Symlinks are left alone; the walk follows the real tree.
+ * Bazel writes its outputs read-only (files 0444, directories 0555), and parts of the output tree
+ * (assets/content, for example) are symlinks into other read-only Bazel outputs. Post-processing
+ * edits the tree in place, so: replace every symlink with a real copy of its target (Bazel's own
+ * outputs stay untouched), then give the owner write access to every file and directory.
+ * Dangling symlinks are left as they are.
  */
 export async function makeWritable(dir) {
   let count = 0;
   const walk = async (p) => {
-    const st = await lstat(p);
-    if (st.isSymbolicLink()) return;
+    let st = await lstat(p);
+    if (st.isSymbolicLink()) {
+      let target;
+      try {
+        target = await realpath(p);
+      } catch {
+        return;
+      }
+      const tst = await stat(target);
+      await unlink(p);
+      if (tst.isDirectory()) await cp(target, p, {recursive: true, dereference: true});
+      else await fsCopyFile(target, p);
+      count++;
+      st = await lstat(p);
+    }
     const mode = st.mode & 0o7777;
     const want = st.isDirectory() ? mode | 0o700 : mode | 0o200;
     if (want !== mode) {
