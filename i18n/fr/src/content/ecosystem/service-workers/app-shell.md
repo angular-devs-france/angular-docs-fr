@@ -1,4 +1,4 @@
-<!-- source: a68e1739a62b109f3ebff6d9a729861175331e0d -->
+<!-- source: ccc29cb4bcd4a5e89a547190703c868fa8f26e1b -->
 # Le pattern app shell
 
 Le [pattern app shell](https://developer.chrome.com/blog/app-shell) est une façon de rendre une partie de votre application à l'aide d'une route au moment du build.
@@ -31,11 +31,12 @@ La commande met à jour le code de l'application et ajoute des fichiers supplém
 src
 ├── app
 │ ├── app.config.server.ts # server application configuration
+│ ├── app.routes.server.ts # server routes configuration
 │ └── app-shell # app-shell component
-│   ├── app-shell.component.html
-│   ├── app-shell.component.scss
-│   ├── app-shell.component.spec.ts
-│   └── app-shell.component.ts
+│   ├── app-shell.css
+│   ├── app-shell.html
+│   ├── app-shell.spec.ts
+│   └── app-shell.ts
 └── main.server.ts # main server application bootstrapping
 ```
 
