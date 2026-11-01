@@ -1,4 +1,4 @@
-<!-- source: bcd7908ca3ce51b0a3c8b1768ee3913754329506 -->
+<!-- source: 5775c28b8409719e747ec2e2ea42b3eb85d25311 -->
 # Bien démarrer avec les service workers
 
 Ce document explique comment activer la prise en charge du service worker Angular dans les projets créés avec l'[Angular CLI](tools/cli). Il utilise ensuite un exemple pour vous montrer un service worker en action, avec le chargement et la mise en cache de base.
@@ -98,16 +98,12 @@ Elles sont chargées depuis le cache du service worker.
 Remarquez que tous les fichiers dont le navigateur a besoin pour afficher cette application sont en cache.
 La configuration de base de `ngsw-config.json` est prévue pour mettre en cache les ressources spécifiques utilisées par la CLI :
 
-- `index.html`
-- `favicon.ico`
+- `index.html` (et `index.csr.html` pour les applications avec rendu côté serveur ou prérendu)
+- `favicon.ico` et `manifest.webmanifest`
 - Les artefacts de build (bundles JS et CSS)
-- Tout ce qui se trouve sous `assets`
-- Les images et polices situées directement sous l'`outputPath` configuré (par défaut `./dist/<project-name>/`) ou sous `resourcesOutputPath`.
-  Consultez la documentation de `ng build` pour plus d'informations sur ces options.
+- Les images et polices situées n'importe où dans la sortie navigateur (par défaut `./dist/<project-name>/browser/`)
 
 IMPORTANT: Le fichier `ngsw-config.json` généré inclut une liste limitée d'extensions de polices et d'images pouvant être mises en cache. Dans certains cas, vous voudrez peut-être modifier le pattern glob selon vos besoins.
-
-IMPORTANT: Si les chemins `resourcesOutputPath` ou `assets` sont modifiés après la génération du fichier de configuration, vous devez modifier les chemins manuellement dans `ngsw-config.json`.
 
 ### Modifier votre application {#making-changes-to-your-application}
 
@@ -121,8 +117,8 @@ Modifiez l'application et observez le service worker installer la mise à jour�
    Cela devrait aussi fermer les Developer Tools.
 
 1. Arrêtez `http-server` (Ctrl-c).
-1. Ouvrez `src/app/app.component.html` pour le modifier.
-1. Remplacez le texte `Welcome to {{title}}!` par `Bienvenue à {{title}}!`.
+1. Ouvrez `src/app/app.html` pour le modifier.
+1. Remplacez le texte `Hello, {{ title() }}` par `Bienvenue à {{ title() }}!`.
 1. Compilez et relancez le serveur :
 
 ```shell

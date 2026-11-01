@@ -1,4 +1,4 @@
-<!-- source: d5759321dd07f924ed842c42e2c5d8e29b8fa3e3 -->
+<!-- source: 5a4112afe300b0043ce25c94e8c989507881c943 -->
 # Désigner les locales par leur identifiant
 
 Angular utilise l'_identifiant de locale_ Unicode \(Unicode locale ID\) pour trouver les données de locale correctes pour l'internationalisation des chaînes de texte.
@@ -61,6 +61,22 @@ Pour changer la locale source de votre projet pour le build, effectuez les actio
   }
 }
 ```
+
+## Lire la locale active en dehors de l'injection de dépendances {#read-the-active-locale-outside-dependency-injection}
+
+Dans un composant ou un service, injectez le token `LOCALE_ID` pour obtenir la locale active.
+
+Si vous ne pouvez pas injecter `LOCALE_ID`, par exemple dans une simple fonction en dehors d'un contexte d'injection, lisez `$localize.locale`.
+Chaque build localisé définit cette valeur, et c'est elle que lit la fabrique par défaut de `LOCALE_ID`.
+Si votre application fournit son propre `LOCALE_ID`, `$localize.locale` ne le reflète pas.
+
+```ts
+declare const $localize: {locale?: string};
+
+export const locale = (typeof $localize !== 'undefined' && $localize.locale) || 'en-US';
+```
+
+Placez ce code dans un fichier qui contient un `import` ou un `export`. Si votre projet inclut déjà les types de `@angular/localize`, omettez la ligne `declare`.
 
 ## Et ensuite ? {#whats-next}
 
