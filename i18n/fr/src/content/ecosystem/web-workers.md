@@ -1,4 +1,4 @@
-<!-- source: 74ba7736397a4fcb7cf0e521322a51e06f9e9341 -->
+<!-- source: dff85f273645777414e862d6f3d9c34ebb7a9d0b -->
 # Traitement en arrière-plan avec les web workers
 
 Les [web workers](https://developer.mozilla.org/docs/Web/API/Web_Workers_API) vous permettent d'exécuter des calculs gourmands en CPU dans un thread d'arrière-plan, ce qui libère le thread principal pour mettre à jour l'interface utilisateur.
@@ -15,7 +15,7 @@ ng generate web-worker <location>
 ```
 
 Vous pouvez ajouter un web worker n'importe où dans votre application.
-Par exemple, pour ajouter un web worker au composant racine, `src/app/app.component.ts`, exécutez la commande suivante.
+Par exemple, pour ajouter un web worker au composant racine, `src/app/app.ts`, exécutez la commande suivante.
 
 ```shell
 ng generate web-worker app
@@ -33,9 +33,9 @@ La commande effectue les actions suivantes.
    });
    ```
 
-1. Elle ajoute le code de base suivant à `src/app/app.component.ts` pour utiliser le worker.
+1. Elle ajoute le code de base suivant à `src/app/app.ts` pour utiliser le worker.
 
-   ```ts {header:"src/app/app.component.ts"}
+   ```ts {header:"src/app/app.ts"}
    if (typeof Worker !== 'undefined') {
      // Create a new
      const worker = new Worker(new URL('./app.worker', import.meta.url));
