@@ -1,4 +1,4 @@
-<!-- source: 08d576cd3e3c3a73478fdfbb00cfe18168555975 -->
+<!-- source: 2985e2a642e08e9bf31ffb750bebac48b293a36e -->
 # Lier du texte, des propriétés et des attributs dynamiques
 
 Dans Angular, un **binding** crée une connexion dynamique entre le template d'un composant et ses données. Cette connexion garantit que les modifications des données du composant mettent automatiquement à jour le template rendu.
@@ -55,7 +55,7 @@ Pour poursuivre l'exemple du thème, si un utilisateur clique sur un bouton qui 
 
 Vous pouvez utiliser l'interpolation de texte partout où vous écririez normalement du texte en HTML.
 
-Toutes les valeurs d'expression sont converties en chaîne de caractères. Les objets et les tableaux sont convertis à l'aide de la méthode `toString` de la valeur.
+Les valeurs d'expression sont converties en chaîne de caractères. `null` et `undefined` sont rendus sous forme de chaîne vide. Les objets et les tableaux sont convertis à l'aide de la méthode `toString` de la valeur.
 
 ## Lier des propriétés et des attributs dynamiques {#binding-dynamic-properties-and-attributes}
 
@@ -104,7 +104,7 @@ Quand vous devez définir des attributs HTML qui n'ont pas de propriété DOM co
 
 Dans cet exemple, chaque fois que `listRole` change, Angular définit automatiquement l'attribut `role` de l'élément `<ul>` en appelant `setAttribute`.
 
-Si la valeur d'un attribute binding est `null`, Angular supprime l'attribut en appelant `removeAttribute`.
+Si la valeur d'un attribute binding est `null` ou `undefined`, Angular supprime l'attribut en appelant `removeAttribute`.
 
 ### Interpolation de texte dans les propriétés et les attributs {#text-interpolation-in-properties-and-attributes}
 
@@ -165,7 +165,7 @@ L'exemple ci-dessus produit le DOM suivant :
 <button class="highlighted"> ... </button>
 ```
 
-Angular ignore toute valeur de chaîne qui n'est pas un nom de classe CSS valide.
+Angular découpe une valeur de chaîne sur les espaces et ignore les chaînes vides.
 
 Quand vous utilisez à la fois des classes CSS statiques, un binding direct à `class` et des bindings à des classes spécifiques, Angular combine intelligemment toutes les classes dans le résultat rendu.
 
@@ -259,6 +259,6 @@ Angular permet de lier des valeurs de chaîne aux attributs ARIA.
 </button>
 ```
 
-Angular écrit la valeur de chaîne dans l'attribut `aria-label` de l'élément et le supprime quand la valeur liée est `null`.
+Angular écrit la valeur de chaîne dans l'attribut `aria-label` de l'élément et le supprime quand la valeur liée est `null` ou `undefined`.
 
 Certaines fonctionnalités ARIA exposent des propriétés DOM ou des inputs de directive qui acceptent des valeurs structurées (comme des références d'éléments). Utilisez les property bindings standard dans ces cas-là. Consultez le [guide d'accessibilité](/best-practices/a11y#aria-attributes-and-properties) pour des exemples et des conseils supplémentaires.
