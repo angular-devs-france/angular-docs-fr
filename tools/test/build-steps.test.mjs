@@ -82,6 +82,20 @@ describe('prepareWorktree', () => {
     assert.ok((await read(path.join(dir, 'adev', 'src', 'index.html'))).includes('<html lang="en"'));
     assert.equal(await read(path.join(dir, '.bazelrc.user')), 'build --jobs=1\n\nbuild --personal\n');
   });
+  test('moves an existing worktree to a new pin even when the overlay dirtied a file upstream changed', async () => {
+    const {commitAll} = await import('./helpers.mjs');
+    const upstreamIndex = path.join(repo.origin, 'adev', 'src', 'index.html');
+    await write(upstreamIndex, (await read(upstreamIndex)).replace('<html lang="en"', '<html lang="en" data-pin="2"'));
+    const newSha = await commitAll(repo.origin, 'upstream moves');
+    await write(path.join(dir, 'adev', 'src', 'index.html'), 'overlay from the previous build');
+    const r = await prepareWorktree(lang);
+    assert.equal(r.sha, newSha);
+    assert.equal((await execa('git', ['rev-parse', 'HEAD'], {cwd: dir})).stdout.trim(), newSha);
+    assert.ok((await read(path.join(dir, 'adev', 'src', 'index.html'))).includes('data-pin="2"'));
+    // Back to the fixture pin for the remaining tests.
+    await execa('git', ['reset', '--hard', '--quiet', repo.originSha], {cwd: repo.origin});
+    assert.equal((await prepareWorktree(lang)).sha, repo.originSha);
+  });
 });
 
 describe('applyOverlay', () => {
