@@ -27,9 +27,11 @@ export async function prepareWorktree(lang) {
   const dir = buildDir(lang);
   log.step(`build directory ${path.relative(rootDir, dir)} @ ${sha.slice(0, 10)}`);
   if (await exists(path.join(dir, '.git'))) {
-    await run('git', ['checkout', '--detach', '--quiet', sha], {cwd: dir});
+    // Discard the previous overlay before moving: a dirty file that upstream changed between the
+    // old and the new pin makes a plain checkout abort ("would be overwritten by checkout").
     await run('git', ['reset', '--hard', '--quiet'], {cwd: dir});
     await run('git', ['clean', '-fdq'], {cwd: dir});
+    await run('git', ['checkout', '--detach', '--quiet', sha], {cwd: dir});
   } else {
     await run('git', ['worktree', 'prune'], {cwd: originDir});
     await run('git', ['worktree', 'add', '--detach', dir, sha], {cwd: originDir});
