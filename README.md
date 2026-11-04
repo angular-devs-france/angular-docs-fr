@@ -1,38 +1,72 @@
-# angular-docs-rosetta
+# angular-docs-fr
 
-Translate and publish [angular.dev](https://angular.dev) in your language, and keep the translation current as upstream moves.
+Traduction française communautaire de [angular.dev](https://angular.dev), la documentation officielle d'Angular, publiée sur **[docs.angulardevs.fr](https://docs.angulardevs.fr)** et maintenue par [Angular Devs France](https://github.com/angular-devs-france).
 
-This is a **GitHub template repository**. Click **Use this template**, run one command, and you have a repo that builds a localized copy of the Angular docs site, tracks what changed upstream file by file, and ships with agent skills so humans and AI assistants translate and maintain it the same way.
+Ce dépôt n'est pas un fork d'`angular/angular` : il contient uniquement les pages traduites et de quoi reconstruire le site. L'anglais reste la référence ; la traduction suit la dernière branche de release d'Angular (aujourd'hui `22.2.x`) et chaque page sait de quelle version de l'anglais elle a été traduite. Une page en retard affiche un bandeau et un lien vers l'original.
 
-**Start with [docs/guide.md](docs/guide.md)**: set up, deploy and maintain, end to end.
+Le dépôt a été créé à partir du template [angular-docs-rosetta](https://github.com/openng-org/angular-docs-rosetta), dont il reçoit les mises à jour d'outillage par PR automatique. Le modèle est celui éprouvé par [angular.jp](https://github.com/angular/angular-ja) et [angular.lat](https://github.com/angular-hispano/angular-docs-es).
 
-The model is the one proven by [angular.jp](https://github.com/angular/angular-ja) and [angular.lat](https://github.com/angular-hispano/angular-docs-es):
+## Contribuer à la traduction
 
-- `origin/` is `angular/angular` as a git submodule, pinned to the head of the latest release branch. Upstream files are never edited.
-- `i18n/<lang>/src/**` mirrors `adev/src/**`. A translated `page.md` sits next to `page.en.md`, the English it was translated from, and starts with `<!-- source: <hash> -->`, the hash of that snapshot. The tooling knows exactly which pages are outdated and shows the English diff.
-- The site is built in a throwaway directory: copy upstream, overlay the translations, apply string dictionaries and a few patches, run upstream's own Bazel build, deploy to Firebase Hosting. Nothing generated is committed.
-- One repo can host several languages (`i18n/fr/`, `i18n/es/`, …): each language is its own build and its own Firebase site; the tooling, skills and upstream pin are shared.
+Aucun build Angular n'est nécessaire pour traduire : Git, Node 26 (`nvm use` lit `.nvmrc`) et pnpm suffisent.
 
-In one picture (French as the example):
+```bash
+git clone https://github.com/angular-devs-france/angular-docs-fr.git
+cd angular-docs-fr
+nvm use
+pnpm install
+pnpm bootstrap        # récupère (en shallow) le commit d'angular/angular épinglé dans origin/
+
+pnpm status fr        # la file d'attente : pages obsolètes (avec classe de diff), non traduites, nouvelles, supprimées
+```
+
+Avant d'écrire une ligne, lisez [`i18n/fr/LANGUAGE.md`](i18n/fr/LANGUAGE.md) (vouvoiement, typographie, ce qui reste en anglais) et [`i18n/fr/glossary.json`](i18n/fr/glossary.json) (terminologie) : la relecture les applique.
+
+Traduire une page :
+
+```bash
+pnpm status fr --init content/guide/signals/overview.md   # nouvelle page : crée le snapshot .en.md et la copie à traduire
+pnpm status fr --diff content/guide/signals/overview.md   # page obsolète : le diff anglais depuis la traduction
+# ... traduire, puis :
+pnpm status fr --mark content/guide/signals/overview.md   # page obsolète : met à jour le marqueur
+pnpm check fr i18n/fr/src/content/guide/signals/overview.md
+```
+
+Règles vérifiées par `pnpm check` : même nombre de lignes que le snapshot anglais (le marqueur excepté), mêmes titres avec leur ancre anglaise `{#comme-ceci}`, mêmes blocs de code, `docs-*` et liens, code/identifiants/URL intacts, glossaire respecté, espaces insécables avant `: ; ? !`.
+
+Ensuite : une PR par page (ou petit groupe de pages liées), à partir du template de PR. Le détail est dans [CONTRIBUTING.md](CONTRIBUTING.md) et [docs/translating.md](docs/translating.md) ; les règles de la langue dans [i18n/fr/README.md](i18n/fr/README.md). Un Codespace fonctionne sans configuration (`.devcontainer/`).
+
+Pour signaler une erreur sur le site sans toucher au dépôt : [ouvrir une issue](https://github.com/angular-devs-france/angular-docs-fr/issues/new?template=translation-error.yml) (le lien « Signaler un problème de traduction » des pages y mène aussi).
+
+### Avec un assistant IA
+
+Les skills sous `.agents/skills/` décrivent comment traduire une page ou un hunk (`adev-translation`) et comment maintenir le dépôt (`adev-i18n-maintenance`) ; elles commencent par lire `LANGUAGE.md` et le glossaire. Pointez votre assistant (Claude Code, Gemini CLI, Codex…) vers [`AGENTS.md`](AGENTS.md). Vous restez responsable du texte que vous soumettez.
+
+## Comment ça marche
+
+- `origin/` est `angular/angular` en submodule git, épinglé sur la tête de la dernière branche de release. Jamais modifié.
+- `i18n/fr/src/**` reflète `adev/src/**`. Une page traduite `page.md` est accompagnée de `page.en.md`, l'anglais dont elle a été traduite, et commence par `<!-- source: <hash> -->`, le hash de ce snapshot. L'outillage sait donc exactement quelles pages sont en retard et montre le diff anglais.
+- Les chaînes de l'interface (navigation, pied de page, home, `index.html`) sont des dictionnaires dans `i18n/fr/dictionaries/`, pas du Markdown.
+- Le site est construit dans un répertoire jetable (`build/fr/`, jamais commité) : copie d'upstream, overlay des traductions, application des dictionnaires et de deux petits patches (sélecteur de langue, bandeaux), puis le build Bazel d'upstream lui-même, et déploiement sur Firebase Hosting.
 
 ```mermaid
 flowchart LR
   subgraph upstream["angular/angular"]
-    rel["release branch<br/>22.2.x"]
+    rel["branche de release<br/>22.2.x"]
   end
-  subgraph repo["your repository"]
-    origin["origin/<br/>submodule pinned<br/>to one upstream SHA"]
+  subgraph repo["angular-docs-fr"]
+    origin["origin/<br/>submodule épinglé<br/>sur un SHA upstream"]
     i18n["i18n/fr/src/**<br/>page.md + page.en.md"]
-    dict["i18n/fr/<br/>dictionaries, glossary,<br/>LANGUAGE.md, site.json"]
-    status["pnpm status · pnpm check<br/>outdated pages and diff classes,<br/>anchors, structure, glossary"]
+    dict["i18n/fr/<br/>dictionnaires, glossaire,<br/>LANGUAGE.md, site.json"]
+    status["pnpm status · pnpm check<br/>pages obsolètes et classes de diff,<br/>ancres, structure, glossaire"]
   end
-  subgraph build["build/fr/ (ignored, never committed)"]
-    wt["worktree of origin<br/>+ overlay + dictionaries<br/>+ patches"]
-    bazel["upstream's own<br/>Bazel build"]
+  subgraph build["build/fr/ (ignoré, jamais commité)"]
+    wt["worktree d'origin<br/>+ overlay + dictionnaires<br/>+ patches"]
+    bazel["build Bazel<br/>d'upstream"]
   end
-  site["Firebase Hosting<br/>angular.fr"]
-  rel -- "pnpm update-origin latest<br/>moves the pin" --> origin
-  origin -- "refreshes every page.en.md<br/>translations untouched" --> i18n
+  site["Firebase Hosting<br/>docs.angulardevs.fr"]
+  rel -- "pnpm update-origin latest<br/>déplace l'épingle" --> origin
+  origin -- "rafraîchit chaque page.en.md<br/>traductions intactes" --> i18n
   i18n --> status
   dict --> status
   origin --> wt
@@ -41,96 +75,69 @@ flowchart LR
   wt --> bazel --> site
 ```
 
-## Quick start (new language)
-
-Requirements: Git, Node 26 (`.nvmrc`; `nvm use`, fnm or Volta) and pnpm (`npm install -g pnpm`; Node 25+ no longer ships corepack). One Node version is enough: the Angular build's Bazel toolchain downloads its own Node, and inside `build/<lang>` pnpm switches itself to the version upstream pins.
+## Suivre Angular (mainteneurs)
 
 ```bash
-# 1. Create your repo from this template on GitHub, then:
-git clone https://github.com/<you>/<your-repo>.git
-cd <your-repo>
-nvm use                # Node 26, from .nvmrc
-pnpm install
-
-# 2. Fetch the pinned upstream (shallow) and check your toolchain
-pnpm bootstrap
-
-# 3. Scaffold your language: i18n/<lang>/, dictionaries pre-filled with the English strings,
-#    a LANGUAGE.md rules file, a seeded glossary, Firebase targets, CI matrix entry
-pnpm create-language fr
-
-# 4. See the work queue, translate, check, build
-pnpm status fr
+pnpm update-origin latest   # déplace l'épingle sur la tête de la dernière branche de release, rafraîchit chaque *.en.*
+pnpm status fr --md         # la file : pages obsolètes avec classe de diff (a code/URL, b ≤ 5 lignes, c ≤ 30, d restructuration)
+git switch -c sync/$(git -C origin rev-parse --short HEAD)
+git add origin i18n && git commit -m "sync: update origin to $(git -C origin rev-parse --short HEAD)"
+pnpm status fr --apply-mechanical all   # classe a : rien à traduire
+# traduire les classes b/c/d (à la main ou avec la skill adev-translation), puis :
 pnpm check fr
-pnpm start fr          # dev server with live overlay (needs upstream's Node/pnpm, see pnpm bootstrap)
-pnpm build fr          # production build, same targets as angular.dev
 ```
 
-`i18n/<lang>/ONBOARDING.md` lists the GitHub and Firebase settings to flip before the first deploy. The step-by-step version is in [docs/guide.md](docs/guide.md). Contributors who only translate need none of the build: `pnpm install`, one `pnpm bootstrap` (shallow fetch of the pinned upstream, which `status`, `check` and `--init` read), `pnpm check`; a Codespace works out of the box (`.devcontainer/` runs those).
+Un workflow planifié ouvre cette PR de sync chaque semaine ([sync-upstream.yml](.github/workflows/sync-upstream.yml)) ; un autre propose les mises à jour du template ([template-sync.yml](.github/workflows/template-sync.yml)). Chaque merge sur `main` reconstruit et déploie le site ([deploy.yml](.github/workflows/deploy.yml)) ; chaque push lance `pnpm check` ([ci.yml](.github/workflows/ci.yml)).
 
-## Weekly loop (existing language)
+Build local (optionnel, pour voir le rendu ; ~200 Mo de téléchargement la première fois) :
 
 ```bash
-pnpm update-origin latest   # move the pin to the head of the latest release branch, refresh every *.en.* snapshot
-pnpm status fr --md         # outdated / new / removed files with diff classes: paste it into the sync PR
-# translate the outdated passages (by hand, or with the adev-translation skill in Claude Code, Gemini CLI, Codex…)
-pnpm check fr               # structure parity, anchors, glossary, typography, markers
+pnpm start fr    # serveur de dev avec overlay à chaud
+pnpm build fr    # build de production, mêmes cibles qu'angular.dev
 ```
 
-Merging to `main` builds and deploys every language ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)). A scheduled workflow opens the "Update origin" PR for you ([sync-upstream.yml](.github/workflows/sync-upstream.yml)).
+Le guide complet (installation, déploiement, changement de branche de release, patches, dépannage) est dans [docs/guide.md](docs/guide.md) et [docs/maintenance.md](docs/maintenance.md).
 
-## Repository layout
+## Organisation du dépôt
 
 ```
-origin/                     git submodule: angular/angular at the pinned SHA (read-only)
-i18n/<lang>/
-  site.json                 domain, repo, Firebase targets, search, maintainers
-  LANGUAGE.md               language rules: machine-checked front matter + prose for people and agents
-  glossary.json             terms: keep in English, preferred rendering, forbidden renderings
-  prh.yml, .textlintrc.json generated from glossary.json: textlint rules for `pnpm check` and editors
-  dictionaries/             navigation.json, ui.json, index-html.json, pipeline.json (English string -> translation)
-  src/**                    overlay of adev/src/**: page.md + page.en.md, app templates + .en.html
-  README.md                 the language community: maintainers, chat, review rules
-i18n/_example/              reference language used by the template's own CI (removed in your repo)
-tools/                      the `rosetta` CLI (tools/cli.mjs): update-origin, status, check, build, start, create-language…
-tools/adev-patches/         010 language switcher, notice and banners; 020 analytics only with your own GA4 id
-.agents/skills/             adev-translation and adev-i18n-maintenance (Agent Skills format)
-docs/                       guide (set up, deploy, maintain), translating, language rules, maintenance, search, architecture, adding a language
-build/<lang>/               git worktree of origin + overlay (ignored, never committed)
+origin/                     submodule git : angular/angular au SHA épinglé (lecture seule)
+i18n/fr/
+  site.json                 domaine, dépôt, cibles Firebase, textes des bandeaux
+  LANGUAGE.md               règles de la langue : front matter vérifié + prose pour humains et agents
+  glossary.json             termes : à garder en anglais, traduction retenue, traductions interdites
+  prh.yml, .textlintrc.json générés depuis glossary.json : règles textlint pour `pnpm check` et les éditeurs
+  dictionaries/             navigation.json, ui.json, index-html.json, pipeline.json (anglais -> français)
+  src/**                    overlay de adev/src/** : page.md + page.en.md, templates de l'app + .en.html
+  README.md                 la communauté : mainteneurs, où discuter, règles de relecture
+tools/                      la CLI `rosetta` (tools/cli.mjs) : update-origin, status, check, build, start…
+tools/adev-patches/         010 sélecteur de langue, notice et bandeaux ; 020 analytics
+.agents/skills/             adev-translation et adev-i18n-maintenance (format Agent Skills)
+docs/                       guide, traduction, règles de langue, maintenance, recherche, architecture
+build/fr/                   worktree d'origin + overlay (ignoré, jamais commité)
 ```
 
-## Commands
+## Commandes
 
-| Command | What it does |
+| Commande | Rôle |
 | --- | --- |
-| `pnpm bootstrap` | Initialize the `origin` submodule at the pinned SHA (shallow) and check Node/pnpm against upstream's requirements |
-| `pnpm create-language <lang>` | Scaffold `i18n/<lang>/`, generate dictionaries from upstream, seed the glossary, wire CI and Firebase |
-| `pnpm update-origin <sha\|branch\|latest>` | Move the pin, refresh every `*.en.*` snapshot, report new, removed and renamed upstream files |
-| `pnpm status <lang> [--md\|--json]` | Per-file state: up to date, outdated (with diff class a/b/c/d), untranslated, removed, stale snapshot; dictionary gaps. `--init`, `--diff`, `--mark`, `--apply-mechanical` act on one page |
-| `pnpm check <lang> [paths…] [--strict]` | Snapshot and marker present, line and structure parity, `{#english-anchor}` on headings and `docs-step` titles, alert keywords, glossary (textlint + prh), typography (warnings; errors with `--strict`); dead dictionary pairs |
-| `pnpm dictionaries <lang> [--prune]` | Add new upstream strings to the four dictionaries (navigation, UI templates of the app and the shared docs components, `index.html` pairs, pipeline strings such as alert labels), English fallback; optionally drop obsolete keys |
-| `pnpm glossary <lang> [--check]` | Regenerate the textlint rules (`prh.yml`, `.textlintrc.json`) from `glossary.json` |
-| `pnpm start <lang>` | Dev server: build dir + overlay + ibazel, re-copies files as you edit |
-| `pnpm build <lang>` | Production build, post-processing (edit links, sitemap, status report) |
-| `pnpm report <lang>` | JSON status (coverage, freshness) consumed by the site and the status page |
-| `pnpm firebase-config` | Regenerate `firebase.json` / `.firebaserc` from `i18n/*/site.json` and upstream's header rules |
-| `pnpm search-index <lang> [--verify\|--reindex]` | Algolia crawler configuration for the site; test query with the search-only key; start a crawl after a deploy ([docs/search.md](docs/search.md)) |
-| `pnpm languages [--matrix]` | List configured languages (used by the CI matrix) |
-| `pnpm rosetta <command> --help` | Every command above is a subcommand of one CLI; `--help` lists its flags |
-| `pnpm test` | The tooling's own test suite (unit, CLI end to end against a fixture upstream, anchor parity with upstream) |
+| `pnpm bootstrap` | Initialise le submodule `origin` au SHA épinglé (shallow) et vérifie Node/pnpm |
+| `pnpm status fr [--md\|--json]` | État par fichier : à jour, obsolète (classe a/b/c/d), non traduit, supprimé, snapshot périmé ; trous des dictionnaires. `--init`, `--diff`, `--mark`, `--apply-mechanical` agissent sur une page |
+| `pnpm check fr [chemins…] [--strict]` | Snapshot et marqueur présents, parité des lignes et de la structure, ancres `{#english-anchor}`, mots-clés d'alerte, glossaire (textlint + prh), typographie |
+| `pnpm update-origin <sha\|branche\|latest>` | Déplace l'épingle, rafraîchit chaque `*.en.*`, signale les fichiers upstream nouveaux, supprimés et renommés |
+| `pnpm dictionaries fr [--prune]` | Ajoute les nouvelles chaînes upstream aux quatre dictionnaires ; `--prune` retire les clés obsolètes |
+| `pnpm glossary fr [--check]` | Régénère les règles textlint depuis `glossary.json` |
+| `pnpm start fr` / `pnpm build fr` | Serveur de dev / build de production |
+| `pnpm report fr` | Statut JSON (couverture, fraîcheur) consommé par le site |
+| `pnpm firebase-config` | Régénère `firebase.json` / `.firebaserc` depuis `i18n/fr/site.json` |
+| `pnpm test` | Suite de tests de l'outillage |
 
-## Languages in this repository
+`pnpm rosetta <commande> --help` liste les options de chaque commande.
 
-<!-- languages:start -->
-| Language | Site | Maintainers |
-| --- | --- | --- |
-| Français (`fr`) | https://docs.angulardevs.fr |  |
-<!-- languages:end -->
+## Statut
 
-## Working with an AI assistant
+Couverture et fraîcheur de la traduction : https://docs.angulardevs.fr/assets/others/translation-status.json, ou `pnpm report fr`.
 
-The skills under `.agents/skills/` describe how to translate a page or a hunk (`adev-translation`) and how to run the repo (`adev-i18n-maintenance`). They are language-agnostic and start by reading `i18n/<lang>/LANGUAGE.md` and `glossary.json`. Point your assistant at `AGENTS.md`; Claude Code, Gemini CLI and Codex pick the skills up from there.
+## Crédits et licence
 
-## Credits and license
-
-Tooling: MIT, see [LICENSE](LICENSE). It adapts ideas and code from [angular/angular-ja](https://github.com/angular/angular-ja) and [angular-hispano/angular-docs-es](https://github.com/angular-hispano/angular-docs-es). The documentation you translate is the work of the Angular Team at Google and its contributors (MIT). A site built with this template is a community translation; say so on the site and follow Angular's [brand guidelines](https://angular.dev/press-kit).
+Outillage : MIT, voir [LICENSE](LICENSE) ; il vient d'[angular-docs-rosetta](https://github.com/openng-org/angular-docs-rosetta), qui adapte des idées et du code d'[angular/angular-ja](https://github.com/angular/angular-ja) et d'[angular-hispano/angular-docs-es](https://github.com/angular-hispano/angular-docs-es). La documentation traduite est l'œuvre de l'équipe Angular chez Google et de ses contributeurs (MIT). Ce site est une traduction communautaire, non affiliée à Google ; il respecte les [règles d'usage de la marque Angular](https://angular.dev/press-kit).
