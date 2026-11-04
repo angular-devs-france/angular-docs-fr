@@ -91,6 +91,14 @@ describe('template strings', () => {
     assert.deepEqual(missing, []);
     assert.equal(applied, 5);
   });
+  test('[attr.text] string literals are copy (docs-primary-btn labels); ternaries are not', () => {
+    const t = `<button class="docs-primary-btn" [attr.text]="'Get Started'" aria-label="Get Started">Get Started</button>\n<button [attr.text]="revealed() ? 'Reset' : 'Reveal Answer'">x</button>`;
+    assert.deepEqual(extractTemplateStrings(t), ['Get Started']);
+    const {html: out, applied} = applyTemplateStrings(t, {'Get Started': "C'est parti"});
+    assert.ok(out.includes(`[attr.text]="'C\\'est parti'" aria-label="C'est parti">C'est parti<`));
+    assert.ok(out.includes(`? 'Reset' : 'Reveal Answer'`));
+    assert.equal(applied, 3);
+  });
   test('missing and identical entries leave the template untouched', () => {
     const {html: out, missing, applied} = applyTemplateStrings(html, {Docs: 'Docs'});
     assert.equal(out, html);
