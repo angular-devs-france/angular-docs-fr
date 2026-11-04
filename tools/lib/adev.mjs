@@ -71,6 +71,8 @@ export function applyNavLabels(tsSource, dict) {
 // UI strings in templates (text nodes and a few attributes)
 
 const TEXT_ATTRS = new Set(['aria-label', 'aria-description', 'title', 'placeholder', 'alt']);
+/** Attribute bindings whose string literal is visible copy (docs-primary-btn shows `text` via CSS). */
+const TEXT_ATTR_BINDINGS = new Set(['[attr.text]']);
 /** Elements whose text is never UI copy. */
 const SKIP_ELEMENTS = new Set(['code', 'pre', 'script', 'style', 'docs-icon', 'svg']);
 // Both Angular syntax flags are required: without tokenizeAngularLetDeclaration the parser
@@ -119,7 +121,8 @@ function isIconElement(el) {
 
 /**
  * Visible strings of a template with their source spans:
- * [{text, start, end, kind: 'text' | 'attr'}], where [start, end) is the exact region to replace.
+ * [{text, start, end, kind: 'text' | 'attr' | 'expr'}], where [start, end) is the exact region to replace;
+ * 'expr' is the inside of a single-quoted literal in an attribute binding such as [attr.text].
  */
 export function templateStringSpans(html) {
   const {rootNodes} = parse(html, PARSE_OPTIONS);
@@ -143,7 +146,21 @@ export function templateStringSpans(html) {
       if (isElement(node)) {
         const skipChildren = skipping || SKIP_ELEMENTS.has(elementName(node)) || isIconElement(node);
         for (const attr of node.attrs) {
-          if (!TEXT_ATTRS.has(attr.name) || !attr.valueSpan) continue;
+          if (!attr.valueSpan) continue;
+          if (TEXT_ATTR_BINDINGS.has(attr.name)) {
+            // [attr.text]="'Get Started'": docs-primary-btn renders its label from the attribute
+            // (CSS content: attr(text)). Only a single-quoted literal is copy; a ternary is left alone.
+            const raw = html.slice(attr.valueSpan.start.offset, attr.valueSpan.end.offset);
+            const m = raw.match(/^(["']?)\s*'((?:[^'\\]|\\.)*)'\s*\1$/);
+            if (!m) continue;
+            const inner = m[2];
+            const text = normalizeText(inner.replace(/\\'/g, "'"));
+            if (!looksLikeString(text)) continue;
+            const start = attr.valueSpan.start.offset + raw.indexOf("'" + inner + "'") + 1;
+            found.push({text, start, end: start + inner.length, kind: 'expr'});
+            continue;
+          }
+          if (!TEXT_ATTRS.has(attr.name)) continue;
           const s = attr.valueSpan.start.offset;
           const e = attr.valueSpan.end.offset;
           const rawValue = html.slice(s, e);
@@ -190,7 +207,9 @@ export function applyTemplateStrings(html, dict) {
       continue;
     }
     if (translated === s.text) continue;
-    edits.push({...s, replacement: s.kind === 'attr' ? translated.replace(/"/g, '&quot;') : translated});
+    const replacement =
+      s.kind === 'attr' ? translated.replace(/"/g, '&quot;') : s.kind === 'expr' ? translated.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;') : translated;
+    edits.push({...s, replacement});
   }
   let out = html;
   for (const e of edits.sort((a, b) => b.start - a.start)) {
