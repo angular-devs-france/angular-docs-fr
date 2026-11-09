@@ -1,4 +1,4 @@
-<!-- source: 9c774c0638d53ec832fad7e566936db342026b6d -->
+<!-- source: 4ba4f82cec9d45c9526b4175f6cecba29a574b80 -->
 # Utiliser les API du DOM
 
 TIP: Ce guide suppose que vous avez déjà lu le [guide des Fondamentaux](essentials). Lisez-le d'abord si vous découvrez Angular.
@@ -63,8 +63,8 @@ pour mettre à jour des propriétés d'animation synthétiques et la méthode `l
 des événements d'animation synthétiques. Consultez le guide [Animations](guide/animations) pour plus de détails.
 
 En dehors de ces deux cas d'usage restreints, il n'y a aucune différence entre l'utilisation de `Renderer2` et celle des API
-natives du DOM. Les API de `Renderer2` ne prennent pas en charge la manipulation du DOM dans les contextes de rendu côté serveur ni de
-prérendu au moment du build.
+natives du DOM. Les deux fonctionnent en rendu côté serveur et en prérendu au moment du build, mais le DOM du serveur ne dispose pas
+des API propres au navigateur, comme la mesure de la mise en page et les observers.
 
 ## Quand utiliser les API du DOM {#when-to-use-dom-apis}
 

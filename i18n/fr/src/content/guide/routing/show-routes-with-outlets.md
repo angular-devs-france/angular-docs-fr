@@ -1,4 +1,4 @@
-<!-- source: b0e18aa25c15068a2bfb42bb2b033f3bd6134075 -->
+<!-- source: be7b8057d894d0d36c99ef6e0169b91a7249a6a8 -->
 # Afficher les routes avec des outlets
 
 La directive `RouterOutlet` est un placeholder qui marque l'emplacement où le router doit afficher le composant correspondant à l'URL courante.
@@ -131,7 +131,7 @@ Une page peut avoir plusieurs outlets : vous pouvez attribuer un nom à chaque
 <app-footer />
 ```
 
-Chaque outlet doit avoir un nom unique. Le nom ne peut pas être défini ni modifié dynamiquement. Par défaut, le nom est `'primary'`.
+Chaque outlet doit avoir un nom unique. Vous pouvez lier le nom à une valeur. Quand la valeur change, l'outlet détruit son composant courant et affiche la route correspondant au nouveau nom, s'il y en a une. Par défaut, le nom est `'primary'`.
 
 Angular fait correspondre le nom de l'outlet à la propriété `outlet` définie sur chaque route :
 

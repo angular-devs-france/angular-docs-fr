@@ -1,4 +1,4 @@
-<!-- source: e5a3bc8f65f0bdd1d2b701b7d3b3bc90c18a7785 -->
+<!-- source: f373723390df2d7228a779f3a3a79cf6e8465c3f -->
 # Système de build des applications Angular
 
 À partir de la v17, le nouveau système de build offre une meilleure façon de compiler les applications Angular. Ce nouveau système de build comprend :
@@ -23,7 +23,7 @@ Les nouvelles applications utilisent ce nouveau système de build par défaut, v
 ## Pour les applications existantes {#for-existing-applications}
 
 Des procédures automatisées et manuelles sont disponibles selon les besoins du projet.
-À partir de la v18, le processus de mise à jour vous demande si vous souhaitez migrer les applications existantes vers le nouveau système de build via la migration automatisée.
+Depuis la v18, le processus de mise à jour vers une nouvelle version majeure vous demande si vous souhaitez migrer les applications existantes vers le nouveau système de build via la migration automatisée.
 Avant de migrer, pensez à consulter la section [Problèmes connus](#known-issues), car elle peut contenir des informations utiles pour votre projet.
 
 HELPFUL: Si vous utilisez le SSR, pensez à supprimer du code serveur de l'application toute hypothèse liée à CommonJS, comme `require`, `__filename`, `__dirname` ou d'autres constructions de la [portée de module CommonJS](https://nodejs.org/api/modules.html#the-module-scope). Tout le code de l'application doit être compatible ESM. Cela ne s'applique pas aux dépendances tierces.
@@ -34,8 +34,8 @@ La migration automatisée ajuste à la fois la configuration de l'application da
 Bien que de nombreux changements puissent être automatisés et que la plupart des applications ne nécessitent aucun changement supplémentaire, chaque application est unique et certains changements manuels peuvent être nécessaires.
 Après la migration, essayez de compiler l'application, car de nouvelles erreurs pourraient nécessiter des ajustements dans le code.
 Les erreurs tentent de proposer des solutions au problème lorsque c'est possible, et les sections suivantes de ce guide décrivent certaines des situations les plus courantes que vous pourriez rencontrer.
-Lors de la mise à jour vers Angular v18 via `ng update`, il vous sera demandé d'exécuter la migration.
-Cette migration est entièrement facultative pour la v18 et peut aussi être exécutée manuellement à tout moment après une mise à jour, via la commande suivante :
+Lors de la mise à jour vers une nouvelle version majeure via `ng update`, il vous sera demandé d'exécuter la migration.
+Cette migration est entièrement facultative et peut aussi être exécutée manuellement à tout moment après une mise à jour, via la commande suivante :
 
 ```shell
 
@@ -69,7 +69,7 @@ Si le builder `application` est difficile à adopter pour votre projet, `browser
 
 #### Migration manuelle vers le builder de compatibilité {#manual-migration-to-the-compatibility-builder}
 
-Un builder nommé `browser-esbuild` est disponible dans le package `@angular-devkit/build-angular`, présent dans toute application générée par l'Angular CLI.
+Un builder nommé `browser-esbuild` est disponible dans le package `@angular-devkit/build-angular`, dont les applications utilisant le builder `browser` dépendent déjà.
 Vous pouvez essayer le nouveau système de build avec les applications qui utilisent le builder `browser`.
 Si vous utilisez un builder personnalisé, consultez la documentation de ce builder pour connaître les options de migration possibles.
 
@@ -99,8 +99,8 @@ Modifier le champ `builder` est le seul changement que vous aurez à faire.
 
 #### Migration manuelle vers le nouveau builder `application` {#manual-migration-to-the-new-application-builder}
 
-Un builder nommé `application` est également disponible dans le package `@angular-devkit/build-angular`, présent dans toute application générée par l'Angular CLI.
-Ce builder est celui par défaut pour toutes les nouvelles applications créées via `ng new`.
+Un builder nommé `application` est également disponible dans le package `@angular-devkit/build-angular`.
+Les nouvelles applications créées via `ng new` utilisent le même builder depuis le package `@angular/build` (`@angular/build:application`).
 
 Voici ce que vous trouverez généralement dans `angular.json` pour une application :
 
@@ -253,9 +253,9 @@ Il est toutefois recommandé d'exclure plutôt des dépendances spécifiques, ca
 L'un des principaux avantages du système de build des applications est l'amélioration de la vitesse de build et de rebuild.
 Le nouveau système de build des applications fournit cependant aussi des fonctionnalités supplémentaires absentes du builder `browser`.
 
-IMPORTANT: Les nouvelles fonctionnalités du builder `application` décrites ici sont incompatibles par défaut avec le builder de test `karma`, car celui-ci utilise le builder `browser` en interne.
-Vous pouvez choisir d'utiliser le builder `application` en définissant l'option `builderMode` à `application` pour le builder `karma`.
-Cette option est actuellement en developer preview.
+IMPORTANT: Les nouvelles fonctionnalités du builder `application` décrites ici sont incompatibles par défaut avec le builder de test `@angular-devkit/build-angular:karma`, car celui-ci utilise le builder `browser` en interne.
+Vous pouvez choisir d'utiliser le builder `application` en définissant l'option `builderMode` à `application` pour ce builder.
+Les builders `@angular/build:karma` et `@angular/build:unit-test` utilisent toujours le builder `application`.
 Si vous rencontrez des problèmes, signalez-les [ici](https://github.com/angular/angular-cli/issues).
 
 ### Remplacement de valeurs au moment du build avec `define` {#build-time-value-replacement-with-define}
@@ -393,8 +393,8 @@ Pour l'attribut d'import, les valeurs de loader suivantes sont prises en charge�
 - `dataurl` : intègre le contenu sous forme de [data URL](https://developer.mozilla.org/docs/Web/HTTP/Basics_of_HTTP/Data_URIs).
 - `base64` : intègre le contenu sous forme de chaîne encodée en Base64.
 
-Pour utiliser les attributs d'import, l'option TypeScript `module` doit en outre être définie à `esnext` afin que TypeScript puisse compiler correctement le code de l'application.
-Une fois `ES2025` disponible dans TypeScript, ce changement ne sera plus nécessaire.
+Pour utiliser les attributs d'import, l'option TypeScript `module` doit en outre être définie à `esnext` ou `preserve` afin que TypeScript puisse compiler correctement le code de l'application.
+Les nouveaux projets utilisent `preserve` par défaut, donc aucun changement n'est nécessaire.
 
 Pour le moment, TypeScript ne prend pas en charge les définitions de types basées sur les valeurs des attributs d'import.
 L'utilisation de `@ts-expect-error`/`@ts-ignore` ou de fichiers de définitions de types individuels (à condition que le fichier soit toujours importé avec le même attribut de loader) est actuellement nécessaire.

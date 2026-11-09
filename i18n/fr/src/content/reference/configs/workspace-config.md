@@ -1,4 +1,4 @@
-<!-- source: a9fe9437a4dcd165a9b9d0f72cd5c05feef22e69 -->
+<!-- source: 2997393423446211076d1b481b0aa583ea3998b7 -->
 # Configuration du workspace Angular
 
 Le fichier `angular.json`, situé au niveau racine d'un workspace Angular, fournit des valeurs de configuration par défaut communes au workspace et spécifiques à chaque projet. Elles sont utilisées par les outils de build et de développement fournis par l'Angular CLI.
@@ -156,10 +156,10 @@ Consultez l'exemple de [Cible de build](#build-target) ci-dessous.
 | Propriété | Détails |
 | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `build` | Configure les valeurs par défaut des options de la commande `ng build`. Consultez la section [Cible de build](#build-target) pour plus d'informations. |
-| `serve` | Remplace les valeurs par défaut du build et fournit des valeurs par défaut supplémentaires pour la commande `ng serve`. En plus des options disponibles pour la commande `ng build`, elle ajoute des options liées au service de l'application. |
-| `e2e` | Remplace les valeurs par défaut du build pour compiler des applications de test de bout en bout avec la commande `ng e2e`. |
-| `test` | Remplace les valeurs par défaut du build pour les builds de test et fournit des valeurs par défaut supplémentaires d'exécution des tests pour la commande `ng test`. |
-| `lint` | Configure les valeurs par défaut des options de la commande `ng lint`, qui effectue une analyse statique du code des fichiers source du projet. |
+| `serve` | Configure les valeurs par défaut des options de la commande `ng serve`. Le serveur de développement a ses propres options et compile l'application avec la cible de build définie dans son option `buildTarget`. |
+| `e2e` | Configure les valeurs par défaut des options de la commande `ng e2e`, qui exécute les tests de bout en bout. Non générée par `ng new`. Exécuter `ng e2e` sans cette cible propose d'ajouter un package de tests de bout en bout. |
+| `test` | Configure les valeurs par défaut des options de la commande `ng test`. Le builder de tests unitaires utilise la cible de build définie dans son option `buildTarget` pour compiler les tests. |
+| `lint` | Configure les valeurs par défaut des options de la commande `ng lint`, qui effectue une analyse statique du code des fichiers source du projet. Non générée par `ng new`. Exécuter `ng lint` sans cette cible propose d'ajouter `angular-eslint`. |
 | `extract-i18n` | Configure les valeurs par défaut des options de la commande `ng extract-i18n`, qui extrait les chaînes de messages localisées du code source et produit des fichiers de traduction pour l'internationalisation. |
 
 HELPFUL: Toutes les options du fichier de configuration doivent utiliser le `camelCase`, et non le `dash-case` utilisé en ligne de commande.
@@ -251,7 +251,7 @@ Pour le détail de ces options et de leurs valeurs possibles, consultez la [réf
 | `budgets` | Type de budget de taille et seuils par défaut pour tout ou partie de votre application. Vous pouvez configurer le builder pour qu'il signale un avertissement ou une erreur lorsque la sortie atteint ou dépasse une taille seuil. Consultez [Configurer les budgets de taille](tools/cli/build#configuring-size-budgets). |
 | `fileReplacements` | Un objet contenant des fichiers et leurs remplacements à la compilation. Pour en savoir plus, consultez [Configurer des remplacements de fichiers propres à une cible](tools/cli/environments#configure-environment-specific-defaults). |
 | `index` | Un document HTML de base qui charge l'application. Pour en savoir plus, consultez [Configuration de l'index](#index-configuration). |
-| `security` | Un objet contenant la clé `autoCsp`, qui peut valoir `true` ou `false` |
+| `security` | Un objet qui configure les fonctionnalités de sécurité. Voir la section [Configuration de la sécurité](#security-configuration). |
 
 ### Options supplémentaires de serve {#extra-serve-options}
 
@@ -416,7 +416,9 @@ Les fichiers de ce répertoire, comme `src/style-paths/_variables.scss`, peuvent
 @import 'variables';
 ```
 
-HELPFUL: Vous devez aussi ajouter les styles ou scripts au builder `test` si vous en avez besoin pour les tests unitaires.
+HELPFUL: Le builder `@angular/build:unit-test` par défaut n'a pas d'options `styles` ni `scripts`. Il hérite de `styles` et `stylePreprocessorOptions` depuis la cible de build définie dans son option `buildTarget`, mais pas de `scripts`.
+Pour exécuter un script avant vos tests unitaires, ajoutez-le à l'option `setupFiles` de la cible `test`.
+Si votre projet utilise le builder `@angular/build:karma`, ajoutez les styles ou scripts dont vos tests unitaires ont besoin à la cible `test`.
 Consultez aussi [Utiliser des libraries globales à l'exécution dans votre application](tools/libraries/using-libraries#using-runtime-global-libraries-inside-your-app).
 
 ### Configuration de l'optimisation {#optimization-configuration}
@@ -551,6 +553,7 @@ Pour exclure le contenu source des source maps, définissez l'option `sourcesCon
 Configure la génération de l'index HTML de l'application.
 
 L'option `index` peut être soit une chaîne, soit un objet pour une configuration plus fine.
+Définissez-la à `false` pour ne pas générer de fichier HTML index.
 
 Lorsque la valeur est fournie sous forme de chaîne, le nom de fichier du chemin indiqué est utilisé pour le fichier généré, qui est créé à la racine du chemin de sortie configuré pour l'application.
 
@@ -560,6 +563,16 @@ Lorsque la valeur est fournie sous forme de chaîne, le nom de fichier du chemin
 | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------- | :-------------- |
 | `input` | Le chemin d'un fichier à utiliser pour l'index HTML généré de l'application. | `string` | Aucune (obligatoire) |
 | `output` | Le chemin de sortie du fichier HTML index généré de l'application. Le chemin complet fourni est utilisé et considéré comme relatif au chemin de sortie configuré pour l'application. | `string` | `index.html` |
+| `preloadInitial` | Génère des éléments link `preload`, `modulepreload` et `preconnect` pour les fichiers et ressources initiaux de l'application. | `boolean` | `false` quand un service worker est activé, `true` sinon |
+
+### Configuration de la sécurité {#security-configuration}
+
+L'option `security` est un objet qui active individuellement des fonctionnalités de sécurité.
+
+| Options | Détails |
+| :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `autoCsp` | Génère une Content Security Policy basée sur des hachages quand elle vaut `true`, ou `{"unsafeEval": true}` pour autoriser aussi `eval`. Voir [Hacher les scripts inline avec `autoCsp`](best-practices/security#hash-inline-scripts-with-autocsp). |
+| `allowedHosts` | Les noms d'hôte autorisés à accéder à l'application côté serveur. Voir [Prévenir la falsification de requête côté serveur (SSRF)](best-practices/security#preventing-server-side-request-forgery-ssrf). |
 
 ### Configuration du chemin de sortie {#output-path-configuration}
 

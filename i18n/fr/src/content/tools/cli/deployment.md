@@ -1,4 +1,4 @@
-<!-- source: d69942f76e3394dda3a895dc1510c7536348422a -->
+<!-- source: 5ec8e9afd8d658b60fa58acdbd0d448f0dc18bd0 -->
 # Déploiement
 
 Lorsque vous êtes prêt à déployer votre application Angular sur un serveur distant, plusieurs options s'offrent à vous.
@@ -79,6 +79,8 @@ Un serveur statique renvoie habituellement `index.html` lorsqu'il reçoit une re
 Mais la plupart des serveurs rejettent par défaut `http://my-app.test/users/42` et renvoient une erreur `404 - Not Found`, _sauf_ s'ils sont configurés pour renvoyer `index.html` à la place.
 Configurez la route de repli ou la page 404 de votre serveur vers `index.html`, afin qu'Angular soit servi pour les liens profonds et puisse afficher la bonne route.
 Certains serveurs appellent ce comportement de repli le mode « Single-Page Application » (SPA).
+
+IMPORTANT: Quand vous prérendez votre application avec `outputMode: "static"`, configurez votre serveur pour utiliser `index.csr.html` comme page de repli à la place d'`index.html`. Le build écrit la page hôte dans `index.csr.html`, tandis qu'`index.html` (s'il est généré) contient le contenu prérendu de la route racine (`/`).
 
 Une fois que le navigateur a chargé l'application, le router Angular lit l'URL pour déterminer sur quelle page il se trouve et affiche correctement `/users/42`.
 
