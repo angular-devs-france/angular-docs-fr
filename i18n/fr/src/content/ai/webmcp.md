@@ -1,4 +1,4 @@
-<!-- source: 684bc4e1ae5b4969df309f2ff6182a6871901a03 -->
+<!-- source: b6b8eb70e1aa4e19174f20d763a1cd81c4c40317 -->
 # WebMCP
 
 WebMCP est une [proposition de standard web](https://github.com/webmachinelearning/webmcp/) qui permet aux applications web d'exposer des outils structurés directement aux agents IA qui s'exécutent nativement dans le navigateur. Les outils définis par une application permettent aux assistants IA d'interagir directement avec elle, ce qui fournit des capacités supplémentaires à l'agent et réduit le besoin d'interactions avec le DOM.
@@ -33,7 +33,6 @@ bootstrapApplication(AppRoot, {
       {
         name: 'greet',
         description: 'Greets the agent.',
-        inputSchema: {type: 'object', properties: {}},
         execute: () => {
           const greeter = inject(Greeter);
 
@@ -114,7 +113,6 @@ export const routes: Routes = [
         {
           name: 'exportDashboardReports',
           description: 'Exports the current dashboard analytics.',
-          inputSchema: {type: 'object', properties: {}},
           execute: () => ({
             content: [{type: 'text', text: 'Dashboard export successfully triggered.'}],
           }),
@@ -152,7 +150,6 @@ export class Counter {
     declareExperimentalWebMcpTool({
       name: 'getCounter',
       description: 'Reads the global counter.',
-      inputSchema: {type: 'object', properties: {}},
       execute: () => ({
         content: [{type: 'text', text: `The count is: ${this.count()}.`}],
       }),

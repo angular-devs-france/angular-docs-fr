@@ -1,4 +1,4 @@
-<!-- source: 7fd60e1dadbae267f5348b54e2367d76480f94d7 -->
+<!-- source: 5da0d5a4ac047b79ba5f585fcd1ea4abe87df36b -->
 # Cycle de vie des composants
 
 TIP: Ce guide suppose que vous avez déjà lu le [guide des Fondamentaux](essentials). Lisez-le d'abord si vous découvrez Angular.
@@ -184,8 +184,9 @@ _contenu_).
 
 Vous pouvez utiliser ce lifecycle hook pour lire les résultats des
 [content queries](guide/components/queries#content-queries). Vous pouvez accéder à l'état initialisé
-de ces queries, mais toute tentative de modifier un état dans cette méthode provoque une
-[ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100)
+de ces queries, mais évitez de modifier un état non-signal que le template d'un ancêtre a déjà
+rendu. Cela peut provoquer une
+[ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100).
 
 ### ngAfterContentChecked {#ngaftercontentchecked}
 
@@ -196,8 +197,8 @@ Cette méthode s'exécute très fréquemment et peut avoir un impact important s
 de définir ce hook autant que possible, et ne l'utilisez que si vous n'avez pas d'autre solution.
 
 Vous pouvez accéder ici à l'état mis à jour
-des [content queries](guide/components/queries#content-queries), mais toute tentative de
-modifier un état dans cette méthode provoque
+des [content queries](guide/components/queries#content-queries), mais évitez de modifier un état
+non-signal que le template d'un ancêtre a déjà rendu. Cela peut provoquer
 une [ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100).
 
 ### ngAfterViewInit {#ngafterviewinit}
@@ -207,8 +208,8 @@ _vue_).
 
 Vous pouvez utiliser ce lifecycle hook pour lire les résultats des
 [view queries](guide/components/queries#view-queries). Vous pouvez accéder à l'état initialisé de
-ces queries, mais toute tentative de modifier un état dans cette méthode provoque une
-[ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100)
+ces queries, mais évitez de modifier un état non-signal qu'un template a déjà rendu. Cela peut
+provoquer une [ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100).
 
 ### ngAfterViewChecked {#ngafterviewchecked}
 
@@ -219,8 +220,7 @@ Cette méthode s'exécute très fréquemment et peut avoir un impact important s
 de définir ce hook autant que possible, et ne l'utilisez que si vous n'avez pas d'autre solution.
 
 Vous pouvez accéder à l'état mis à jour des [view queries](guide/components/queries#view-queries)
-ici, mais toute tentative de
-modifier un état dans cette méthode provoque
+ici, mais évitez de modifier un état non-signal qu'un template a déjà rendu. Cela peut provoquer
 une [ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100).
 
 ### afterEveryRender et afterNextRender {#aftereveryrender-and-afternextrender}
