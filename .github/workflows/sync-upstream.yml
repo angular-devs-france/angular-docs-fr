@@ -65,7 +65,7 @@ jobs:
           } > /tmp/pr-body.md
       - name: Open or update the sync PR
         if: steps.update.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        uses: peter-evans/create-pull-request@15733dbdfeedb4f7fdb73d13c6f5ac83b710fab8 # v8.1.2
         with:
           # A PR opened with the default GITHUB_TOKEN does not trigger the Check workflow;
           # set SYNC_TOKEN (fine-grained PAT: contents, pull requests and workflows, write) to get CI on it.
