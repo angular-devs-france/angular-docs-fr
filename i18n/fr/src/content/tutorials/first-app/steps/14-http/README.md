@@ -1,4 +1,4 @@
-<!-- source: bf8a245989945f34d4bf04ea80064e9b226ce663 -->
+<!-- source: cb516ca31e351236feb966dd60b19d5a5ca61a87 -->
 # Ajouter la communication HTTP à votre application
 
 Ce tutoriel montre comment intégrer HTTP et une API dans votre application.
@@ -151,19 +151,19 @@ Si vous rencontrez des difficultés avec votre configuration, vous trouverez plu
 <docs-step title="Modifier le service pour utiliser un serveur web au lieu d'un tableau local {#update-service-to-use-web-server-instead-of-local-array}">
 La source de données est configurée ; l'étape suivante consiste à modifier votre application web pour s'y connecter et utiliser les données.
 
-1.  Dans `src/app/housing.service.ts`, apportez les modifications suivantes :
+1.  Dans `src/app/housing-service.ts`, apportez les modifications suivantes :
 
 1.  Modifiez le code pour supprimer la propriété `housingLocationList` et le tableau contenant les données, ainsi que la propriété `baseUrl`.
 
 1.  Ajoutez une propriété de type chaîne nommée `url` et affectez-lui la valeur `'http://localhost:3000/locations'`
 
-    <docs-code header="Ajouter la propriété url dans housing.service.ts" path="adev/src/content/tutorials/first-app/steps/14-http/src-final/app/housing.service.ts" visibleLines="[6]"/>
+    <docs-code header="Ajouter la propriété url dans housing-service.ts" path="adev/src/content/tutorials/first-app/steps/14-http/src-final/app/housing-service.ts" visibleLines="[6]"/>
 
     Ce code provoquera des erreurs dans le reste du fichier, car celui-ci dépend de la propriété `housingLocationList`. Nous allons ensuite modifier les méthodes du service.
 
 1.  Modifiez la fonction `getAllHousingLocations` pour qu'elle appelle le serveur web que vous avez configuré.
 
-     <docs-code header="Modifier la méthode getAllHousingLocations dans housing.service.ts" path="adev/src/content/tutorials/first-app/steps/14-http/src-final/app/housing.service.ts" visibleLines="[8,11]"/>
+     <docs-code header="Modifier la méthode getAllHousingLocations dans housing-service.ts" path="adev/src/content/tutorials/first-app/steps/14-http/src-final/app/housing-service.ts" visibleLines="[8,11]"/>
 
     Le code utilise maintenant du code asynchrone pour effectuer une requête **GET** via HTTP.
 
@@ -173,11 +173,11 @@ La source de données est configurée ; l'étape suivante consiste à modifier
 
     HELPFUL: Remarquez que l'URL de `fetch` ajoute maintenant l'`id` comme segment de chemin (`${this.url}/${id}`) pour demander le logement dont la propriété `id` a la valeur correspondante.
 
-     <docs-code header="Modifier la méthode getHousingLocationById dans housing.service.ts" path="adev/src/content/tutorials/first-app/steps/14-http/src-final/app/housing.service.ts" visibleLines="[13,17]"/>
+     <docs-code header="Modifier la méthode getHousingLocationById dans housing-service.ts" path="adev/src/content/tutorials/first-app/steps/14-http/src-final/app/housing-service.ts" visibleLines="[13,17]"/>
 
 1.  Une fois toutes les modifications terminées, votre service modifié doit correspondre au code suivant.
 
-     <docs-code header="Version finale de housing.service.ts" path="adev/src/content/tutorials/first-app/steps/14-http/src-final/app/housing.service.ts" visibleLines="[1,23]" />
+     <docs-code header="Version finale de housing-service.ts" path="adev/src/content/tutorials/first-app/steps/14-http/src-final/app/housing-service.ts" visibleLines="[1,23]" />
 
 </docs-step>
 
@@ -201,7 +201,7 @@ Le serveur lit maintenant les données à partir de la requête HTTP, mais les c
 
 NOTE: Cette leçon s'appuie sur l'API `fetch` du navigateur. Pour la prise en charge des intercepteurs, consultez la [documentation du client HTTP](/guide/http)
 
-SUMMARY: Dans cette leçon, vous avez modifié votre application pour utiliser un serveur web local (`json-server`) et des méthodes de service asynchrones pour récupérer des données.
+SUMMARY: Dans cette leçon, vous avez utilisé un serveur web local (`json-server`) et des méthodes de service asynchrones pour récupérer des données.
 
 Félicitations ! Vous avez terminé ce tutoriel avec succès et vous êtes prêt à poursuivre votre parcours en construisant des applications Angular encore plus complexes.
 

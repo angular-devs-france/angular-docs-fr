@@ -1,4 +1,4 @@
-<!-- source: 6e3394c4cc9184d50a078c658d6161b4d79b7e20 -->
+<!-- source: 4a287053244a940a79be0028f2d7b46c2474926d -->
 # Reactive forms
 
 Les reactive forms proposent une approche pilotée par le modèle pour gérer les saisies de formulaire dont les valeurs évoluent au fil du temps.
@@ -264,7 +264,7 @@ Le service `FormBuilder` est un provider injectable issu du module des reactive 
 
 </docs-step>
 <docs-step title="Générer les contrôles de formulaire {#generate-form-controls}">
-Le service `FormBuilder` dispose de trois méthodes : `control()`, `group()` et `array()`. Ce sont des méthodes de fabrique qui génèrent des instances dans les classes de vos composants, notamment des contrôles de formulaire, des groupes de formulaire et des tableaux de formulaire. Utilisez la méthode `group` pour créer les contrôles de `profileForm`.
+Le service `FormBuilder` dispose de quatre méthodes : `control()`, `group()`, `record()` et `array()`. Ce sont des méthodes de fabrique qui génèrent des instances dans les classes de vos composants, notamment des contrôles de formulaire, des groupes de formulaire, des records de formulaire et des tableaux de formulaire. Utilisez la méthode `group` pour créer les contrôles de `profileForm`.
 
 <docs-code header="profile-editor.component.ts (FormBuilder)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" region="form-builder"/>
 

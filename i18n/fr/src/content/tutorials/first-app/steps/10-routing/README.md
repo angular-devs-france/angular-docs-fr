@@ -1,4 +1,4 @@
-<!-- source: db18b91ed28f2a6c0af0a5f1c6398a645c3e3a47 -->
+<!-- source: cd26191be8e1699d15f4a1b80d29380515aa50ee -->
 # Ajouter des routes à l'application
 
 Cette leçon du tutoriel montre comment ajouter des routes à votre application.
@@ -45,11 +45,11 @@ Dans cette leçon, vous allez activer le routing dans votre application pour nav
           <docs-code header="Ajouter la configuration du router dans src/main.ts" path="adev/src/content/tutorials/first-app/steps/11-details-page/src/main.ts" visibleLines="[6,8]"/>
 
 3.  Dans `src/app/app.ts`, modifiez le composant pour qu'il utilise le routing :
-    1.  Ajoutez des imports au niveau du fichier pour les directives du router `RouterOutlet` et `RouterLink` :
+    1.  Ajoutez des imports au niveau du fichier pour les directives du router `RouterLink` et `RouterOutlet` :
 
-          <docs-code language="angular-ts" header="Importer les directives du router dans src/app/app.ts" path="adev/src/content/tutorials/first-app/steps/11-details-page/src/app/app.ts" visibleLines="[3]"/>
+          <docs-code language="angular-ts" header="Importer les directives du router dans src/app/app.ts" path="adev/src/content/tutorials/first-app/steps/11-details-page/src/app/app.ts" visibleLines="[2]"/>
 
-    1.  Ajoutez `RouterOutlet` et `RouterLink` aux imports des métadonnées de `@Component`
+    1.  Dans les imports des métadonnées `@Component`, remplacez `Home` par `RouterLink` et `RouterOutlet` :
 
           <docs-code language="angular-ts" header="Ajouter les directives du router aux imports du composant dans src/app/app.ts" path="adev/src/content/tutorials/first-app/steps/11-details-page/src/app/app.ts" visibleLines="[6]"/>
 

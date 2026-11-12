@@ -1,4 +1,4 @@
-<!-- source: 0493a09e3fa04b4a25d88c340105bd842dc192be -->
+<!-- source: 57111ac55055150ea280e095f41b838c03c74139 -->
 # Host elements des composants
 
 TIP: Ce guide suppose que vous avez déjà lu le [guide des Fondamentaux](essentials). Commencez par celui-ci si vous découvrez Angular.
@@ -111,29 +111,29 @@ décorateurs existent uniquement pour la rétrocompatibilité.
 
 ## Conflits de bindings {#binding-collisions}
 
-Quand vous utilisez un composant dans un template, vous pouvez ajouter des bindings à l'élément de cette instance du composant.
-Le composant peut _aussi_ définir des host bindings pour les mêmes propriétés ou attributs.
+Quand vous utilisez un composant dans un template, vous pouvez appliquer des bindings à l'élément de ce composant. Le composant (ou les directives qui lui sont appliquées) peut aussi définir des host bindings pour les mêmes propriétés, attributs, classes ou styles.
 
-```angular-ts
-@Component({
-  ...,
-  host: {
-    'role': 'presentation',
-    '[id]': 'id',
-  }
-})
-export class ProfilePhoto { /* ... */ }
-```
+La façon dont Angular gère ces conflits dépend du type de binding :
 
-```angular-html
-<profile-photo role="group" [id]="otherId" />
-```
+### Class bindings et style bindings {#class-and-style-bindings}
 
-Dans ce genre de cas, les règles suivantes déterminent quelle valeur l'emporte :
+Les class bindings et les style bindings ont un ordre de priorité défini. Les bindings définis dans le template l'emportent sur les host bindings définis sur les directives ou les composants :
 
-- Si les deux valeurs sont statiques, le binding de l'instance l'emporte.
-- Si une valeur est statique et l'autre dynamique, la valeur dynamique l'emporte.
-- Si les deux valeurs sont dynamiques, le host binding du composant l'emporte.
+1. **Les bindings du template** (par exemple `[class.active]` ou `[style.color]`)
+2. **Les valeurs statiques du template** (par exemple `class="..."` ou `style="..."` dans le template)
+3. **Les host bindings des directives**
+4. **Les host bindings des composants**
+5. **Les valeurs statiques du host** (par exemple `host: {class: '...'}`)
+
+Si la valeur d'un binding est `undefined`, Angular se rabat sur le niveau suivant. Une valeur `null` retire la classe ou le style sans se rabattre.
+
+### Conflits de propriétés et d'attributs {#property-and-attribute-collisions}
+
+Pour les propriétés et attributs qui ne concernent pas le style (comme `id`, `role` ou `[attr.aria-*]`) :
+
+- **Attributs statiques :** si le template et le composant déclarent tous deux un attribut statique (par exemple `<my-cmp id="parent">` et `host: {id: 'child'}`), l'attribut défini dans le template l'emporte.
+- **Statique et dynamique :** si une valeur est statique et l'autre dynamique, la valeur dynamique l'emporte.
+- **Bindings dynamiques :** évitez de lier la même propriété ou le même attribut du DOM à la fois dans le template et via des host bindings. Angular ne réconcilie pas les property bindings en double ; des bindings dynamiques qui se chevauchent peuvent provoquer des écrasements inattendus selon l'ordre d'exécution de la détection de changements.
 
 ## Styliser avec les propriétés personnalisées CSS {#styling-with-css-custom-properties}
 

@@ -1,4 +1,4 @@
-<!-- source: f5379f6af72fb6d11b3e786d771333d9ad1ba376 -->
+<!-- source: d2f400e900a8547bce5a1e53d69dc790db3d826f -->
 # Ignorer des sous-arbres de composants
 
 Par défaut, JavaScript utilise des structures de données mutables que vous pouvez référencer depuis plusieurs composants différents. Angular exécute la détection de changements sur l'ensemble de votre arbre de composants pour s'assurer que l'état le plus récent de vos structures de données est reflété dans le DOM.
@@ -11,6 +11,8 @@ OnPush est la stratégie de détection de changements par défaut d'Angular (dep
 
 - Le composant racine du sous-arbre reçoit de nouveaux inputs à la suite d'un binding de template. Angular compare la valeur actuelle et la valeur précédente de l'input avec `Object.is`.
 - Angular traite un événement _(par exemple via un event binding, un binding d'output ou `@HostListener` )_ dans le composant racine du sous-arbre ou dans l'un de ses enfants, qu'ils utilisent ou non la détection de changements OnPush.
+- Un composant du sous-arbre est marqué pour vérification, par exemple avec `ChangeDetectorRef.markForCheck` ou par `AsyncPipe`.
+- Un signal lu dans le template d'un composant du sous-arbre change. Angular ne rafraîchit alors que les composants qui lisent ce signal.
 
 ## Scénarios courants de détection de changements {#common-change-detection-scenarios}
 

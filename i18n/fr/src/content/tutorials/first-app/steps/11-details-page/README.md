@@ -1,4 +1,4 @@
-<!-- source: 0893e571b74f59f9818defac99ded0f9051ce43a -->
+<!-- source: 75bbd068854347b5c7e8308e46138902c2ea50b1 -->
 # Intégrer la page de détails dans l'application
 
 Cette leçon du tutoriel montre comment connecter la page de détails à votre application.
@@ -59,11 +59,11 @@ Dans cette étape, vous allez récupérer le paramètre de route dans `Details`.
 
          ```ts
          export class Details {
-            route: ActivatedRoute = inject(ActivatedRoute);
-            housingLocationId = -1;
-            constructor() {
-            this.housingLocationId = Number(this.route.snapshot.params['id']);
-            }
+           route: ActivatedRoute = inject(ActivatedRoute);
+           housingLocationId = -1;
+           constructor() {
+             this.housingLocationId = Number(this.route.snapshot.params['id']);
+           }
          }
          ```
 
@@ -97,9 +97,6 @@ Pour accéder aux données, vous allez ajouter un appel à `HousingService`.
 
    et enregistrez vos modifications
 
-1. Dans `Details`, utilisez le fichier `details.css` que vous venez de créer comme source des styles :
-   <docs-code language="angular-ts" header="Modifier details.ts pour utiliser le fichier css créé" path="adev/src/content/tutorials/first-app/steps/12-forms/src/app/details/details.ts" visibleLines="[30]"/>
-
 1. Dans le navigateur, actualisez la page et vérifiez que, lorsque vous cliquez sur le lien « Learn More » d'un logement donné, la page de détails affiche les bonnes informations selon les données de l'élément sélectionné.
 
 <img alt="Page de détails présentant les informations du logement" src="assets/images/tutorials/first-app/homes-app-lesson-11-step-3.png">
@@ -111,7 +108,7 @@ Dans une leçon précédente, vous avez modifié le template de `App` pour y inc
 
 1.  Vérifiez que votre code correspond à ce qui suit :
 
-      <docs-code language="angular-ts" header="Vérifier le routerLink dans app.ts" path="adev/src/content/tutorials/first-app/steps/12-forms/src/app/app.ts" visibleLines="[8,19]"/>
+      <docs-code language="angular-ts" header="Vérifier le routerLink dans app.ts" path="adev/src/content/tutorials/first-app/steps/12-forms/src/app/app.ts" visibleLines="[7,18]"/>
 
     Votre code devrait déjà être à jour, mais vérifiez-le pour en être sûr.
 

@@ -1,4 +1,4 @@
-<!-- source: f7f15cfa265ff68c3baea2ed32b21d85846dff90 -->
+<!-- source: df311bba5d1f897311bd1ae3a072618813350d57 -->
 # Ajouter de la logique de formulaire
 
 Les Signal Forms vous permettent d'ajouter de la logique à votre formulaire à l'aide de schémas. La logique de validation est traitée dans le [guide de validation](guide/forms/signals/validation) ; ce guide présente les autres règles disponibles dans les schémas. Vous pouvez désactiver des champs sous condition, les masquer en fonction d'autres valeurs, les mettre en lecture seule, appliquer un debounce à la saisie de l'utilisateur et associer des métadonnées pour les contrôles personnalisés.
@@ -263,7 +263,7 @@ export class Profile {
 
 ## Afficher des champs non modifiables avec `readonly()` {#display-uneditable-fields-with-readonly}
 
-La règle `readonly()` empêche les utilisateurs de modifier un champ. La directive `[FormField]` lie automatiquement cet état à l'attribut HTML `readonly`, qui empêche la modification tout en permettant aux utilisateurs de donner le focus au champ et d'en sélectionner le texte.
+La règle `readonly()` empêche les utilisateurs de modifier un champ. La directive `FormField` lie automatiquement cet état à l'attribut HTML `readonly`, qui empêche la modification tout en permettant aux utilisateurs de donner le focus au champ et d'en sélectionner le texte.
 
 NOTE: Les champs en lecture seule ne sont pas soumis à la [validation](guide/forms/signals/validation).
 
@@ -302,7 +302,7 @@ export class Account {
 }
 ```
 
-La directive `[FormField]` lie automatiquement l'attribut `readonly` en fonction de l'état du champ.
+La directive `FormField` lie automatiquement l'attribut `readonly` en fonction de l'état du champ.
 
 ### Lecture seule conditionnelle {#conditional-readonly}
 
@@ -458,10 +458,18 @@ export class Search {
   });
 
   searchForm = form(this.searchModel, (schemaPath) => {
-    debounce(schemaPath.query, () => {
-      // Return a promise that resolves after 500ms
+    debounce(schemaPath.query, (context, abortSignal) => {
+      // Return a promise that resolves after 500ms, or right away when the debounce is aborted
       return new Promise<void>((resolve) => {
-        setTimeout(() => resolve(), 500);
+        const timeoutId = setTimeout(resolve, 500);
+        abortSignal.addEventListener(
+          'abort',
+          () => {
+            clearTimeout(timeoutId);
+            resolve();
+          },
+          {once: true},
+        );
       });
     });
   });

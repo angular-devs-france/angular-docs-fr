@@ -1,4 +1,4 @@
-<!-- source: 6fe64ebf2ace04dc26856dd7743e3e491cbdaf74 -->
+<!-- source: 5bad05531c638347041adf68efbb56318b140c96 -->
 # Injectors hiérarchiques
 
 Ce guide couvre en profondeur le système hiérarchique d'injection de dépendances d'Angular, y compris les règles de résolution, les modificateurs et les patterns avancés.
@@ -86,7 +86,7 @@ Le diagramme suivant représente la relation entre le `ModuleInjector` `root` et
 
 ```mermaid
 stateDiagram-v2
-    elementInjector: EnvironmentInjector<br>(configured by Angular)<br>has special things like DomSanitizer => providedIn 'platform'
+    elementInjector: EnvironmentInjector<br>(configured by Angular)<br>has special things like PlatformLocation => providedIn 'platform'
     rootInjector: root EnvironmentInjector<br>(configured by AppConfig)<br>has things for your app => bootstrapApplication(..., AppConfig)
     nullInjector: NullInjector<br>always throws an error unless<br>you use @Optional()
 

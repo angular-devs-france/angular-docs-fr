@@ -1,4 +1,4 @@
-<!-- source: 202af3e35bf7c06645bf999f4dfa4f62aa29e5b1 -->
+<!-- source: d086e2cbcce3d83331b1aa94e710fd35677d437a -->
 # Projection de contenu avec ng-content
 
 TIP: Ce guide suppose que vous avez déjà lu le [guide des Fondamentaux](essentials). Lisez-le d'abord si vous découvrez Angular.
@@ -143,6 +143,9 @@ export class App {}
 
 Le placeholder `<ng-content>` prend en charge les mêmes selectors CSS
 que les [selectors de composant](guide/components/selectors).
+IMPORTANT: si vous utilisez un sélecteur d'attribut ou de classe, il doit être défini statiquement, c'est-à-dire `class="within"`.
+Les bindings dynamiques tels que `[class.within]="isWithin()"` ne sont pas vus par le sélecteur `select`.
+
 
 Si vous incluez un ou plusieurs placeholders `<ng-content>` avec un attribut `select` et
 un placeholder `<ng-content>` sans attribut `select`, ce dernier capture tous les éléments qui

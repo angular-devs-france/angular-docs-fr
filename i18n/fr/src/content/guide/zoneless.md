@@ -1,4 +1,4 @@
-<!-- source: 3e92a5a4002f63ce8ef7d2cf3a3cec2154dc42c0 -->
+<!-- source: 80c755b1a9752db5a2e3bcb4643f186394b9b128 -->
 # Angular sans ZoneJS (zoneless)
 
 ## Pourquoi utiliser le mode zoneless ? {#why-use-zoneless}
@@ -60,7 +60,7 @@ Une façon de garantir qu'un composant utilise les bons mécanismes de notificat
 utiliser [ChangeDetectionStrategy.OnPush](/best-practices/skipping-subtrees#using-onpush).
 
 La stratégie de détection de changements `OnPush` n'est pas obligatoire, mais c'est une étape recommandée vers la compatibilité zoneless pour les composants d'application. Il n'est pas toujours possible pour les composants de library d'utiliser `ChangeDetectionStrategy.OnPush`.
-Lorsqu'un composant de library est le host de composants utilisateur susceptibles d'utiliser `ChangeDetectionStrategy.Eager`/`Default`, il ne peut pas utiliser `OnPush`, car cela empêcherait le composant enfant d'être rafraîchi s'il n'est pas compatible `OnPush` et s'appuie sur ZoneJS pour déclencher la détection de changements. Les composants peuvent utiliser la stratégie `Default` tant qu'ils notifient Angular lorsque la détection de changements doit s'exécuter (en appelant `markForCheck`, en utilisant des signals, `AsyncPipe`, etc.).
+Lorsqu'un composant de library est le host de composants utilisateur susceptibles d'utiliser `ChangeDetectionStrategy.Eager`, il ne peut pas utiliser `OnPush`, car cela empêcherait le composant enfant d'être rafraîchi s'il n'est pas compatible `OnPush` et s'appuie sur ZoneJS pour déclencher la détection de changements. Les composants peuvent utiliser la stratégie `Eager` tant qu'ils notifient Angular lorsque la détection de changements doit s'exécuter (en appelant `markForCheck`, en utilisant des signals, `AsyncPipe`, etc.).
 Être le host d'un composant utilisateur signifie utiliser une API comme `ViewContainerRef.createComponent`, et pas seulement héberger une portion du template d'un composant utilisateur (c'est-à-dire la projection de contenu ou un input recevant une référence de template).
 
 ### Retirer `NgZone.onMicrotaskEmpty`, `NgZone.onUnstable`, `NgZone.isStable` ou `NgZone.onStable` {#remove-ngzoneonmicrotaskempty-ngzoneonunstable-ngzoneisstable-or-ngzoneonstable}

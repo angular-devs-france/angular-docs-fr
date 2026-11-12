@@ -1,4 +1,4 @@
-<!-- source: 22752d550080583e24093d34349bc56b75354667 -->
+<!-- source: d6622c4227f686d3d143acc4a20eca58cc6a64e2 -->
 # Hello world
 
 Cette première leçon sert de point de départ : chaque leçon de ce tutoriel y ajoute de nouvelles fonctionnalités pour construire une application Angular complète. Dans cette leçon, nous allons modifier l'application pour qu'elle affiche le célèbre texte « Hello World ».
@@ -69,9 +69,8 @@ Dans le panneau **Explorer** de votre IDE :
       1. Les nouveaux composants sont ajoutés dans ce répertoire.
 
    1. Dans l'explorateur de fichiers, trouvez le répertoire des images (`/public`), qui contient les images utilisées par l'application.
-   1. Dans l'explorateur de fichiers, trouvez les fichiers et répertoires dont une application Angular a besoin pour se compiler et s'exécuter, mais avec lesquels vous n'interagissez normalement pas.
+   1. Dans l'explorateur de fichiers, trouvez les fichiers et répertoires dont une application Angular a besoin pour se compiler et s'exécuter. Ce ne sont pas des fichiers avec lesquels vous interagissez normalement.
       1. `.angular` contient les fichiers nécessaires à la compilation de l'application Angular.
-      1. `.e2e` contient les fichiers utilisés pour tester l'application.
       1. `.node_modules` contient les packages node.js utilisés par l'application.
       1. `angular.json` décrit l'application Angular aux outils de build.
       1. `package.json` est utilisé par `npm` (le node package manager) pour exécuter l'application finale.

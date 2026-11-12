@@ -1,4 +1,4 @@
-<!-- source: a65c9628a09e318d5dc69f037f7abed913db6c9e -->
+<!-- source: 26783cddbad7794cd7d14dcd7279a1e454c35ec3 -->
 # Fichier de configuration du service worker
 
 Cette page décrit les propriétés du fichier de configuration du service worker.
@@ -382,4 +382,8 @@ IMPORTANT: La stratégie `freshness` entraîne généralement davantage de requ�
 
 ### `applicationMaxAge`
 
-Cette propriété facultative vous permet de configurer combien de temps le service worker met en cache les requêtes. Pendant la durée `maxAge`, les fichiers sont servis depuis le cache. Au-delà, toutes les requêtes sont servies uniquement depuis le réseau, y compris les requêtes d'assets et de données.
+Cette propriété facultative vous permet de configurer combien de temps le service worker sert une version de l'application depuis son cache. L'âge est mesuré à partir du moment où vous avez compilé l'application, pas du moment où les fichiers ont été mis en cache sur l'appareil.
+
+Pendant la durée `applicationMaxAge`, le service worker sert les fichiers depuis le cache. Au-delà, le service worker envoie toutes les requêtes au réseau, y compris les requêtes d'assets et de données, même si aucune version plus récente n'existe. L'application ne fonctionne pas hors ligne tant qu'un nouveau build n'est pas déployé et récupéré par l'appareil.
+
+Si vous omettez `applicationMaxAge`, il n'y a pas d'âge maximal et le service worker sert les versions en cache quel que soit leur âge.

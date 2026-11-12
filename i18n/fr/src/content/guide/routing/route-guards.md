@@ -1,4 +1,4 @@
-<!-- source: efe7da9aa9a25e06250e4806dfc08a3fde44782e -->
+<!-- source: 4176ec7f3ff2b42a31500bbfa5993a2b3e2b734b -->
 # Contrôler l'accès aux routes avec des guards
 
 CRITICAL: Ne comptez jamais sur des guards côté client comme seule source de contrôle d'accès. Tout le JavaScript exécuté dans un navigateur web peut être modifié par l'utilisateur de ce navigateur. Appliquez toujours l'autorisation des utilisateurs côté serveur, en plus des éventuelles guards côté client.
@@ -27,7 +27,9 @@ Toutes les guards de route partagent les mêmes types de retour possibles. Cela 
 | `UrlTree` ou `RedirectCommand`  | Redirige vers une autre route au lieu de bloquer                                    |
 | `Promise<T>` ou `Observable<T>` | Le router utilise la première valeur émise, puis se désabonne                         |
 
-NOTE: `CanMatch` se comporte différemment : lorsqu'elle renvoie `false`, Angular essaie d'autres routes correspondantes au lieu de bloquer complètement la navigation.
+NOTE: Une route guard doit émettre une valeur. Un `Observable` qui se termine sans émettre, comme `EMPTY` ou tout `Observable<never>`, laisse le router sans résultat, et la navigation échoue avec une `EmptyError` RxJS. Cela vient souvent d'une requête qu'un interceptor annule. Si votre source peut se terminer vide, donnez-lui une valeur avec `defaultIfEmpty(false)`.
+
+NOTE: `CanMatch` est différente. Lorsqu'elle renvoie `false`, Angular essaie d'autres routes correspondantes au lieu de bloquer la navigation.
 
 ## Types de guards de route {#types-of-route-guards}
 
@@ -49,7 +51,7 @@ La guard `CanActivate` détermine si un utilisateur peut accéder à une route. 
 Elle a accès aux arguments par défaut suivants :
 
 - `route` : `ActivatedRouteSnapshot` - Contient les informations sur la route en cours d'activation
-- `state` : `RouterStateSnapshot` - Contient l'état courant du router
+- `state` : `RouterStateSnapshot` - Contient l'état vers lequel le router navigue, pas l'état courant (utilisez `Router.routerState` pour cela)
 
 Elle peut renvoyer les [types de retour standard des guards](#route-guard-return-types).
 
@@ -74,7 +76,7 @@ La guard `CanActivateChild` détermine si un utilisateur peut accéder aux route
 Elle a accès aux arguments par défaut suivants :
 
 - `childRoute` : `ActivatedRouteSnapshot` - Contient les informations sur le snapshot « futur » (c'est-à-dire l'état vers lequel le router tente de naviguer) de la route enfant en cours d'activation
-- `state` : `RouterStateSnapshot` - Contient l'état courant du router
+- `state` : `RouterStateSnapshot` - Contient l'état vers lequel le router navigue, pas l'état courant (utilisez `Router.routerState` pour cela)
 
 Elle peut renvoyer les [types de retour standard des guards](#route-guard-return-types).
 
