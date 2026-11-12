@@ -1,4 +1,4 @@
-<!-- source: 86a3b711562312752f27cc04bb2a9e2cd06c4d30 -->
+<!-- source: c5a186da9c7bf474c4cebce9d03d8dea71155424 -->
 # Créer le composant Home
 
 Cette leçon du tutoriel montre comment créer un nouveau [composant](guide/components) pour votre application Angular.
@@ -7,7 +7,7 @@ Cette leçon du tutoriel montre comment créer un nouveau [composant](guide/comp
 
 ## Ce que vous allez apprendre {#what-youll-learn}
 
-Votre application dispose d'un nouveau composant : `Home`.
+Votre application disposera d'un nouveau composant : `Home`.
 
 ## Aperçu conceptuel des composants Angular {#conceptual-preview-of-angular-components}
 
@@ -21,7 +21,7 @@ Lorsque vous créez votre `Home`, vous utilisez ces propriétés :
 - `selector` : pour décrire comment Angular fait référence au composant dans les templates.
 - `imports` : pour décrire les dépendances du composant.
 - `template` : pour décrire le balisage HTML et la mise en page du composant.
-- `styleUrls` : pour lister dans un tableau les URL des fichiers CSS utilisés par le composant.
+- `styleUrl` : pour indiquer l'URL du fichier CSS utilisé par le composant.
 
 <docs-pill-row>
   <docs-pill href="api/core/Component" title="En savoir plus sur les composants"/>

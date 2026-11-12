@@ -1,4 +1,4 @@
-<!-- source: 00b4c1d7fc6e738739ad8d70c2cd3147358e3016 -->
+<!-- source: 598d0ff3cd88d96a036c3efc2bdcd3c747ef2f29 -->
 # Tests unitaires
 
 Tester votre application Angular vous aide à vérifier qu'elle fonctionne comme prévu. Les tests unitaires sont essentiels pour détecter les bugs tôt, garantir la qualité du code et faciliter un refactoring sans risque.
@@ -88,7 +88,7 @@ Pour les cas d'usage avancés, vous pouvez fournir un fichier de configuration V
 
 IMPORTANT: Si une configuration personnalisée donne accès à des options avancées, l'équipe Angular n'assure aucun support pour le contenu du fichier de configuration ni pour les plugins tiers. La CLI écrase aussi certaines propriétés (`test.projects`, `test.include`) pour garantir une intégration correcte.
 
-Vous pouvez créer un fichier de configuration Vitest (par ex. `vitest-base.config.ts`) et le référencer dans votre `angular.json` :
+Vous pouvez créer un fichier de configuration Vitest (par ex. `vitest-base.config.mts`) et le référencer dans votre `angular.json` :
 
 ```json
 {
@@ -98,7 +98,7 @@ Vous pouvez créer un fichier de configuration Vitest (par ex. `vitest-base.conf
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
-            "runnerConfig": "vitest-base.config.ts"
+            "runnerConfig": "vitest-base.config.mts"
           }
         }
       }
@@ -113,7 +113,7 @@ Vous pouvez aussi générer un fichier de configuration de base avec la CLI :
 ng generate config vitest
 ```
 
-Cela crée un fichier `vitest-base.config.ts` que vous pouvez personnaliser.
+Cela crée un fichier `vitest-base.config.mts` que vous pouvez personnaliser.
 
 HELPFUL: Pour en savoir plus sur la configuration de Vitest, consultez la [documentation officielle de Vitest](https://vitest.dev/config/).
 

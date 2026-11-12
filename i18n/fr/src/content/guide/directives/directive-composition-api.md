@@ -1,4 +1,4 @@
-<!-- source: 47b132a262676fbfe9c21991d301feea291beda2 -->
+<!-- source: 035c2ee6f2d56ca5132628465208ce97f12e2aa8 -->
 # API de composition de directives
 
 Les directives Angular offrent un excellent moyen d'encapsuler des comportements réutilisables. Les directives peuvent appliquer des attributs, des classes CSS et des event listeners à un élément.
@@ -178,10 +178,10 @@ Si une directive correspond à un élément une fois via un **selector de templa
 
 Le modèle mental est le suivant : une correspondance en tant que host directive représente `Partial<YourDirective>`, une application partielle où seuls les inputs et les outputs explicitement listés dans `hostDirectives` sont exposés, tandis qu'une correspondance dans le template représente la directive complète avec toute son API publique.
 
+```ts
 @Directive({selector: '[hoverable]'})
 export class Hoverable {}
 
-```ts
 @Component({
   selector: 'app-button',
   hostDirectives: [Hoverable],

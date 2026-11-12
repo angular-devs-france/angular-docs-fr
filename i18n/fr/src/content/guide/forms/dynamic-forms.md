@@ -1,4 +1,4 @@
-<!-- source: be680110bde2d94a8487eb388a3402c94f87c60a -->
+<!-- source: 5bdcf09025f16af3f07ebaeb618862062fd41c57 -->
 # Créer des formulaires dynamiques
 
 De nombreux formulaires, comme les questionnaires, peuvent se ressembler beaucoup dans leur format et leur objectif.
@@ -23,7 +23,7 @@ Le tutoriel vous guide à travers les étapes suivantes :
 1. Développer un composant pour créer dynamiquement des contrôles de formulaire.
 
 Le formulaire que vous créez utilise la validation des saisies et des styles pour améliorer l'expérience utilisateur.
-Il comporte un bouton Submit qui n'est activé que lorsque toutes les saisies de l'utilisateur sont valides, et signale les saisies invalides par un code couleur et des messages d'erreur.
+Il comporte un bouton Save qui n'est activé que lorsque toutes les saisies de l'utilisateur sont valides, et signale les saisies invalides par un code couleur et des messages d'erreur.
 
 Cette version de base peut évoluer pour prendre en charge une plus grande variété de questions, un rendu plus soigné et une meilleure expérience utilisateur.
 
@@ -66,7 +66,7 @@ Le type de contrôle `DropdownQuestion` présente une liste de choix dans une li
 ### Composer les groupes de formulaire {#compose-form-groups}
 
 Un formulaire dynamique utilise un service pour créer des ensembles groupés de contrôles de saisie, à partir du model de formulaire.
-Le `QuestionControlService` suivant rassemble un ensemble d'instances `FormGroup` qui consomment les métadonnées du modèle de questions.
+Le `QuestionControlService` suivant construit un `FormGroup` d'instances `FormControl` à partir des métadonnées du modèle de questions.
 Vous pouvez définir des valeurs par défaut et des règles de validation.
 
 <docs-code header="question-control.service.ts" path="adev/src/content/examples/dynamic-form/src/app/question-control.service.ts"/>
@@ -78,7 +78,7 @@ Chaque question est représentée dans le template du composant de formulaire pa
 
 Le `DynamicFormQuestionComponent` se charge d'afficher les détails d'une question individuelle à partir des valeurs de l'objet question lié aux données.
 Le formulaire s'appuie sur une [directive `[formGroup]`](api/forms/FormGroupDirective 'API reference') pour relier le HTML du template aux objets de contrôle sous-jacents.
-Le `DynamicFormQuestionComponent` crée des groupes de formulaire et les remplit avec les contrôles définis dans le modèle de questions, en précisant les règles d'affichage et de validation.
+Le `DynamicFormQuestionComponent` reçoit le groupe de formulaire construit par `QuestionControlService` et affiche le contrôle de sa question, en montrant l'état de validation selon les règles qui y sont définies.
 
 <docs-code-multifile>
   <docs-code header="dynamic-form-question.component.html" path="adev/src/content/examples/dynamic-form/src/app/dynamic-form-question.component.html"/>

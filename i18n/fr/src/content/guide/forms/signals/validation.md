@@ -1,4 +1,4 @@
-<!-- source: c094c0ea6188cf5821b992732ad0a65fbcfb0fd6 -->
+<!-- source: 081651abb56bd349e71766633c3f70ea735a804d -->
 # Validation
 
 Les formulaires ont besoin de validation pour garantir que les utilisateurs fournissent des données correctes et complètes avant la soumission. Sans validation, vous devriez gérer les problèmes de qualité des données côté serveur, offrir une mauvaise expérience utilisateur avec des messages d'erreur peu clairs et vérifier manuellement chaque contrainte.
@@ -477,7 +477,7 @@ signupForm = form(this.signupModel, (schemaPath) => {
 });
 ```
 
-Si le champ e-mail est vide, seule l'erreur `required()` apparaît. Si l'utilisateur saisit « a@b », les erreurs `email()` et `minLength()` apparaissent toutes les deux. Toutes les règles de validation s'exécutent : la validation ne s'arrête pas après le premier échec.
+Si le champ e-mail est vide, seule l'erreur `required()` apparaît. Si l'utilisateur saisit « a@ », les erreurs `email()` et `minLength()` apparaissent toutes les deux. Toutes les règles de validation s'exécutent : la validation ne s'arrête pas après le premier échec.
 
 TIP: Utilisez le pattern `touched() && invalid()` dans vos templates pour éviter que les erreurs n'apparaissent avant que l'utilisateur n'ait interagi avec un champ. Pour des conseils complets sur l'affichage des erreurs de validation, consultez le [guide Gestion de l'état des champs](guide/forms/signals/field-state-management#conditional-error-display).
 
@@ -794,12 +794,12 @@ const userForm = form(signal({email: '', password: ''}), (schemaPath) => {
 
 ### Schémas dynamiques {#dynamic-schemas}
 
-Vous pouvez passer un signal au lieu d'un schéma statique pour que le schéma de validation se mette à jour automatiquement quand ses dépendances changent.
+Au lieu d'un schéma statique, vous pouvez passer une fonction qui renvoie le schéma. La validation se met alors à jour automatiquement quand les signals lus par la fonction changent.
 
 ```angular-ts
 import {Component, computed, signal} from '@angular/core';
 import {form, FormField, validateStandardSchema} from '@angular/forms/signals';
-import z from 'zod';
+import * as z from 'zod';
 
 @Component({/* ... */})
 export class DynamicSchema {

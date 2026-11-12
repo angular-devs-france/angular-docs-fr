@@ -1,4 +1,4 @@
-<!-- source: 680f13658ca3c2d82ab84ec12f9001eab286e117 -->
+<!-- source: 01e06dc2900431114ed1fe350d32c2ce1e1f2b82 -->
 # Créer une interface
 
 Cette leçon du tutoriel montre comment créer une interface et l'inclure dans un composant de votre application.
@@ -7,8 +7,8 @@ Cette leçon du tutoriel montre comment créer une interface et l'inclure dans u
 
 ## Ce que vous allez apprendre {#what-youll-learn}
 
-- Votre application dispose d'une nouvelle interface qu'elle peut utiliser comme type de données.
-- Votre application dispose d'une instance de cette nouvelle interface avec des données d'exemple.
+- Votre application disposera d'une nouvelle interface qu'elle pourra utiliser comme type de données.
+- Votre application disposera d'une instance de cette nouvelle interface avec des données d'exemple.
 
 ## Aperçu conceptuel des interfaces {#conceptual-preview-of-interfaces}
 

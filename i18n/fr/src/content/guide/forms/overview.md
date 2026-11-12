@@ -1,4 +1,4 @@
-<!-- source: f637747cffae98c0b3cc386e6c751ef909b9f413 -->
+<!-- source: 0f18697f6979a0b4ff8f32f9415f6a1d5231be69 -->
 <docs-decorative-header title="Les formulaires dans Angular" imgSrc="adev/src/assets/images/overview.svg"> <!-- markdownlint-disable-line -->
 La gestion des saisies de l'utilisateur avec des formulaires est la pierre angulaire de nombreuses applications courantes.
 </docs-decorative-header>
@@ -294,7 +294,7 @@ Voici les étapes effectuées dans le test de la vue vers le model.
 
 1. Interrogez la vue pour obtenir l'élément de saisie du formulaire, et créez un événement « input » personnalisé pour le test.
 1. Définissez la nouvelle valeur du champ de saisie à _Red_, et émettez l'événement « input » sur l'élément de saisie du formulaire.
-1. Exécutez la détection de changements via la fixture de test.
+1. Utilisez `await fixture.whenStable()` pour attendre que la mise à jour soit traitée.
 1. Vérifiez que la valeur de la propriété `favoriteColor` du composant correspond à la valeur du champ de saisie.
 
 Le test suivant vérifie le flux de données du model vers la vue.
@@ -304,7 +304,6 @@ Le test suivant vérifie le flux de données du model vers la vue.
 Voici les étapes effectuées dans le test du model vers la vue.
 
 1. Utilisez l'instance du composant pour définir la valeur de la propriété `favoriteColor`.
-1. Exécutez la détection de changements via la fixture de test.
 1. Utilisez `await fixture.whenStable()` pour attendre le prochain rendu.
 1. Interrogez la vue pour obtenir l'élément de saisie du formulaire.
 1. Vérifiez que la valeur du champ de saisie correspond à la valeur de la propriété `favoriteColor` de l'instance du composant.

@@ -73,6 +73,7 @@
     "Community translations": "Traductions communautaires",
     "Azərbaycanca": "Azərbaycanca",
     "Español": "Español",
+    "Français": "Français",
     "Oʻzbekcha": "Oʻzbekcha",
     "Türkçe": "Türkçe",
     "Русский": "Русский",
@@ -263,6 +264,7 @@
     "Jump to details": "Aller aux détails"
   },
   "src/app/features/tutorial/tutorial.component.html": {
+    "Back to My Code": "Revenir à mon code",
     "Next Tutorial": "Tutoriel suivant"
   },
   "src/app/features/update/update.component.html": {

@@ -1,4 +1,4 @@
-<!-- source: ac8d748b9f416ddb8efad2aec92d0fee28626e3c -->
+<!-- source: 0ed5df8190af2cbe3abe9483e7c85b995a248c44 -->
 # Créer le composant HousingLocation de l'application
 
 Cette leçon du tutoriel montre comment ajouter le composant `HousingLocation` à votre application Angular.
@@ -7,7 +7,7 @@ Cette leçon du tutoriel montre comment ajouter le composant `HousingLocation` �
 
 ## Ce que vous allez apprendre {#what-youll-learn}
 
-- Votre application dispose d'un nouveau composant, `HousingLocation`, qui affiche un message confirmant que le composant a été ajouté à votre application.
+Votre application disposera d'un nouveau composant, `HousingLocation`, qui affichera un message confirmant que le composant a été ajouté à votre application.
 
 <docs-workflow>
 

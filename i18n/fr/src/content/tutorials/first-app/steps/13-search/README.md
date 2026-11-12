@@ -1,4 +1,4 @@
-<!-- source: c2c4dc6cc21f718607222908b68042742200f22c -->
+<!-- source: 8184e1d5011dfbc1b8f5e1e3dd19bf976a24196d -->
 # Ajouter la fonctionnalité de recherche à votre application
 
 Cette leçon du tutoriel montre comment ajouter une fonctionnalité de recherche à votre application Angular.
@@ -27,7 +27,7 @@ Dans cette étape, vous allez modifier la classe `Home` pour stocker des donnée
 
 1. Par défaut, au chargement de la page, `filteredLocationList` doit contenir l'ensemble des logements. Modifiez le `constructor` de `Home` pour définir cette valeur.
 
-   <docs-code header="Définir la valeur de filteredLocationList" path="adev/src/content/tutorials/first-app/steps/14-http/src/app/home/home.ts" visibleLines="[29,32]"/>
+   <docs-code header="Définir la valeur de filteredLocationList" path="adev/src/content/tutorials/first-app/steps/14-http/src/app/home/home.ts" visibleLines="[30,33]"/>
 
 </docs-step>
 
@@ -70,7 +70,7 @@ Le template a été modifié pour lier la fonction `filterResults` à l'événem
 
 </docs-workflow>
 
-SUMMARY: Dans cette leçon, vous avez modifié votre application pour utiliser des variables de template afin d'interagir avec les valeurs du template, et ajouté une fonctionnalité de recherche à l'aide de l'event binding et de fonctions de tableau.
+SUMMARY: Dans cette leçon, vous avez utilisé des variables de template pour interagir avec les valeurs du template, et ajouté une fonctionnalité de recherche à l'aide de l'event binding et de fonctions de tableau.
 
 Pour plus d'informations sur les sujets abordés dans cette leçon, consultez :
 

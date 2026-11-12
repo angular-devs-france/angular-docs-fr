@@ -1,4 +1,4 @@
-<!-- source: 7709afb7412cad5799ef0fc4cb110c4b13e36d27 -->
+<!-- source: ff9d3250cda4cbe8c57d0b57321d59d79819cd6b -->
 # Personnaliser le comportement des routes
 
 Angular Router fournit de puissants points d'extension qui vous permettent de personnaliser le comportement des routes dans votre application. Si le comportement de routing par défaut convient à la plupart des applications, des besoins spécifiques exigent souvent des implémentations personnalisées pour optimiser les performances, traiter les URL de façon particulière ou gérer une logique de routing complexe.
@@ -120,7 +120,7 @@ provideRouter(routes, withRouterConfig({urlUpdateStrategy: 'eager'}));
 
 ### Choisir le traitement par défaut des query parameters {#choose-default-query-parameter-handling}
 
-`defaultQueryParamsHandling` définit le comportement de repli de `Router.createUrlTree` lorsque l'appel ne précise pas `queryParamsHandling`. `'replace'` est la valeur par défaut et remplace la query string existante. `'merge'` combine les valeurs fournies avec les valeurs courantes, et `'preserve'` conserve les query parameters existants, sauf si vous en fournissez explicitement de nouveaux.
+`defaultQueryParamsHandling` définit le comportement de repli de `Router.createUrlTree` lorsque l'appel ne précise pas `queryParamsHandling`. `'replace'` est la valeur par défaut et remplace la query string existante. `'merge'` combine les valeurs fournies avec les valeurs courantes, et `'preserve'` conserve les query parameters existants et ignore les `queryParams` que vous passez à l'appel.
 
 ```ts
 provideRouter(routes, withRouterConfig({defaultQueryParamsHandling: 'merge'}));
@@ -555,7 +555,7 @@ export const routes: Routes = [
 ];
 ```
 
-Le composant reçoit les paramètres extraits via les inputs de route :
+Si vous activez [`withComponentInputBinding`](api/router/withComponentInputBinding), le composant reçoit les paramètres extraits via les inputs de route :
 
 ```angular-ts
 import {Component, input, inject, resource} from '@angular/core';
@@ -573,7 +573,7 @@ import {Component, input, inject, resource} from '@angular/core';
   `,
 })
 export class Documentation {
-  // Route parameters are automatically bound to signal inputs
+  // The router sets these inputs from the route parameters
   version = input.required<string>(); // Receives the version parameter
   section = input.required<string>(); // Receives the section parameter
 

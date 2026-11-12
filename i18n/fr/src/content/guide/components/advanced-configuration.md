@@ -1,4 +1,4 @@
-<!-- source: f452e2a1482e4e9241fbeebdb35996aa638bbaac -->
+<!-- source: ed6277aac0cc1de9a67a1fdfffb104fa09b6ea1c -->
 # Configuration avancée des composants
 
 TIP: Ce guide suppose que vous avez déjà lu le [guide des Fondamentaux](essentials). Commencez par celui-ci si vous découvrez Angular.
@@ -8,7 +8,7 @@ TIP: Ce guide suppose que vous avez déjà lu le [guide des Fondamentaux](essent
 Le décorateur `@Component` accepte une option `changeDetection` qui contrôle le **mode de détection
 de changements** du composant. Il existe deux modes de détection de changements.
 
-**`ChangeDetectionStrategy.Eager`/`Default`** est un mode facultatif. Dans ce mode,
+**`ChangeDetectionStrategy.Eager`** est un mode facultatif. Dans ce mode,
 Angular vérifie si le DOM du composant doit être mis à jour chaque fois qu'une activité a pu se produire
 n'importe où dans l'application. Les activités qui déclenchent cette vérification incluent les interactions de l'utilisateur, les réponses réseau,
 les timers, et plus encore.
@@ -19,9 +19,11 @@ doit effectuer. Dans ce mode, le framework vérifie si le DOM d'un composant doi
 - Un input du composant change à la suite d'un binding dans un template, ou
 - Un event listener de ce composant s'exécute
 - Le composant est explicitement marqué pour vérification, via `ChangeDetectorRef.markForCheck` ou quelque chose qui l'encapsule, comme `AsyncPipe`.
+- Un signal lu dans le template du composant change.
 
-De plus, quand un composant OnPush est vérifié, Angular vérifie _aussi_ tous ses composants
-ancêtres, en remontant l'arbre de l'application.
+Dans les trois premiers cas, Angular vérifie _aussi_ tous les composants ancêtres
+du composant, en remontant l'arbre de l'application. Quand un signal change, Angular ne
+rafraîchit que les composants dont le template le lit.
 
 ## PreserveWhitespaces {#preservewhitespaces}
 

@@ -1,4 +1,4 @@
-<!-- source: 9766071b2099bd4e934dba5fbe1a6c92349ac1b8 -->
+<!-- source: 05abb5d040688b80f84ba191d4889c4174fc6214 -->
 # Appliquer un debounce aux signals avec `debounced`
 
 IMPORTANT: `debounced` est [expérimental](reference/releases#experimental). Vous pouvez l'essayer dès maintenant, mais il peut changer avant d'être stable.
@@ -32,11 +32,13 @@ export class Search {
 }
 ```
 
-`debounced` prend le signal source et une durée d'attente en millisecondes. La `value()` de la resource renvoyée contient toujours la dernière valeur stabilisée, et `status()` vous indique si une nouvelle valeur est encore en attente.
+`debounced` prend le signal source et une durée d'attente en millisecondes. La `value()` de la resource renvoyée contient la dernière valeur stabilisée, et `status()` vous indique si une nouvelle valeur est encore en attente.
 
 ## Statut pendant le debounce {#status-during-debounce}
 
-Pendant le décompte du minuteur de debounce, `status()` vaut `'loading'` et `value()` renvoie la valeur résolue précédemment. Quand le minuteur expire, la resource passe à l'état `'resolved'`. Si le signal source lève une erreur, la resource passe immédiatement à l'état `'error'` ; aucun minuteur ne s'exécute.
+Pendant le décompte du minuteur de debounce après une valeur résolue, `status()` vaut `'loading'` et `value()` renvoie la valeur résolue précédemment. Quand le minuteur expire, la resource passe à l'état `'resolved'`.
+
+Si le signal source lève une erreur, la resource passe immédiatement à l'état `'error'`, `value()` lève l'erreur, et aucun minuteur ne s'exécute. Quand le signal source cesse de lever une erreur, la resource reste à l'état `'error'` jusqu'à la fin de la nouvelle attente, puis passe à `'resolved'`.
 
 Consultez [Statut d'une resource](/guide/signals/resource#resource-status) pour la liste complète des statuts et le comportement de `value()` pour chacun d'eux.
 

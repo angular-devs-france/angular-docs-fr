@@ -1,4 +1,4 @@
-<!-- source: fe1ed0e4d6da61a20edb179339ed0fc63dcb906d -->
+<!-- source: a90045d61fef7e7def7f456d90985e620bb1a455 -->
 # Ajouter un formulaire à votre application Angular
 
 Cette leçon du tutoriel montre comment ajouter à une application Angular un formulaire qui collecte des données utilisateur.
@@ -13,8 +13,8 @@ IMPORTANT: Nous vous recommandons d'utiliser votre environnement local pour cett
 
 ## Ce que vous allez apprendre {#what-youll-learn}
 
-- Votre application dispose d'un formulaire dans lequel les utilisateurs peuvent saisir des données envoyées au service de votre application.
-- Le service écrit les données du formulaire dans le journal de la console du navigateur.
+- Votre application disposera d'un formulaire dans lequel les utilisateurs pourront saisir des données envoyées au service de votre application.
+- Le service écrira les données du formulaire dans le journal de la console du navigateur.
 
 <docs-workflow>
 
@@ -24,9 +24,9 @@ Dans cet exemple, la méthode écrit les données du formulaire dans le journal 
 
 Dans le panneau **Edit** de votre IDE :
 
-1.  Dans `src/app/housing.service.ts`, dans la classe `HousingService`, collez cette méthode à la fin de la définition de la classe.
+1.  Dans `src/app/housing-service.ts`, dans la classe `HousingService`, collez cette méthode à la fin de la définition de la classe.
 
-       <docs-code header="Méthode de soumission dans src/app/housing.service.ts" path="adev/src/content/tutorials/first-app/steps/13-search/src/app/housing.service.ts" visibleLines="[118,122]"/>
+       <docs-code header="Méthode de soumission dans src/app/housing-service.ts" path="adev/src/content/tutorials/first-app/steps/13-search/src/app/housing-service.ts" visibleLines="[119,123]"/>
 
 1.  Vérifiez que l'application se compile sans erreur.
     Corrigez les éventuelles erreurs avant de passer à l'étape suivante.
@@ -97,7 +97,7 @@ Cette étape teste le nouveau formulaire pour vérifier que, lorsque les donnée
 
 </docs-workflow>
 
-SUMMARY: Dans cette leçon, vous avez modifié votre application pour ajouter un formulaire à l'aide de la fonctionnalité de formulaires d'Angular, et connecté les données saisies dans le formulaire à un composant à l'aide d'un event handler.
+SUMMARY: Dans cette leçon, vous avez ajouté un formulaire à l'aide de la fonctionnalité de formulaires d'Angular, et connecté les données saisies dans le formulaire à un composant à l'aide d'un event handler.
 
 Pour plus d'informations sur les sujets abordés dans cette leçon, consultez :
 

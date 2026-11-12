@@ -1,4 +1,4 @@
-<!-- source: 8aac30345a54b9b9614487874447423910586510 -->
+<!-- source: f694d6a938010b6747813d4ad6474844fdb22da6 -->
 # Encyclopédie des erreurs
 
 ## Erreurs d'exécution {#runtime-errors}
@@ -27,6 +27,7 @@
 | `NG0505`  | [Aucune information d'hydratation dans la réponse du serveur](errors/NG0505) |
 | `NG0506`  | [L'application reste instable](errors/NG0506) |
 | `NG0507`  | [Le contenu HTML a été modifié après le rendu côté serveur](errors/NG0507) |
+| `NG0509`  | [Hydration Missing Node on Path](errors/NG0509)                                      |
 | `NG0600`  | [Écriture de signal dans un contexte interdit](errors/NG0600) |
 | `NG0602`  | [Appel de fonction interdit dans un contexte réactif](errors/NG0602) |
 | `NG0750`  | [Échec du chargement des dépendances de @defer](errors/NG0750) |

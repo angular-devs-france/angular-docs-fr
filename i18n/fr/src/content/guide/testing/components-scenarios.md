@@ -1,4 +1,4 @@
-<!-- source: 85a6ad3d80cbfce40b65513a9b3138e533f415b1 -->
+<!-- source: 183cb0d2170e95ad0af692e99448c07fe9814751 -->
 # Scénarios de test de composants
 
 Ce guide explore des cas d'usage courants du test de composants.
@@ -150,7 +150,7 @@ Le composant `Welcome` affiche un message de bienvenue à l'utilisateur connect�
 Il sait qui est l'utilisateur grâce à une propriété du service `UserAuthentication` injecté :
 
 ```angular-ts
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, computed, inject} from '@angular/core';
 import {UserAuthentication} from '../model/user.authentication';
 
 @Component({
@@ -159,7 +159,7 @@ import {UserAuthentication} from '../model/user.authentication';
 })
 export class Welcome {
   private userAuth = inject(UserAuthentication);
-  welcome = signal(
+  welcome = computed(() =>
     this.userAuth.isLoggedIn() ? `Welcome, ${this.userAuth.user().name}` : 'Please log in.',
   );
 }

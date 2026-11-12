@@ -1,4 +1,4 @@
-<!-- source: c70729cc03479aa96b2a1e475840ba769aaa9c5f -->
+<!-- source: 5d7abd0e6f586e0416f89891c5c7ed8d92397843 -->
 # Les services Angular
 
 Cette leçon du tutoriel montre comment créer un service Angular et utiliser l'injection de dépendances pour l'inclure dans votre application.
@@ -7,8 +7,7 @@ Cette leçon du tutoriel montre comment créer un service Angular et utiliser l'
 
 ## Ce que vous allez apprendre {#what-youll-learn}
 
-Votre application dispose d'un service qui lui fournit ses données.
-À la fin de cette leçon, le service lit des données locales et statiques.
+Votre application disposera d'un service qui lit des données locales et statiques et les fournit à votre application.
 Dans une leçon ultérieure, vous modifierez le service pour qu'il récupère les données depuis un service web.
 
 ## Aperçu conceptuel des services {#conceptual-preview-of-services}
@@ -37,7 +36,7 @@ Dans le panneau **Terminal** de votre IDE :
 1. Dans le répertoire `first-app`, exécutez cette commande pour créer le nouveau service.
 
    ```shell
-   ng generate service housing --skip-tests
+   ng generate service housingService --skip-tests
    ```
 
 1. Exécutez `ng serve` pour compiler l'application et la servir sur `http://localhost:4200`.
@@ -53,18 +52,18 @@ Pour l'instant, le nouveau service de votre application utilise les données cr�
 Dans le panneau **Edit** de votre IDE :
 
 1. Dans `src/app/home/home.ts`, copiez depuis `Home` la variable `baseUrl` et la variable `housingLocationList` avec son tableau de valeurs.
-1. Dans `src/app/housing.service.ts` :
+1. Dans `src/app/housing-service.ts` :
    1. Dans la classe `HousingService`, collez les variables que vous avez copiées depuis `Home` à l'étape précédente.
    1. Dans la classe `HousingService`, collez ces fonctions après les données que vous venez de copier.
       Ces fonctions permettent aux dépendances d'accéder aux données du service.
 
-      <docs-code header="Fonctions du service dans src/app/housing.service.ts" path="adev/src/content/tutorials/first-app/steps/10-routing/src/app/housing.service.ts" visibleLines="[110,116]"/>
+      <docs-code header="Fonctions du service dans src/app/housing-service.ts" path="adev/src/content/tutorials/first-app/steps/10-routing/src/app/housing-service.ts" visibleLines="[111,117]"/>
 
       Vous aurez besoin de ces fonctions dans une prochaine leçon. Pour l'instant, il suffit de comprendre que ces fonctions renvoient soit un `HousingLocation` précis selon son id, soit la liste complète.
 
    1. Ajoutez un import au niveau du fichier pour `HousingLocation`.
 
-      <docs-code header="Importer le type HousingLocation dans  src/app/housing.service.ts" path="adev/src/content/tutorials/first-app/steps/10-routing/src/app/housing.service.ts" visibleLines="[2]"/>
+      <docs-code header="Importer le type HousingLocation dans  src/app/housing-service.ts" path="adev/src/content/tutorials/first-app/steps/10-routing/src/app/housing-service.ts" visibleLines="[2]"/>
 
 1. Vérifiez que l'application se compile sans erreur.
    Corrigez les éventuelles erreurs avant de passer à l'étape suivante.

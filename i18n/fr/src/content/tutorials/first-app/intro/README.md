@@ -1,4 +1,4 @@
-<!-- source: 8627604e0df8cef344fc724dfdc340508579fd24 -->
+<!-- source: afc56feb09c7b0a4df5abeeda135fb867913f5d4 -->
 # Créer votre première application Angular
 
 Ce tutoriel se compose de leçons qui présentent les concepts Angular à connaître pour commencer à coder avec Angular.
@@ -17,10 +17,10 @@ Pour tirer le meilleur parti de ce tutoriel, passez en revue ces prérequis afin
 
 Les leçons de ce tutoriel supposent que vous avez déjà :
 
-1. Créé une page web HTML en modifiant directement le HTML.
-1. Programmé le contenu d'un site web en JavaScript.
-1. Lu du contenu CSS (Cascading Style Sheets) et compris comment les sélecteurs sont utilisés.
-1. Utilisé des instructions en ligne de commande pour effectuer des tâches sur votre ordinateur.
+1. Créer des pages web HTML en modifiant directement le HTML.
+1. Programmer le contenu d'un site web en JavaScript.
+1. Lire du contenu CSS (Cascading Style Sheets) et comprendre comment les sélecteurs sont utilisés.
+1. Utiliser des instructions en ligne de commande pour effectuer des tâches sur votre ordinateur.
 
 ### Votre équipement {#your-equipment}
 
@@ -66,8 +66,8 @@ Depuis une fenêtre de **Terminal**, exécutez la commande suivante : `npm ins
 Vous êtes libre d'utiliser l'outil de votre choix pour créer des applications avec Angular. Nous recommandons les suivants :
 
 1. [Visual Studio Code](https://code.visualstudio.com/)
-2. Étape facultative mais recommandée : vous pouvez améliorer encore votre expérience de développement en installant l'[Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)
-3. [WebStorm](https://www.jetbrains.com/webstorm/)
+   - Étape facultative mais recommandée : vous pouvez améliorer encore votre expérience de développement en installant l'[Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)
+1. [WebStorm](https://www.jetbrains.com/webstorm/)
    </docs-step>
 
 <docs-step title="Facultatif : configurer votre IDE assisté par IA {#optional-set-up-your-ai-powered-ide}">

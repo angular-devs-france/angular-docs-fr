@@ -1,4 +1,4 @@
-<!-- source: 0f849f716fed62633e344849663981dd254982b7 -->
+<!-- source: 1fc26a7edb5f86d1ae9b555e1e602e0e06ccbcca -->
 # NgModules
 
 IMPORTANT: L'équipe Angular recommande d'utiliser des [composants standalone](guide/components) plutôt que `NgModule` pour tout nouveau code. Utilisez ce guide pour comprendre le code existant construit avec `@NgModule`.
@@ -181,6 +181,7 @@ import {platformBrowser} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 @NgModule({
+  declarations: [MyApplication],
   bootstrap: [MyApplication],
 })
 export class MyApplicationModule {}
@@ -188,6 +189,6 @@ export class MyApplicationModule {}
 platformBrowser().bootstrapModule(MyApplicationModule);
 ```
 
-Les composants listés dans `bootstrap` sont automatiquement inclus dans les déclarations du NgModule.
+Les composants listés dans `bootstrap` doivent aussi être déclarés dans les `declarations` du NgModule.
 
 Quand vous effectuez le bootstrap d'une application à partir d'un NgModule, les `providers` collectés de ce module et tous les `providers` de ses `imports` sont chargés immédiatement et disponibles à l'injection dans toute l'application.

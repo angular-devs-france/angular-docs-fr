@@ -1,4 +1,4 @@
-<!-- source: 9e1c24eeb530a37a8c20d5d4073ac4a7ab40c47f -->
+<!-- source: 9ceed719747bdafb2dc6f403230a5f9b2093eae6 -->
 # Créer des fragments de template avec ng-template
 
 Inspiré de l'[élément natif `<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template), l'élément `<ng-template>` vous permet de déclarer un **fragment de template** – une section de contenu que vous pouvez afficher de manière dynamique ou programmatique.
@@ -189,12 +189,10 @@ export class ComponentWithFragment { }
 })
 export class MyOutlet {
   private viewContainer = inject(ViewContainerRef);
-  fragment = input<TemplateRef<unknown> | undefined>();
+  fragment = input.required<TemplateRef<unknown>>();
 
   showFragment() {
-    if (this.fragment()) {
-      this.viewContainer.createEmbeddedView(this.fragment());
-    }
+    this.viewContainer.createEmbeddedView(this.fragment());
   }
 }
 ```

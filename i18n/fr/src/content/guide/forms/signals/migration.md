@@ -1,4 +1,4 @@
-<!-- source: f9e059b7ef5511708daafcfa5a15fc029187b56e -->
+<!-- source: d75840f69c0209f3d46b0f71a6b8c2300f9cf0db -->
 # Migrer des formulaires existants vers les Signal Forms
 
 Ce guide présente des stratégies pour migrer des bases de code existantes vers les Signal Forms, en mettant l'accent sur l'interopérabilité avec
@@ -212,13 +212,12 @@ form.password().value(); // 'password'
 form().value(); // { email: '', password: FormControl}
 ```
 
-Si vous avez besoin de la valeur complète du formulaire, vous devez la construire manuellement :
+Si vous avez besoin de la valeur complète du formulaire avec les contrôles déballés, utilisez `extractValue` de `@angular/forms/signals/compat` :
 
 ```typescript
-const formValue = computed(() => ({
-  email: form.email().value(),
-  password: form.password().value(),
-})); // {email: '', password: ''}
+import {extractValue} from '@angular/forms/signals/compat';
+
+const formValue = computed(() => extractValue(form)); // {email: '', password: 'password'}
 ```
 
 ## Migration ascendante {#bottom-up-migration}

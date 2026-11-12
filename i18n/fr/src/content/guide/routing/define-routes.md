@@ -1,4 +1,4 @@
-<!-- source: 10b1b09ddb2892d437606cbe9d6aaee05372461d -->
+<!-- source: e456a35cb341c63383daec72f668d1e78ddc94c4 -->
 # Définir des routes
 
 Les routes sont les briques de base de la navigation dans une application Angular.
@@ -244,11 +244,13 @@ import {TitleStrategy, RouterStateSnapshot} from '@angular/router';
 @Injectable()
 export class AppTitleStrategy extends TitleStrategy {
   private readonly title = inject(Title);
+  // Read once: getTitle() returns the prefixed title after the first update
+  private readonly defaultTitle = this.title.getTitle();
 
   updateTitle(snapshot: RouterStateSnapshot): void {
     // PageTitle is equal to the "Title" of a route if it's set
-    // If its not set it will use the "title" given in index.html
-    const pageTitle = this.buildTitle(snapshot) || this.title.getTitle();
+    // If it's not set, it uses the "title" given in index.html
+    const pageTitle = this.buildTitle(snapshot) || this.defaultTitle;
     this.title.setTitle(`MyAwesomeApp - ${pageTitle}`);
   }
 }

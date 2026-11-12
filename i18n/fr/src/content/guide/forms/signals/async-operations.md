@@ -1,4 +1,4 @@
-<!-- source: 11c25911b4eadd96a81c89ef93170e28cff44e21 -->
+<!-- source: 7a4efe6f88b93422ab51bd133eab75277bc868ba -->
 # Opérations asynchrones
 
 Certaines validations nécessitent des données provenant de sources externes, comme des API backend ou des services tiers. Les Signal Forms fournissent deux fonctions pour la validation asynchrone : `validateHttp()` pour la validation basée sur HTTP et `validateAsync()` pour une validation personnalisée basée sur une resource.
@@ -181,7 +181,7 @@ onSuccess: (response: { usernameTaken: boolean; profanity: boolean }) => {
 } // prettier-ignore
 ```
 
-Le type de `onSuccess` peut être spécifié soit directement dans le paramètre, soit avec la propriété `parse` des `options` de `validateHttp`
+Le type de `onSuccess` peut être spécifié soit directement dans le paramètre, soit avec la propriété `parse` des `options` de `validateHttp`.
 
 ```ts
 onSuccess: (response: { usernameTaken: boolean; profanity: boolean }) => {
@@ -191,8 +191,8 @@ onSuccess: (response: { usernameTaken: boolean; profanity: boolean }) => {
 // or
 
 options: {
-  parse: (response) => response as {usernameTaken: boolean; profanity: boolean};
-}
+  parse: (response) => response as {usernameTaken: boolean; profanity: boolean},
+},
 onSuccess: (response) => {
   // ...
 } // prettier-ignore
@@ -240,7 +240,7 @@ validateHttp(schemaPath.field, {
 });
 ```
 
-TIP: Consultez la [documentation de l'API httpResource](api/common/http/httpResource) pour toutes les options disponibles.
+TIP: Consultez la [documentation de l'API `HttpResourceRequest`](api/common/http/HttpResourceRequest) pour toutes les propriétés de requête disponibles, et la [documentation de l'API httpResource](api/common/http/httpResource) pour le paramètre `options`.
 
 ## Validation asynchrone personnalisée avec validateAsync() {#custom-async-validation-with-validateasync}
 

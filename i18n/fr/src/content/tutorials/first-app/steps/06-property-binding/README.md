@@ -1,4 +1,4 @@
-<!-- source: 17d28361f0beb51f0ec5193381986d7c949ecb06 -->
+<!-- source: 13257993935de8d87910d3c4bdd0492a069c6002 -->
 # Ajouter un property binding au template d'un composant
 
 Cette leçon du tutoriel montre comment ajouter un property binding à un template et l'utiliser pour transmettre des données dynamiques aux composants.
@@ -7,8 +7,8 @@ Cette leçon du tutoriel montre comment ajouter un property binding à un templa
 
 ## Ce que vous allez apprendre {#what-youll-learn}
 
-- Votre application comporte des bindings de données dans le template de `Home`.
-- Votre application envoie des données de `Home` vers `HousingLocation`.
+- Votre application comportera des bindings de données dans le template de `Home`.
+- Votre application enverra des données de `Home` vers `HousingLocation`.
 
 ## Aperçu conceptuel des inputs {#conceptual-preview-of-inputs}
 

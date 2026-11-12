@@ -1,4 +1,4 @@
-<!-- source: a3371d3a9e679dd6f036129a9e4be4788f575f3c -->
+<!-- source: 837de1a476b0bc1cde97add4b653fc2275a0392a -->
 # Ajouter un paramètre d'input au composant
 
 Cette leçon du tutoriel montre comment créer un `input` de composant et l'utiliser pour transmettre des données à un composant afin de le personnaliser.
@@ -9,7 +9,7 @@ NOTE: Cette vidéo présente une ancienne syntaxe, mais les concepts principaux 
 
 ## Ce que vous allez apprendre {#what-youll-learn}
 
-Le template `HousingLocation` de votre application dispose d'une propriété `HousingLocation` pour recevoir des données en entrée.
+Le template `HousingLocation` de votre application disposera d'une propriété `HousingLocation` pour recevoir des données en entrée.
 
 ## Aperçu conceptuel des inputs {#conceptual-preview-of-inputs}
 

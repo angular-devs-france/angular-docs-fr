@@ -1,4 +1,4 @@
-<!-- source: 7131d3b205717ae5a2b9c5946f0ab49cbe8508d1 -->
+<!-- source: 6e53b45ae5f68dbd70bdfe9b7d7e076f261b87dd -->
 # Présentation des DevTools
 
 Angular DevTools est une extension de navigateur qui fournit des fonctionnalités de débogage et de profilage pour les applications Angular.
@@ -25,7 +25,7 @@ Lorsque vous ouvrez l'extension, vous voyez quatre onglets supplémentaires :
 | [Injector Tree](tools/devtools/injectors) | Vous permet de visualiser la hiérarchie des injectors : injector d'environnement et element injector                      |
 | [Router Tree](tools/devtools/router)      | Vous permet de visualiser l'arbre de routing de votre application.                                                     |
 
-D'autres onglets comme `Transfer State` sont expérimentaux : ils peuvent être activés dans les paramètres des devtools et ne sont pas encore documentés.
+Un onglet `Transfer State` apparaît aussi quand l'application utilise l'hydratation.
 
 HELPFUL: Si vous utilisez un navigateur basé sur Chromium, l'[intégration au panneau Performance](/best-practices/profiling-with-chrome-devtools) pourrait vous intéresser.
 
