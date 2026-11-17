@@ -29,7 +29,7 @@ jobs:
           git rm -rq --ignore-unmatch i18n/_example .github/workflows/template-canary.yml .github/workflows/template-cleanup.yml
           sed -i 's#\*\*Use this template\*\*#the template#' README.md || true
       - if: steps.detect.outputs.needed == 'true'
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8.1.3
         with:
           branch: chore/template-cleanup
           delete-branch: true
