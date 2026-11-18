@@ -1,4 +1,4 @@
-<!-- source: b23421fbd8b4b444442216954ea422658f1e1690 -->
+<!-- source: 67712c1c87267d287054e0eab54b101918468c2b -->
 # Lire l'état de la route
 
 Le router d'Angular vous permet de lire et d'utiliser les informations associées à une route pour créer des composants réactifs et conscients de leur contexte.
@@ -31,7 +31,7 @@ export class Product {
 | `data`        | Un `Observable` qui contient l'objet `data` fourni pour la route. Contient aussi les valeurs résolues par la resolve guard. |
 | `params`      | Un `Observable` qui contient les paramètres obligatoires et facultatifs propres à la route.                                         |
 | `queryParams` | Un `Observable` qui contient les query parameters disponibles pour toutes les routes.                                                       |
-| `resources`   | Un enregistrement facultatif d'instances de `Resource` définies sur la route (quand `withRouterResources` est activé).                          |
+| `resources`   | An optional record of read-only `Resource` instances defined on or inherited by the route (requires `withRouterResources()`).     |
 
 Consultez la [documentation de l'API `ActivatedRoute`](/api/router/ActivatedRoute) pour la liste complète de ce à quoi vous pouvez accéder dans la route.
 

@@ -1,4 +1,4 @@
-<!-- source: 711cb25bff7a38fcb03f5919c29c8be42a75b997 -->
+<!-- source: d001ec651458c553394886fe76e0e0f524e30076 -->
 # Chargement différé avec `@defer`
 
 Les vues différables, aussi appelées blocs `@defer`, réduisent la taille du bundle initial de votre application en différant le chargement du code qui n'est pas strictement nécessaire au rendu initial d'une page. Cela se traduit souvent par un chargement initial plus rapide et une amélioration des Core Web Vitals (CWV), principalement le Largest Contentful Paint (LCP) et le Time to First Byte (TTFB).
@@ -213,12 +213,14 @@ Si vous souhaitez personnaliser les options de l'`IntersectionObserver`, le déc
 <div #greeting>Hello!</div>
 
 <!-- With options and a trigger -->
-@defer (on viewport({trigger: greeting, rootMargin: '100px', threshold: 0.5})) {
+@defer (
+  on viewport({trigger: greeting, rootMargin: '100px', scrollMargin: '50px', threshold: 0.5})
+) {
   <greetings-cmp />
 }
 
 <!-- With options and an implied trigger -->
-@defer (on viewport({rootMargin: '100px', threshold: 0.5})) {
+@defer (on viewport({rootMargin: '100px', scrollMargin: '50px', threshold: 0.5})) {
   <greetings-cmp />
 } @placeholder {
   <div>Implied trigger</div>

@@ -1,4 +1,4 @@
-<!-- source: 797b4a5596c84224731815cb0518f74ea7f30c85 -->
+<!-- source: 734c684b3de4d075b8a25aaf329348084ce0a925 -->
 # Rediriger des routes
 
 Les redirections de routes vous permettent de faire naviguer automatiquement les utilisateurs d'une route vers une autre. C'est comparable à la réexpédition du courrier, où le courrier destiné à une adresse est envoyé à une autre adresse. C'est utile pour gérer d'anciennes URL, mettre en place des routes par défaut ou gérer le contrôle d'accès.
@@ -137,6 +137,37 @@ export const routes: Routes = [
 
 Pour en savoir plus, consultez [la documentation de l'API de RedirectFunction](api/router/RedirectFunction).
 
+## Rediriger depuis les composants et les resources avec `RedirectCommand` {#redirecting-from-components-and-resources-with-redirectcommand}
+
+En plus des redirections de route statiques et par fonction, les composants et les resources de route peuvent déclencher une redirection de manière impérative en levant une `RedirectCommand`. C'est particulièrement utile pour rediriger les utilisateurs non authentifiés ou gérer des vérifications d'autorisation dynamiques pendant la récupération des données :
+
+```angular-ts
+import {Component, inject, resource} from '@angular/core';
+import {Router, RedirectCommand} from '@angular/router';
+
+@Component({
+  selector: 'app-account',
+  template: `<p>Account Details</p>`,
+})
+export class AccountPage {
+  private router = inject(Router);
+
+  accountData = resource({
+    loader: async () => {
+      const response = await fetch('/api/account');
+      if (response.status === 401) {
+        // Automatically redirects to /login when unauthorized
+        throw new RedirectCommand(this.router.parseUrl('/login'));
+      }
+      return response.json();
+    },
+  });
+}
+```
+
+Quand une `RedirectCommand` est levée dans le constructeur d'un composant routé, un lifecycle hook ou le loader d'une resource de route, le router Angular intercepte la commande et déclenche automatiquement la navigation vers l'URL cible.
+
 ## Étapes suivantes {#next-steps}
 
 Pour plus d'informations sur la propriété `redirectTo`, consultez la [documentation de l'API](api/router/Route#redirectTo).
+Pour en savoir plus sur les error boundaries et la capture des échecs de composants, consultez le [guide sur les error boundaries](/guide/routing/error-boundaries).

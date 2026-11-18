@@ -1,4 +1,4 @@
-<!-- source: 9773b96cfdf8b992bcd8eb8fc5f48c96642dda80 -->
+<!-- source: 7b04e35c5096a701da1007ad11c91fa639fa0f86 -->
 # Créer des libraries
 
 Cette page présente une vue d'ensemble conceptuelle de la création et de la publication de nouvelles libraries pour étendre les fonctionnalités d'Angular.
@@ -45,12 +45,12 @@ Quand vous générez une nouvelle library, le fichier de configuration du worksp
   …
   "my-lib": {
     "root": "projects/my-lib",
-    "sourceRoot": "projects/my-lib/src",
+    "sourceRoot": "projects/my-lib",
     "projectType": "library",
     "prefix": "lib",
     "architect": {
       "build": {
-        "builder": "@angular/build:ng-packagr",
+        "builder": "@angular/build:library",
         …
 
 ```
@@ -80,18 +80,19 @@ Votre library doit fournir une documentation \(généralement un fichier README\
 ## Points d'entrée {#entry-points}
 
 Un _point d'entrée_ est un spécificateur de module depuis lequel les consommateurs importent, associé à l'API publique que ce spécificateur expose.
-Chaque library possède un _point d'entrée principal_ et peut ajouter autant de _points d'entrée secondaires_ que nécessaire.
+Chaque library possède un _point d'entrée principal_, et vous pouvez ajouter autant de _points d'entrée secondaires_ que nécessaire.
 
-Le point d'entrée principal est le package lui-même.
-Le fichier `ng-package.json` à la racine de la library le configure, et `lib.entryFile` désigne le fichier qui définit son API publique.
+Vous configurez les points d'entrée dans le fichier `package.json` de la library à l'aide du champ `"exports"`.
+La clé `"."` définit le point d'entrée principal et pointe vers le fichier TypeScript qui exporte son API publique :
 
-```json {header: 'projects/my-lib/ng-package.json'}
+```json {header: "projects/my-lib/package.json"}
 {
-  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/my-lib",
-  "lib": {
-    "entryFile": "src/public-api.ts"
-  }
+  "name": "my-lib",
+  "version": "0.0.1",
+  "exports": {
+    ".": "./src/public-api.ts"
+  },
+  …
 }
 ```
 
@@ -101,9 +102,8 @@ Les consommateurs importent le point d'entrée principal par le nom du package�
 import {ThemeService} from 'my-lib';
 ```
 
-Un point d'entrée secondaire est un répertoire à l'intérieur de la library, doté de son propre fichier `ng-package.json`.
-Le chemin de ce répertoire relatif à la racine de la library définit le sous-chemin d'import.
-Par exemple, un répertoire `button` met `my-lib/button` à la disposition des consommateurs :
+Un point d'entrée secondaire est une clé de sous-chemin supplémentaire dans `"exports"` qui pointe vers son propre fichier d'API publique.
+Par exemple, un export `"./button"` met `my-lib/button` à la disposition des consommateurs :
 
 ```ts
 import {ButtonComponent} from 'my-lib/button';
@@ -116,53 +116,67 @@ HELPFUL: Pour une vue d'ensemble architecturale de la façon dont les points d'e
 
 ### Ajouter un point d'entrée secondaire {#adding-a-secondary-entry-point}
 
-Créez un répertoire à l'intérieur de la library avec son propre `ng-package.json` et son propre fichier d'API publique :
+Utilisez la [schematic `entry-point`](cli/generate/entry-point) pour générer un nouveau point d'entrée secondaire dans votre library :
 
-```text
-projects/my-lib/
-├── ng-package.json      (primary entry point: my-lib)
-├── package.json
-├── src/
-│   ├── public-api.ts
-│   └── lib/ …
-└── button/
-    ├── ng-package.json  (secondary entry point: my-lib/button)
-    └── src/
-        ├── public-api.ts
-        └── button.ts
+```shell
+ng generate entry-point button --project my-lib
 ```
 
-Le `ng-package.json` secondaire configure uniquement le point d'entrée lui-même :
+Vous pouvez aussi générer des sous-chemins imbriqués, comme `testing/harness` :
 
-```json {header: 'projects/my-lib/button/ng-package.json'}
-{
-  "$schema": "../../../node_modules/ng-packagr/ng-entrypoint.schema.json",
-  "lib": {
-    "entryFile": "src/public-api.ts"
-  }
-}
+```shell
+ng generate entry-point testing/harness --project my-lib
 ```
 
-IMPORTANT: Un `ng-package.json` secondaire n'accepte que les options `lib`. Les options qui concernent tout le package, comme `dest` et `assets`, se placent dans le `ng-package.json` à la racine de la library et s'appliquent à tous les points d'entrée.
+Exécuter `ng generate entry-point button --project my-lib` effectue les étapes suivantes :
 
-Vous n'avez pas besoin d'enregistrer le point d'entrée secondaire ailleurs.
-Pendant le build, `ng-packagr` découvre automatiquement chaque `ng-package.json` sous la racine de la library et déduit le sous-chemin d'import de son chemin de répertoire (par exemple, `button/` devient `my-lib/button` et `testing/harness/` devient `my-lib/testing/harness`).
+1. Crée un répertoire `button/src/` dans la library, avec son propre fichier `public-api.ts` et des fichiers de composant initiaux :
 
-Pour importer un point d'entrée secondaire depuis une application du même workspace, ajoutez un mapping de chemin avec wildcard dans le `tsconfig.json` du workspace.
-Par défaut, `ng generate library` ne mappe que la racine du package, ce qui ne couvre pas les sous-chemins :
+   ```text
+   projects/my-lib/
+   ├── package.json
+   ├── src/
+   │   ├── public-api.ts         (primary entry point: my-lib)
+   │   └── lib/
+   │       ├── my-lib.spec.ts
+   │       └── my-lib.ts
+   └── button/
+       └── src/
+           ├── button.spec.ts
+           ├── button.ts
+           └── public-api.ts     (secondary entry point: my-lib/button)
+   ```
 
-```json {header: 'tsconfig.json'}
-{
-  "compilerOptions": {
-    "paths": {
-      "my-lib": ["./dist/my-lib"],
-      "my-lib/*": ["./dist/my-lib/*"]
-    }
-  }
-}
-```
+1. Enregistre le sous-chemin `"./button"` dans le `package.json` de la library :
 
-IMPORTANT: Quand vous importez du code depuis un autre point d'entrée de la même library, utilisez toujours son chemin d'import de package (par exemple, `import {ThemeService} from 'my-lib'`) plutôt qu'un chemin relatif. `ng-packagr` compile chaque point d'entrée séparément, dans l'ordre des dépendances : les imports relatifs entre points d'entrée et les dépendances circulaires entre points d'entrée font donc échouer le build.
+   ```json {header: "projects/my-lib/package.json"}
+   {
+     "name": "my-lib",
+     "version": "0.0.1",
+     "exports": {
+       ".": "./src/public-api.ts",
+       "./button": "./button/src/public-api.ts"
+     },
+     …
+   }
+   ```
+
+1. Ajoute un mapping de chemin avec wildcard `"my-lib/*"` dans le `tsconfig.json` du workspace (s'il n'existe pas déjà), pour que les applications du même workspace puissent résoudre les points d'entrée secondaires depuis la sortie compilée de la library :
+
+   ```json {header: "tsconfig.json"}
+   {
+     "compilerOptions": {
+       "paths": {
+         "my-lib": ["./dist/my-lib"],
+         "my-lib/*": ["./dist/my-lib/*"]
+       }
+     }
+   }
+   ```
+
+   Comme `"my-lib/*"` est un motif wildcard, il est ajouté la première fois que vous générez un point d'entrée secondaire et couvre automatiquement tous les points d'entrée secondaires actuels et futurs, sans autre modification de `tsconfig.json`.
+
+Pendant le build, `@angular/build:library` découvre tous les points d'entrée à partir du champ `"exports"` de `projects/my-lib/package.json`, compile et bundle chaque point d'entrée, puis écrit les conditions d'export `types` et `default` correspondantes dans `dist/my-lib/package.json`.
 
 ## Extraire des parties d'une application dans une library {#refactoring-parts-of-an-application-into-a-library}
 
@@ -219,11 +233,10 @@ Pour plus d'informations, consultez [Générer du code avec les schematics](tool
 
 Utilisez l'Angular CLI et le gestionnaire de packages npm pour compiler et publier votre library sous forme de package npm.
 
-L'Angular CLI utilise un outil appelé [ng-packagr](https://github.com/ng-packagr/ng-packagr/blob/main/README.md) pour créer, à partir de votre code compilé, des packages publiables sur npm.
-Consultez [Compiler des libraries avec Ivy](tools/libraries/creating-libraries#publishing-libraries) pour en savoir plus sur les formats de distribution pris en charge par `ng-packagr` et sur la façon
-de choisir le bon format pour votre library.
+L'Angular CLI utilise le builder `@angular/build:library` pour compiler votre code en packages au format [Angular Package Format](tools/libraries/angular-package-format) que vous pouvez publier sur npm.
+Consultez [Publier des libraries](tools/libraries/creating-libraries#publishing-libraries) pour en savoir plus sur les formats de distribution pris en charge et sur la façon de choisir le bon format pour votre library.
 
-Compilez toujours les libraries destinées à la distribution avec la configuration `production`.
+Compilez toujours les libraries destinées à la distribution avec la configuration `production` (la configuration par défaut de `ng build`).
 Cela garantit que la sortie générée utilise les optimisations appropriées et le bon format de package pour npm.
 
 ```shell
@@ -237,30 +250,56 @@ npm publish
 ## Gérer les assets dans une library {#managing-assets-in-a-library}
 
 Dans votre library Angular, le package distribuable peut inclure des assets supplémentaires comme des fichiers de thème, des mixins Sass ou de la documentation \(comme un changelog\).
-Pour plus d'informations, consultez [copier des assets dans votre library pendant le build](https://github.com/ng-packagr/ng-packagr/blob/main/docs/copy-assets.md) et [intégrer des assets dans les styles des composants](https://github.com/ng-packagr/ng-packagr/blob/main/docs/embed-assets-css.md).
+Par défaut, le builder de library copie les fichiers `README.md` et `LICENSE*` de la racine de votre library vers le répertoire de sortie, et intègre sous forme d'URL de données les assets référencés par des chemins `url()` relatifs dans les feuilles de style des composants.
+Pour copier des fichiers supplémentaires pendant le build, configurez l'[option `assets`](reference/configs/workspace-config#assets-configuration) de la cible `build` de votre library dans `angular.json` :
 
-IMPORTANT: Si vous incluez des assets supplémentaires comme des mixins Sass ou du CSS précompilé,
-vous devez les ajouter manuellement aux [« exports »](tools/libraries/angular-package-format#exports) conditionnels du `package.json` du point d'entrée principal.
-
-`ng-packagr` fusionne les `"exports"` écrits à la main avec ceux générés automatiquement, ce qui permet aux auteurs de libraries de configurer des sous-chemins d'export supplémentaires ou des conditions personnalisées.
-
-```json
-
-"exports": {
-  ".": {
-    "sass": "./_index.scss",
-  },
-  "./theming": {
-    "sass": "./_theming.scss"
-  },
-  "./prebuilt-themes/indigo-pink.css": {
-    "style": "./prebuilt-themes/indigo-pink.css"
+```json {header: "angular.json"}
+{
+  "projects": {
+    "my-lib": {
+      "architect": {
+        "build": {
+          "builder": "@angular/build:library",
+          "options": {
+            "tsConfig": "projects/my-lib/tsconfig.lib.json",
+            "assets": [
+              "projects/my-lib/CHANGELOG.md",
+              "projects/my-lib/_index.scss",
+              "projects/my-lib/prebuilt-themes",
+              {
+                "glob": "**/*.scss",
+                "input": "projects/my-lib/src/theming",
+                "output": "theming"
+              }
+            ]
+          }
+        }
+      }
+    }
   }
 }
-
 ```
 
-L'exemple ci-dessus est extrait du package distribuable [@angular/material](https://unpkg.com/browse/@angular/material/package.json).
+IMPORTANT: Si vous incluez des assets supplémentaires comme des mixins Sass ou du CSS précompilé, exposez-les dans le champ [`"exports"`](tools/libraries/angular-package-format#exports) du `package.json` de votre library.
+
+Le builder de library fusionne les sous-chemins et conditions `"exports"` personnalisés avec les exports de points d'entrée générés, ce qui vous permet d'exposer des feuilles de style ou des conditions personnalisées à côté des points d'entrée TypeScript :
+
+```json {header: "projects/my-lib/package.json"}
+{
+  "exports": {
+    ".": {
+      "sass": "./_index.scss",
+      "default": "./src/public-api.ts"
+    },
+    "./theming": {
+      "sass": "./theming/_theming.scss"
+    },
+    "./prebuilt-themes/indigo-pink.css": {
+      "style": "./prebuilt-themes/indigo-pink.css"
+    }
+  }
+}
+```
 
 ## Dépendances peer {#peer-dependencies}
 
@@ -314,14 +353,9 @@ ng build my-lib --watch
 
 ```
 
-IMPORTANT: La commande `build` de la CLI utilise un builder différent et invoque un outil de build différent pour les libraries et pour les applications.
+IMPORTANT: La commande `build` de la CLI utilise un builder différent pour les libraries (`@angular/build:library`) et pour les applications (`@angular/build:application`).
 
-- Le système de build des applications, `@angular/build`, est basé sur `esbuild` et est inclus dans tous les nouveaux projets Angular CLI
-- Le système de build des libraries est basé sur `ng-packagr`.
-  Il n'est ajouté à vos dépendances que lorsque vous ajoutez une library avec `ng generate library my-lib`.
-
-Les deux systèmes de build prennent en charge des choses différentes, et même lorsqu'ils prennent en charge les mêmes choses, ils les font différemment.
-Cela signifie que le même code source TypeScript peut produire un code JavaScript différent dans une library compilée et dans une application compilée.
+Les libraries sont compilées et empaquetées selon l'[Angular Package Format](tools/libraries/angular-package-format), ce qui signifie que le même code source TypeScript produit une sortie différente dans une library compilée et dans une application compilée.
 
 Pour cette raison, une application qui dépend d'une library ne doit utiliser que des mappings de chemins TypeScript qui pointent vers la _library compilée_.
 Les mappings de chemins TypeScript ne doivent _pas_ pointer vers les fichiers source `.ts` de la library.
@@ -385,14 +419,14 @@ Pour utiliser des libraries liées, vous devez configurer le fichier `angular.js
 
 Il existe deux formats de distribution utilisables pour publier une library :
 
-| Formats de distribution     | Détails                                                                                                                                                                                                                                                                                                                                  |
-| :-------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Partial-Ivy \(recommandé\)  | Contient du code portable qui peut être consommé par des applications Ivy compilées avec n'importe quelle version d'Angular à partir de la v12.                                                                                                                                                                                          |
-| Full-Ivy                    | Contient des instructions Angular Ivy privées, dont le fonctionnement n'est pas garanti d'une version d'Angular à l'autre. Ce format exige que la library et l'application soient compilées avec _exactement_ la même version d'Angular. Ce format est utile dans les environnements où tout le code des libraries et des applications est compilé directement depuis les sources. |
+| Formats de distribution     | Détails |
+| :-------------------------- | :------ |
+| Partial-Ivy \(recommandé\)  | Contient du code portable qui peut être consommé par des applications Ivy compilées avec n'importe quelle version d'Angular à partir de la v12. |
+| Full-Ivy                    | Contient des instructions Angular Ivy privées. L'ABI du compilateur (les API internes du runtime appelées par ces instructions) est stable entre versions patch, mais peut changer entre versions mineures. Ce format exige que la library et l'application soient compilées avec la même version mineure d'Angular. Il est utile dans les environnements où tout le code des libraries et des applications est compilé depuis les sources ou partagé dans une architecture micro-frontend. |
 
 Pour publier sur npm, utilisez le format partial-Ivy, car il est stable entre les versions patch d'Angular.
 
-Évitez de compiler des libraries en code full-Ivy si vous publiez sur npm, car les instructions Ivy générées ne font pas partie de l'API publique d'Angular et peuvent donc changer entre les versions patch.
+Évitez de compiler des libraries en code full-Ivy si vous publiez sur npm, car les instructions Ivy générées dépendent de l'ABI du compilateur, qui peut changer entre versions mineures.
 
 ## Garantir la compatibilité des versions de library {#ensuring-library-version-compatibility}
 
@@ -400,11 +434,11 @@ La version d'Angular utilisée pour compiler une application doit toujours être
 Par exemple, si vous avez une library qui utilise Angular 13, l'application qui dépend de cette library doit utiliser Angular 13 ou une version ultérieure.
 Angular ne prend pas en charge l'utilisation d'une version antérieure pour l'application.
 
-Si vous prévoyez de publier votre library sur npm, compilez en code partial-Ivy en définissant `"compilationMode": "partial"` dans `tsconfig.prod.json`.
+Si vous prévoyez de publier votre library sur npm, compilez avec la configuration `production`, qui définit `"compilationMode": "partial"` par défaut pour produire du code partial-Ivy.
 Ce format partiel est stable entre les différentes versions d'Angular, et peut donc être publié sans risque sur npm.
 Le code dans ce format est traité pendant le build de l'application avec la même version du compilateur Angular, ce qui garantit que l'application et toutes ses libraries utilisent une seule et même version d'Angular.
 
-Évitez de compiler des libraries en code full-Ivy si vous publiez sur npm, car les instructions Ivy générées ne font pas partie de l'API publique d'Angular et peuvent donc changer entre les versions patch.
+Évitez de compiler des libraries en code full-Ivy si vous publiez sur npm, car les instructions Ivy générées dépendent de l'ABI du compilateur, qui peut changer entre versions mineures.
 
 Si vous n'avez jamais publié de package sur npm, vous devez créer un compte utilisateur.
 Pour en savoir plus, consultez [Publishing npm Packages](https://docs.npmjs.com/getting-started/publishing-npm-packages).

@@ -1,4 +1,4 @@
-<!-- source: ab0fabbc02fd84239e5906b7510a0bba2dc566a4 -->
+<!-- source: 5e5c7dc81fa6ebafbd93a0ceacc07c9527fa00cb -->
 # Tester le routing et la navigation
 
 Tester le routing et la navigation est essentiel pour garantir que votre application se comporte correctement quand les utilisateurs naviguent entre différentes routes. Ce guide présente plusieurs stratégies pour tester les fonctionnalités de routing dans les applications Angular.
@@ -291,6 +291,18 @@ describe('Search', () => {
 
     expect(component.searchTerm()).toBe('angular');
   });
+
+  it('should read search term and fragment passed as navigation extras', async () => {
+    component = await harness.navigate(
+      ['/search'],
+      {queryParams: {q: 'angular'}, fragment: 'results'},
+      Search,
+    );
+
+    expect(component.searchTerm()).toBe('angular');
+    expect(component.fragment()).toBe('results');
+    expect(TestBed.inject(Router).url).toBe('/search?q=angular#results');
+  });
 });
 ```
 
@@ -300,13 +312,17 @@ import {ActivatedRoute} from '@angular/router';
 import {toSignal} from '@angular/core/rxjs-interop';
 
 @Component({
-  template: '<div>Search term: {{searchTerm()}}</div>',
+  template: `
+    <div>Search term: {{ searchTerm() }}</div>
+    <div>Fragment: {{ fragment() }}</div>
+  `,
 })
 export class Search {
   private route = inject(ActivatedRoute);
   private queryParams = toSignal(this.route.queryParams, {initialValue: {}});
 
   searchTerm = computed(() => this.queryParams()['q'] || null);
+  fragment = toSignal(this.route.fragment, {initialValue: null});
 }
 ```
 

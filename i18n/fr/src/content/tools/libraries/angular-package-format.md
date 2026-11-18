@@ -1,4 +1,4 @@
-<!-- source: 553af5b1e1559a1f69eaca0b18f2927f444031fe -->
+<!-- source: 280d2aad4d17e668a55088bf637386feee63783a -->
 # Angular Package Format
 
 Ce document décrit l'Angular Package Format \(APF\).
@@ -18,7 +18,7 @@ Ces outils peuvent comprendre et exiger des entrées différentes : certains o
 
 Le format de distribution d'Angular prend en charge tous les outils et workflows de développement couramment utilisés, et met l'accent sur les optimisations qui produisent soit une application plus légère, soit un cycle d'itération de développement plus rapide \(temps de build\).
 
-Les développeurs peuvent s'appuyer sur l'Angular CLI et sur [ng-packagr](https://github.com/ng-packagr/ng-packagr) \(un outil de build qu'utilise l'Angular CLI\) pour produire des packages au format Angular Package Format.
+Les développeurs peuvent s'appuyer sur l'Angular CLI pour produire des packages au format Angular Package Format.
 Consultez le guide [Créer des libraries](tools/libraries/creating-libraries) pour plus de détails.
 
 ## Organisation des fichiers {#file-layout}
@@ -104,7 +104,7 @@ Pour chaque point d'entrée, les formats disponibles sont :
 
 Les outils qui connaissent ces clés peuvent choisir en priorité un format de code adapté dans `"exports"`.
 
-Les libraries peuvent vouloir exposer des fichiers statiques supplémentaires qui ne sont pas couverts par les exports des points d'entrée JavaScript, comme des mixins Sass ou du CSS précompilé.
+Vous pouvez aussi vouloir exposer des fichiers statiques supplémentaires, comme des mixins Sass ou du CSS précompilé, qui ne font pas partie des points d'entrée JavaScript.
 
 Pour plus d'informations, consultez [Gérer les assets dans une library](tools/libraries/creating-libraries#managing-assets-in-a-library).
 
@@ -161,7 +161,7 @@ La plupart des libraries qui ont une seule finalité logique devraient être pub
 
 #### Résolution des points d'entrée secondaires {#resolution-of-secondary-entry-points}
 
-Les points d'entrée secondaires peuvent être résolus via le champ `"exports"` du `package.json` du package.
+Les résolveurs de modules résolvent les points d'entrée secondaires à l'aide du champ `"exports"` du fichier `package.json` du package.
 
 Pour savoir comment configurer des points d'entrée secondaires dans une library, consultez [Points d'entrée](tools/libraries/creating-libraries#entry-points).
 
@@ -207,35 +207,15 @@ L'Angular Package Format spécifie que le code doit être publié au format de m
 Cela réduit considérablement le temps de build des applications Angular, ainsi que le temps de téléchargement et d'analyse du bundle final de l'application.
 Consultez l'excellent article [« The cost of small modules »](https://nolanlawson.com/2016/08/15/the-cost-of-small-modules) de Nolan Lawson.
 
-Le compilateur Angular peut générer des fichiers de module ES d'index. Des outils comme Rollup / Rolldown peuvent utiliser ces fichiers pour générer des modules aplatis au format de fichier _Flattened ES Module_ (FESM).
-
 Le FESM est un format de fichier créé en aplatissant tous les modules ES accessibles depuis un point d'entrée en un seul module ES.
 Il est obtenu en suivant tous les imports d'un package et en copiant ce code dans un seul fichier, tout en conservant tous les exports ES publics et en supprimant tous les imports privés.
 Cependant, dans certains cas, le FESM peut dépendre de chunks partagés entre plusieurs points d'entrée.
 
-L'abréviation FESM, prononcée _phe-som_, peut être suivie d'un nombre, comme FESM2020.
+L'abréviation FESM, prononcée _phe-som_, peut être suivie d'un nombre, comme FESM2022.
 Ce nombre désigne le niveau de langage du JavaScript contenu dans le module.
-Ainsi, un fichier FESM2022 serait en ESM+ES2022 et contiendrait des instructions import/export et du code source ES2022.
+Ainsi, un fichier FESM2022 est en ESM+ES2022 et contient des instructions import/export et du code source ES2022.
 
-Pour générer un fichier d'index de module ES aplati, utilisez les options de configuration suivantes dans votre fichier tsconfig.json :
-
-```js
-{
-  "compilerOptions": {
-    …
-    "module": "esnext",
-    "target": "es2022",
-    …
-  },
-  "angularCompilerOptions": {
-    …
-    "flatModuleOutFile": "my-ui-lib.js",
-    "flatModuleId": "my-ui-lib"
-  }
-}
-```
-
-Une fois le fichier d'index \(par exemple, `my-ui-lib.js`\) généré par ngc, des bundlers et des optimiseurs comme Rollup et Rolldown peuvent être utilisés pour produire le fichier ESM aplati.
+Lors d'un build avec l'Angular CLI (`@angular/build:library`), le builder compile votre library avec `ngc` et utilise Rolldown pour bundler chaque point d'entrée directement en modules ES2022 aplatis dans le répertoire `fesm2022/`.
 
 ### L'option « sideEffects » {#sideeffects-flag}
 
@@ -268,8 +248,9 @@ C'est souhaitable et cela évite la duplication des types.
 
 ### Tslib
 
-Depuis l'APF v10, il est recommandé d'ajouter tslib comme dépendance directe de votre point d'entrée principal.
-En effet, la version de tslib est liée à la version de TypeScript utilisée pour compiler votre library.
+Depuis l'APF v10, il est recommandé de déclarer `tslib` comme dépendance directe de votre library dès que sa sortie compilée importe des helpers d'exécution depuis `tslib`.
+En effet, la version de `tslib` est liée à la version de TypeScript utilisée pour compiler votre library.
+Lors d'un build avec `@angular/build:library`, le builder ajoute automatiquement `tslib` aux `dependencies` du `package.json` généré si le code compilé importe `tslib`.
 
 ## Exemples {#examples}
 
@@ -373,4 +354,4 @@ Le compilateur Ahead-of-Time d'Angular.
 
 ### Définitions de types aplaties {#flattened-type-definitions}
 
-Les définitions TypeScript bundlées, générées avec des outils comme [API Extractor](https://api-extractor.com) ou [rollup-plugin-dts](https://github.com/Swatinem/rollup-plugin-dts).
+Les définitions TypeScript bundlées, générées avec des outils comme [API Extractor](https://api-extractor.com) ou [`rolldown-plugin-dts`](https://github.com/sxzz/rolldown-plugin-dts).

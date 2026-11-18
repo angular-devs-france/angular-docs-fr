@@ -1,4 +1,4 @@
-<!-- source: 48057fe1e04f752c76b5fb64568b19f20117a99d -->
+<!-- source: 39fa70c500de96290d02da165594e7de3097b6d3 -->
 # Naviguer vers des routes
 
 La directive RouterLink est l'approche déclarative d'Angular pour la navigation. Elle vous permet d'utiliser des éléments d'ancre standard (`<a>`) qui s'intègrent parfaitement au système de routing d'Angular.
@@ -249,6 +249,23 @@ export class ProductList {
   // Create a UrlTree to display in the address bar
   displayUrl: UrlTree = this.router.createUrlTree(['/products', 'widget']);
 }
+```
+
+## Contrôler le défilement avec RouterLink {#controlling-scrolling-with-routerlink}
+
+Quand le défilement en mémoire est activé avec `withInMemoryScrolling({scrollPositionRestoration: 'enabled'})` (ou `'top'`), le router fait défiler la page jusqu'en haut après un clic sur un lien, même quand le lien ne change qu'un query parameter. La directive `RouterLink` accepte un input `scroll` qui permet à un lien donné de s'en exempter :
+
+```angular-html
+<!-- Switches tabs without scrolling back to the top of the page -->
+<a routerLink="/products/42" [queryParams]="{tab: 'reviews'}" scroll="manual">Reviews</a>
+```
+
+Avec `scroll="manual"`, le router ne fait pas défiler la page pour cette navigation. La valeur par défaut, `'after-transition'`, fait défiler la page selon la configuration de défilement du router.
+
+La même option est disponible pour la navigation programmatique :
+
+```ts
+router.navigateByUrl('/products/42?tab=reviews', {scroll: 'manual'});
 ```
 
 ## Prochaines étapes {#next-steps}

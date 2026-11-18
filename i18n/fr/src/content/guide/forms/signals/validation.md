@@ -1,4 +1,4 @@
-<!-- source: 081651abb56bd349e71766633c3f70ea735a804d -->
+<!-- source: 0f298ad5e19ec6c60019f7d07505214d47c191db -->
 # Validation
 
 Les formulaires ont besoin de validation pour garantir que les utilisateurs fournissent des données correctes et complètes avant la soumission. Sans validation, vous devriez gérer les problèmes de qualité des données côté serveur, offrir une mauvaise expérience utilisateur avec des messages d'erreur peu clairs et vérifier manuellement chaque contrainte.
@@ -39,7 +39,7 @@ Dans les Signal Forms, la validation suit ce schéma :
 3. **Propagation des erreurs** - Les erreurs de validation sont exposées via les signals d'état des champs
 4. **Mises à jour réactives** - L'interface se met à jour automatiquement quand l'état de validation change
 
-La validation s'exécute à chaque changement de valeur pour les champs interactifs. Les champs masqués et désactivés ne sont pas validés : leurs règles de validation sont ignorées jusqu'à ce que le champ redevienne interactif.
+La validation s'exécute à chaque changement de valeur pour les champs interactifs. Les champs masqués, désactivés et en lecture seule ne sont pas validés : leurs règles de validation sont ignorées jusqu'à ce que le champ redevienne interactif.
 
 ### Moment de la validation {#validation-timing}
 
@@ -477,7 +477,7 @@ signupForm = form(this.signupModel, (schemaPath) => {
 });
 ```
 
-Si le champ e-mail est vide, seule l'erreur `required()` apparaît. Si l'utilisateur saisit « a@ », les erreurs `email()` et `minLength()` apparaissent toutes les deux. Toutes les règles de validation s'exécutent : la validation ne s'arrête pas après le premier échec.
+Si le champ e-mail est vide, seule l'erreur `required()` apparaît. Si l'utilisateur saisit « a@ », les erreurs `email()` et `minLength()` apparaissent toutes les deux. Toutes les règles de validation s'exécutent : la validation ne s'arrête pas après le premier échec.
 
 TIP: Utilisez le pattern `touched() && invalid()` dans vos templates pour éviter que les erreurs n'apparaissent avant que l'utilisateur n'ait interagi avec un champ. Pour des conseils complets sur l'affichage des erreurs de validation, consultez le [guide Gestion de l'état des champs](guide/forms/signals/field-state-management#conditional-error-display).
 
