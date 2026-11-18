@@ -1,4 +1,4 @@
-<!-- source: c30e340bb51f1248b71f988952a016ecb81ca260 -->
+<!-- source: e281244470e3411379ae24449a776527b89145ec -->
 # Rendu serveur et hybride
 
 Angular livre par défaut toutes les applications en rendu côté client (CSR). Si cette approche fournit une charge initiale légère, elle introduit des compromis : temps de chargement plus lents, métriques de performance dégradées et besoins en ressources plus élevés, puisque l'appareil de l'utilisateur effectue la plupart des calculs. C'est pourquoi de nombreuses applications obtiennent des gains de performances significatifs en intégrant le rendu côté serveur (SSR) dans une stratégie de rendu hybride.
@@ -405,7 +405,7 @@ Pour cela, mettez à jour votre fichier `angular.json` comme suit :
 ```json
 {
   "projects": {
-    "your-app": {
+    "my-app": {
       "architect": {
         "build": {
           "options": {
@@ -417,6 +417,38 @@ Pour cela, mettez à jour votre fichier `angular.json` comme suit :
   }
 }
 ```
+
+### Format de sortie des fichiers prérendus {#prerendered-file-output-format}
+
+La propriété `format` de l'option `prerender` contrôle la structure de fichiers qu'Angular écrit pour chaque route prérendue. Pour une route dont le chemin est `about` :
+
+| `format`                 | Fichier prérendu   |
+| ------------------------ | ------------------ |
+| `directory` (par défaut) | `about/index.html` |
+| `file`                   | `about.html`       |
+
+Selon votre hébergeur statique, vous pouvez définir `format` à `"file"` si votre hébergeur exige des fichiers `<route>.html` pour servir les routes sans rediriger vers une barre oblique finale.
+
+```json
+{
+  "projects": {
+    "my-app": {
+      "architect": {
+        "build": {
+          "options": {
+            "outputMode": "static",
+            "prerender": {
+              "format": "file"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+NOTE: L'option `format` n'est prise en compte que lorsque le build ne produit pas de serveur.
 
 ## Mettre en cache les données avec HttpClient {#caching-data-when-using-httpclient}
 
@@ -456,7 +488,7 @@ CRITICAL: Pendant le SSR, l'implémentation de Fetch lit l'intégralité du corp
 Vous pouvez personnaliser la façon dont Angular met en cache les réponses HTTP pendant le rendu côté serveur (SSR) et les réutilise pendant l'hydratation en configurant `HttpTransferCacheOptions`.  
 Cette configuration est fournie globalement avec `withHttpTransferCacheOptions` dans `provideClientHydration()`.
 
-Par défaut, `HttpClient` met en cache toutes les requêtes `HEAD` et `GET` qui ne contiennent pas d'en-tête `Authorization`, `Proxy-Authorization` ou `Cookie` et qui ne sont pas envoyées avec `withCredentials` ou avec des modes `credentials` de la Fetch API susceptibles d'envoyer des identifiants. Angular ignore aussi le transfer cache lorsqu'une requête ou une réponse contient des directives `Cache-Control` qui interdisent la mise en cache (`no-store`, `no-cache` ou `private`), ou lorsque l'option `cache` de la Fetch API vaut `no-store` ou `no-cache`. Les réponses qui portent un en-tête `Set-Cookie` sont également ignorées. Vous pouvez remplacer les paramètres de filtrage des requêtes avec `withHttpTransferCacheOptions` dans la configuration de l'hydratation.
+Par défaut, `HttpClient` met en cache toutes les requêtes `HEAD`, `QUERY` et `GET` qui ne contiennent pas d'en-tête `Authorization`, `Proxy-Authorization` ou `Cookie` et qui ne sont pas envoyées avec `withCredentials` ou avec des modes `credentials` de la Fetch API susceptibles d'envoyer des identifiants. Angular ignore aussi le transfer cache lorsqu'une requête ou une réponse contient des directives `Cache-Control` qui interdisent la mise en cache (`no-store`, `no-cache` ou `private`), ou lorsque l'option `cache` de la Fetch API vaut `no-store` ou `no-cache`. Les réponses qui portent un en-tête `Set-Cookie` sont également ignorées. Vous pouvez remplacer les paramètres de filtrage des requêtes avec `withHttpTransferCacheOptions` dans la configuration de l'hydratation.
 
 ```ts
 import {
@@ -496,7 +528,7 @@ Inclure `Cache-Control` dans `includeHeaders` rend seulement cet en-tête dispon
 
 ### `includePostRequests` {#includepostrequests}
 
-Par défaut, seules les requêtes `GET` et `HEAD` sont mises en cache.  
+Par défaut, seules les requêtes `GET`, `QUERY` et `HEAD` sont mises en cache.  
 Vous pouvez activer la mise en cache des requêtes `POST` lorsqu'elles servent d'opérations de lecture, comme les requêtes GraphQL.
 
 ```ts

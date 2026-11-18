@@ -1,4 +1,4 @@
-<!-- source: 52db021a0b90fa4f35daa5f4b9001a7262328208 -->
+<!-- source: 2a31448f94afc20e71c3a836cd345060c6189e8b -->
 # Options du compilateur Angular
 
 Lorsque vous utilisez la [compilation ahead-of-time (AOT)](tools/cli/aot-compiler), vous pouvez contrôler la façon dont votre application est compilée en spécifiant des options du compilateur Angular dans le [fichier de configuration TypeScript](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
@@ -54,16 +54,16 @@ Les modes suivants sont disponibles :
 
 | Modes | Détails |
 | :---------- | :-------------------------------------------------------------------------------------------------- |
-| `'full'` | Génère du code entièrement compilé en AOT selon la version d'Angular actuellement utilisée. |
-| `'partial'` | Génère du code sous une forme stable mais intermédiaire, adaptée à une library publiée. |
+| `'full'` | Génère du code entièrement compilé en AOT. L'ABI du compilateur (les API internes du runtime utilisées par ce code) est stable entre les versions patch d'une même version mineure. |
+| `'partial'` | Génère du code sous une forme stable mais intermédiaire, adaptée aux libraries publiées indépendamment. |
 
 La valeur par défaut est `'full'`.
 
 Pour la plupart des applications, `'full'` est le bon mode de compilation.
 
-Utilisez `'partial'` pour les libraries publiées indépendamment, comme les packages npm.
-Les compilations `'partial'` produisent un format intermédiaire stable, mieux adapté à une utilisation par des applications compilées avec des versions d'Angular différentes de celle de la library.
-Les libraries compilées à « HEAD » avec leurs applications et utilisant la même version d'Angular, comme dans un monodépôt, peuvent utiliser `'full'` puisqu'il n'y a aucun risque de décalage de versions.
+Utilisez `'partial'` pour les libraries publiées indépendamment, comme les packages NPM.
+Les compilations `'partial'` produisent un format intermédiaire stable, mieux adapté à une utilisation par des applications compilées avec des versions majeures ou mineures d'Angular différentes de celle de la library.
+Les libraries compilées à « HEAD » avec leurs applications et utilisant la même version d'Angular, comme dans un monodépôt, peuvent utiliser `'full'` puisqu'il n'y a aucun risque de décalage entre versions mineures. Notez que l'ABI du compilateur est stable entre les versions patch d'une même mineure, ce qui permet de partager sans risque le runtime Angular dans des architectures micro-frontend où différentes applications peuvent être à des niveaux de patch différents.
 
 ### `disableTypeScriptVersionCheck`
 
@@ -93,8 +93,6 @@ Avec le builder `@angular/build:application` (esbuild), cette option n'a aucun e
 Lorsque cette option vaut `true`, remplace les propriétés `templateUrl` et `styleUrls` de tous les décorateurs `@Component` par du contenu inline dans les propriétés `template` et `styles`.
 
 Lorsqu'elle est activée, la sortie `.js` de `ngc` n'inclut aucune URL de template ou de style chargée en lazy loading.
-
-Pour les projets de library créés avec l'Angular CLI, la valeur par défaut de la configuration de développement est `true`.
 
 ### `flatModuleId`
 
@@ -156,8 +154,6 @@ Cela désactive la majeure partie du compilateur de templates ainsi que le signa
 
 Peut servir à demander au compilateur de templates de produire des fichiers `.metadata.json` à distribuer avec un package `npm`. Cela évite de produire des fichiers `.ngfactory.js` et `.ngstyle.js` qui ne peuvent pas être distribués sur `npm`.
 
-Pour les projets de library créés avec l'Angular CLI, la valeur par défaut de la configuration de développement est `true`.
-
 ### `strictMetadataEmit`
 
 Lorsque cette option vaut `true`, signale une erreur dans le fichier `.metadata.json` si `"skipMetadataEmit"` vaut `false`.
@@ -175,8 +171,6 @@ Le compilateur de templates peut ensuite utiliser ces nœuds d'erreur pour signa
 
 Si le client d'une library prévoit d'utiliser un symbole dans une annotation, le compilateur de templates ne le signale normalement pas. L'erreur n'est signalée qu'une fois que le client utilise réellement le symbole.
 Cette option permet de détecter ces erreurs pendant la phase de build de la library ; elle est utilisée, par exemple, pour produire les libraries Angular elles-mêmes.
-
-Pour les projets de library créés avec l'Angular CLI, la valeur par défaut de la configuration de développement est `true`.
 
 ### `strictInjectionParameters`
 

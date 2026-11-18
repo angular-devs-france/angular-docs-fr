@@ -1,4 +1,4 @@
-<!-- source: e456a35cb341c63383daec72f668d1e78ddc94c4 -->
+<!-- source: 3651abd8d35bd9253cc3b7901b2c5594104c394e -->
 # Définir des routes
 
 Les routes sont les briques de base de la navigation dans une application Angular.
@@ -332,6 +332,26 @@ Quand vous devez récupérer des données pour une route, le router Angular pren
 
 - [Récupérer des données avec les resources](/guide/routing/data-fetching-with-resources) : récupérez des données de façon réactive avec les API `Resource` des signals d'Angular.
 - [Resolvers de données de route](/guide/routing/data-resolvers) : récupérez des données avant l'activation de la route à l'aide de fonctions resolver.
+
+### Composants de repli en cas d'erreur {#error-fallback-components}
+
+Vous pouvez indiquer un `errorComponent` sur une route pour afficher un composant de repli dédié si le composant de la route lève une erreur pendant son initialisation ou son rendu :
+
+```ts
+import {Routes} from '@angular/router';
+import {ProductDetails} from './product-details';
+import {ProductErrorFallback} from './product-error-fallback';
+
+export const routes: Routes = [
+  {
+    path: 'product/:id',
+    component: ProductDetails,
+    errorComponent: ProductErrorFallback,
+  },
+];
+```
+
+Pour en savoir plus sur la configuration des replis en cas d'erreur et la relance des routes en échec, consultez le [guide sur les error boundaries](/guide/routing/error-boundaries).
 
 ## Routes imbriquées {#nested-routes}
 

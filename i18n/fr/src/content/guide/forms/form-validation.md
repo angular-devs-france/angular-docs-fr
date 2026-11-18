@@ -1,4 +1,4 @@
-<!-- source: e1c61c301d2a9fbb558a8970be49887f2b60acb8 -->
+<!-- source: 099f5fec27dd7560602ffe8abcd9b3a5360553fe -->
 # Valider les saisies de formulaire
 
 Vous pouvez améliorer la qualité globale des données en validant l'exactitude et la complétude des saisies de l'utilisateur.
@@ -348,17 +348,20 @@ Angular fournit plusieurs méthodes sur `AbstractControl` pour gérer les valida
 ### Ajouter et supprimer des validateurs {#adding-and-removing-validators}
 
 Les méthodes [`addValidators`](api/forms/AbstractControl#addValidators) et [`removeValidators`](api/forms/AbstractControl#removeValidators) vous permettent de modifier les validateurs d'un contrôle après son initialisation.
+Angular compare les validateurs par référence : vous devez donc passer à `removeValidators` la même fonction que celle passée à `addValidators`.
 
 ```ts
+private readonly usPostalCode = Validators.pattern(/^\d{5}$/);
+
 onCountryChange(country: string) {
     const postalCodeControl = this.profileForm.get('postalCode');
 
     if (country === 'US') {
       // Add validators for US postal codes
-      postalCodeControl.addValidators([Validators.required, Validators.pattern(/^\d{5}$/)]);
+      postalCodeControl.addValidators([Validators.required, this.usPostalCode]);
     } else {
       // Remove validators when not US
-      postalCodeControl.removeValidators([Validators.required]);
+      postalCodeControl.removeValidators([Validators.required, this.usPostalCode]);
     }
 
     postalCodeControl.updateValueAndValidity();

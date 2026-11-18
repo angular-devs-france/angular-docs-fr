@@ -1,4 +1,4 @@
-<!-- source: b12fce2a630cdcac832e440d04a208f3fcd231b5 -->
+<!-- source: d8be0cd0de95d9ed88a71e133d262d7a738e726f -->
 # Générer du code avec les schematics
 
 Un schematic est un générateur de code à base de template qui prend en charge une logique complexe.
@@ -34,6 +34,11 @@ Consultez [Configuration du workspace](reference/configs/workspace-config) pour 
 
 Les schémas JSON des schematics par défaut que la CLI utilise pour générer des projets et des parties de projets sont regroupés dans le package [`@schematics/angular`](https://github.com/angular/angular-cli/tree/main/packages/schematics/angular).
 Le schéma décrit les options disponibles dans la CLI pour chacune des sous-commandes de `ng generate`, telles qu'elles apparaissent dans la sortie de `--help`.
+### Formatage automatique {#automatic-formatting}
+
+Si [Prettier](https://prettier.io/) ou [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html) est installé dans votre workspace, l'Angular CLI formate automatiquement les fichiers créés ou modifiés par les schematics et les migrations de `ng update`.
+La CLI ne formate que les fichiers concernés et laisse tous les autres fichiers intacts.
+
 
 ## Développer des schematics pour les libraries {#developing-schematics-for-libraries}
 

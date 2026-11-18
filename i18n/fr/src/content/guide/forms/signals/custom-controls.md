@@ -1,4 +1,4 @@
-<!-- source: 7e8f6f3c9be3aa679e0b69d98b4eb735f4db9eea -->
+<!-- source: 720661a01edff1ba2bcae770dc737a4f93d0af83 -->
 # Contrôles personnalisés
 
 NOTE: Ce guide suppose que vous connaissez déjà les [Fondamentaux des Signal Forms](essentials/signal-forms).
@@ -150,10 +150,10 @@ Toutes les propriétés sont optionnelles. N'implémentez que ce dont votre cont
 
 Suivez les interactions des utilisateurs avec votre contrôle :
 
-| Propriété | Rôle                                             |
-| --------- | ------------------------------------------------ |
-| `touched` | Indique si l'utilisateur a interagi avec le champ |
-| `dirty`   | Indique si la valeur diffère de son état initial |
+| Propriété | Rôle                                                                        |
+| --------- | --------------------------------------------------------------------------- |
+| `touched` | Indique si l'utilisateur a interagi avec le champ                           |
+| `dirty`   | Indique si l'utilisateur a modifié la valeur, même s'il l'a remise à l'état initial |
 
 #### État de validation {#validation-state}
 
@@ -384,7 +384,7 @@ export class App {
 }
 ```
 
-IMPORTANT: Émettez `touch` sur `blur` (quand le focus quitte le contrôle), pas sur `focus`. Sans l'output `touch`, le champ n'est jamais considéré comme ayant perdu le focus, et `debounce('blur')` n'a donc aucun effet sur votre contrôle.
+IMPORTANT: Émettez `touch` sur `blur` (quand le focus quitte le contrôle), pas sur `focus`. Si votre contrôle n'émet pas `touch`, le champ n'est jamais marqué comme touché, et `debounce('blur')` n'écrit jamais dans le modèle du formulaire la valeur émise par votre contrôle.
 
 ## Transformation de valeur {#value-transformation}
 

@@ -1,4 +1,4 @@
-<!-- source: ed0f8e65958c6e08f86e4428593fc195d73a259f -->
+<!-- source: b7d8839f444b463b95e45f98f78ea82832730758 -->
 # Récupération de données avec les resources
 
 IMPORTANT: Les resources de route sont en [developer preview](reference/releases#developer-preview).
@@ -65,7 +65,10 @@ export class UserProfile {
 
 ### L'objet `ResourceContext` {#the-resourcecontext-object}
 
-La fonction `resources` reçoit un `ResourceContext` qui donne accès aux signals réactifs de la route : `params`, `queryParams`, `fragment` et `data`.
+La fonction `resources` reçoit un `ResourceContext` qui fournit :
+
+- les signals de la route : `params`, `queryParams`, `fragment` et `data` ;
+- `resources` : un signal des resources héritées des routes ancêtres. Consultez [Héritage des resources](#resource-inheritance).
 
 ### Implémentations de resource prises en charge {#supported-resource-implementations}
 
@@ -129,7 +132,122 @@ TIP: Lisez des propriétés précises, comme `ctx.params()['id']`, au lieu de re
 
 Les resolvers de données s'exécutent séquentiellement, de la route parente à la route enfant. Si le resolver d'une route parente prend 200 ms et celui d'une route enfant 300 ms, la navigation est bloquée pendant 500 ms.
 
-Les resources de route de toute la hiérarchie de routes correspondante s'exécutent simultanément : la même navigation se termine donc en 300 ms, le temps de la resource la plus lente.
+Les resources de route de toute la hiérarchie de routes correspondante s'exécutent simultanément : la même navigation se termine donc en 300 ms, le temps de la resource la plus lente. Les resources qui dépendent des données d'une route ancêtre se mettent aussi en place immédiatement au lieu d'attendre ; consultez [Chaîner une resource à partir d'une resource ancêtre](#chaining-a-resource-off-an-ancestor-resource).
+
+## Héritage des resources {#resource-inheritance}
+
+Chaque route hérite des resources de ses routes ancêtres. Angular expose ces resources héritées sous deux formes :
+
+| API | Contenu | Comportement | À utiliser pour |
+| :-- | :------ | :----------- | :-------------- |
+| `ctx.resources()` dans une fonction `resources` | Les resources des ancêtres uniquement | Les resources brutes renvoyées par les fonctions `resources` des ancêtres. Leur état est toujours à jour. | Chaîner une resource à partir d'une resource ancêtre |
+| `ActivatedRoute.resources` et `ActivatedRouteSnapshot.resources` | Les resources de la route et celles des ancêtres | Des resources en lecture seule gérées par le router. Leur état est gelé tant qu'une navigation est en cours. | Lire des données ou appeler `reload()` depuis un composant, une directive ou une guard |
+
+Si une route définit une resource portant le même nom qu'une resource ancêtre, la resource de la route masque la resource héritée.
+
+### Lier les resources héritées aux inputs d'un composant {#binding-inherited-resources-to-component-inputs}
+
+Avec `withComponentInputBinding()`, le router lie aussi bien les resources héritées que les resources propres à la route aux inputs correspondants du composant :
+
+```angular-ts
+import {Component, input, resource} from '@angular/core';
+import {Routes} from '@angular/router';
+
+interface Project {
+  id: string;
+  name: string;
+}
+
+interface Task {
+  id: string;
+  title: string;
+}
+
+const routes: Routes = [
+  {
+    path: 'projects/:projectId',
+    resources: (ctx) => ({
+      project: resource({
+        params: () => ctx.params()['projectId'],
+        loader: ({params: id}) => fetchProject(id),
+      }),
+    }),
+    children: [
+      {
+        path: 'tasks/:taskId',
+        component: TaskDetail,
+        resources: (ctx) => ({
+          task: resource({
+            params: () => ctx.params()['taskId'],
+            loader: ({params: id}) => fetchTask(id),
+          }),
+        }),
+      },
+    ],
+  },
+];
+
+@Component({
+  template: `
+    <h1>Project: {{ project().name }}</h1>
+    <h2>Task: {{ task().title }}</h2>
+  `,
+})
+export class TaskDetail {
+  // Inherited from the parent 'projects/:projectId' route
+  project = input.required<Project>();
+
+  // Bound from the route's own resource
+  task = input.required<Task>();
+}
+```
+
+NOTE: Quand le router lie l'état de la route aux inputs d'un composant, les noms de resources ont priorité sur les `data` de la route (y compris les valeurs résolues), les paramètres de chemin et les query parameters.
+
+### Chaîner une resource à partir d'une resource ancêtre {#chaining-a-resource-off-an-ancestor-resource}
+
+Une route enfant a souvent besoin des données d'une route ancêtre avant de pouvoir charger les siennes. Au lieu d'attendre que la route ancêtre ait fini de charger, chaînez la fonction `params` de l'enfant à la resource ancêtre avec [`chain()`](/guide/signals/resource#chaining-resources). Angular passe à chaque fonction `params` un objet de contexte qui contient `chain` :
+
+```ts
+import {Resource, resource} from '@angular/core';
+import {Routes} from '@angular/router';
+
+interface User {
+  id: string;
+  role: string;
+}
+
+const routes: Routes = [
+  {
+    path: 'user/:id',
+    resources: (ctx) => ({
+      user: resource({
+        params: () => ctx.params()['id'],
+        loader: ({params: id}) => fetchUser(id),
+      }),
+    }),
+    children: [
+      {
+        path: 'details',
+        component: UserDetails,
+        resources: (ctx) => ({
+          details: resource({
+            // Retains the loading state until the inherited 'user' resource resolves
+            params: ({chain}) => chain(ctx.resources()['user'] as Resource<User>).role,
+            loader: ({params: role}) => fetchRoleDetails(role),
+          }),
+        }),
+      },
+    ],
+  },
+];
+```
+
+IMPORTANT: Ne déstructurez et n'invoquez jamais `ctx.resources()` directement dans le corps de la fonction `resources` externe (par exemple, `const {user} = ctx.resources()`). Comme les routes ancêtres s'initialisent en parallèle, et éventuellement de manière asynchrone, les resources des ancêtres ne sont pas disponibles pendant la mise en place de la route. Appeler `ctx.resources()` de manière synchrone en dehors d'un contexte réactif lève une erreur et fait échouer la navigation. Lisez toujours `ctx.resources()` de manière réactive, dans la fonction `params` d'une resource.
+
+NOTE: Comme `ctx.resources()` est typé comme un record de `Resource<unknown>`, convertissez la resource héritée vers le type de sa valeur (par exemple `as Resource<User>`) quand vous la lisez.
+
+`chain()` propage aussi l'état de la resource ancêtre. Si l'ancêtre est en erreur, la resource chaînée passe en erreur avec une `ResourceDependencyError`, et le router annule la navigation quand cette resource chaînée est bloquante. Si l'ancêtre est `idle`, la resource chaînée devient `idle`.
 
 ## Resources bloquantes et non bloquantes {#blocking-and-non-blocking-resources}
 
@@ -246,6 +364,8 @@ Tant qu'une navigation est en attente, le router fige les resources qu'il expose
 Si vous naviguez de `/user/1` vers `/user/2` et que le router réutilise le composant `UserProfile`, le composant continue d'afficher les données de `/user/1` jusqu'à ce que `/user/2` soit résolu. Le router libère alors les resources et l'interface passe directement aux nouvelles données, sans flash de chargement.
 
 Le router expose ces resources en lecture seule, même lorsque la fonction `resources` renvoie une resource modifiable comme `resource()`. Vous pouvez lire les signals de la resource et appeler `reload()`, mais pas `set()` ni `update()`. Un appel à `reload()` pendant une navigation active ou pendant la récupération après un rollback renvoie `false`, afin de ne pas interrompre le suivi des transitions par le router.
+
+NOTE: Le gel ne s'applique qu'aux resources que le router expose sur `ActivatedRoute`. Les resources brutes disponibles via `ctx.resources()` reflètent toujours leur état réel, ce qui permet à une resource chaînée de réagir à une resource ancêtre pendant une navigation.
 
 ### Récupération après un rollback lors d'une annulation {#rollback-recovery-on-cancellation}
 

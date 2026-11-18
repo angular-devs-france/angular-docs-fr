@@ -1,4 +1,4 @@
-<!-- source: ff9d3250cda4cbe8c57d0b57321d59d79819cd6b -->
+<!-- source: 9d54d0f0700e6f94453d323121122c7280bb0575 -->
 # Personnaliser le comportement des routes
 
 Angular Router fournit de puissants points d'extension qui vous permettent de personnaliser le comportement des routes dans votre application. Si le comportement de routing par défaut convient à la plupart des applications, des besoins spécifiques exigent souvent des implémentations personnalisées pour optimiser les performances, traiter les URL de façon particulière ou gérer une logique de routing complexe.
@@ -246,6 +246,8 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
   }
 }
 ```
+
+IMPORTANT: Les [resources](guide/routing/data-fetching-with-resources#resource-inheritance) de route héritées ne fonctionnent pas avec une `RouteReuseStrategy` personnalisée qui détache une route sans détacher aussi les ancêtres dont ses resources dépendent.
 
 ### Détruire manuellement les detached route handles {#manually-destroying-detached-route-handles}
 
@@ -555,7 +557,7 @@ export const routes: Routes = [
 ];
 ```
 
-Si vous activez [`withComponentInputBinding`](api/router/withComponentInputBinding), le composant reçoit les paramètres extraits via les inputs de route :
+Si vous activez [`withComponentInputBinding`](api/router/withComponentInputBinding), le composant reçoit les paramètres extraits via les inputs de route :
 
 ```angular-ts
 import {Component, input, inject, resource} from '@angular/core';

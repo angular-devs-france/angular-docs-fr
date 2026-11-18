@@ -1,4 +1,4 @@
-<!-- source: 3bc46ba97fe8dc1619843fd142c2d53ab7602514 -->
+<!-- source: 77ca5be08c1e0833ffcb7cd6629fcf5c43ed1dbb -->
 # Tester les requêtes
 
 Comme pour toute dépendance externe, vous devez mocker le backend HTTP afin que vos tests puissent simuler l'interaction avec un serveur distant. La library `@angular/common/http/testing` fournit des outils pour capturer les requêtes effectuées par l'application, faire des assertions sur celles-ci et mocker les réponses pour émuler le comportement de votre backend.
@@ -140,7 +140,7 @@ req.flush('Failed!', {status: 500, statusText: 'Internal Server Error'});
 
 ### Erreurs réseau {#network-errors}
 
-Les requêtes peuvent aussi échouer à cause d'erreurs réseau, qui se manifestent sous forme d'erreurs `ProgressEvent`. Celles-ci peuvent être transmises avec la méthode `error()` :
+Les requêtes peuvent aussi échouer à cause d'erreurs réseau, que `HttpClient` signale sous forme d'une `HttpErrorResponse` avec un `status` à `0`. Celles-ci peuvent être simulées avec la méthode `error()`, qui enveloppe le `ProgressEvent` fourni dans une telle réponse :
 
 ```ts
 const req = httpTesting.expectOne('/api/config');

@@ -1,4 +1,4 @@
-<!-- source: 4ba3e72230a9de43a008ea54e329e9b72417a299 -->
+<!-- source: bd6abb5f9c7e59de21a202e9a6da6d0176657b6a -->
 # Syntaxe des expressions
 
 Les expressions Angular sont basées sur JavaScript, mais en diffèrent sur quelques points clés. Ce guide présente les similitudes et les différences entre les expressions Angular et le JavaScript standard.
@@ -71,6 +71,8 @@ Angular prend en charge les opérateurs suivants du JavaScript standard.
 | in                            | `'model' in car`                               |
 | instanceof                    | `car instanceof Automobile`                    |
 | Affectation                   | `a = b`                                        |
+| Incrémentation                | `a++`, `++a`                                   |
+| Décrémentation                | `a--`, `--a`                                   |
 | Affectation après addition    | `a += b`                                       |
 | Affectation après soustraction | `a -= b`                                       |
 | Affectation après multiplication | `a *= b`                                       |
@@ -102,7 +104,7 @@ Les expressions Angular prennent également en charge les opérateurs non standa
 Avant Angular 22, l'opérateur de chaînage optionnel (`?.`) renvoyait `null` lorsque l'opérande de gauche valait `null` ou `undefined`, alors que l'opérateur `?.` du JavaScript standard renvoie `undefined`.
 Depuis Angular 22, le comportement de l'opérateur de chaînage optionnel dans les expressions Angular est aligné sur celui du JavaScript standard.
 
-Lors de la migration vers la v22, les schematics de `ng update` ont ajouté une fonction magique `$safeNavigationMigration` aux expressions existantes pour préserver l'ancien comportement qui renvoie `null`.
+Lors de la migration vers la v22, les schematics de `ng update` ajoutent une fonction `$safeNavigationMigration` aux expressions existantes pour préserver l'ancien comportement.
 
 ```html
 {{ $safeNavigationMigration(foo?.bar) }}

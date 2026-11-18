@@ -1,4 +1,4 @@
-<!-- source: 52b03362d6012f4456f491d6053a94ca0cb3dde2 -->
+<!-- source: a33351187f80d8968ad540a49b9cab569fefc88a -->
 # Diagnostics étendus
 
 De nombreux motifs de code sont techniquement valides pour le compilateur ou à l'exécution, mais peuvent comporter des subtilités ou des pièges.
@@ -27,6 +27,7 @@ Actuellement, Angular prend en charge les diagnostics étendus suivants :
 | `NG8115` | [`uninvokedTrackFunction`](extended-diagnostics/NG8115)               |
 | `NG8116` | [`missingStructuralDirective`](extended-diagnostics/NG8116)           |
 | `NG8117` | [`uninvokedFunctionInTextInterpolation`](extended-diagnostics/NG8117) |
+| `NG8119` | [`numericCssPropertyRequiresUnit`](extended-diagnostics/NG8119)       |
 | `NG8021` | [`deferTriggerMisconfiguration`](extended-diagnostics/NG8021)         |
 
 ## Configuration {#configuration}

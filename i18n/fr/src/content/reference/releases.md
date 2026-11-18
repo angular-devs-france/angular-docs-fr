@@ -1,4 +1,4 @@
-<!-- source: a60ea843aa095af246dc7ae7f3da9d6e89716b74 -->
+<!-- source: ef3950815850c88cf8426537bbe749ddab673f88 -->
 # Gestion des versions et sorties d'Angular
 
 Nous savons que vous avez besoin de stabilité de la part du framework Angular.
@@ -137,6 +137,14 @@ Pour garantir la rétrocompatibilité d'Angular, nous effectuons une série de v
 - Exécution des tests de toutes les applications de Google qui dépendent d'Angular
 
 Tout changement de la surface d'API publique est effectué conformément aux politiques de gestion des versions, de support et de dépréciation décrites précédemment. Dans des cas exceptionnels, comme des patchs de sécurité critiques, des correctifs peuvent introduire des changements non rétrocompatibles. Ces cas exceptionnels sont accompagnés d'un avis explicite sur les canaux de communication officiels du framework.
+
+### Stabilité de l'ABI du compilateur {#compiler-abi-stability}
+
+En plus de la stabilité de l'API publique, Angular maintient la **stabilité de l'ABI (Application Binary Interface) du compilateur** entre les versions patch d'une même version mineure. L'ABI désigne l'ensemble des API internes du runtime (comme celles préfixées par `ɵɵ`) utilisées par le code généré par le compilateur Angular. Cette stabilité garantit que du code compilé avec la version `X.Y.A` du compilateur Angular est compatible avec le runtime Angular de la version `X.Y.B`.
+
+Cette stabilité débloque des cas d'usage comme les micro-frontends, où plusieurs applications peuvent partager un seul runtime Angular tout en étant compilées indépendamment avec des versions patch différentes. Notez que la stabilité de l'ABI n'est pas garantie entre versions mineures, car de nouvelles fonctionnalités peuvent nécessiter des changements dans les API internes ou dans le format du code généré.
+
+HELPFUL: Bien que nous nous efforcions de maintenir la compatibilité de l'ABI et que nous traitions toute rupture comme une régression, il est en pratique difficile de valider cette compatibilité pour toutes les combinaisons de versions.
 
 ## Politique des changements incompatibles et chemins de mise à jour {#breaking-change-policy-and-update-paths}
 

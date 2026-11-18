@@ -1,4 +1,4 @@
-<!-- source: 9ff769ab17f2c013227f9dc24258b01d348d1446 -->
+<!-- source: e0d846594a1b89c955bfbcece1f456ca747ae9f4 -->
 # Gestion de l'état des champs
 
 L'état des champs des Signal Forms vous permet de réagir aux interactions de l'utilisateur en fournissant des signals réactifs pour le statut de validation (comme `valid`, `invalid`, `errors`), le suivi des interactions (comme `touched`, `dirty`) et la disponibilité (comme `disabled`, `hidden`).
@@ -439,19 +439,26 @@ Le formulaire racine est lui aussi un champ de l'arbre de champs. Lorsque vous l
 ### Accéder à l'état du formulaire {#accessing-form-state}
 
 ```angular-ts
+import {Component, signal} from '@angular/core';
+import {FormField, FormRoot, form, required} from '@angular/forms/signals';
+
 @Component({
+  imports: [FormRoot, FormField],
   template: `
-    <form novalidate>
+    <form [formRoot]="loginForm">
       <input [formField]="loginForm.email" />
       <input [formField]="loginForm.password" />
 
-      <button [disabled]="!loginForm().valid()">Sign In</button>
+      <button type="submit" [disabled]="!loginForm().valid()">Sign In</button>
     </form>
   `,
 })
 export class Login {
   loginModel = signal({email: '', password: ''});
-  loginForm = form(this.loginModel);
+  loginForm = form(this.loginModel, (schemaPath) => {
+    required(schemaPath.email);
+    required(schemaPath.password);
+  });
 }
 ```
 
@@ -747,7 +754,7 @@ export class Registration {
 }
 ```
 
-Lorsque vous utilisez `FormRoot`, soumettre le formulaire appelle automatiquement la fonction `submit()`, qui marque tous les champs comme touchés (ce qui révèle les erreurs de validation) et exécute votre callback `action` si le formulaire est valide.
+Lorsque vous utilisez `FormRoot` avec un formulaire qui a une option `submission`, soumettre le formulaire appelle automatiquement la fonction `submit()`, qui marque tous les champs comme touchés (ce qui révèle les erreurs de validation) et exécute votre callback `action` si le formulaire est valide.
 
 Vous pouvez aussi soumettre un formulaire manuellement, sans utiliser la directive, en appelant `submit(this.registrationForm)`. Lorsque vous appelez explicitement la fonction `submit` de cette façon, vous pouvez passer un `FormSubmitOptions` pour remplacer la logique de `submission` par défaut du formulaire : `submit(this.registrationForm, {action: () => /* ... */ })`.
 
@@ -866,7 +873,7 @@ onSubmit() {
 
 ### Contrôles personnalisés {#custom-controls}
 
-Par défaut, appeler `focusBoundControl()` sur un contrôle personnalisé n'a aucun effet, car un contrôle personnalisé peut contenir plusieurs champs natifs. Par exemple, un sélecteur de date peut contenir des champs distincts pour le jour, le mois et l'année. Angular ne peut donc pas déterminer quel élément doit recevoir le focus ni quelle action effectuer.
+Par défaut, appeler `focusBoundControl()` sur un contrôle personnalisé donne le focus à l'élément host du contrôle, qui ne peut généralement pas le recevoir. Un contrôle personnalisé peut contenir plusieurs champs natifs. Par exemple, un sélecteur de date peut contenir des champs distincts pour le jour, le mois et l'année. Angular ne peut donc pas déterminer quel élément doit recevoir le focus ni quelle action effectuer.
 
 Pour prendre en charge le focus par programmation dans un contrôle personnalisé, implémentez une méthode `focus()`. Lorsque `focusBoundControl()` est appelée sur l'état du champ associé à un contrôle personnalisé, Angular appelle la méthode `focus()` du contrôle si elle existe.
 
@@ -874,7 +881,7 @@ Prenons un champ de mot de passe personnalisé :
 
 ```html
 <div class="password-block">
-  <input type="password" #passwordCtrl [value]="value()" (input)="value.set($event.target.value)" />
+  <input type="password" #passwordCtrl [value]="value()" (input)="value.set(passwordCtrl.value)" />
 </div>
 ```
 

@@ -1,4 +1,4 @@
-<!-- source: f694d6a938010b6747813d4ad6474844fdb22da6 -->
+<!-- source: e4f0cc2158a4d44aaa8e0fe307267b85414960cc -->
 # Encyclopédie des erreurs
 
 ## Erreurs d'exécution {#runtime-errors}
@@ -28,6 +28,7 @@
 | `NG0506`  | [L'application reste instable](errors/NG0506) |
 | `NG0507`  | [Le contenu HTML a été modifié après le rendu côté serveur](errors/NG0507) |
 | `NG0509`  | [Hydration Missing Node on Path](errors/NG0509)                                      |
+| `NG0512`  | [Hydration Missing Text](errors/NG0512)                                              |
 | `NG0600`  | [Écriture de signal dans un contexte interdit](errors/NG0600) |
 | `NG0602`  | [Appel de fonction interdit dans un contexte réactif](errors/NG0602) |
 | `NG0750`  | [Échec du chargement des dépendances de @defer](errors/NG0750) |
@@ -70,5 +71,6 @@
 | `NG8002` | [Attribut invalide](errors/NG8002) |
 | `NG8003` | [Cible de référence manquante](errors/NG8003) |
 | `NG8011` | [Control flow empêchant la projection de contenu](errors/NG8011) |
+| `NG8022` | [Unsupported Binding on a Form Field](errors/NG8022)        |
 | `NG8023` | [Plusieurs composants correspondent au même élément](errors/NG8023) |
 | `NG8024` | [Binding de host directive en conflit](errors/NG8024) |

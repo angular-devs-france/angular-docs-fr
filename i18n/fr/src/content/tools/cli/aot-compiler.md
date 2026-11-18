@@ -1,4 +1,4 @@
-<!-- source: cb2b96a9dbb76d168ae639f0d8acfaaf752f2fa1 -->
+<!-- source: e1c68de22ab112eb7a1f390d08f12b9c3e4bbf40 -->
 # Compilation ahead-of-time (AOT)
 
 Une application Angular se compose principalement de composants et de leurs templates HTML.
@@ -40,6 +40,8 @@ Consultez la [référence des commandes CLI](cli) et [Compiler et servir des app
 Le compilateur AOT d'Angular extrait des **métadonnées** pour interpréter les parties de l'application qu'Angular est censé gérer.
 Vous pouvez spécifier les métadonnées explicitement dans des **décorateurs** comme `@Component()`, ou implicitement dans les déclarations de constructeur des classes décorées.
 Les métadonnées indiquent à Angular comment construire les instances des classes de votre application et interagir avec elles à l'exécution.
+Le code généré par le compilateur AOT dépend d'un ensemble d'API internes du runtime appelé **ABI (Application Binary Interface) du compilateur**. Angular maintient la stabilité de l'ABI entre toutes les versions patch d'une même version mineure du framework. Cela garantit que des applications ou des libraries compilées avec des versions patch différentes de la même mineure peuvent partager sans risque un seul runtime Angular à l'exécution.
+
 
 Dans l'exemple suivant, l'objet de métadonnées de `@Component()` et le constructeur de la classe indiquent à Angular comment créer et afficher une instance de `Typical`.
 

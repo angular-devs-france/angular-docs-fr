@@ -1,4 +1,4 @@
-<!-- source: 7d4750e45642d4ef3400d9687e196b757e4ee8af -->
+<!-- source: c4dabc94181f9ad36e6d2aaf572409dc06196c93 -->
 # Compiler des applications Angular
 
 Vous pouvez compiler votre application ou votre library Angular CLI avec la commande `ng build`.
@@ -10,12 +10,12 @@ L'Angular CLI inclut quatre builders généralement utilisés comme cibles `buil
 | Builder                                         | Rôle                                                                                                                                                                                                                                        |
 | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `@angular/build:application`                    | Compile une application avec un bundle côté client, un serveur Node et des routes prérendues au moment du build, avec [esbuild](https://esbuild.github.io/).                                                                                                  |
+| `@angular/build:library`                        | Builds an Angular library adhering to the [Angular Package Format](tools/libraries/angular-package-format).                                                                                                                                    |
 | `@angular-devkit/build-angular:browser-esbuild` | Regroupe en bundle une application côté client destinée au navigateur avec [esbuild](https://esbuild.github.io/). Consultez la [documentation de `browser-esbuild`](tools/cli/build-system-migration#manual-migration-to-the-compatibility-builder) pour plus d'informations. |
 | `@angular-devkit/build-angular:browser`         | Regroupe en bundle une application côté client destinée au navigateur avec [webpack](https://webpack.js.org/).                                                                                                                                                |
-| `@angular/build:ng-packagr`                     | Compile une library Angular conforme à l'[Angular Package Format](tools/libraries/angular-package-format).                                                                                                                                        |
 
 Les applications générées par `ng new` utilisent `@angular/build:application` par défaut.
-Les libraries générées par `ng generate library` utilisent `@angular/build:ng-packagr` par défaut.
+Les libraries générées par `ng generate library` utilisent `@angular/build:library` par défaut.
 
 Vous pouvez déterminer quel builder est utilisé pour un projet donné en consultant la cible `build` de ce projet.
 
