@@ -404,7 +404,7 @@ To configure this, update your `angular.json` file as follows:
 ```json
 {
   "projects": {
-    "your-app": {
+    "my-app": {
       "architect": {
         "build": {
           "options": {
@@ -416,6 +416,38 @@ To configure this, update your `angular.json` file as follows:
   }
 }
 ```
+
+### Prerendered file output format
+
+The `format` property of the `prerender` option controls the file structure Angular writes for each prerendered route. For a route with the path `about`:
+
+| `format`              | Prerendered file   |
+| --------------------- | ------------------ |
+| `directory` (default) | `about/index.html` |
+| `file`                | `about.html`       |
+
+Depending on your static hosting provider, you can set `format` to `"file"` if your host requires `<route>.html` files to serve routes without redirecting to a trailing slash.
+
+```json
+{
+  "projects": {
+    "my-app": {
+      "architect": {
+        "build": {
+          "options": {
+            "outputMode": "static",
+            "prerender": {
+              "format": "file"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+NOTE: The `format` option is only considered when the build does not produce a server.
 
 ## Caching data when using HttpClient
 
@@ -455,7 +487,7 @@ CRITICAL: During SSR, the Fetch implementation reads the entire response body to
 You can customize how Angular caches HTTP responses during server‑side rendering (SSR) and reuses them during hydration by configuring `HttpTransferCacheOptions`.  
 This configuration is provided globally using `withHttpTransferCacheOptions` inside `provideClientHydration()`.
 
-By default, `HttpClient` caches all `HEAD` and `GET` requests which don't contain `Authorization`, `Proxy-Authorization`, or `Cookie` headers and are not sent with `withCredentials` or Fetch API `credentials` modes that can send credentials. Angular also skips transfer cache when a request or response includes `Cache-Control` directives that forbid caching (`no-store`, `no-cache`, or `private`), or when the Fetch API `cache` option is set to `no-store` or `no-cache`. Responses that carry a `Set-Cookie` header are also skipped. You can override the request filtering settings by using `withHttpTransferCacheOptions` in the hydration configuration.
+By default, `HttpClient` caches all `HEAD`, `QUERY` and `GET` requests which don't contain `Authorization`, `Proxy-Authorization`, or `Cookie` headers and are not sent with `withCredentials` or Fetch API `credentials` modes that can send credentials. Angular also skips transfer cache when a request or response includes `Cache-Control` directives that forbid caching (`no-store`, `no-cache`, or `private`), or when the Fetch API `cache` option is set to `no-store` or `no-cache`. Responses that carry a `Set-Cookie` header are also skipped. You can override the request filtering settings by using `withHttpTransferCacheOptions` in the hydration configuration.
 
 ```ts
 import {
@@ -495,7 +527,7 @@ Including `Cache-Control` in `includeHeaders` only makes that header available o
 
 ### `includePostRequests`
 
-By default, only `GET` and `HEAD` requests are cached.  
+By default, only `GET`, `QUERY` and `HEAD` requests are cached.  
 You can enable caching for `POST` requests when they are used as read operations such as GraphQL queries.
 
 ```ts

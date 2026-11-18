@@ -27,6 +27,7 @@
 | `NG0506`  | [NgZone remains unstable](errors/NG0506)                                             |
 | `NG0507`  | [HTML content was altered after SSR](errors/NG0507)                                  |
 | `NG0509`  | [Hydration Missing Node on Path](errors/NG0509)                                      |
+| `NG0512`  | [Hydration Missing Text](errors/NG0512)                                              |
 | `NG0600`  | [Signal write in a disallowed context](errors/NG0600)                                |
 | `NG0602`  | [Disallowed function call inside reactive context](errors/NG0602)                    |
 | `NG0750`  | [@defer dependencies failed to load](errors/NG0750)                                  |
@@ -69,5 +70,6 @@
 | `NG8002` | [Invalid Attribute](errors/NG8002)                          |
 | `NG8003` | [Missing Reference Target](errors/NG8003)                   |
 | `NG8011` | [Control Flow Preventing Content Projection](errors/NG8011) |
+| `NG8022` | [Unsupported Binding on a Form Field](errors/NG8022)        |
 | `NG8023` | [Multiple Components Match Same Element](errors/NG8023)     |
 | `NG8024` | [Conflicting Host Directive Binding](errors/NG8024)         |
